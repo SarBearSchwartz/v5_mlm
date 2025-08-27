@@ -89,7 +89,7 @@ This data was also using in an article title *"Missing data methods in longitudi
 
 
 ```{r}
-data_raw <- read.table("https://raw.githubusercontent.com/CEHS-research/data/master/MLM/Muscatine.txt", header=TRUE)
+data_raw <- read.table("data/Muscatine.txt", header=TRUE)
 ```
 
 
@@ -556,8 +556,8 @@ plot_pred_gee <- fit_geeglm_2un %>%
   ggplot(aes(x        = age,
              y        = prob,
              group    = gender)) +
-  geom_ribbon(aes(ymin = asymp.LCL,
-                  ymax = asymp.UCL,
+  geom_ribbon(aes(ymin = lower.CL,
+                  ymax = upper.CL,
                   fill = gender),
               alpha = .2) +
   geom_line(aes(linetype = gender,
@@ -603,15 +603,16 @@ Indicates smaller model is better, no interaction at higher level necessary
 anova(fit_glmm_1, fit_glmm_2)
 ```
 
+NOTE: THIS IS NOT WORKING ANYMORE?
 
 ```{r, results='asis'}
-texreg::knitreg(list(extract_glmer_exp(fit_glmm_1), 
-                     extract_glmer_exp(fit_glmm_2)),
-                custom.model.names = c("Interaction",
-                                       "Main Effects"),
-                caption = "GLMM: Parameter EStimates",
-                single.row = TRUE,
-                ci.test = 1)
+# texreg::knitreg(list(extract_glmer_exp(fit_glmm_1), 
+#                      extract_glmer_exp(fit_glmm_2)),
+#                 custom.model.names = c("Interaction",
+#                                        "Main Effects"),
+#                 caption = "GLMM: Parameter EStimates",
+#                 single.row = TRUE,
+#                 ci.test = 1)
 ```
 
 ```{r}
@@ -670,16 +671,18 @@ plot_pred_glmm
 
 ## Compare Methods
 
+NOTE: THIS IS NO LONGER WORKING ???
+
 ```{r, results="asis"}
-texreg::knitreg(list(extract_glm_exp(fit_glm_2),
-                       extract_gee_exp(fit_gee_2un),
-                       extract_glmer_exp(fit_glmm_2)),
-                  custom.model.names = c("GLM",
-                                         "GEE",
-                                         "GLMM"),
-                  caption = "Compare Methods: Parameter EStimates",
-                  single.row = TRUE,
-                  ci.test = 1)
+# texreg::knitreg(list(extract_glm_exp(fit_glm_2),
+#                        extract_gee_exp(fit_gee_2un),
+#                        extract_glmer_exp(fit_glmm_2)),
+#                   custom.model.names = c("GLM",
+#                                          "GEE",
+#                                          "GLMM"),
+#                   caption = "Compare Methods: Parameter EStimates",
+#                   single.row = TRUE,
+#                   ci.test = 1)
 ```
 
 

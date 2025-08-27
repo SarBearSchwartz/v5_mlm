@@ -48,7 +48,7 @@ FOR THIS CHAPTER WE WILL IGNORE ALL LEVELS EXCEPT FOR STUDNETS BEING NESTED WITH
 Read the SPSS data in with the `haven` package .
 
 ```{r}
-data_raw <- haven::read_sav("http://www.mlminr.com/data-sets/Achieve.sav?attredirects=0")
+data_raw <- haven::read_sav("data/Achieve.sav")
 ```
 
 Declare all categorical variables to be factors and apply labels where meaningful.

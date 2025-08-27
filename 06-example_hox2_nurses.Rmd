@@ -58,8 +58,9 @@ knitr::include_graphics("images/diagram_hox_nurses.png")
 Here the data is read in and the SPSS variables with labels are converted to $R$ factors. 
 
 ```{r}
-data_raw <- haven::read_spss("https://github.com/MultiLevelAnalysis/Datasets-third-edition-Multilevel-book/raw/master/chapter%202/Nurses/SPSS/Nurses.sav") %>% 
-  haven::as_factor()             # retain the labels from SPSS --> factor
+data_raw <- haven::read_spss("data/Nurses.sav") %>% 
+  haven::as_factor() %>%             # retain the labels from SPSS --> factor
+  haven::zap_label()
 ```
 
 

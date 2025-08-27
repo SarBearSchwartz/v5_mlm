@@ -19,7 +19,7 @@ library(lme4)         # non-linear mixed-effects models
 This comes from a **Randomized Controled Trial**.
 
 ```{r}
-data_raw <- read.table("https://raw.githubusercontent.com/CEHS-research/data/master/MLM/exercise_diet.txt",
+data_raw <- read.table("data/exercise_diet.txt",
                   header = TRUE, 
                   sep = ",")
 ```

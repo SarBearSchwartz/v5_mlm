@@ -76,8 +76,9 @@ knitr::include_graphics("images/diagram_hox_popular2.png")
 *Note: We will ignore the centered and standardized variables, which start with a capital Z or C.*
 
 ```{r}
-data_raw <- haven::read_sav("https://github.com/MultiLevelAnalysis/Datasets-third-edition-Multilevel-book/raw/master/chapter%202/popularity/SPSS/popular2.sav") %>% 
-  haven::as_factor()             # retain the labels from SPSS --> factor
+data_raw <- haven::read_sav("data/popular2.sav") %>% 
+  haven::as_factor() %>%             # retain the labels from SPSS --> factor
+  haven::zap_label()                 # drop the varaible labels from SPSS
 
 tibble::glimpse(data_raw) 
 ```

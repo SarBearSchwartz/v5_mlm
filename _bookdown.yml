@@ -1,5 +1,9 @@
-book_filename: eBook_multilevel
-repo: http://github.com/cehs-research/eBook_multilevel/
+book_filename: v5_mlm
+repo: http://github.com/sarbearschwartz/v5_mlm/
 output_dir: "docs"
 new_session: no
 delete_merged_file: true
+language:
+  label:
+    fig: !expr function(i) paste0('<strong> Figure  ', i, '</strong><br/> ')
+    tab: !expr function(i) paste0('<strong> Table  ', i, '</strong><br/> ') 

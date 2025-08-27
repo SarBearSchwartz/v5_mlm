@@ -385,8 +385,8 @@ mod_geeglm_exc %>%
              y = rate,
              group = drug_name %>% fct_rev,
              color = drug_name %>% fct_rev)) +
-  geom_errorbar(aes(ymin = asymp.LCL,
-                    ymax = asymp.UCL),
+  geom_errorbar(aes(ymin = lower.CL,
+                    ymax = upper.CL),
                 width = .3,
                 position = position_dodge(width = .25)) +
   geom_point(position = position_dodge(width = .25)) +
@@ -488,8 +488,8 @@ mod_geeglm_exc2 %>%
              y = rate,
              group = antibiotic,
              color = antibiotic)) +
-  geom_errorbar(aes(ymin = asymp.LCL,
-                    ymax = asymp.UCL),
+  geom_errorbar(aes(ymin = lower.CL,
+                    ymax = upper.CL),
                 width = .3,
                 position = position_dodge(width = .25)) +
   geom_point(position = position_dodge(width = .25)) +

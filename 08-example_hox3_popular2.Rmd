@@ -46,7 +46,7 @@ The following example is used through out @hox2017's chapater 2.
 
 
 ```{r}
-data_raw <- haven::read_sav("https://github.com/MultiLevelAnalysis/Datasets-third-edition-Multilevel-book/raw/master/chapter%202/popularity/SPSS/popular2.sav") %>% 
+data_raw <- haven::read_sav("data/popular2.sav") %>% 
   haven::as_factor()             # retain the labels from SPSS --> factor
 
 data_pop <- data_raw %>%   

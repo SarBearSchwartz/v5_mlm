@@ -83,7 +83,7 @@ In clinical trials of modern hormonal contraceptives, pregnancy is exceedingly r
 
 
 ```{r}
-data_raw <- read.table("https://raw.githubusercontent.com/CEHS-research/data/master/MLM/RCTcontraception.txt", header=TRUE)
+data_raw <- read.table("data/RCTcontraception.txt", header=TRUE)
 ```
 
 
@@ -259,15 +259,15 @@ texreg::knitreg(list(fit_1, fit_2),
 
 #### Odds ratio scale
 
-
+NOTE: THIS IS NOT WORKING ?
 
 ```{r, results="asis"}
-texreg::knitreg(list(extract_glmer_exp(fit_1), 
-                     extract_glmer_exp(fit_2)),
-                custom.model.names = c("with", "without"),
-                ci.test = 1,
-                single.row = TRUE,
-                caption = "MLM Parameter Estimates: Inclusion of Interaction (95% CI's)")
+# texreg::knitreg(list(texreghelpr::extract_glmer_exp(fit_1), 
+#                      texreghelpr::extract_glmer_exp(fit_2)),
+#                 custom.model.names = c("with", "without"),
+#                 ci.test = 1,
+#                 single.row = TRUE,
+#                 caption = "MLM Parameter Estimates: Inclusion of Interaction (95% CI's)")
 ```
 
 

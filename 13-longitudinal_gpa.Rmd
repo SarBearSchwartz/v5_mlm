@@ -37,8 +37,9 @@ The GPA for 200 college students were followed for 6 consecutive semesters (simu
 
 
 ```{r}
-data_raw <- haven::read_sav("https://github.com/MultiLevelAnalysis/Datasets-third-edition-Multilevel-book/raw/master/chapter%205/GPA2/gpa2long.sav") %>% 
-  haven::as_factor()             # retain the labels from SPSS --> factor
+data_raw <- haven::read_sav("data/gpa2long.sav") %>% 
+  haven::as_factor() %>%             # retain the labels from SPSS --> factor
+  haven::zap_label()
 
 tibble::glimpse(data_raw) 
 ```

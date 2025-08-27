@@ -34,7 +34,7 @@ library(sjPlot)       # Quick predicitive and diagnostic plots
 Read the SPSS data in with the `haven` package and prepare it (see previous chapter).
 
 ```{r}
-data_raw <- haven::read_sav("http://www.mlminr.com/data-sets/Achieve.sav?attredirects=0")
+data_raw <- haven::read_sav("data/Achieve.sav")
 
 data_achieve_center_scale <- data_raw %>% 
   dplyr::mutate_at(vars(id, region, corp, school, class), factor) %>% 

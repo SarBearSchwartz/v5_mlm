@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>21 GLMM, Count Outcome: Bolous | R Notebook</title>
+  <title>21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="21 GLMM, Count Outcome: Bolous | R Notebook" />
+  <meta property="og:title" content="21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="github-repo" content="cehs-research/eBook_wrangle" />
+  <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="21 GLMM, Count Outcome: Bolous | R Notebook" />
+  <meta name="twitter:title" content="21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
@@ -51,13 +51,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -67,7 +67,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -121,10 +121,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -162,8 +167,6 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
@@ -220,9 +223,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.1" data-path="example-articles.html"><a href="example-articles.html#cross-sectional-clustered-or-hierarchical"><i class="fa fa-check"></i><b>4.1</b> Cross-sectional: clustered or hierarchical</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="example-articles.html"><a href="example-articles.html#non-randomized-intervention"><i class="fa fa-check"></i><b>4.1.1</b> Non-randomized Intervention</a></li>
-<li class="chapter" data-level="4.1.2" data-path="example-articles.html"><a href="example-articles.html#dyadic-design"><i class="fa fa-check"></i><b>4.1.2</b> Dyadic Design</a></li>
-<li class="chapter" data-level="4.1.3" data-path="example-articles.html"><a href="example-articles.html#binary-outcome"><i class="fa fa-check"></i><b>4.1.3</b> Binary Outcome</a></li>
+<li class="chapter" data-level="4.1.1" data-path="example-articles.html"><a href="example-articles.html#observed-cross-classified-clusters"><i class="fa fa-check"></i><b>4.1.1</b> Observed, cross-classified Clusters</a></li>
+<li class="chapter" data-level="4.1.2" data-path="example-articles.html"><a href="example-articles.html#non-randomized-intervention"><i class="fa fa-check"></i><b>4.1.2</b> Non-randomized Intervention</a></li>
+<li class="chapter" data-level="4.1.3" data-path="example-articles.html"><a href="example-articles.html#dyadic-design"><i class="fa fa-check"></i><b>4.1.3</b> Dyadic Design</a></li>
+<li class="chapter" data-level="4.1.4" data-path="example-articles.html"><a href="example-articles.html#binary-outcome"><i class="fa fa-check"></i><b>4.1.4</b> Binary Outcome</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="example-articles.html"><a href="example-articles.html#repeated-measures-longitudinal-change-over-time-or-conditional-no-time-component"><i class="fa fa-check"></i><b>4.2</b> Repeated Measures: longitudinal (change over time) or conditional (no time component)</a>
 <ul>
@@ -537,12 +541,6 @@ div.csl-indent {
 <li class="chapter" data-level="14.3.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#add-fixed-effects-level-specific"><i class="fa fa-check"></i><b>14.3.3</b> Add fixed effects: level specific</a></li>
 <li class="chapter" data-level="14.3.4" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#final-model-4"><i class="fa fa-check"></i><b>14.3.4</b> Final Model</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#autoregression-1"><i class="fa fa-check"></i><b>14.4</b> Autoregression 1</a>
-<ul>
-<li class="chapter" data-level="14.4.1" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#unstructured"><i class="fa fa-check"></i><b>14.4.1</b> Unstructured</a></li>
-<li class="chapter" data-level="14.4.2" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#compound-symmetry-with-constant-correlation"><i class="fa fa-check"></i><b>14.4.2</b> Compound Symmetry (with constant correlation)</a></li>
-<li class="chapter" data-level="14.4.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#compare-performance"><i class="fa fa-check"></i><b>14.4.3</b> Compare performance</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html"><i class="fa fa-check"></i><b>15</b> GEE, Continuous Outcome: Beat the Blues</a>
 <ul>
@@ -825,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Notebook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
           </h1>
         </div>
 
@@ -840,38 +838,37 @@ div.csl-indent {
 GLMM FAQ by: Ben Bolker and others
 </p>
 <p>
-<a href="https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html"
-class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
+<a href="https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html" class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
 </p>
 </div>
 <div id="packages-6" class="section level2 hasAnchor" number="21.1">
 <h2><span class="header-section-number">21.1</span> Packages<a href="glmm-count-outcome-bolous.html#packages-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="cran-6" class="section level3 hasAnchor" number="21.1.1">
 <h3><span class="header-section-number">21.1.1</span> CRAN<a href="glmm-count-outcome-bolous.html#cran-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1031-1"><a href="glmm-count-outcome-bolous.html#cb1031-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># all things tidy</span></span>
-<span id="cb1031-2"><a href="glmm-count-outcome-bolous.html#cb1031-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)       <span class="co"># nice looking genderal tabulations</span></span>
-<span id="cb1031-3"><a href="glmm-count-outcome-bolous.html#cb1031-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># nice table1() descriptives</span></span>
-<span id="cb1031-4"><a href="glmm-count-outcome-bolous.html#cb1031-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)       <span class="co"># Convert Regression Output to LaTeX or HTML Tables</span></span>
-<span id="cb1031-5"><a href="glmm-count-outcome-bolous.html#cb1031-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)        <span class="co"># contains some useful functions, like headTail</span></span>
-<span id="cb1031-6"><a href="glmm-count-outcome-bolous.html#cb1031-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1031-7"><a href="glmm-count-outcome-bolous.html#cb1031-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)         <span class="co"># Linear, generalized linear, &amp; nonlinear mixed models</span></span>
-<span id="cb1031-8"><a href="glmm-count-outcome-bolous.html#cb1031-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gee)          <span class="co"># Generalized Estimating Equations</span></span>
-<span id="cb1031-9"><a href="glmm-count-outcome-bolous.html#cb1031-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(optimx)       <span class="co"># Optimizers for use in lme4::glmer</span></span>
-<span id="cb1031-10"><a href="glmm-count-outcome-bolous.html#cb1031-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)        <span class="co"># Multi-Model Inference (caluclate QIC)</span></span>
-<span id="cb1031-11"><a href="glmm-count-outcome-bolous.html#cb1031-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)      <span class="co"># Plotting estimated marginal means</span></span>
-<span id="cb1031-12"><a href="glmm-count-outcome-bolous.html#cb1031-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(interactions)</span>
-<span id="cb1031-13"><a href="glmm-count-outcome-bolous.html#cb1031-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
-<span id="cb1031-14"><a href="glmm-count-outcome-bolous.html#cb1031-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1031-15"><a href="glmm-count-outcome-bolous.html#cb1031-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)    <span class="co"># combining graphics</span></span></code></pre></div>
+<div class="sourceCode" id="cb1012"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1012-1"><a href="glmm-count-outcome-bolous.html#cb1012-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># all things tidy</span></span>
+<span id="cb1012-2"><a href="glmm-count-outcome-bolous.html#cb1012-2" tabindex="-1"></a><span class="fu">library</span>(pander)       <span class="co"># nice looking genderal tabulations</span></span>
+<span id="cb1012-3"><a href="glmm-count-outcome-bolous.html#cb1012-3" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># nice table1() descriptives</span></span>
+<span id="cb1012-4"><a href="glmm-count-outcome-bolous.html#cb1012-4" tabindex="-1"></a><span class="fu">library</span>(texreg)       <span class="co"># Convert Regression Output to LaTeX or HTML Tables</span></span>
+<span id="cb1012-5"><a href="glmm-count-outcome-bolous.html#cb1012-5" tabindex="-1"></a><span class="fu">library</span>(psych)        <span class="co"># contains some useful functions, like headTail</span></span>
+<span id="cb1012-6"><a href="glmm-count-outcome-bolous.html#cb1012-6" tabindex="-1"></a></span>
+<span id="cb1012-7"><a href="glmm-count-outcome-bolous.html#cb1012-7" tabindex="-1"></a><span class="fu">library</span>(lme4)         <span class="co"># Linear, generalized linear, &amp; nonlinear mixed models</span></span>
+<span id="cb1012-8"><a href="glmm-count-outcome-bolous.html#cb1012-8" tabindex="-1"></a><span class="fu">library</span>(gee)          <span class="co"># Generalized Estimating Equations</span></span>
+<span id="cb1012-9"><a href="glmm-count-outcome-bolous.html#cb1012-9" tabindex="-1"></a><span class="fu">library</span>(optimx)       <span class="co"># Optimizers for use in lme4::glmer</span></span>
+<span id="cb1012-10"><a href="glmm-count-outcome-bolous.html#cb1012-10" tabindex="-1"></a><span class="fu">library</span>(MuMIn)        <span class="co"># Multi-Model Inference (caluclate QIC)</span></span>
+<span id="cb1012-11"><a href="glmm-count-outcome-bolous.html#cb1012-11" tabindex="-1"></a><span class="fu">library</span>(effects)      <span class="co"># Plotting estimated marginal means</span></span>
+<span id="cb1012-12"><a href="glmm-count-outcome-bolous.html#cb1012-12" tabindex="-1"></a><span class="fu">library</span>(interactions)</span>
+<span id="cb1012-13"><a href="glmm-count-outcome-bolous.html#cb1012-13" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb1012-14"><a href="glmm-count-outcome-bolous.html#cb1012-14" tabindex="-1"></a></span>
+<span id="cb1012-15"><a href="glmm-count-outcome-bolous.html#cb1012-15" tabindex="-1"></a><span class="fu">library</span>(patchwork)    <span class="co"># combining graphics</span></span></code></pre></div>
 </div>
 <div id="github-6" class="section level3 hasAnchor" number="21.1.2">
 <h3><span class="header-section-number">21.1.2</span> GitHub<a href="glmm-count-outcome-bolous.html#github-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Helper <code>extract</code> functions for exponentiating parameters form generalized regression models within a <code>texreg</code> table of model parameters.</p>
-<div class="sourceCode" id="cb1032"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1032-1"><a href="glmm-count-outcome-bolous.html#cb1032-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb1032-2"><a href="glmm-count-outcome-bolous.html#cb1032-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(devtools)</span></span>
-<span id="cb1032-3"><a href="glmm-count-outcome-bolous.html#cb1032-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install_github(&quot;SarBearSchwartz/texreghelpr&quot;)</span></span>
-<span id="cb1032-4"><a href="glmm-count-outcome-bolous.html#cb1032-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1032-5"><a href="glmm-count-outcome-bolous.html#cb1032-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreghelpr)</span></code></pre></div>
+<div class="sourceCode" id="cb1013"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1013-1"><a href="glmm-count-outcome-bolous.html#cb1013-1" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
+<span id="cb1013-2"><a href="glmm-count-outcome-bolous.html#cb1013-2" tabindex="-1"></a><span class="co"># library(devtools)</span></span>
+<span id="cb1013-3"><a href="glmm-count-outcome-bolous.html#cb1013-3" tabindex="-1"></a><span class="co"># install_github(&quot;SarBearSchwartz/texreghelpr&quot;)</span></span>
+<span id="cb1013-4"><a href="glmm-count-outcome-bolous.html#cb1013-4" tabindex="-1"></a></span>
+<span id="cb1013-5"><a href="glmm-count-outcome-bolous.html#cb1013-5" tabindex="-1"></a><span class="fu">library</span>(texreghelpr)</span></code></pre></div>
 </div>
 </div>
 <div id="data-prep-2" class="section level2 hasAnchor" number="21.2">
@@ -906,15 +903,15 @@ class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
 </ul>
 <div id="import-2" class="section level3 hasAnchor" number="21.2.1">
 <h3><span class="header-section-number">21.2.1</span> Import<a href="glmm-count-outcome-bolous.html#import-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1033-1"><a href="glmm-count-outcome-bolous.html#cb1033-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;https://raw.githubusercontent.com/CEHS-research/data/master/MLM/bolus.txt&quot;</span>,</span>
-<span id="cb1033-2"><a href="glmm-count-outcome-bolous.html#cb1033-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb1034"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1034-1"><a href="glmm-count-outcome-bolous.html#cb1034-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_raw) <span class="co"># see the structure</span></span></code></pre></div>
+<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1014-1"><a href="glmm-count-outcome-bolous.html#cb1014-1" tabindex="-1"></a>data_raw <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/bolus.txt&quot;</span>,</span>
+<span id="cb1014-2"><a href="glmm-count-outcome-bolous.html#cb1014-2" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1015"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1015-1"><a href="glmm-count-outcome-bolous.html#cb1015-1" tabindex="-1"></a><span class="fu">str</span>(data_raw) <span class="co"># see the structure</span></span></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   715 obs. of  4 variables:
  $ id   : int  1 1 1 1 1 1 1 1 1 1 ...
  $ group: chr  &quot;1mg&quot; &quot;1mg&quot; &quot;1mg&quot; &quot;1mg&quot; ...
  $ time : int  0 1 2 3 4 5 6 7 8 9 ...
  $ count: int  2 2 5 2 4 0 2 4 4 4 ...</code></pre>
-<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1036-1"><a href="glmm-count-outcome-bolous.html#cb1036-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_raw)</span></code></pre></div>
+<div class="sourceCode" id="cb1017"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1017-1"><a href="glmm-count-outcome-bolous.html#cb1017-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_raw)</span></code></pre></div>
 <pre><code>     id group time count
 1     1   1mg    0     2
 2     1   1mg    1     2
@@ -928,18 +925,18 @@ class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
 </div>
 <div id="long-format-8" class="section level3 hasAnchor" number="21.2.2">
 <h3><span class="header-section-number">21.2.2</span> Long Format<a href="glmm-count-outcome-bolous.html#long-format-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1038"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1038-1"><a href="glmm-count-outcome-bolous.html#cb1038-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb1038-2"><a href="glmm-count-outcome-bolous.html#cb1038-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">factor</span>(id)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1038-3"><a href="glmm-count-outcome-bolous.html#cb1038-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">timeF =</span> <span class="fu">factor</span>(time)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1038-4"><a href="glmm-count-outcome-bolous.html#cb1038-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">factor</span>(group))</span></code></pre></div>
-<div class="sourceCode" id="cb1039"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1039-1"><a href="glmm-count-outcome-bolous.html#cb1039-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_long) <span class="co"># see the structure</span></span></code></pre></div>
+<div class="sourceCode" id="cb1019"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1019-1"><a href="glmm-count-outcome-bolous.html#cb1019-1" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb1019-2"><a href="glmm-count-outcome-bolous.html#cb1019-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">factor</span>(id)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1019-3"><a href="glmm-count-outcome-bolous.html#cb1019-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">timeF =</span> <span class="fu">factor</span>(time)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1019-4"><a href="glmm-count-outcome-bolous.html#cb1019-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">factor</span>(group))</span></code></pre></div>
+<div class="sourceCode" id="cb1020"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1020-1"><a href="glmm-count-outcome-bolous.html#cb1020-1" tabindex="-1"></a><span class="fu">str</span>(data_long) <span class="co"># see the structure</span></span></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   715 obs. of  5 variables:
  $ id   : Factor w/ 65 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
  $ group: Factor w/ 2 levels &quot;1mg&quot;,&quot;2mg&quot;: 1 1 1 1 1 1 1 1 1 1 ...
  $ time : int  0 1 2 3 4 5 6 7 8 9 ...
  $ count: int  2 2 5 2 4 0 2 4 4 4 ...
  $ timeF: Factor w/ 11 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
-<div class="sourceCode" id="cb1041"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1041-1"><a href="glmm-count-outcome-bolous.html#cb1041-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_long)</span></code></pre></div>
+<div class="sourceCode" id="cb1022"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1022-1"><a href="glmm-count-outcome-bolous.html#cb1022-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_long)</span></code></pre></div>
 <pre><code>      id group time count timeF
 1      1   1mg    0     2     0
 2      1   1mg    1     2     1
@@ -953,13 +950,13 @@ class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
 </div>
 <div id="wide-format-8" class="section level3 hasAnchor" number="21.2.3">
 <h3><span class="header-section-number">21.2.3</span> Wide Format<a href="glmm-count-outcome-bolous.html#wide-format-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1043-1"><a href="glmm-count-outcome-bolous.html#cb1043-1" aria-hidden="true" tabindex="-1"></a>data_wide <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1043-2"><a href="glmm-count-outcome-bolous.html#cb1043-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>timeF) <span class="sc">%&gt;%</span></span>
-<span id="cb1043-3"><a href="glmm-count-outcome-bolous.html#cb1043-3" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> time,</span>
-<span id="cb1043-4"><a href="glmm-count-outcome-bolous.html#cb1043-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_prefix =</span> <span class="st">&quot;time_&quot;</span>,</span>
-<span id="cb1043-5"><a href="glmm-count-outcome-bolous.html#cb1043-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_from =</span> count)</span>
-<span id="cb1043-6"><a href="glmm-count-outcome-bolous.html#cb1043-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1043-7"><a href="glmm-count-outcome-bolous.html#cb1043-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_wide) <span class="co"># see the structure</span></span></code></pre></div>
+<div class="sourceCode" id="cb1024"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1024-1"><a href="glmm-count-outcome-bolous.html#cb1024-1" tabindex="-1"></a>data_wide <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1024-2"><a href="glmm-count-outcome-bolous.html#cb1024-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>timeF) <span class="sc">%&gt;%</span></span>
+<span id="cb1024-3"><a href="glmm-count-outcome-bolous.html#cb1024-3" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> time,</span>
+<span id="cb1024-4"><a href="glmm-count-outcome-bolous.html#cb1024-4" tabindex="-1"></a>                     <span class="at">names_prefix =</span> <span class="st">&quot;time_&quot;</span>,</span>
+<span id="cb1024-5"><a href="glmm-count-outcome-bolous.html#cb1024-5" tabindex="-1"></a>                     <span class="at">values_from =</span> count)</span>
+<span id="cb1024-6"><a href="glmm-count-outcome-bolous.html#cb1024-6" tabindex="-1"></a></span>
+<span id="cb1024-7"><a href="glmm-count-outcome-bolous.html#cb1024-7" tabindex="-1"></a><span class="fu">str</span>(data_wide) <span class="co"># see the structure</span></span></code></pre></div>
 <pre><code>tibble [65 × 13] (S3: tbl_df/tbl/data.frame)
  $ id     : Factor w/ 65 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
  $ group  : Factor w/ 2 levels &quot;1mg&quot;,&quot;2mg&quot;: 1 1 1 1 1 1 1 1 1 1 ...
@@ -974,7 +971,7 @@ class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
  $ time_8 : int [1:65] 4 2 5 0 2 2 3 9 8 4 ...
  $ time_9 : int [1:65] 4 7 3 1 5 4 4 1 5 1 ...
  $ time_10: int [1:65] 2 4 5 1 0 4 6 4 5 0 ...</code></pre>
-<div class="sourceCode" id="cb1045"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1045-1"><a href="glmm-count-outcome-bolous.html#cb1045-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_wide)</span></code></pre></div>
+<div class="sourceCode" id="cb1026"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1026-1"><a href="glmm-count-outcome-bolous.html#cb1026-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_wide)</span></code></pre></div>
 <pre><code>    id group time_0 time_1 time_2 time_3 time_4 time_5 time_6 time_7 time_8
 1    1   1mg      2      2      5      2      4      0      2      4      4
 2    2   1mg      3      5      4      4      5      0      6      3      2
@@ -1003,14 +1000,14 @@ class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
 <h3><span class="header-section-number">21.3.1</span> Summary Statistics<a href="glmm-count-outcome-bolous.html#summary-statistics-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="demographics-and-baseline-2" class="section level4 hasAnchor" number="21.3.1.1">
 <h4><span class="header-section-number">21.3.1.1</span> Demographics and Baseline<a href="glmm-count-outcome-bolous.html#demographics-and-baseline-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1047"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1047-1"><a href="glmm-count-outcome-bolous.html#cb1047-1" aria-hidden="true" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb1047-2"><a href="glmm-count-outcome-bolous.html#cb1047-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
-<span id="cb1047-3"><a href="glmm-count-outcome-bolous.html#cb1047-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(<span class="st">&quot;Count at Baseline&quot;</span> <span class="ot">=</span> time_0,</span>
-<span id="cb1047-4"><a href="glmm-count-outcome-bolous.html#cb1047-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">total   =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1047-5"><a href="glmm-count-outcome-bolous.html#cb1047-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">test    =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1047-6"><a href="glmm-count-outcome-bolous.html#cb1047-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.rm   =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1047-7"><a href="glmm-count-outcome-bolous.html#cb1047-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">digits  =</span> <span class="dv">2</span>,</span>
-<span id="cb1047-8"><a href="glmm-count-outcome-bolous.html#cb1047-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">output  =</span> <span class="st">&quot;markdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1028"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1028-1"><a href="glmm-count-outcome-bolous.html#cb1028-1" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb1028-2"><a href="glmm-count-outcome-bolous.html#cb1028-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb1028-3"><a href="glmm-count-outcome-bolous.html#cb1028-3" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(<span class="st">&quot;Count at Baseline&quot;</span> <span class="ot">=</span> time_0,</span>
+<span id="cb1028-4"><a href="glmm-count-outcome-bolous.html#cb1028-4" tabindex="-1"></a>                    <span class="at">total   =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1028-5"><a href="glmm-count-outcome-bolous.html#cb1028-5" tabindex="-1"></a>                    <span class="at">test    =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1028-6"><a href="glmm-count-outcome-bolous.html#cb1028-6" tabindex="-1"></a>                    <span class="at">na.rm   =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1028-7"><a href="glmm-count-outcome-bolous.html#cb1028-7" tabindex="-1"></a>                    <span class="at">digits  =</span> <span class="dv">2</span>,</span>
+<span id="cb1028-8"><a href="glmm-count-outcome-bolous.html#cb1028-8" tabindex="-1"></a>                    <span class="at">output  =</span> <span class="st">&quot;markdown&quot;</span>)</span></code></pre></div>
 <table>
 <colgroup>
 <col width="28%" />
@@ -1055,16 +1052,16 @@ class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
 </div>
 <div id="status-over-time-3" class="section level4 hasAnchor" number="21.3.1.2">
 <h4><span class="header-section-number">21.3.1.2</span> Status over Time<a href="glmm-count-outcome-bolous.html#status-over-time-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1048"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1048-1"><a href="glmm-count-outcome-bolous.html#cb1048-1" aria-hidden="true" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb1048-2"><a href="glmm-count-outcome-bolous.html#cb1048-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
-<span id="cb1048-3"><a href="glmm-count-outcome-bolous.html#cb1048-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(time_0, </span>
-<span id="cb1048-4"><a href="glmm-count-outcome-bolous.html#cb1048-4" aria-hidden="true" tabindex="-1"></a>                    time_1, time_2, time_3, time_4, time_5, </span>
-<span id="cb1048-5"><a href="glmm-count-outcome-bolous.html#cb1048-5" aria-hidden="true" tabindex="-1"></a>                    time_6, time_7, time_8, time_9, time_10,</span>
-<span id="cb1048-6"><a href="glmm-count-outcome-bolous.html#cb1048-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">total   =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1048-7"><a href="glmm-count-outcome-bolous.html#cb1048-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">test    =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1048-8"><a href="glmm-count-outcome-bolous.html#cb1048-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.rm   =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1048-9"><a href="glmm-count-outcome-bolous.html#cb1048-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">digits  =</span> <span class="dv">2</span>,</span>
-<span id="cb1048-10"><a href="glmm-count-outcome-bolous.html#cb1048-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">output  =</span> <span class="st">&quot;markdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1029-1"><a href="glmm-count-outcome-bolous.html#cb1029-1" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb1029-2"><a href="glmm-count-outcome-bolous.html#cb1029-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb1029-3"><a href="glmm-count-outcome-bolous.html#cb1029-3" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(time_0, </span>
+<span id="cb1029-4"><a href="glmm-count-outcome-bolous.html#cb1029-4" tabindex="-1"></a>                    time_1, time_2, time_3, time_4, time_5, </span>
+<span id="cb1029-5"><a href="glmm-count-outcome-bolous.html#cb1029-5" tabindex="-1"></a>                    time_6, time_7, time_8, time_9, time_10,</span>
+<span id="cb1029-6"><a href="glmm-count-outcome-bolous.html#cb1029-6" tabindex="-1"></a>                    <span class="at">total   =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1029-7"><a href="glmm-count-outcome-bolous.html#cb1029-7" tabindex="-1"></a>                    <span class="at">test    =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1029-8"><a href="glmm-count-outcome-bolous.html#cb1029-8" tabindex="-1"></a>                    <span class="at">na.rm   =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1029-9"><a href="glmm-count-outcome-bolous.html#cb1029-9" tabindex="-1"></a>                    <span class="at">digits  =</span> <span class="dv">2</span>,</span>
+<span id="cb1029-10"><a href="glmm-count-outcome-bolous.html#cb1029-10" tabindex="-1"></a>                    <span class="at">output  =</span> <span class="st">&quot;markdown&quot;</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1242,127 +1239,127 @@ class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
 </div>
 <div id="correlation-over-time" class="section level4 hasAnchor" number="21.3.1.3">
 <h4><span class="header-section-number">21.3.1.3</span> Correlation over Time<a href="glmm-count-outcome-bolous.html#correlation-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1049"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1049-1"><a href="glmm-count-outcome-bolous.html#cb1049-1" aria-hidden="true" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb1049-2"><a href="glmm-count-outcome-bolous.html#cb1049-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;time_&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1049-3"><a href="glmm-count-outcome-bolous.html#cb1049-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb1049-4"><a href="glmm-count-outcome-bolous.html#cb1049-4" aria-hidden="true" tabindex="-1"></a>  corrplot<span class="sc">::</span><span class="fu">corrplot.mixed</span>()</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-792-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1030"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1030-1"><a href="glmm-count-outcome-bolous.html#cb1030-1" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb1030-2"><a href="glmm-count-outcome-bolous.html#cb1030-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;time_&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1030-3"><a href="glmm-count-outcome-bolous.html#cb1030-3" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1030-4"><a href="glmm-count-outcome-bolous.html#cb1030-4" tabindex="-1"></a>  corrplot<span class="sc">::</span><span class="fu">corrplot.mixed</span>()</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-767-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="visualize-6" class="section level3 hasAnchor" number="21.3.2">
 <h3><span class="header-section-number">21.3.2</span> Visualize<a href="glmm-count-outcome-bolous.html#visualize-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="person-profile-plots-by-group" class="section level4 hasAnchor" number="21.3.2.1">
 <h4><span class="header-section-number">21.3.2.1</span> Person Profile Plots, by Group<a href="glmm-count-outcome-bolous.html#person-profile-plots-by-group" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1050"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1050-1"><a href="glmm-count-outcome-bolous.html#cb1050-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1050-2"><a href="glmm-count-outcome-bolous.html#cb1050-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
-<span id="cb1050-3"><a href="glmm-count-outcome-bolous.html#cb1050-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
-<span id="cb1050-4"><a href="glmm-count-outcome-bolous.html#cb1050-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id),</span>
-<span id="cb1050-5"><a href="glmm-count-outcome-bolous.html#cb1050-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb1050-6"><a href="glmm-count-outcome-bolous.html#cb1050-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb1050-7"><a href="glmm-count-outcome-bolous.html#cb1050-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
-<span id="cb1050-8"><a href="glmm-count-outcome-bolous.html#cb1050-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-793-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb1051"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1051-1"><a href="glmm-count-outcome-bolous.html#cb1051-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1051-2"><a href="glmm-count-outcome-bolous.html#cb1051-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
-<span id="cb1051-3"><a href="glmm-count-outcome-bolous.html#cb1051-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
-<span id="cb1051-4"><a href="glmm-count-outcome-bolous.html#cb1051-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> id),</span>
-<span id="cb1051-5"><a href="glmm-count-outcome-bolous.html#cb1051-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb1051-6"><a href="glmm-count-outcome-bolous.html#cb1051-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
-<span id="cb1051-7"><a href="glmm-count-outcome-bolous.html#cb1051-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1051-8"><a href="glmm-count-outcome-bolous.html#cb1051-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
-<span id="cb1051-9"><a href="glmm-count-outcome-bolous.html#cb1051-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-794-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb1052"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1052-1"><a href="glmm-count-outcome-bolous.html#cb1052-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1052-2"><a href="glmm-count-outcome-bolous.html#cb1052-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
-<span id="cb1052-3"><a href="glmm-count-outcome-bolous.html#cb1052-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
-<span id="cb1052-4"><a href="glmm-count-outcome-bolous.html#cb1052-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> id),</span>
-<span id="cb1052-5"><a href="glmm-count-outcome-bolous.html#cb1052-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb1052-6"><a href="glmm-count-outcome-bolous.html#cb1052-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>),</span>
-<span id="cb1052-7"><a href="glmm-count-outcome-bolous.html#cb1052-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
-<span id="cb1052-8"><a href="glmm-count-outcome-bolous.html#cb1052-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1052-9"><a href="glmm-count-outcome-bolous.html#cb1052-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
-<span id="cb1052-10"><a href="glmm-count-outcome-bolous.html#cb1052-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-795-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb1053"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1053-1"><a href="glmm-count-outcome-bolous.html#cb1053-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1053-2"><a href="glmm-count-outcome-bolous.html#cb1053-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
-<span id="cb1053-3"><a href="glmm-count-outcome-bolous.html#cb1053-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
-<span id="cb1053-4"><a href="glmm-count-outcome-bolous.html#cb1053-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb1053-5"><a href="glmm-count-outcome-bolous.html#cb1053-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>,</span>
-<span id="cb1053-6"><a href="glmm-count-outcome-bolous.html#cb1053-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb1053-7"><a href="glmm-count-outcome-bolous.html#cb1053-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1053-8"><a href="glmm-count-outcome-bolous.html#cb1053-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb1053-9"><a href="glmm-count-outcome-bolous.html#cb1053-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb1053-10"><a href="glmm-count-outcome-bolous.html#cb1053-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1053-11"><a href="glmm-count-outcome-bolous.html#cb1053-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
-<span id="cb1053-12"><a href="glmm-count-outcome-bolous.html#cb1053-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-796-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb1054"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1054-1"><a href="glmm-count-outcome-bolous.html#cb1054-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1054-2"><a href="glmm-count-outcome-bolous.html#cb1054-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
-<span id="cb1054-3"><a href="glmm-count-outcome-bolous.html#cb1054-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">log</span>(count <span class="sc">+</span> .<span class="dv">1</span>))) <span class="sc">+</span></span>
-<span id="cb1054-4"><a href="glmm-count-outcome-bolous.html#cb1054-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb1054-5"><a href="glmm-count-outcome-bolous.html#cb1054-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>,</span>
-<span id="cb1054-6"><a href="glmm-count-outcome-bolous.html#cb1054-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb1054-7"><a href="glmm-count-outcome-bolous.html#cb1054-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1054-8"><a href="glmm-count-outcome-bolous.html#cb1054-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb1054-9"><a href="glmm-count-outcome-bolous.html#cb1054-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb1054-10"><a href="glmm-count-outcome-bolous.html#cb1054-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1054-11"><a href="glmm-count-outcome-bolous.html#cb1054-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
-<span id="cb1054-12"><a href="glmm-count-outcome-bolous.html#cb1054-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-797-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb1055"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1055-1"><a href="glmm-count-outcome-bolous.html#cb1055-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1055-2"><a href="glmm-count-outcome-bolous.html#cb1055-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
-<span id="cb1055-3"><a href="glmm-count-outcome-bolous.html#cb1055-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
-<span id="cb1055-4"><a href="glmm-count-outcome-bolous.html#cb1055-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;1. Loess&quot;</span>),</span>
-<span id="cb1055-5"><a href="glmm-count-outcome-bolous.html#cb1055-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;loess&quot;</span>,</span>
-<span id="cb1055-6"><a href="glmm-count-outcome-bolous.html#cb1055-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1055-7"><a href="glmm-count-outcome-bolous.html#cb1055-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;2. Linear&quot;</span>),</span>
-<span id="cb1055-8"><a href="glmm-count-outcome-bolous.html#cb1055-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb1055-9"><a href="glmm-count-outcome-bolous.html#cb1055-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1055-10"><a href="glmm-count-outcome-bolous.html#cb1055-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;3. Quadratic&quot;</span>),</span>
-<span id="cb1055-11"><a href="glmm-count-outcome-bolous.html#cb1055-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb1055-12"><a href="glmm-count-outcome-bolous.html#cb1055-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>),</span>
-<span id="cb1055-13"><a href="glmm-count-outcome-bolous.html#cb1055-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1055-14"><a href="glmm-count-outcome-bolous.html#cb1055-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;4. Cubic&quot;</span>),</span>
-<span id="cb1055-15"><a href="glmm-count-outcome-bolous.html#cb1055-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb1055-16"><a href="glmm-count-outcome-bolous.html#cb1055-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">3</span>),</span>
-<span id="cb1055-17"><a href="glmm-count-outcome-bolous.html#cb1055-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1055-18"><a href="glmm-count-outcome-bolous.html#cb1055-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
-<span id="cb1055-19"><a href="glmm-count-outcome-bolous.html#cb1055-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb1055-20"><a href="glmm-count-outcome-bolous.html#cb1055-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Type of Smoother&quot;</span>) <span class="sc">+</span></span>
-<span id="cb1055-21"><a href="glmm-count-outcome-bolous.html#cb1055-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb1055-22"><a href="glmm-count-outcome-bolous.html#cb1055-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;cm&quot;</span>))</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-798-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1031-1"><a href="glmm-count-outcome-bolous.html#cb1031-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1031-2"><a href="glmm-count-outcome-bolous.html#cb1031-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
+<span id="cb1031-3"><a href="glmm-count-outcome-bolous.html#cb1031-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb1031-4"><a href="glmm-count-outcome-bolous.html#cb1031-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id),</span>
+<span id="cb1031-5"><a href="glmm-count-outcome-bolous.html#cb1031-5" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb1031-6"><a href="glmm-count-outcome-bolous.html#cb1031-6" tabindex="-1"></a>            <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb1031-7"><a href="glmm-count-outcome-bolous.html#cb1031-7" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
+<span id="cb1031-8"><a href="glmm-count-outcome-bolous.html#cb1031-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-768-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1032"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1032-1"><a href="glmm-count-outcome-bolous.html#cb1032-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1032-2"><a href="glmm-count-outcome-bolous.html#cb1032-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
+<span id="cb1032-3"><a href="glmm-count-outcome-bolous.html#cb1032-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb1032-4"><a href="glmm-count-outcome-bolous.html#cb1032-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> id),</span>
+<span id="cb1032-5"><a href="glmm-count-outcome-bolous.html#cb1032-5" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1032-6"><a href="glmm-count-outcome-bolous.html#cb1032-6" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb1032-7"><a href="glmm-count-outcome-bolous.html#cb1032-7" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1032-8"><a href="glmm-count-outcome-bolous.html#cb1032-8" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
+<span id="cb1032-9"><a href="glmm-count-outcome-bolous.html#cb1032-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-769-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1033-1"><a href="glmm-count-outcome-bolous.html#cb1033-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1033-2"><a href="glmm-count-outcome-bolous.html#cb1033-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
+<span id="cb1033-3"><a href="glmm-count-outcome-bolous.html#cb1033-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb1033-4"><a href="glmm-count-outcome-bolous.html#cb1033-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> id),</span>
+<span id="cb1033-5"><a href="glmm-count-outcome-bolous.html#cb1033-5" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1033-6"><a href="glmm-count-outcome-bolous.html#cb1033-6" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>),</span>
+<span id="cb1033-7"><a href="glmm-count-outcome-bolous.html#cb1033-7" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb1033-8"><a href="glmm-count-outcome-bolous.html#cb1033-8" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1033-9"><a href="glmm-count-outcome-bolous.html#cb1033-9" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
+<span id="cb1033-10"><a href="glmm-count-outcome-bolous.html#cb1033-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-770-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1034"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1034-1"><a href="glmm-count-outcome-bolous.html#cb1034-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1034-2"><a href="glmm-count-outcome-bolous.html#cb1034-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
+<span id="cb1034-3"><a href="glmm-count-outcome-bolous.html#cb1034-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb1034-4"><a href="glmm-count-outcome-bolous.html#cb1034-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb1034-5"><a href="glmm-count-outcome-bolous.html#cb1034-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>,</span>
+<span id="cb1034-6"><a href="glmm-count-outcome-bolous.html#cb1034-6" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb1034-7"><a href="glmm-count-outcome-bolous.html#cb1034-7" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1034-8"><a href="glmm-count-outcome-bolous.html#cb1034-8" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1034-9"><a href="glmm-count-outcome-bolous.html#cb1034-9" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb1034-10"><a href="glmm-count-outcome-bolous.html#cb1034-10" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1034-11"><a href="glmm-count-outcome-bolous.html#cb1034-11" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
+<span id="cb1034-12"><a href="glmm-count-outcome-bolous.html#cb1034-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-771-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1035"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1035-1"><a href="glmm-count-outcome-bolous.html#cb1035-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1035-2"><a href="glmm-count-outcome-bolous.html#cb1035-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
+<span id="cb1035-3"><a href="glmm-count-outcome-bolous.html#cb1035-3" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">log</span>(count <span class="sc">+</span> .<span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb1035-4"><a href="glmm-count-outcome-bolous.html#cb1035-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb1035-5"><a href="glmm-count-outcome-bolous.html#cb1035-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>,</span>
+<span id="cb1035-6"><a href="glmm-count-outcome-bolous.html#cb1035-6" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb1035-7"><a href="glmm-count-outcome-bolous.html#cb1035-7" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1035-8"><a href="glmm-count-outcome-bolous.html#cb1035-8" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1035-9"><a href="glmm-count-outcome-bolous.html#cb1035-9" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb1035-10"><a href="glmm-count-outcome-bolous.html#cb1035-10" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1035-11"><a href="glmm-count-outcome-bolous.html#cb1035-11" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
+<span id="cb1035-12"><a href="glmm-count-outcome-bolous.html#cb1035-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-772-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1036-1"><a href="glmm-count-outcome-bolous.html#cb1036-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1036-2"><a href="glmm-count-outcome-bolous.html#cb1036-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
+<span id="cb1036-3"><a href="glmm-count-outcome-bolous.html#cb1036-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb1036-4"><a href="glmm-count-outcome-bolous.html#cb1036-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;1. Loess&quot;</span>),</span>
+<span id="cb1036-5"><a href="glmm-count-outcome-bolous.html#cb1036-5" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;loess&quot;</span>,</span>
+<span id="cb1036-6"><a href="glmm-count-outcome-bolous.html#cb1036-6" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1036-7"><a href="glmm-count-outcome-bolous.html#cb1036-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;2. Linear&quot;</span>),</span>
+<span id="cb1036-8"><a href="glmm-count-outcome-bolous.html#cb1036-8" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1036-9"><a href="glmm-count-outcome-bolous.html#cb1036-9" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1036-10"><a href="glmm-count-outcome-bolous.html#cb1036-10" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;3. Quadratic&quot;</span>),</span>
+<span id="cb1036-11"><a href="glmm-count-outcome-bolous.html#cb1036-11" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1036-12"><a href="glmm-count-outcome-bolous.html#cb1036-12" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>),</span>
+<span id="cb1036-13"><a href="glmm-count-outcome-bolous.html#cb1036-13" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1036-14"><a href="glmm-count-outcome-bolous.html#cb1036-14" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">&quot;4. Cubic&quot;</span>),</span>
+<span id="cb1036-15"><a href="glmm-count-outcome-bolous.html#cb1036-15" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1036-16"><a href="glmm-count-outcome-bolous.html#cb1036-16" tabindex="-1"></a>              <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">3</span>),</span>
+<span id="cb1036-17"><a href="glmm-count-outcome-bolous.html#cb1036-17" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1036-18"><a href="glmm-count-outcome-bolous.html#cb1036-18" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
+<span id="cb1036-19"><a href="glmm-count-outcome-bolous.html#cb1036-19" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb1036-20"><a href="glmm-count-outcome-bolous.html#cb1036-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Type of Smoother&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1036-21"><a href="glmm-count-outcome-bolous.html#cb1036-21" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb1036-22"><a href="glmm-count-outcome-bolous.html#cb1036-22" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;cm&quot;</span>))</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-773-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="means-over-time-by-group" class="section level4 hasAnchor" number="21.3.2.2">
 <h4><span class="header-section-number">21.3.2.2</span> Means over Time, BY Group<a href="glmm-count-outcome-bolous.html#means-over-time-by-group" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1056"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1056-1"><a href="glmm-count-outcome-bolous.html#cb1056-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1056-2"><a href="glmm-count-outcome-bolous.html#cb1056-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group, timeF) <span class="sc">%&gt;%</span> </span>
-<span id="cb1056-3"><a href="glmm-count-outcome-bolous.html#cb1056-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>(count)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1056-4"><a href="glmm-count-outcome-bolous.html#cb1056-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> timeF,</span>
-<span id="cb1056-5"><a href="glmm-count-outcome-bolous.html#cb1056-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> M,</span>
-<span id="cb1056-6"><a href="glmm-count-outcome-bolous.html#cb1056-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> group,</span>
-<span id="cb1056-7"><a href="glmm-count-outcome-bolous.html#cb1056-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> group)) <span class="sc">+</span></span>
-<span id="cb1056-8"><a href="glmm-count-outcome-bolous.html#cb1056-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb1056-9"><a href="glmm-count-outcome-bolous.html#cb1056-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb1056-10"><a href="glmm-count-outcome-bolous.html#cb1056-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb1056-11"><a href="glmm-count-outcome-bolous.html#cb1056-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
-<span id="cb1056-12"><a href="glmm-count-outcome-bolous.html#cb1056-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Sample Mean Count&quot;</span>,</span>
-<span id="cb1056-13"><a href="glmm-count-outcome-bolous.html#cb1056-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) </span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-799-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb1057"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1057-1"><a href="glmm-count-outcome-bolous.html#cb1057-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1057-2"><a href="glmm-count-outcome-bolous.html#cb1057-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group, timeF) <span class="sc">%&gt;%</span> </span>
-<span id="cb1057-3"><a href="glmm-count-outcome-bolous.html#cb1057-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>(<span class="fu">log</span>(count <span class="sc">+</span> .<span class="dv">1</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb1057-4"><a href="glmm-count-outcome-bolous.html#cb1057-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> timeF,</span>
-<span id="cb1057-5"><a href="glmm-count-outcome-bolous.html#cb1057-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> M,</span>
-<span id="cb1057-6"><a href="glmm-count-outcome-bolous.html#cb1057-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> group,</span>
-<span id="cb1057-7"><a href="glmm-count-outcome-bolous.html#cb1057-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> group)) <span class="sc">+</span></span>
-<span id="cb1057-8"><a href="glmm-count-outcome-bolous.html#cb1057-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb1057-9"><a href="glmm-count-outcome-bolous.html#cb1057-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb1057-10"><a href="glmm-count-outcome-bolous.html#cb1057-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb1057-11"><a href="glmm-count-outcome-bolous.html#cb1057-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
-<span id="cb1057-12"><a href="glmm-count-outcome-bolous.html#cb1057-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Sample Mean Count&quot;</span>,</span>
-<span id="cb1057-13"><a href="glmm-count-outcome-bolous.html#cb1057-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) </span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-800-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1037"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1037-1"><a href="glmm-count-outcome-bolous.html#cb1037-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1037-2"><a href="glmm-count-outcome-bolous.html#cb1037-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group, timeF) <span class="sc">%&gt;%</span> </span>
+<span id="cb1037-3"><a href="glmm-count-outcome-bolous.html#cb1037-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1037-4"><a href="glmm-count-outcome-bolous.html#cb1037-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> timeF,</span>
+<span id="cb1037-5"><a href="glmm-count-outcome-bolous.html#cb1037-5" tabindex="-1"></a>             <span class="at">y =</span> M,</span>
+<span id="cb1037-6"><a href="glmm-count-outcome-bolous.html#cb1037-6" tabindex="-1"></a>             <span class="at">group =</span> group,</span>
+<span id="cb1037-7"><a href="glmm-count-outcome-bolous.html#cb1037-7" tabindex="-1"></a>             <span class="at">color =</span> group)) <span class="sc">+</span></span>
+<span id="cb1037-8"><a href="glmm-count-outcome-bolous.html#cb1037-8" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb1037-9"><a href="glmm-count-outcome-bolous.html#cb1037-9" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb1037-10"><a href="glmm-count-outcome-bolous.html#cb1037-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb1037-11"><a href="glmm-count-outcome-bolous.html#cb1037-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
+<span id="cb1037-12"><a href="glmm-count-outcome-bolous.html#cb1037-12" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Sample Mean Count&quot;</span>,</span>
+<span id="cb1037-13"><a href="glmm-count-outcome-bolous.html#cb1037-13" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) </span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-774-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1038"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1038-1"><a href="glmm-count-outcome-bolous.html#cb1038-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1038-2"><a href="glmm-count-outcome-bolous.html#cb1038-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group, timeF) <span class="sc">%&gt;%</span> </span>
+<span id="cb1038-3"><a href="glmm-count-outcome-bolous.html#cb1038-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>(<span class="fu">log</span>(count <span class="sc">+</span> .<span class="dv">1</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb1038-4"><a href="glmm-count-outcome-bolous.html#cb1038-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> timeF,</span>
+<span id="cb1038-5"><a href="glmm-count-outcome-bolous.html#cb1038-5" tabindex="-1"></a>             <span class="at">y =</span> M,</span>
+<span id="cb1038-6"><a href="glmm-count-outcome-bolous.html#cb1038-6" tabindex="-1"></a>             <span class="at">group =</span> group,</span>
+<span id="cb1038-7"><a href="glmm-count-outcome-bolous.html#cb1038-7" tabindex="-1"></a>             <span class="at">color =</span> group)) <span class="sc">+</span></span>
+<span id="cb1038-8"><a href="glmm-count-outcome-bolous.html#cb1038-8" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb1038-9"><a href="glmm-count-outcome-bolous.html#cb1038-9" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb1038-10"><a href="glmm-count-outcome-bolous.html#cb1038-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb1038-11"><a href="glmm-count-outcome-bolous.html#cb1038-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
+<span id="cb1038-12"><a href="glmm-count-outcome-bolous.html#cb1038-12" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Sample Mean Count&quot;</span>,</span>
+<span id="cb1038-13"><a href="glmm-count-outcome-bolous.html#cb1038-13" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) </span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-775-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1372,14 +1369,14 @@ class="uri">https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</a>
 <h3><span class="header-section-number">21.4.1</span> Fit Various Correlation Structures<a href="glmm-count-outcome-bolous.html#fit-various-correlation-structures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="exchangable" class="section level4 hasAnchor" number="21.4.1.1">
 <h4><span class="header-section-number">21.4.1.1</span> Exchangable<a href="glmm-count-outcome-bolous.html#exchangable" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1058"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1058-1"><a href="glmm-count-outcome-bolous.html#cb1058-1" aria-hidden="true" tabindex="-1"></a>mod_gee_ex <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> group <span class="sc">+</span> time <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb1058-2"><a href="glmm-count-outcome-bolous.html#cb1058-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">id =</span> id,</span>
-<span id="cb1058-3"><a href="glmm-count-outcome-bolous.html#cb1058-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> data_long,</span>
-<span id="cb1058-4"><a href="glmm-count-outcome-bolous.html#cb1058-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb1058-5"><a href="glmm-count-outcome-bolous.html#cb1058-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">corstr =</span> <span class="st">&#39;exchangeable&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1039"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1039-1"><a href="glmm-count-outcome-bolous.html#cb1039-1" tabindex="-1"></a>mod_gee_ex <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> group <span class="sc">+</span> time <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb1039-2"><a href="glmm-count-outcome-bolous.html#cb1039-2" tabindex="-1"></a>                       <span class="at">id =</span> id,</span>
+<span id="cb1039-3"><a href="glmm-count-outcome-bolous.html#cb1039-3" tabindex="-1"></a>                       <span class="at">data =</span> data_long,</span>
+<span id="cb1039-4"><a href="glmm-count-outcome-bolous.html#cb1039-4" tabindex="-1"></a>                       <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb1039-5"><a href="glmm-count-outcome-bolous.html#cb1039-5" tabindex="-1"></a>                       <span class="at">corstr =</span> <span class="st">&#39;exchangeable&#39;</span>)</span></code></pre></div>
 <pre><code>(Intercept)    group2mg        time   I(time^2) 
    1.721889    0.362804   -0.002225   -0.004167 </code></pre>
-<div class="sourceCode" id="cb1060"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1060-1"><a href="glmm-count-outcome-bolous.html#cb1060-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_ex)</span></code></pre></div>
+<div class="sourceCode" id="cb1041"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1041-1"><a href="glmm-count-outcome-bolous.html#cb1041-1" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_ex)</span></code></pre></div>
 <pre><code>
  GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA
  gee S-function, version 4.13 modified 98/01/27 (1998) 
@@ -1436,15 +1433,15 @@ Working Correlation
 </div>
 <div id="auto-regressive-correlation-decay-over-time" class="section level4 hasAnchor" number="21.4.1.2">
 <h4><span class="header-section-number">21.4.1.2</span> Auto-regressive (correlation decay over time)<a href="glmm-count-outcome-bolous.html#auto-regressive-correlation-decay-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1062"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1062-1"><a href="glmm-count-outcome-bolous.html#cb1062-1" aria-hidden="true" tabindex="-1"></a>mod_gee_ar <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> group <span class="sc">+</span> time <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb1062-2"><a href="glmm-count-outcome-bolous.html#cb1062-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">id =</span> id,</span>
-<span id="cb1062-3"><a href="glmm-count-outcome-bolous.html#cb1062-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> data_long,</span>
-<span id="cb1062-4"><a href="glmm-count-outcome-bolous.html#cb1062-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb1062-5"><a href="glmm-count-outcome-bolous.html#cb1062-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">corstr =</span> <span class="st">&quot;AR-M&quot;</span>,</span>
-<span id="cb1062-6"><a href="glmm-count-outcome-bolous.html#cb1062-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Mv =</span> <span class="dv">1</span>)  </span></code></pre></div>
+<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1043-1"><a href="glmm-count-outcome-bolous.html#cb1043-1" tabindex="-1"></a>mod_gee_ar <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> group <span class="sc">+</span> time <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb1043-2"><a href="glmm-count-outcome-bolous.html#cb1043-2" tabindex="-1"></a>                       <span class="at">id =</span> id,</span>
+<span id="cb1043-3"><a href="glmm-count-outcome-bolous.html#cb1043-3" tabindex="-1"></a>                       <span class="at">data =</span> data_long,</span>
+<span id="cb1043-4"><a href="glmm-count-outcome-bolous.html#cb1043-4" tabindex="-1"></a>                       <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb1043-5"><a href="glmm-count-outcome-bolous.html#cb1043-5" tabindex="-1"></a>                       <span class="at">corstr =</span> <span class="st">&quot;AR-M&quot;</span>,</span>
+<span id="cb1043-6"><a href="glmm-count-outcome-bolous.html#cb1043-6" tabindex="-1"></a>                       <span class="at">Mv =</span> <span class="dv">1</span>)  </span></code></pre></div>
 <pre><code>(Intercept)    group2mg        time   I(time^2) 
    1.721889    0.362804   -0.002225   -0.004167 </code></pre>
-<div class="sourceCode" id="cb1064"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1064-1"><a href="glmm-count-outcome-bolous.html#cb1064-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_ar)</span></code></pre></div>
+<div class="sourceCode" id="cb1045"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1045-1"><a href="glmm-count-outcome-bolous.html#cb1045-1" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_ar)</span></code></pre></div>
 <pre><code>
  GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA
  gee S-function, version 4.13 modified 98/01/27 (1998) 
@@ -1500,16 +1497,16 @@ Working Correlation
 [10,] 0.533655 1.000000 0.533655
 [11,] 0.284788 0.533655 1.000000</code></pre>
 </div>
-<div id="unstructured-1" class="section level4 hasAnchor" number="21.4.1.3">
-<h4><span class="header-section-number">21.4.1.3</span> Unstructured<a href="glmm-count-outcome-bolous.html#unstructured-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1066"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1066-1"><a href="glmm-count-outcome-bolous.html#cb1066-1" aria-hidden="true" tabindex="-1"></a>mod_gee_un <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> group <span class="sc">+</span> time <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb1066-2"><a href="glmm-count-outcome-bolous.html#cb1066-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">id =</span> id,</span>
-<span id="cb1066-3"><a href="glmm-count-outcome-bolous.html#cb1066-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> data_long,</span>
-<span id="cb1066-4"><a href="glmm-count-outcome-bolous.html#cb1066-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb1066-5"><a href="glmm-count-outcome-bolous.html#cb1066-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">corstr =</span> <span class="st">&quot;unstructured&quot;</span>) </span></code></pre></div>
+<div id="unstructured" class="section level4 hasAnchor" number="21.4.1.3">
+<h4><span class="header-section-number">21.4.1.3</span> Unstructured<a href="glmm-count-outcome-bolous.html#unstructured" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb1047"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1047-1"><a href="glmm-count-outcome-bolous.html#cb1047-1" tabindex="-1"></a>mod_gee_un <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> group <span class="sc">+</span> time <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb1047-2"><a href="glmm-count-outcome-bolous.html#cb1047-2" tabindex="-1"></a>                       <span class="at">id =</span> id,</span>
+<span id="cb1047-3"><a href="glmm-count-outcome-bolous.html#cb1047-3" tabindex="-1"></a>                       <span class="at">data =</span> data_long,</span>
+<span id="cb1047-4"><a href="glmm-count-outcome-bolous.html#cb1047-4" tabindex="-1"></a>                       <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb1047-5"><a href="glmm-count-outcome-bolous.html#cb1047-5" tabindex="-1"></a>                       <span class="at">corstr =</span> <span class="st">&quot;unstructured&quot;</span>) </span></code></pre></div>
 <pre><code>(Intercept)    group2mg        time   I(time^2) 
    1.721889    0.362804   -0.002225   -0.004167 </code></pre>
-<div class="sourceCode" id="cb1068"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1068-1"><a href="glmm-count-outcome-bolous.html#cb1068-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_un)</span></code></pre></div>
+<div class="sourceCode" id="cb1049"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1049-1"><a href="glmm-count-outcome-bolous.html#cb1049-1" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_un)</span></code></pre></div>
 <pre><code>
  GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA
  gee S-function, version 4.13 modified 98/01/27 (1998) 
@@ -1569,10 +1566,10 @@ Working Correlation
 <h3><span class="header-section-number">21.4.2</span> Compare Corelation Structures<a href="glmm-count-outcome-bolous.html#compare-corelation-structures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="qic-model-fit" class="section level4 hasAnchor" number="21.4.2.1">
 <h4><span class="header-section-number">21.4.2.1</span> QIC: Model Fit<a href="glmm-count-outcome-bolous.html#qic-model-fit" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1070"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1070-1"><a href="glmm-count-outcome-bolous.html#cb1070-1" aria-hidden="true" tabindex="-1"></a>MuMIn<span class="sc">::</span><span class="fu">model.sel</span>(mod_gee_ex, </span>
-<span id="cb1070-2"><a href="glmm-count-outcome-bolous.html#cb1070-2" aria-hidden="true" tabindex="-1"></a>                 mod_gee_ar, </span>
-<span id="cb1070-3"><a href="glmm-count-outcome-bolous.html#cb1070-3" aria-hidden="true" tabindex="-1"></a>                 mod_gee_un, </span>
-<span id="cb1070-4"><a href="glmm-count-outcome-bolous.html#cb1070-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rank =</span> <span class="st">&quot;QIC&quot;</span>)    <span class="co">#sorts the best to the TOP, uses QIC(I) to choose corelation structure</span></span></code></pre></div>
+<div class="sourceCode" id="cb1051"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1051-1"><a href="glmm-count-outcome-bolous.html#cb1051-1" tabindex="-1"></a>MuMIn<span class="sc">::</span><span class="fu">model.sel</span>(mod_gee_ex, </span>
+<span id="cb1051-2"><a href="glmm-count-outcome-bolous.html#cb1051-2" tabindex="-1"></a>                 mod_gee_ar, </span>
+<span id="cb1051-3"><a href="glmm-count-outcome-bolous.html#cb1051-3" tabindex="-1"></a>                 mod_gee_un, </span>
+<span id="cb1051-4"><a href="glmm-count-outcome-bolous.html#cb1051-4" tabindex="-1"></a>                 <span class="at">rank =</span> <span class="st">&quot;QIC&quot;</span>)    <span class="co">#sorts the best to the TOP, uses QIC(I) to choose corelation structure</span></span></code></pre></div>
 <pre><code>Model selection table 
            (Intrc) group      time    time^2 corstr Mv qLik   QIC delta weight
 mod_gee_ex   1.734     + -0.002224 -0.004168     ex    3464 -6904  0.00  0.432
@@ -1581,10 +1578,10 @@ mod_gee_un   1.563     +  0.043980 -0.009419     un    3407 -6902  1.83  0.173
 Abbreviations:
  corstr: ex = &#39;exchangeable&#39;, un = &#39;unstructured&#39;
 Models ranked by QIC(x) </code></pre>
-<div class="sourceCode" id="cb1072"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1072-1"><a href="glmm-count-outcome-bolous.html#cb1072-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">compare_performance</span>(mod_gee_ex, </span>
-<span id="cb1072-2"><a href="glmm-count-outcome-bolous.html#cb1072-2" aria-hidden="true" tabindex="-1"></a>                                 mod_gee_ar, </span>
-<span id="cb1072-3"><a href="glmm-count-outcome-bolous.html#cb1072-3" aria-hidden="true" tabindex="-1"></a>                                 mod_gee_un,</span>
-<span id="cb1072-4"><a href="glmm-count-outcome-bolous.html#cb1072-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">rank =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1053"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1053-1"><a href="glmm-count-outcome-bolous.html#cb1053-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">compare_performance</span>(mod_gee_ex, </span>
+<span id="cb1053-2"><a href="glmm-count-outcome-bolous.html#cb1053-2" tabindex="-1"></a>                                 mod_gee_ar, </span>
+<span id="cb1053-3"><a href="glmm-count-outcome-bolous.html#cb1053-3" tabindex="-1"></a>                                 mod_gee_un,</span>
+<span id="cb1053-4"><a href="glmm-count-outcome-bolous.html#cb1053-4" tabindex="-1"></a>                                 <span class="at">rank =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code># Comparison of Model Performance Indices
 
 Name       | Model |  RMSE | Sigma | Score_log | Score_spherical | Performance-Score
@@ -1595,15 +1592,15 @@ mod_gee_un |   gee | 5.081 | 5.096 |    -3.614 |           0.030 |            25
 </div>
 <div id="model-parameter-table" class="section level4 hasAnchor" number="21.4.2.2">
 <h4><span class="header-section-number">21.4.2.2</span> Model Parameter Table<a href="glmm-count-outcome-bolous.html#model-parameter-table" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1074"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1074-1"><a href="glmm-count-outcome-bolous.html#cb1074-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_gee_exp</span>(mod_gee_ex),</span>
-<span id="cb1074-2"><a href="glmm-count-outcome-bolous.html#cb1074-2" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_ar),</span>
-<span id="cb1074-3"><a href="glmm-count-outcome-bolous.html#cb1074-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_un)),</span>
-<span id="cb1074-4"><a href="glmm-count-outcome-bolous.html#cb1074-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Exchangable&quot;</span>,</span>
-<span id="cb1074-5"><a href="glmm-count-outcome-bolous.html#cb1074-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;AutoRegressive&quot;</span>,</span>
-<span id="cb1074-6"><a href="glmm-count-outcome-bolous.html#cb1074-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;Unstructured&quot;</span>),</span>
-<span id="cb1074-7"><a href="glmm-count-outcome-bolous.html#cb1074-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GEE: Main Effects Only, with Quadratic Time&quot;</span>,</span>
-<span id="cb1074-8"><a href="glmm-count-outcome-bolous.html#cb1074-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1074-9"><a href="glmm-count-outcome-bolous.html#cb1074-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1055"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1055-1"><a href="glmm-count-outcome-bolous.html#cb1055-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_gee_exp</span>(mod_gee_ex),</span>
+<span id="cb1055-2"><a href="glmm-count-outcome-bolous.html#cb1055-2" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_ar),</span>
+<span id="cb1055-3"><a href="glmm-count-outcome-bolous.html#cb1055-3" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_un)),</span>
+<span id="cb1055-4"><a href="glmm-count-outcome-bolous.html#cb1055-4" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Exchangable&quot;</span>,</span>
+<span id="cb1055-5"><a href="glmm-count-outcome-bolous.html#cb1055-5" tabindex="-1"></a>                                       <span class="st">&quot;AutoRegressive&quot;</span>,</span>
+<span id="cb1055-6"><a href="glmm-count-outcome-bolous.html#cb1055-6" tabindex="-1"></a>                                       <span class="st">&quot;Unstructured&quot;</span>),</span>
+<span id="cb1055-7"><a href="glmm-count-outcome-bolous.html#cb1055-7" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GEE: Main Effects Only, with Quadratic Time&quot;</span>,</span>
+<span id="cb1055-8"><a href="glmm-count-outcome-bolous.html#cb1055-8" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1055-9"><a href="glmm-count-outcome-bolous.html#cb1055-9" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>)</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
 <caption>
 GEE: Main Effects Only, with Quadratic Time
@@ -1708,17 +1705,17 @@ Dispersion
 </div>
 <div id="add-interaction-terms" class="section level3 hasAnchor" number="21.4.3">
 <h3><span class="header-section-number">21.4.3</span> Add Interaction Terms<a href="glmm-count-outcome-bolous.html#add-interaction-terms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1075"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1075-1"><a href="glmm-count-outcome-bolous.html#cb1075-1" aria-hidden="true" tabindex="-1"></a>mod_gee_ar2 <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> group<span class="sc">*</span>time <span class="sc">+</span> group<span class="sc">*</span><span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb1075-2"><a href="glmm-count-outcome-bolous.html#cb1075-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">id =</span> id,</span>
-<span id="cb1075-3"><a href="glmm-count-outcome-bolous.html#cb1075-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> data_long,</span>
-<span id="cb1075-4"><a href="glmm-count-outcome-bolous.html#cb1075-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb1075-5"><a href="glmm-count-outcome-bolous.html#cb1075-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">corstr =</span> <span class="st">&quot;AR-M&quot;</span>,</span>
-<span id="cb1075-6"><a href="glmm-count-outcome-bolous.html#cb1075-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Mv =</span> <span class="dv">1</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb1056"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1056-1"><a href="glmm-count-outcome-bolous.html#cb1056-1" tabindex="-1"></a>mod_gee_ar2 <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> group<span class="sc">*</span>time <span class="sc">+</span> group<span class="sc">*</span><span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb1056-2"><a href="glmm-count-outcome-bolous.html#cb1056-2" tabindex="-1"></a>                        <span class="at">id =</span> id,</span>
+<span id="cb1056-3"><a href="glmm-count-outcome-bolous.html#cb1056-3" tabindex="-1"></a>                        <span class="at">data =</span> data_long,</span>
+<span id="cb1056-4"><a href="glmm-count-outcome-bolous.html#cb1056-4" tabindex="-1"></a>                        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb1056-5"><a href="glmm-count-outcome-bolous.html#cb1056-5" tabindex="-1"></a>                        <span class="at">corstr =</span> <span class="st">&quot;AR-M&quot;</span>,</span>
+<span id="cb1056-6"><a href="glmm-count-outcome-bolous.html#cb1056-6" tabindex="-1"></a>                        <span class="at">Mv =</span> <span class="dv">1</span>) </span></code></pre></div>
 <pre><code>       (Intercept)           group2mg               time          I(time^2) 
          1.7400506          0.3334615          0.0004752         -0.0051756 
      group2mg:time group2mg:I(time^2) 
         -0.0040973          0.0015817 </code></pre>
-<div class="sourceCode" id="cb1077"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1077-1"><a href="glmm-count-outcome-bolous.html#cb1077-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_ar2)</span></code></pre></div>
+<div class="sourceCode" id="cb1058"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1058-1"><a href="glmm-count-outcome-bolous.html#cb1058-1" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_ar2)</span></code></pre></div>
 <pre><code>
  GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA
  gee S-function, version 4.13 modified 98/01/27 (1998) 
@@ -1775,16 +1772,16 @@ Working Correlation
  [9,] 1.000000 0.534560 0.285754
 [10,] 0.534560 1.000000 0.534560
 [11,] 0.285754 0.534560 1.000000</code></pre>
-<div class="sourceCode" id="cb1079"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1079-1"><a href="glmm-count-outcome-bolous.html#cb1079-1" aria-hidden="true" tabindex="-1"></a>MuMIn<span class="sc">::</span><span class="fu">QIC</span>(mod_gee_ar, </span>
-<span id="cb1079-2"><a href="glmm-count-outcome-bolous.html#cb1079-2" aria-hidden="true" tabindex="-1"></a>           mod_gee_ar2, </span>
-<span id="cb1079-3"><a href="glmm-count-outcome-bolous.html#cb1079-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">typeR =</span> <span class="cn">TRUE</span>)    <span class="co"># NOT the default</span></span></code></pre></div>
+<div class="sourceCode" id="cb1060"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1060-1"><a href="glmm-count-outcome-bolous.html#cb1060-1" tabindex="-1"></a>MuMIn<span class="sc">::</span><span class="fu">QIC</span>(mod_gee_ar, </span>
+<span id="cb1060-2"><a href="glmm-count-outcome-bolous.html#cb1060-2" tabindex="-1"></a>           mod_gee_ar2, </span>
+<span id="cb1060-3"><a href="glmm-count-outcome-bolous.html#cb1060-3" tabindex="-1"></a>           <span class="at">typeR =</span> <span class="cn">TRUE</span>)    <span class="co"># NOT the default</span></span></code></pre></div>
 <pre><code>              QIC
 mod_gee_ar  -6900
 mod_gee_ar2 -6897</code></pre>
-<div class="sourceCode" id="cb1081"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1081-1"><a href="glmm-count-outcome-bolous.html#cb1081-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_gee_exp</span>(mod_gee_ar),</span>
-<span id="cb1081-2"><a href="glmm-count-outcome-bolous.html#cb1081-2" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_ar2)),</span>
-<span id="cb1081-3"><a href="glmm-count-outcome-bolous.html#cb1081-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1081-4"><a href="glmm-count-outcome-bolous.html#cb1081-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ci.test =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1062"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1062-1"><a href="glmm-count-outcome-bolous.html#cb1062-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_gee_exp</span>(mod_gee_ar),</span>
+<span id="cb1062-2"><a href="glmm-count-outcome-bolous.html#cb1062-2" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_ar2)),</span>
+<span id="cb1062-3"><a href="glmm-count-outcome-bolous.html#cb1062-3" tabindex="-1"></a>                  <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1062-4"><a href="glmm-count-outcome-bolous.html#cb1062-4" tabindex="-1"></a>                  <span class="at">ci.test =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>&lt;table class=&quot;texreg&quot; style=&quot;margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;&quot;&gt;
 &lt;caption&gt;Statistical models&lt;/caption&gt;
 &lt;thead&gt;
@@ -1842,10 +1839,10 @@ mod_gee_ar2 -6897</code></pre>
 <h3><span class="header-section-number">21.4.4</span> Visualize Best Model<a href="glmm-count-outcome-bolous.html#visualize-best-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="model-parameter-table-1" class="section level4 hasAnchor" number="21.4.4.1">
 <h4><span class="header-section-number">21.4.4.1</span> Model Parameter Table<a href="glmm-count-outcome-bolous.html#model-parameter-table-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1083"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1083-1"><a href="glmm-count-outcome-bolous.html#cb1083-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">extract_gee_exp</span>(mod_gee_ar),</span>
-<span id="cb1083-2"><a href="glmm-count-outcome-bolous.html#cb1083-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GEE: Final Model (auto regressive)&quot;</span>,</span>
-<span id="cb1083-3"><a href="glmm-count-outcome-bolous.html#cb1083-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1083-4"><a href="glmm-count-outcome-bolous.html#cb1083-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1064"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1064-1"><a href="glmm-count-outcome-bolous.html#cb1064-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">extract_gee_exp</span>(mod_gee_ar),</span>
+<span id="cb1064-2"><a href="glmm-count-outcome-bolous.html#cb1064-2" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GEE: Final Model (auto regressive)&quot;</span>,</span>
+<span id="cb1064-3"><a href="glmm-count-outcome-bolous.html#cb1064-3" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1064-4"><a href="glmm-count-outcome-bolous.html#cb1064-4" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>)</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
 <caption>
 GEE: Final Model (auto regressive)
@@ -1913,13 +1910,13 @@ Dispersion
 </div>
 <div id="refit-via-geepackgeeglm" class="section level4 hasAnchor" number="21.4.4.2">
 <h4><span class="header-section-number">21.4.4.2</span> Refit via <code>geepack::geeglm()</code><a href="glmm-count-outcome-bolous.html#refit-via-geepackgeeglm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1084"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1084-1"><a href="glmm-count-outcome-bolous.html#cb1084-1" aria-hidden="true" tabindex="-1"></a>mod_geeglm_ar <span class="ot">&lt;-</span> geepack<span class="sc">::</span><span class="fu">geeglm</span>(count <span class="sc">~</span> group <span class="sc">+</span> time <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb1084-2"><a href="glmm-count-outcome-bolous.html#cb1084-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">id =</span> id,</span>
-<span id="cb1084-3"><a href="glmm-count-outcome-bolous.html#cb1084-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> data_long,</span>
-<span id="cb1084-4"><a href="glmm-count-outcome-bolous.html#cb1084-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb1084-5"><a href="glmm-count-outcome-bolous.html#cb1084-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">corstr =</span> <span class="st">&quot;ar1&quot;</span>)  </span>
-<span id="cb1084-6"><a href="glmm-count-outcome-bolous.html#cb1084-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1084-7"><a href="glmm-count-outcome-bolous.html#cb1084-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_geeglm_ar)</span></code></pre></div>
+<div class="sourceCode" id="cb1065"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1065-1"><a href="glmm-count-outcome-bolous.html#cb1065-1" tabindex="-1"></a>mod_geeglm_ar <span class="ot">&lt;-</span> geepack<span class="sc">::</span><span class="fu">geeglm</span>(count <span class="sc">~</span> group <span class="sc">+</span> time <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb1065-2"><a href="glmm-count-outcome-bolous.html#cb1065-2" tabindex="-1"></a>                       <span class="at">id =</span> id,</span>
+<span id="cb1065-3"><a href="glmm-count-outcome-bolous.html#cb1065-3" tabindex="-1"></a>                       <span class="at">data =</span> data_long,</span>
+<span id="cb1065-4"><a href="glmm-count-outcome-bolous.html#cb1065-4" tabindex="-1"></a>                       <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb1065-5"><a href="glmm-count-outcome-bolous.html#cb1065-5" tabindex="-1"></a>                       <span class="at">corstr =</span> <span class="st">&quot;ar1&quot;</span>)  </span>
+<span id="cb1065-6"><a href="glmm-count-outcome-bolous.html#cb1065-6" tabindex="-1"></a></span>
+<span id="cb1065-7"><a href="glmm-count-outcome-bolous.html#cb1065-7" tabindex="-1"></a><span class="fu">summary</span>(mod_geeglm_ar)</span></code></pre></div>
 <pre><code>
 Call:
 geepack::geeglm(formula = count ~ group + time + I(time^2), family = poisson(link = &quot;log&quot;), 
@@ -1945,21 +1942,21 @@ Estimated Correlation Parameters:
       Estimate Std.err
 alpha    0.775  0.0333
 Number of clusters:   65  Maximum cluster size: 11 </code></pre>
-<div class="sourceCode" id="cb1086"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1086-1"><a href="glmm-count-outcome-bolous.html#cb1086-1" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_geeglm_ar,</span>
-<span id="cb1086-2"><a href="glmm-count-outcome-bolous.html#cb1086-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
-<span id="cb1086-3"><a href="glmm-count-outcome-bolous.html#cb1086-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">modx =</span> group)</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-812-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1067"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1067-1"><a href="glmm-count-outcome-bolous.html#cb1067-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_geeglm_ar,</span>
+<span id="cb1067-2"><a href="glmm-count-outcome-bolous.html#cb1067-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
+<span id="cb1067-3"><a href="glmm-count-outcome-bolous.html#cb1067-3" tabindex="-1"></a>                            <span class="at">modx =</span> group)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-787-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="predict-over-a-grid" class="section level4 hasAnchor" number="21.4.4.3">
 <h4><span class="header-section-number">21.4.4.3</span> Predict over a Grid<a href="glmm-count-outcome-bolous.html#predict-over-a-grid" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Estimated Marginal Mean Counts</p>
-<div class="sourceCode" id="cb1087"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1087-1"><a href="glmm-count-outcome-bolous.html#cb1087-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expand.grid</span>(<span class="at">time =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>,</span>
-<span id="cb1087-2"><a href="glmm-count-outcome-bolous.html#cb1087-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">group =</span> <span class="fu">levels</span>(data_long<span class="sc">$</span>group)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1087-3"><a href="glmm-count-outcome-bolous.html#cb1087-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">predict</span>(mod_geeglm_ar,</span>
-<span id="cb1087-4"><a href="glmm-count-outcome-bolous.html#cb1087-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">newdata =</span> .,</span>
-<span id="cb1087-5"><a href="glmm-count-outcome-bolous.html#cb1087-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1087-6"><a href="glmm-count-outcome-bolous.html#cb1087-6" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">spread</span>(<span class="at">key =</span> group,</span>
-<span id="cb1087-7"><a href="glmm-count-outcome-bolous.html#cb1087-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> fit)</span></code></pre></div>
+<div class="sourceCode" id="cb1068"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1068-1"><a href="glmm-count-outcome-bolous.html#cb1068-1" tabindex="-1"></a><span class="fu">expand.grid</span>(<span class="at">time =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb1068-2"><a href="glmm-count-outcome-bolous.html#cb1068-2" tabindex="-1"></a>            <span class="at">group =</span> <span class="fu">levels</span>(data_long<span class="sc">$</span>group)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1068-3"><a href="glmm-count-outcome-bolous.html#cb1068-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">predict</span>(mod_geeglm_ar,</span>
+<span id="cb1068-4"><a href="glmm-count-outcome-bolous.html#cb1068-4" tabindex="-1"></a>                              <span class="at">newdata =</span> .,</span>
+<span id="cb1068-5"><a href="glmm-count-outcome-bolous.html#cb1068-5" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1068-6"><a href="glmm-count-outcome-bolous.html#cb1068-6" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">spread</span>(<span class="at">key =</span> group,</span>
+<span id="cb1068-7"><a href="glmm-count-outcome-bolous.html#cb1068-7" tabindex="-1"></a>                <span class="at">value =</span> fit)</span></code></pre></div>
 <pre><code>   time  1mg  2mg
 1     0 5.11 7.22
 2     1 5.26 7.43
@@ -1975,22 +1972,22 @@ Number of clusters:   65  Maximum cluster size: 11 </code></pre>
 </div>
 <div id="plot-estimated-marginal-means" class="section level4 hasAnchor" number="21.4.4.4">
 <h4><span class="header-section-number">21.4.4.4</span> Plot Estimated Marginal Means<a href="glmm-count-outcome-bolous.html#plot-estimated-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1089"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1089-1"><a href="glmm-count-outcome-bolous.html#cb1089-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expand.grid</span>(<span class="at">time =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>,</span>
-<span id="cb1089-2"><a href="glmm-count-outcome-bolous.html#cb1089-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">group =</span> <span class="fu">levels</span>(data_long<span class="sc">$</span>group)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1089-3"><a href="glmm-count-outcome-bolous.html#cb1089-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">predict</span>(mod_geeglm_ar,</span>
-<span id="cb1089-4"><a href="glmm-count-outcome-bolous.html#cb1089-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">newdata =</span> .,</span>
-<span id="cb1089-5"><a href="glmm-count-outcome-bolous.html#cb1089-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1089-6"><a href="glmm-count-outcome-bolous.html#cb1089-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
-<span id="cb1089-7"><a href="glmm-count-outcome-bolous.html#cb1089-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> fit,</span>
-<span id="cb1089-8"><a href="glmm-count-outcome-bolous.html#cb1089-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="fu">fct_rev</span>(group))) <span class="sc">+</span></span>
-<span id="cb1089-9"><a href="glmm-count-outcome-bolous.html#cb1089-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb1089-10"><a href="glmm-count-outcome-bolous.html#cb1089-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb1089-11"><a href="glmm-count-outcome-bolous.html#cb1089-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb1089-12"><a href="glmm-count-outcome-bolous.html#cb1089-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
-<span id="cb1089-13"><a href="glmm-count-outcome-bolous.html#cb1089-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Populaton Mean Count&quot;</span>,</span>
-<span id="cb1089-14"><a href="glmm-count-outcome-bolous.html#cb1089-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb1089-15"><a href="glmm-count-outcome-bolous.html#cb1089-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-814-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1070"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1070-1"><a href="glmm-count-outcome-bolous.html#cb1070-1" tabindex="-1"></a><span class="fu">expand.grid</span>(<span class="at">time =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb1070-2"><a href="glmm-count-outcome-bolous.html#cb1070-2" tabindex="-1"></a>            <span class="at">group =</span> <span class="fu">levels</span>(data_long<span class="sc">$</span>group)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1070-3"><a href="glmm-count-outcome-bolous.html#cb1070-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">predict</span>(mod_geeglm_ar,</span>
+<span id="cb1070-4"><a href="glmm-count-outcome-bolous.html#cb1070-4" tabindex="-1"></a>                              <span class="at">newdata =</span> .,</span>
+<span id="cb1070-5"><a href="glmm-count-outcome-bolous.html#cb1070-5" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1070-6"><a href="glmm-count-outcome-bolous.html#cb1070-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
+<span id="cb1070-7"><a href="glmm-count-outcome-bolous.html#cb1070-7" tabindex="-1"></a>             <span class="at">y =</span> fit,</span>
+<span id="cb1070-8"><a href="glmm-count-outcome-bolous.html#cb1070-8" tabindex="-1"></a>             <span class="at">color =</span> <span class="fu">fct_rev</span>(group))) <span class="sc">+</span></span>
+<span id="cb1070-9"><a href="glmm-count-outcome-bolous.html#cb1070-9" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb1070-10"><a href="glmm-count-outcome-bolous.html#cb1070-10" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb1070-11"><a href="glmm-count-outcome-bolous.html#cb1070-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb1070-12"><a href="glmm-count-outcome-bolous.html#cb1070-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
+<span id="cb1070-13"><a href="glmm-count-outcome-bolous.html#cb1070-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Populaton Mean Count&quot;</span>,</span>
+<span id="cb1070-14"><a href="glmm-count-outcome-bolous.html#cb1070-14" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb1070-15"><a href="glmm-count-outcome-bolous.html#cb1070-15" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-789-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1998,19 +1995,19 @@ Number of clusters:   65  Maximum cluster size: 11 </code></pre>
 <h2><span class="header-section-number">21.5</span> GLMM Analysis<a href="glmm-count-outcome-bolous.html#glmm-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="ri-random-intercepts-only" class="section level3 hasAnchor" number="21.5.1">
 <h3><span class="header-section-number">21.5.1</span> RI: Random Intercepts Only<a href="glmm-count-outcome-bolous.html#ri-random-intercepts-only" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1090"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1090-1"><a href="glmm-count-outcome-bolous.html#cb1090-1" aria-hidden="true" tabindex="-1"></a>mod_glmer_ri <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">glmer</span>(count <span class="sc">~</span> group <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span> <span class="fu">I</span>((time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id),</span>
-<span id="cb1090-2"><a href="glmm-count-outcome-bolous.html#cb1090-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
-<span id="cb1090-3"><a href="glmm-count-outcome-bolous.html#cb1090-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
-<span id="cb1090-4"><a href="glmm-count-outcome-bolous.html#cb1090-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1090-5"><a href="glmm-count-outcome-bolous.html#cb1090-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_glmer_ri)</span></code></pre></div>
+<div class="sourceCode" id="cb1071"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1071-1"><a href="glmm-count-outcome-bolous.html#cb1071-1" tabindex="-1"></a>mod_glmer_ri <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">glmer</span>(count <span class="sc">~</span> group <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span> <span class="fu">I</span>((time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id),</span>
+<span id="cb1071-2"><a href="glmm-count-outcome-bolous.html#cb1071-2" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
+<span id="cb1071-3"><a href="glmm-count-outcome-bolous.html#cb1071-3" tabindex="-1"></a>                            <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
+<span id="cb1071-4"><a href="glmm-count-outcome-bolous.html#cb1071-4" tabindex="-1"></a></span>
+<span id="cb1071-5"><a href="glmm-count-outcome-bolous.html#cb1071-5" tabindex="-1"></a><span class="fu">summary</span>(mod_glmer_ri)</span></code></pre></div>
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
  Family: poisson  ( log )
 Formula: count ~ group + I(time/4) + I((time/4)^2) + (1 | id)
    Data: data_long
 
-     AIC      BIC   logLik deviance df.resid 
-    4061     4083    -2025     4051      710 
+      AIC       BIC    logLik -2*log(L)  df.resid 
+     4061      4083     -2025      4051       710 
 
 Scaled residuals: 
    Min     1Q Median     3Q    Max 
@@ -2038,19 +2035,19 @@ I((tm/4)^2)  0.226  0.000 -0.960</code></pre>
 </div>
 <div id="rias-random-intercepts-and-slopes-1" class="section level3 hasAnchor" number="21.5.2">
 <h3><span class="header-section-number">21.5.2</span> RIAS: Random Intercepts and Slopes<a href="glmm-count-outcome-bolous.html#rias-random-intercepts-and-slopes-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1092"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1092-1"><a href="glmm-count-outcome-bolous.html#cb1092-1" aria-hidden="true" tabindex="-1"></a>mod_glmer_rias <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">glmer</span>(count <span class="sc">~</span> group <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span> <span class="fu">I</span>((time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> (<span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">|</span>id),</span>
-<span id="cb1092-2"><a href="glmm-count-outcome-bolous.html#cb1092-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> data_long,</span>
-<span id="cb1092-3"><a href="glmm-count-outcome-bolous.html#cb1092-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
-<span id="cb1092-4"><a href="glmm-count-outcome-bolous.html#cb1092-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1092-5"><a href="glmm-count-outcome-bolous.html#cb1092-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_glmer_rias)</span></code></pre></div>
+<div class="sourceCode" id="cb1073"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1073-1"><a href="glmm-count-outcome-bolous.html#cb1073-1" tabindex="-1"></a>mod_glmer_rias <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">glmer</span>(count <span class="sc">~</span> group <span class="sc">+</span> <span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span> <span class="fu">I</span>((time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> (<span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">|</span>id),</span>
+<span id="cb1073-2"><a href="glmm-count-outcome-bolous.html#cb1073-2" tabindex="-1"></a>                              <span class="at">data =</span> data_long,</span>
+<span id="cb1073-3"><a href="glmm-count-outcome-bolous.html#cb1073-3" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
+<span id="cb1073-4"><a href="glmm-count-outcome-bolous.html#cb1073-4" tabindex="-1"></a></span>
+<span id="cb1073-5"><a href="glmm-count-outcome-bolous.html#cb1073-5" tabindex="-1"></a><span class="fu">summary</span>(mod_glmer_rias)</span></code></pre></div>
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
  Family: poisson  ( log )
 Formula: count ~ group + I(time/4) + I((time/4)^2) + (I(time/4) | id)
    Data: data_long
 
-     AIC      BIC   logLik deviance df.resid 
-    3964     3996    -1975     3950      708 
+      AIC       BIC    logLik -2*log(L)  df.resid 
+     3964      3996     -1975      3950       708 
 
 Scaled residuals: 
    Min     1Q Median     3Q    Max 
@@ -2076,189 +2073,63 @@ Correlation of Fixed Effects:
 group2mg    -0.679              
 I(time/4)   -0.363  0.005       
 I((tm/4)^2)  0.224  0.001 -0.848</code></pre>
-<div class="sourceCode" id="cb1094"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1094-1"><a href="glmm-count-outcome-bolous.html#cb1094-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_glmer_ri, mod_glmer_rias)</span></code></pre></div>
+<div class="sourceCode" id="cb1075"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1075-1"><a href="glmm-count-outcome-bolous.html#cb1075-1" tabindex="-1"></a><span class="fu">anova</span>(mod_glmer_ri, mod_glmer_rias)</span></code></pre></div>
 <pre><code>Data: data_long
 Models:
 mod_glmer_ri: count ~ group + I(time/4) + I((time/4)^2) + (1 | id)
 mod_glmer_rias: count ~ group + I(time/4) + I((time/4)^2) + (I(time/4) | id)
-               npar  AIC  BIC logLik deviance Chisq Df Pr(&gt;Chisq)    
-mod_glmer_ri      5 4061 4083  -2025     4051                        
-mod_glmer_rias    7 3964 3996  -1975     3950   100  2     &lt;2e-16 ***
+               npar  AIC  BIC logLik -2*log(L) Chisq Df Pr(&gt;Chisq)    
+mod_glmer_ri      5 4061 4083  -2025      4051                        
+mod_glmer_rias    7 3964 3996  -1975      3950   100  2     &lt;2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb1096"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1096-1"><a href="glmm-count-outcome-bolous.html#cb1096-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_glmer_exp</span>(mod_glmer_ri),</span>
-<span id="cb1096-2"><a href="glmm-count-outcome-bolous.html#cb1096-2" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">extract_glmer_exp</span>(mod_glmer_rias)),</span>
-<span id="cb1096-3"><a href="glmm-count-outcome-bolous.html#cb1096-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Intecepts&quot;</span>, <span class="st">&quot;Intercepts and Slopes&quot;</span>),</span>
-<span id="cb1096-4"><a href="glmm-count-outcome-bolous.html#cb1096-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GLMM: Compare Random Effects&quot;</span>,</span>
-<span id="cb1096-5"><a href="glmm-count-outcome-bolous.html#cb1096-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1096-6"><a href="glmm-count-outcome-bolous.html#cb1096-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>)</span></code></pre></div>
-<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
-<caption>
-GLMM: Compare Random Effects
-</caption>
-<thead>
-<tr>
-<th style="padding-left: 5px;padding-right: 5px;">
- 
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Intecepts
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Intercepts and Slopes
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(Intercept)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-5.00 [4.05; 6.17]<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-4.95 [3.99; 6.15]<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-group2mg
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-1.36 [1.04; 1.79]<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-1.35 [1.03; 1.77]<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-time/4
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.99 [0.86; 1.14]
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-1.05 [0.89; 1.23]
-</td>
-</tr>
-<tr style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(time/4)^2
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.94 [0.88; 0.99]<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.90 [0.85; 0.95]<sup>*</sup>
-</td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td style="font-size: 0.8em;" colspan="3">
-<sup>*</sup> Null hypothesis value outside the confidence interval.
-</td>
-</tr>
-</tfoot>
-</table>
+<p>NOTE: THI IS NO LONER WROKING???</p>
+<div class="sourceCode" id="cb1077"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1077-1"><a href="glmm-count-outcome-bolous.html#cb1077-1" tabindex="-1"></a><span class="co"># texreg::knitreg(list(extract_glmer_exp(mod_glmer_ri),</span></span>
+<span id="cb1077-2"><a href="glmm-count-outcome-bolous.html#cb1077-2" tabindex="-1"></a><span class="co">#                      extract_glmer_exp(mod_glmer_rias)),</span></span>
+<span id="cb1077-3"><a href="glmm-count-outcome-bolous.html#cb1077-3" tabindex="-1"></a><span class="co">#                 custom.model.names = c(&quot;Intecepts&quot;, &quot;Intercepts and Slopes&quot;),</span></span>
+<span id="cb1077-4"><a href="glmm-count-outcome-bolous.html#cb1077-4" tabindex="-1"></a><span class="co">#                 caption = &quot;GLMM: Compare Random Effects&quot;,</span></span>
+<span id="cb1077-5"><a href="glmm-count-outcome-bolous.html#cb1077-5" tabindex="-1"></a><span class="co">#                 single.row = TRUE,</span></span>
+<span id="cb1077-6"><a href="glmm-count-outcome-bolous.html#cb1077-6" tabindex="-1"></a><span class="co">#                 ci.test = 1)</span></span></code></pre></div>
 </div>
 <div id="rais-add-interaction" class="section level3 hasAnchor" number="21.5.3">
 <h3><span class="header-section-number">21.5.3</span> RAIS: Add Interaction<a href="glmm-count-outcome-bolous.html#rais-add-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>See the <a href="https://cehs-research.github.io/eBook_multilevel/glmm-binary-outcome-antibiotics-for-leprosy.html#glmm---optimizers">GLMM - Optimizers page</a> for more information on convergence problems.</p>
-<div class="sourceCode" id="cb1097"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1097-1"><a href="glmm-count-outcome-bolous.html#cb1097-1" aria-hidden="true" tabindex="-1"></a>mod_glmer_rias2 <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">glmer</span>(count <span class="sc">~</span> group<span class="sc">*</span><span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span> group<span class="sc">*</span><span class="fu">I</span>((time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> ( <span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">|</span>id ),</span>
-<span id="cb1097-2"><a href="glmm-count-outcome-bolous.html#cb1097-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> data_long,</span>
-<span id="cb1097-3"><a href="glmm-count-outcome-bolous.html#cb1097-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span><span class="st">&quot;Nelder_Mead&quot;</span>),  <span class="co"># convergence issues resolved</span></span>
-<span id="cb1097-4"><a href="glmm-count-outcome-bolous.html#cb1097-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))   </span></code></pre></div>
-<div class="sourceCode" id="cb1098"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1098-1"><a href="glmm-count-outcome-bolous.html#cb1098-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod_glmer_rias, mod_glmer_rias2)</span></code></pre></div>
+<div class="sourceCode" id="cb1078"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1078-1"><a href="glmm-count-outcome-bolous.html#cb1078-1" tabindex="-1"></a>mod_glmer_rias2 <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">glmer</span>(count <span class="sc">~</span> group<span class="sc">*</span><span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span> group<span class="sc">*</span><span class="fu">I</span>((time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> ( <span class="fu">I</span>(time<span class="sc">/</span><span class="dv">4</span>)<span class="sc">|</span>id ),</span>
+<span id="cb1078-2"><a href="glmm-count-outcome-bolous.html#cb1078-2" tabindex="-1"></a>                              <span class="at">data =</span> data_long,</span>
+<span id="cb1078-3"><a href="glmm-count-outcome-bolous.html#cb1078-3" tabindex="-1"></a>                              <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span><span class="st">&quot;Nelder_Mead&quot;</span>),  <span class="co"># convergence issues resolved</span></span>
+<span id="cb1078-4"><a href="glmm-count-outcome-bolous.html#cb1078-4" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))   </span></code></pre></div>
+<div class="sourceCode" id="cb1079"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1079-1"><a href="glmm-count-outcome-bolous.html#cb1079-1" tabindex="-1"></a><span class="fu">anova</span>(mod_glmer_rias, mod_glmer_rias2)</span></code></pre></div>
 <pre><code>Data: data_long
 Models:
 mod_glmer_rias: count ~ group + I(time/4) + I((time/4)^2) + (I(time/4) | id)
 mod_glmer_rias2: count ~ group * I(time/4) + group * I((time/4)^2) + (I(time/4) | id)
-                npar  AIC  BIC logLik deviance Chisq Df Pr(&gt;Chisq)
-mod_glmer_rias     7 3964 3996  -1975     3950                    
-mod_glmer_rias2    9 3968 4009  -1975     3950  0.14  2       0.93</code></pre>
+                npar  AIC  BIC logLik -2*log(L) Chisq Df Pr(&gt;Chisq)
+mod_glmer_rias     7 3964 3996  -1975      3950                    
+mod_glmer_rias2    9 3968 4009  -1975      3950  0.14  2       0.93</code></pre>
 </div>
 <div id="visualize-best-model-1" class="section level3 hasAnchor" number="21.5.4">
 <h3><span class="header-section-number">21.5.4</span> Visualize Best Model<a href="glmm-count-outcome-bolous.html#visualize-best-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="model-parameter-table-2" class="section level4 hasAnchor" number="21.5.4.1">
 <h4><span class="header-section-number">21.5.4.1</span> Model Parameter Table<a href="glmm-count-outcome-bolous.html#model-parameter-table-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1100-1"><a href="glmm-count-outcome-bolous.html#cb1100-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_glmer_exp</span>(mod_glmer_rias)),</span>
-<span id="cb1100-2"><a href="glmm-count-outcome-bolous.html#cb1100-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GLMM: Final Model&quot;</span>,</span>
-<span id="cb1100-3"><a href="glmm-count-outcome-bolous.html#cb1100-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1100-4"><a href="glmm-count-outcome-bolous.html#cb1100-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>)</span></code></pre></div>
-<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
-<caption>
-GLMM: Final Model
-</caption>
-<thead>
-<tr>
-<th style="padding-left: 5px;padding-right: 5px;">
- 
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 1
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(Intercept)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-4.95 [3.99; 6.15]<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-group2mg
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-1.35 [1.03; 1.77]<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-time/4
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-1.05 [0.89; 1.23]
-</td>
-</tr>
-<tr style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(time/4)^2
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.90 [0.85; 0.95]<sup>*</sup>
-</td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td style="font-size: 0.8em;" colspan="2">
-<sup>*</sup> 1 outside the confidence interval.
-</td>
-</tr>
-</tfoot>
-</table>
-<div class="sourceCode" id="cb1101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1101-1"><a href="glmm-count-outcome-bolous.html#cb1101-1" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_glmer_rias,</span>
-<span id="cb1101-2"><a href="glmm-count-outcome-bolous.html#cb1101-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
-<span id="cb1101-3"><a href="glmm-count-outcome-bolous.html#cb1101-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">modx =</span> group)</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-822-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1081"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1081-1"><a href="glmm-count-outcome-bolous.html#cb1081-1" tabindex="-1"></a><span class="co"># texreg::knitreg(list(extract_glmer_exp(mod_glmer_rias)),</span></span>
+<span id="cb1081-2"><a href="glmm-count-outcome-bolous.html#cb1081-2" tabindex="-1"></a><span class="co">#                 caption = &quot;GLMM: Final Model&quot;,</span></span>
+<span id="cb1081-3"><a href="glmm-count-outcome-bolous.html#cb1081-3" tabindex="-1"></a><span class="co">#                 single.row = TRUE,</span></span>
+<span id="cb1081-4"><a href="glmm-count-outcome-bolous.html#cb1081-4" tabindex="-1"></a><span class="co">#                 ci.test = 1)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1082"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1082-1"><a href="glmm-count-outcome-bolous.html#cb1082-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_glmer_rias,</span>
+<span id="cb1082-2"><a href="glmm-count-outcome-bolous.html#cb1082-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
+<span id="cb1082-3"><a href="glmm-count-outcome-bolous.html#cb1082-3" tabindex="-1"></a>                            <span class="at">modx =</span> group)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-797-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="estimated-marginal-means" class="section level4 hasAnchor" number="21.5.4.2">
 <h4><span class="header-section-number">21.5.4.2</span> Estimated Marginal Means<a href="glmm-count-outcome-bolous.html#estimated-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1102-1"><a href="glmm-count-outcome-bolous.html#cb1102-1" aria-hidden="true" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;group&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
-<span id="cb1102-2"><a href="glmm-count-outcome-bolous.html#cb1102-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlevels =</span> <span class="fu">list</span>(<span class="at">time =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>),</span>
-<span id="cb1102-3"><a href="glmm-count-outcome-bolous.html#cb1102-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mod =</span> mod_glmer_rias) <span class="sc">%&gt;%</span> </span>
-<span id="cb1102-4"><a href="glmm-count-outcome-bolous.html#cb1102-4" aria-hidden="true" tabindex="-1"></a>  data.frame <span class="sc">%&gt;%</span> </span>
-<span id="cb1102-5"><a href="glmm-count-outcome-bolous.html#cb1102-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(group, time, fit) <span class="sc">%&gt;%</span> </span>
-<span id="cb1102-6"><a href="glmm-count-outcome-bolous.html#cb1102-6" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">spread</span>(<span class="at">key =</span> group,</span>
-<span id="cb1102-7"><a href="glmm-count-outcome-bolous.html#cb1102-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> fit,</span>
-<span id="cb1102-8"><a href="glmm-count-outcome-bolous.html#cb1102-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1083"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1083-1"><a href="glmm-count-outcome-bolous.html#cb1083-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;group&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
+<span id="cb1083-2"><a href="glmm-count-outcome-bolous.html#cb1083-2" tabindex="-1"></a>                <span class="at">xlevels =</span> <span class="fu">list</span>(<span class="at">time =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>),</span>
+<span id="cb1083-3"><a href="glmm-count-outcome-bolous.html#cb1083-3" tabindex="-1"></a>                <span class="at">mod =</span> mod_glmer_rias) <span class="sc">%&gt;%</span> </span>
+<span id="cb1083-4"><a href="glmm-count-outcome-bolous.html#cb1083-4" tabindex="-1"></a>  data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb1083-5"><a href="glmm-count-outcome-bolous.html#cb1083-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(group, time, fit) <span class="sc">%&gt;%</span> </span>
+<span id="cb1083-6"><a href="glmm-count-outcome-bolous.html#cb1083-6" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">spread</span>(<span class="at">key =</span> group,</span>
+<span id="cb1083-7"><a href="glmm-count-outcome-bolous.html#cb1083-7" tabindex="-1"></a>                <span class="at">value =</span> fit,</span>
+<span id="cb1083-8"><a href="glmm-count-outcome-bolous.html#cb1083-8" tabindex="-1"></a>                <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
 <pre><code>   time group_1mg group_2mg
 1     0      4.95      6.68
 2     1      4.97      6.71
@@ -2274,34 +2145,34 @@ time/4
 </div>
 <div id="plot-estimated-marginal-means-1" class="section level4 hasAnchor" number="21.5.4.3">
 <h4><span class="header-section-number">21.5.4.3</span> Plot Estimated Marginal Means<a href="glmm-count-outcome-bolous.html#plot-estimated-marginal-means-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb1104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1104-1"><a href="glmm-count-outcome-bolous.html#cb1104-1" aria-hidden="true" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;group&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
-<span id="cb1104-2"><a href="glmm-count-outcome-bolous.html#cb1104-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlevels =</span> <span class="fu">list</span>(<span class="at">time =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">25</span>)),</span>
-<span id="cb1104-3"><a href="glmm-count-outcome-bolous.html#cb1104-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mod =</span> mod_glmer_rias) <span class="sc">%&gt;%</span> </span>
-<span id="cb1104-4"><a href="glmm-count-outcome-bolous.html#cb1104-4" aria-hidden="true" tabindex="-1"></a>  data.frame <span class="sc">%&gt;%</span> </span>
-<span id="cb1104-5"><a href="glmm-count-outcome-bolous.html#cb1104-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
-<span id="cb1104-6"><a href="glmm-count-outcome-bolous.html#cb1104-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> fit)) <span class="sc">+</span></span>
-<span id="cb1104-7"><a href="glmm-count-outcome-bolous.html#cb1104-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> fit <span class="sc">-</span> se,</span>
-<span id="cb1104-8"><a href="glmm-count-outcome-bolous.html#cb1104-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> fit <span class="sc">+</span> se,</span>
-<span id="cb1104-9"><a href="glmm-count-outcome-bolous.html#cb1104-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fill =</span> group),</span>
-<span id="cb1104-10"><a href="glmm-count-outcome-bolous.html#cb1104-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb1104-11"><a href="glmm-count-outcome-bolous.html#cb1104-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> group)) <span class="sc">+</span> </span>
-<span id="cb1104-12"><a href="glmm-count-outcome-bolous.html#cb1104-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb1104-13"><a href="glmm-count-outcome-bolous.html#cb1104-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
-<span id="cb1104-14"><a href="glmm-count-outcome-bolous.html#cb1104-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Populaton Mean Count&quot;</span>,</span>
-<span id="cb1104-15"><a href="glmm-count-outcome-bolous.html#cb1104-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>,</span>
-<span id="cb1104-16"><a href="glmm-count-outcome-bolous.html#cb1104-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Dose&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb1104-17"><a href="glmm-count-outcome-bolous.html#cb1104-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-824-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb1105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1105-1"><a href="glmm-count-outcome-bolous.html#cb1105-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb1105-2"><a href="glmm-count-outcome-bolous.html#cb1105-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">predict</span>(mod_glmer_rias,</span>
-<span id="cb1105-3"><a href="glmm-count-outcome-bolous.html#cb1105-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">newdata =</span> .,</span>
-<span id="cb1105-4"><a href="glmm-count-outcome-bolous.html#cb1105-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1105-5"><a href="glmm-count-outcome-bolous.html#cb1105-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
-<span id="cb1105-6"><a href="glmm-count-outcome-bolous.html#cb1105-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> fit)) <span class="sc">+</span></span>
-<span id="cb1105-7"><a href="glmm-count-outcome-bolous.html#cb1105-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb1105-8"><a href="glmm-count-outcome-bolous.html#cb1105-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span> group) <span class="sc">+</span></span>
-<span id="cb1105-9"><a href="glmm-count-outcome-bolous.html#cb1105-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-825-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1085"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1085-1"><a href="glmm-count-outcome-bolous.html#cb1085-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;group&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
+<span id="cb1085-2"><a href="glmm-count-outcome-bolous.html#cb1085-2" tabindex="-1"></a>                <span class="at">xlevels =</span> <span class="fu">list</span>(<span class="at">time =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">25</span>)),</span>
+<span id="cb1085-3"><a href="glmm-count-outcome-bolous.html#cb1085-3" tabindex="-1"></a>                <span class="at">mod =</span> mod_glmer_rias) <span class="sc">%&gt;%</span> </span>
+<span id="cb1085-4"><a href="glmm-count-outcome-bolous.html#cb1085-4" tabindex="-1"></a>  data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb1085-5"><a href="glmm-count-outcome-bolous.html#cb1085-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
+<span id="cb1085-6"><a href="glmm-count-outcome-bolous.html#cb1085-6" tabindex="-1"></a>             <span class="at">y =</span> fit)) <span class="sc">+</span></span>
+<span id="cb1085-7"><a href="glmm-count-outcome-bolous.html#cb1085-7" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> fit <span class="sc">-</span> se,</span>
+<span id="cb1085-8"><a href="glmm-count-outcome-bolous.html#cb1085-8" tabindex="-1"></a>                  <span class="at">ymax =</span> fit <span class="sc">+</span> se,</span>
+<span id="cb1085-9"><a href="glmm-count-outcome-bolous.html#cb1085-9" tabindex="-1"></a>                  <span class="at">fill =</span> group),</span>
+<span id="cb1085-10"><a href="glmm-count-outcome-bolous.html#cb1085-10" tabindex="-1"></a>              <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb1085-11"><a href="glmm-count-outcome-bolous.html#cb1085-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> group)) <span class="sc">+</span> </span>
+<span id="cb1085-12"><a href="glmm-count-outcome-bolous.html#cb1085-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb1085-13"><a href="glmm-count-outcome-bolous.html#cb1085-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
+<span id="cb1085-14"><a href="glmm-count-outcome-bolous.html#cb1085-14" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Populaton Mean Count&quot;</span>,</span>
+<span id="cb1085-15"><a href="glmm-count-outcome-bolous.html#cb1085-15" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>,</span>
+<span id="cb1085-16"><a href="glmm-count-outcome-bolous.html#cb1085-16" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Dose&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb1085-17"><a href="glmm-count-outcome-bolous.html#cb1085-17" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-799-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1086"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1086-1"><a href="glmm-count-outcome-bolous.html#cb1086-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1086-2"><a href="glmm-count-outcome-bolous.html#cb1086-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">predict</span>(mod_glmer_rias,</span>
+<span id="cb1086-3"><a href="glmm-count-outcome-bolous.html#cb1086-3" tabindex="-1"></a>                              <span class="at">newdata =</span> .,</span>
+<span id="cb1086-4"><a href="glmm-count-outcome-bolous.html#cb1086-4" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1086-5"><a href="glmm-count-outcome-bolous.html#cb1086-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
+<span id="cb1086-6"><a href="glmm-count-outcome-bolous.html#cb1086-6" tabindex="-1"></a>             <span class="at">y =</span> fit)) <span class="sc">+</span></span>
+<span id="cb1086-7"><a href="glmm-count-outcome-bolous.html#cb1086-7" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb1086-8"><a href="glmm-count-outcome-bolous.html#cb1086-8" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span> group) <span class="sc">+</span></span>
+<span id="cb1086-9"><a href="glmm-count-outcome-bolous.html#cb1086-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-800-1.png" width="576" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -2327,44 +2198,44 @@ time/4
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section",
-"toc_depth": 3,
-"scroll_highlight": true
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "toc_depth": 3,
+    "scroll_highlight": true
+  }
 });
 });
 </script>

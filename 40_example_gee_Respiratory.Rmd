@@ -595,8 +595,8 @@ resp_geeglm_ex %>%
   ggplot(aes(x = age,
              y = prob,
              group = interaction(sex, treatment))) +
-  geom_ribbon(aes(ymin = asymp.LCL,
-                  ymax = asymp.UCL,
+  geom_ribbon(aes(ymin = lower.CL,
+                  ymax = upper.CL,
                   fill = fct_rev(sex)),
               alpha = .3) +
   geom_line(aes(color = fct_rev(sex),
@@ -673,8 +673,8 @@ resp_geeglm_ex %>%
   ggplot(aes(x = age,
              y = prob,
              group = interaction(sex, treatment))) +
-  geom_ribbon(aes(ymin = asymp.LCL,
-                  ymax = asymp.UCL),
+  geom_ribbon(aes(ymin = lower.CL,
+                  ymax = upper.CL),
               alpha = .2) +
   geom_line(aes(linetype = fct_rev(treatment))) +
   theme_bw() + 

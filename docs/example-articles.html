@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Example Articles | R Notebook</title>
+  <title>4 Example Articles | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Example Articles | R Notebook" />
+  <meta property="og:title" content="4 Example Articles | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="github-repo" content="cehs-research/eBook_wrangle" />
+  <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Example Articles | R Notebook" />
+  <meta name="twitter:title" content="4 Example Articles | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
@@ -51,13 +51,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -67,7 +67,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -121,10 +121,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -162,8 +167,6 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
@@ -220,9 +223,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.1" data-path="example-articles.html"><a href="example-articles.html#cross-sectional-clustered-or-hierarchical"><i class="fa fa-check"></i><b>4.1</b> Cross-sectional: clustered or hierarchical</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="example-articles.html"><a href="example-articles.html#non-randomized-intervention"><i class="fa fa-check"></i><b>4.1.1</b> Non-randomized Intervention</a></li>
-<li class="chapter" data-level="4.1.2" data-path="example-articles.html"><a href="example-articles.html#dyadic-design"><i class="fa fa-check"></i><b>4.1.2</b> Dyadic Design</a></li>
-<li class="chapter" data-level="4.1.3" data-path="example-articles.html"><a href="example-articles.html#binary-outcome"><i class="fa fa-check"></i><b>4.1.3</b> Binary Outcome</a></li>
+<li class="chapter" data-level="4.1.1" data-path="example-articles.html"><a href="example-articles.html#observed-cross-classified-clusters"><i class="fa fa-check"></i><b>4.1.1</b> Observed, cross-classified Clusters</a></li>
+<li class="chapter" data-level="4.1.2" data-path="example-articles.html"><a href="example-articles.html#non-randomized-intervention"><i class="fa fa-check"></i><b>4.1.2</b> Non-randomized Intervention</a></li>
+<li class="chapter" data-level="4.1.3" data-path="example-articles.html"><a href="example-articles.html#dyadic-design"><i class="fa fa-check"></i><b>4.1.3</b> Dyadic Design</a></li>
+<li class="chapter" data-level="4.1.4" data-path="example-articles.html"><a href="example-articles.html#binary-outcome"><i class="fa fa-check"></i><b>4.1.4</b> Binary Outcome</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="example-articles.html"><a href="example-articles.html#repeated-measures-longitudinal-change-over-time-or-conditional-no-time-component"><i class="fa fa-check"></i><b>4.2</b> Repeated Measures: longitudinal (change over time) or conditional (no time component)</a>
 <ul>
@@ -537,12 +541,6 @@ div.csl-indent {
 <li class="chapter" data-level="14.3.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#add-fixed-effects-level-specific"><i class="fa fa-check"></i><b>14.3.3</b> Add fixed effects: level specific</a></li>
 <li class="chapter" data-level="14.3.4" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#final-model-4"><i class="fa fa-check"></i><b>14.3.4</b> Final Model</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#autoregression-1"><i class="fa fa-check"></i><b>14.4</b> Autoregression 1</a>
-<ul>
-<li class="chapter" data-level="14.4.1" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#unstructured"><i class="fa fa-check"></i><b>14.4.1</b> Unstructured</a></li>
-<li class="chapter" data-level="14.4.2" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#compound-symmetry-with-constant-correlation"><i class="fa fa-check"></i><b>14.4.2</b> Compound Symmetry (with constant correlation)</a></li>
-<li class="chapter" data-level="14.4.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#compare-performance"><i class="fa fa-check"></i><b>14.4.3</b> Compare performance</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html"><i class="fa fa-check"></i><b>15</b> GEE, Continuous Outcome: Beat the Blues</a>
 <ul>
@@ -825,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Notebook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
           </h1>
         </div>
 
@@ -837,8 +835,87 @@ div.csl-indent {
 <h1><span class="header-section-number">4</span> Example Articles<a href="example-articles.html#example-articles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="cross-sectional-clustered-or-hierarchical" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Cross-sectional: clustered or hierarchical<a href="example-articles.html#cross-sectional-clustered-or-hierarchical" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="non-randomized-intervention" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Non-randomized Intervention<a href="example-articles.html#non-randomized-intervention" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="observed-cross-classified-clusters" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Observed, cross-classified Clusters<a href="example-articles.html#observed-cross-classified-clusters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="rmdlink">
+<p>
+<strong>Disentangling the Relative Influence of Schools and
+Neighborhoods on Adolescents’ Risk for Depressive Symptoms</strong>
+</p>
+<ul>
+<li>
+<a
+href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4358201/">Public
+link</a>
+</li>
+<li>
+<a
+href="https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2014.302374">USU-full
+text</a>
+</li>
+</ul>
+</div>
+<p>Dunn, E. C., Milliren, C. E., Evans, C. R., Subramanian, S. V., &amp; Richmond, T. K. (2015). Disentangling the relative influence of schools and neighborhoods on adolescents’ risk for depressive symptoms. American journal of public health, 105(4), 732-740.</p>
+<blockquote>
+<p>“Our data came from wave 1 of the National Longitudinal Study of Adolescent Health (Add Health), one of the few nationally representative longitudinal surveys of US adolescents that examines health and health-related behaviors and includes information about both school and neighborhood environments.”</p>
+</blockquote>
+<table style="width:100%;">
+<colgroup>
+<col width="4%" />
+<col width="44%" />
+<col width="50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td rowspan="2">Concept
+:===============
+<strong>Terms</strong></td>
+<td colspan="2" rowspan="2">Article Details |
+:==========================================================================================================================================================+
+cross-classified multilevel modeling (CCMM) |</td>
+</tr>
+<tr class="even">
+</tr>
+<tr class="odd">
+<td><p><strong>Samples</strong></p>
+<p><strong>Missing</strong></p></td>
+<td colspan="2"><ul>
+<li>Level 2a: schools (<em>n</em> = 128) |</li>
+<li>Level 2b: neighborhoos (<em>n</em> = 2,118) |</li>
+<li>Level 1: students (<em>n</em> = 16,172) |+—————-+———————————————————————————————————————————————————–
+excluded: not nationally representative and schools that did not provide demographic data had been eliminated (n = 660) |
+adolescents who were missing data on the outcome measure (n = 38) or predictors and covariates (n = 1404) |
+We restricted our analysis to adolescents who were White, Black, or Hispanic (others too sparce) |</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>Centering</strong></td>
+<td>none noted</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Components</strong></td>
+<td colspan="2">descriptives, MLM, ICC |</td>
+</tr>
+<tr class="even">
+<td><strong>Results</strong></td>
+<td colspan="2">plots of cluster means (by school and by neighborhood), table of parameter estimates |</td>
+</tr>
+<tr class="odd">
+<td><strong>Software</strong></td>
+<td colspan="2"><strong>MLwiN version 2.26</strong> with Bayesian estimation procedures, implemented via Markov chain Monte Carlo methodology |</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>disentangle the effects of schools and neighborhoods on adolescents’ risk for depression</li>
+<li>schools appeared to drive the between-level variance in depressive symptoms more than neighborhoods</li>
+<li>After individual-level (or compositional) characteristics had been taken into account, the school-level random effect was statistically significant and more than 3 times the neighborhood-level random effect</li>
+<li>we found that only student-level factors (i.e., gender, race/ethnicity, age, parental SES) were significantly associated with depressive symptoms</li>
+</ul>
+</div>
+<div id="non-randomized-intervention" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Non-randomized Intervention<a href="example-articles.html#non-randomized-intervention" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="rmdlink">
 <p>
 <strong>Efficacy Study of Zearn Math in a Large Urban School
@@ -906,8 +983,8 @@ text</a>
 </tbody>
 </table>
 </div>
-<div id="dyadic-design" class="section level3 hasAnchor" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Dyadic Design<a href="example-articles.html#dyadic-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dyadic-design" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Dyadic Design<a href="example-articles.html#dyadic-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="rmdlink">
 <p>
 <strong>Parent couples’ participation in speech-language therapy for
@@ -975,13 +1052,13 @@ text link</a>
 </tr>
 </tbody>
 </table>
-<div class="figure">
+<div class="float">
 <img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/auta/2020/auta_24_2/1362361319862113/20200123/images/medium/10.1177_1362361319862113-table6.gif" width="550" alt="" />
-<p class="caption"><img src="" /></p>
+<div class="figcaption"><img src="" /></div>
 </div>
 </div>
-<div id="binary-outcome" class="section level3 hasAnchor" number="4.1.3">
-<h3><span class="header-section-number">4.1.3</span> Binary Outcome<a href="example-articles.html#binary-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="binary-outcome" class="section level3 hasAnchor" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Binary Outcome<a href="example-articles.html#binary-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="rmdlink">
 <p>
 <strong>County-level social factors and schizophrenia: A multilevel
@@ -1328,44 +1405,44 @@ link with PDF download</a>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section",
-"toc_depth": 3,
-"scroll_highlight": true
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "toc_depth": 3,
+    "scroll_highlight": true
+  }
 });
 });
 </script>

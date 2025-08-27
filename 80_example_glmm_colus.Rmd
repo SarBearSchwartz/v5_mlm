@@ -96,7 +96,7 @@ A ‘lock-out’ period followed each dose, where subject may not administer mor
 ### Import
 
 ```{r}
-data_raw <- read.table("https://raw.githubusercontent.com/CEHS-research/data/master/MLM/bolus.txt",
+data_raw <- read.table("data/bolus.txt",
   header = TRUE)
 ```
 
@@ -536,14 +536,15 @@ summary(mod_glmer_rias)
 anova(mod_glmer_ri, mod_glmer_rias)
 ```
 
+NOTE: THI IS NO LONER WROKING???
 
 ```{r, results="asis"}
-texreg::knitreg(list(extract_glmer_exp(mod_glmer_ri),
-                     extract_glmer_exp(mod_glmer_rias)),
-                custom.model.names = c("Intecepts", "Intercepts and Slopes"),
-                caption = "GLMM: Compare Random Effects",
-                single.row = TRUE,
-                ci.test = 1)
+# texreg::knitreg(list(extract_glmer_exp(mod_glmer_ri),
+#                      extract_glmer_exp(mod_glmer_rias)),
+#                 custom.model.names = c("Intecepts", "Intercepts and Slopes"),
+#                 caption = "GLMM: Compare Random Effects",
+#                 single.row = TRUE,
+#                 ci.test = 1)
 ```
 
 
@@ -572,10 +573,10 @@ anova(mod_glmer_rias, mod_glmer_rias2)
 
 
 ```{r, results='asis'}
-texreg::knitreg(list(extract_glmer_exp(mod_glmer_rias)),
-                caption = "GLMM: Final Model",
-                single.row = TRUE,
-                ci.test = 1)
+# texreg::knitreg(list(extract_glmer_exp(mod_glmer_rias)),
+#                 caption = "GLMM: Final Model",
+#                 single.row = TRUE,
+#                 ci.test = 1)
 ```
 
 ```{r}

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13 MLM, Longitudinal: Hox ch 5 - student GPA | R Notebook</title>
+  <title>13 MLM, Longitudinal: Hox ch 5 - student GPA | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13 MLM, Longitudinal: Hox ch 5 - student GPA | R Notebook" />
+  <meta property="og:title" content="13 MLM, Longitudinal: Hox ch 5 - student GPA | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="github-repo" content="cehs-research/eBook_wrangle" />
+  <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13 MLM, Longitudinal: Hox ch 5 - student GPA | R Notebook" />
+  <meta name="twitter:title" content="13 MLM, Longitudinal: Hox ch 5 - student GPA | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
@@ -51,13 +51,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -67,7 +67,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -121,10 +121,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -162,8 +167,6 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
@@ -220,9 +223,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.1" data-path="example-articles.html"><a href="example-articles.html#cross-sectional-clustered-or-hierarchical"><i class="fa fa-check"></i><b>4.1</b> Cross-sectional: clustered or hierarchical</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="example-articles.html"><a href="example-articles.html#non-randomized-intervention"><i class="fa fa-check"></i><b>4.1.1</b> Non-randomized Intervention</a></li>
-<li class="chapter" data-level="4.1.2" data-path="example-articles.html"><a href="example-articles.html#dyadic-design"><i class="fa fa-check"></i><b>4.1.2</b> Dyadic Design</a></li>
-<li class="chapter" data-level="4.1.3" data-path="example-articles.html"><a href="example-articles.html#binary-outcome"><i class="fa fa-check"></i><b>4.1.3</b> Binary Outcome</a></li>
+<li class="chapter" data-level="4.1.1" data-path="example-articles.html"><a href="example-articles.html#observed-cross-classified-clusters"><i class="fa fa-check"></i><b>4.1.1</b> Observed, cross-classified Clusters</a></li>
+<li class="chapter" data-level="4.1.2" data-path="example-articles.html"><a href="example-articles.html#non-randomized-intervention"><i class="fa fa-check"></i><b>4.1.2</b> Non-randomized Intervention</a></li>
+<li class="chapter" data-level="4.1.3" data-path="example-articles.html"><a href="example-articles.html#dyadic-design"><i class="fa fa-check"></i><b>4.1.3</b> Dyadic Design</a></li>
+<li class="chapter" data-level="4.1.4" data-path="example-articles.html"><a href="example-articles.html#binary-outcome"><i class="fa fa-check"></i><b>4.1.4</b> Binary Outcome</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="example-articles.html"><a href="example-articles.html#repeated-measures-longitudinal-change-over-time-or-conditional-no-time-component"><i class="fa fa-check"></i><b>4.2</b> Repeated Measures: longitudinal (change over time) or conditional (no time component)</a>
 <ul>
@@ -537,12 +541,6 @@ div.csl-indent {
 <li class="chapter" data-level="14.3.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#add-fixed-effects-level-specific"><i class="fa fa-check"></i><b>14.3.3</b> Add fixed effects: level specific</a></li>
 <li class="chapter" data-level="14.3.4" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#final-model-4"><i class="fa fa-check"></i><b>14.3.4</b> Final Model</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#autoregression-1"><i class="fa fa-check"></i><b>14.4</b> Autoregression 1</a>
-<ul>
-<li class="chapter" data-level="14.4.1" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#unstructured"><i class="fa fa-check"></i><b>14.4.1</b> Unstructured</a></li>
-<li class="chapter" data-level="14.4.2" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#compound-symmetry-with-constant-correlation"><i class="fa fa-check"></i><b>14.4.2</b> Compound Symmetry (with constant correlation)</a></li>
-<li class="chapter" data-level="14.4.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#compare-performance"><i class="fa fa-check"></i><b>14.4.3</b> Compare performance</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html"><i class="fa fa-check"></i><b>15</b> GEE, Continuous Outcome: Beat the Blues</a>
 <ul>
@@ -825,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Notebook</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
           </h1>
         </div>
 
@@ -835,41 +833,42 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="mlm-longitudinal-hox-ch-5---student-gpa" class="section level1 hasAnchor" number="13">
 <h1><span class="header-section-number">13</span> MLM, Longitudinal: Hox ch 5 - student GPA<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#mlm-longitudinal-hox-ch-5---student-gpa" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># all things tidy</span></span>
-<span id="cb592-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb592-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb592-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)       <span class="co"># nice looking genderal tabulations</span></span>
-<span id="cb592-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># nice Table1() descriptives</span></span>
-<span id="cb592-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)       <span class="co"># Convert Regression Output to LaTeX or HTML Tables</span></span>
-<span id="cb592-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb592-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)        <span class="co"># contains some useful functions, like headTail</span></span>
-<span id="cb592-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjstats)      <span class="co"># ICC calculations</span></span>
-<span id="cb592-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjPlot)       <span class="co"># Visualization for Models</span></span>
-<span id="cb592-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb592-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)         <span class="co"># non-linear mixed-effects models</span></span>
-<span id="cb592-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb592-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effects)      <span class="co"># Effect displays for Models</span></span>
-<span id="cb592-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
-<span id="cb592-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(interactions)</span>
-<span id="cb592-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb592-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span></code></pre></div>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># all things tidy</span></span>
+<span id="cb594-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-2" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb594-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-3" tabindex="-1"></a></span>
+<span id="cb594-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-4" tabindex="-1"></a><span class="fu">library</span>(pander)       <span class="co"># nice looking genderal tabulations</span></span>
+<span id="cb594-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-5" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># nice Table1() descriptives</span></span>
+<span id="cb594-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-6" tabindex="-1"></a><span class="fu">library</span>(texreg)       <span class="co"># Convert Regression Output to LaTeX or HTML Tables</span></span>
+<span id="cb594-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-7" tabindex="-1"></a></span>
+<span id="cb594-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-8" tabindex="-1"></a><span class="fu">library</span>(psych)        <span class="co"># contains some useful functions, like headTail</span></span>
+<span id="cb594-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-9" tabindex="-1"></a><span class="fu">library</span>(sjstats)      <span class="co"># ICC calculations</span></span>
+<span id="cb594-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-10" tabindex="-1"></a><span class="fu">library</span>(sjPlot)       <span class="co"># Visualization for Models</span></span>
+<span id="cb594-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-11" tabindex="-1"></a></span>
+<span id="cb594-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-12" tabindex="-1"></a><span class="fu">library</span>(lme4)         <span class="co"># non-linear mixed-effects models</span></span>
+<span id="cb594-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-13" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb594-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-14" tabindex="-1"></a><span class="fu">library</span>(effects)      <span class="co"># Effect displays for Models</span></span>
+<span id="cb594-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-15" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb594-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-16" tabindex="-1"></a><span class="fu">library</span>(interactions)</span>
+<span id="cb594-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb594-17" tabindex="-1"></a><span class="fu">library</span>(performance)</span></code></pre></div>
 <div id="background-6" class="section level2 hasAnchor" number="13.1">
 <h2><span class="header-section-number">13.1</span> Background<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#background-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="rmdlink">
 <p>
 The text <strong>“Multilevel Analysis: Techniques and Applications,
-Third Edition”</strong> <span class="citation"><span class="citation">(<a href="references.html#ref-hox2017" role="doc-biblioref">Hox, Moerbeek, and Van de Schoot 2017</a>)</span></span> has a
+Third Edition”</strong> <span class="citation"><span class="citation">(<a href="references.html#ref-hox2017">Hox, Moerbeek, and Van de Schoot 2017</a>)</span></span> has a
 companion <a href="https://multilevel-analysis.sites.uu.nl/">website</a>
 which includes links to all the data files used throughout the book
 (housed on the <a href="https://github.com/MultiLevelAnalysis">book’s
 GitHub repository</a>).
 </p>
 </div>
-<p>The following example is used through out <span class="citation">Hox, Moerbeek, and Van de Schoot (<a href="references.html#ref-hox2017" role="doc-biblioref">2017</a>)</span>’s chapater 5.</p>
+<p>The following example is used through out <span class="citation">Hox, Moerbeek, and Van de Schoot (<a href="references.html#ref-hox2017">2017</a>)</span>’s chapater 5.</p>
 <p>The GPA for 200 college students were followed for 6 consecutive semesters (simulated). Job status was also measured as number of hours worked for the same size occations. Time-invariant covariates are the student’s gender and high school GPA. The variable <code>admitted</code> will not be used.</p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb593-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">&quot;https://github.com/MultiLevelAnalysis/Datasets-third-edition-Multilevel-book/raw/master/chapter%205/GPA2/gpa2long.sav&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb593-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb593-2" aria-hidden="true" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">as_factor</span>()             <span class="co"># retain the labels from SPSS --&gt; factor</span></span>
-<span id="cb593-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb593-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb593-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb593-4" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(data_raw) </span></code></pre></div>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb595-1" tabindex="-1"></a>data_raw <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">&quot;data/gpa2long.sav&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb595-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb595-2" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">as_factor</span>() <span class="sc">%&gt;%</span>             <span class="co"># retain the labels from SPSS --&gt; factor</span></span>
+<span id="cb595-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb595-3" tabindex="-1"></a>  haven<span class="sc">::</span><span class="fu">zap_label</span>()</span>
+<span id="cb595-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb595-4" tabindex="-1"></a></span>
+<span id="cb595-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb595-5" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(data_raw) </span></code></pre></div>
 <pre><code>Rows: 1,200
 Columns: 7
 $ student  &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4…
@@ -879,9 +878,9 @@ $ job      &lt;fct&gt; 2 hours, 2 hours, 2 hours, 2 hours, 2 hours, 2 hours, 2 h
 $ sex      &lt;fct&gt; female, female, female, female, female, female, male, male, m…
 $ highgpa  &lt;dbl&gt; 2.8, 2.8, 2.8, 2.8, 2.8, 2.8, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2…
 $ admitted &lt;fct&gt; yes, yes, yes, yes, yes, yes, no, no, no, no, no, no, yes, ye…</code></pre>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb595-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb595-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb595-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(occas, job) <span class="sc">%&gt;%</span> </span>
-<span id="cb595-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb595-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(<span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-1" tabindex="-1"></a>data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb597-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(occas, job) <span class="sc">%&gt;%</span> </span>
+<span id="cb597-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-3" tabindex="-1"></a>  <span class="fu">table</span>(<span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
 <pre><code>                   job
 occas               no job 1 hour 2 hours 3 hours 4 or more hours &lt;NA&gt;
   year 1 semester 1      0      0     172      28               0    0
@@ -891,24 +890,24 @@ occas               no job 1 hour 2 hours 3 hours 4 or more hours &lt;NA&gt;
   year 3 semester 1      0     18     150      32               0    0
   year 3 semester 2      0     22     148      30               0    0
   &lt;NA&gt;                   0      0       0       0               0    0</code></pre>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb597-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">student =</span> <span class="fu">factor</span>(student)) <span class="sc">%&gt;%</span> </span>
-<span id="cb597-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sem =</span> <span class="fu">case_when</span>(occas <span class="sc">==</span> <span class="st">&quot;year 1 semester 1&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb597-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-4" aria-hidden="true" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 1 semester 2&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb597-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-5" aria-hidden="true" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 2 semester 1&quot;</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb597-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-6" aria-hidden="true" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 2 semester 2&quot;</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
-<span id="cb597-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-7" aria-hidden="true" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 3 semester 1&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
-<span id="cb597-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-8" aria-hidden="true" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 3 semester 2&quot;</span> <span class="sc">~</span> <span class="dv">6</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb597-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">job =</span> <span class="fu">fct_drop</span>(job)) <span class="sc">%&gt;%</span> </span>
-<span id="cb597-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">hrs =</span> <span class="fu">case_when</span>(job <span class="sc">==</span> <span class="st">&quot;no job&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb597-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-11" aria-hidden="true" tabindex="-1"></a>                                job <span class="sc">==</span> <span class="st">&quot;1 hour&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb597-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-12" aria-hidden="true" tabindex="-1"></a>                                job <span class="sc">==</span> <span class="st">&quot;2 hours&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb597-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-13" aria-hidden="true" tabindex="-1"></a>                                job <span class="sc">==</span> <span class="st">&quot;3 hours&quot;</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb597-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-14" aria-hidden="true" tabindex="-1"></a>                                job <span class="sc">==</span> <span class="st">&quot;4 or more hours&quot;</span> <span class="sc">~</span> <span class="dv">4</span>)) <span class="sc">%&gt;%</span>  </span>
-<span id="cb597-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(student, sex, highgpa, sem, job, hrs, gpa) <span class="sc">%&gt;%</span> </span>
-<span id="cb597-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(student, sem)</span>
-<span id="cb597-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb597-18"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb597-18" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_long, <span class="at">top =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-1" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb599-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">student =</span> <span class="fu">factor</span>(student)) <span class="sc">%&gt;%</span> </span>
+<span id="cb599-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sem =</span> <span class="fu">case_when</span>(occas <span class="sc">==</span> <span class="st">&quot;year 1 semester 1&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb599-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-4" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 1 semester 2&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb599-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-5" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 2 semester 1&quot;</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb599-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-6" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 2 semester 2&quot;</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb599-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-7" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 3 semester 1&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb599-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-8" tabindex="-1"></a>                                occas <span class="sc">==</span> <span class="st">&quot;year 3 semester 2&quot;</span> <span class="sc">~</span> <span class="dv">6</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb599-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">job =</span> <span class="fu">fct_drop</span>(job)) <span class="sc">%&gt;%</span> </span>
+<span id="cb599-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">hrs =</span> <span class="fu">case_when</span>(job <span class="sc">==</span> <span class="st">&quot;no job&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb599-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-11" tabindex="-1"></a>                                job <span class="sc">==</span> <span class="st">&quot;1 hour&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb599-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-12" tabindex="-1"></a>                                job <span class="sc">==</span> <span class="st">&quot;2 hours&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb599-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-13" tabindex="-1"></a>                                job <span class="sc">==</span> <span class="st">&quot;3 hours&quot;</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb599-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-14" tabindex="-1"></a>                                job <span class="sc">==</span> <span class="st">&quot;4 or more hours&quot;</span> <span class="sc">~</span> <span class="dv">4</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb599-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-15" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(student, sex, highgpa, sem, job, hrs, gpa) <span class="sc">%&gt;%</span> </span>
+<span id="cb599-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(student, sem)</span>
+<span id="cb599-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-17" tabindex="-1"></a></span>
+<span id="cb599-18"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-18" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_long, <span class="at">top =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>   student    sex highgpa sem     job hrs gpa
 1        1 female     2.8   1 2 hours   2 2.3
 2        1 female     2.8   2 2 hours   2 2.1
@@ -925,12 +924,12 @@ occas               no job 1 hour 2 hours 3 hours 4 or more hours &lt;NA&gt;
 13     200   male     3.4   4 2 hours   2 3.5
 14     200   male     3.4   5  1 hour   1 3.3
 15     200   male     3.4   6  1 hour   1 3.4</code></pre>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-1" aria-hidden="true" tabindex="-1"></a>data_wide <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb599-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-2" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sem,</span>
-<span id="cb599-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_from =</span> <span class="fu">c</span>(job, hrs, gpa),</span>
-<span id="cb599-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>)</span>
-<span id="cb599-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb599-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb599-6" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_wide)</span></code></pre></div>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-1" tabindex="-1"></a>data_wide <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb601-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-2" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sem,</span>
+<span id="cb601-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-3" tabindex="-1"></a>                     <span class="at">values_from =</span> <span class="fu">c</span>(job, hrs, gpa),</span>
+<span id="cb601-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-4" tabindex="-1"></a>                     <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>)</span>
+<span id="cb601-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-5" tabindex="-1"></a></span>
+<span id="cb601-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-6" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_wide)</span></code></pre></div>
 <pre><code>  student    sex highgpa   job_1   job_2   job_3   job_4   job_5   job_6 hrs_1
 1       1 female     2.8 2 hours 2 hours 2 hours 2 hours 2 hours 2 hours     2
 2       2   male     2.5 2 hours 3 hours 2 hours 2 hours 2 hours 2 hours     2
@@ -951,16 +950,16 @@ occas               no job 1 hour 2 hours 3 hours 4 or more hours &lt;NA&gt;
 7     2     2     2     1     2   2.5   2.9     3   3.2   3.3   3.4
 8     2     3     2     2     3   2.6   2.3   2.7   2.7   2.8   2.8
 9     2     2     2     1     1   2.8   3.2   3.4   3.5   3.3   3.4</code></pre>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-1" aria-hidden="true" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb601-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb601-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(<span class="st">&quot;High School GPA&quot;</span> <span class="ot">=</span> highgpa, </span>
-<span id="cb601-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Initial College GPA&quot;</span> <span class="ot">=</span> gpa_1, </span>
-<span id="cb601-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Initial Job&quot;</span> <span class="ot">=</span> job_1, </span>
-<span id="cb601-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Initial Hrs&quot;</span> <span class="ot">=</span> hrs_1,</span>
-<span id="cb601-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>,</span>
-<span id="cb601-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb601-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">total =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb601-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb601-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">test =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-1" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb603-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb603-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-3" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(<span class="st">&quot;High School GPA&quot;</span> <span class="ot">=</span> highgpa, </span>
+<span id="cb603-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-4" tabindex="-1"></a>                    <span class="st">&quot;Initial College GPA&quot;</span> <span class="ot">=</span> gpa_1, </span>
+<span id="cb603-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-5" tabindex="-1"></a>                    <span class="st">&quot;Initial Job&quot;</span> <span class="ot">=</span> job_1, </span>
+<span id="cb603-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-6" tabindex="-1"></a>                    <span class="st">&quot;Initial Hrs&quot;</span> <span class="ot">=</span> hrs_1,</span>
+<span id="cb603-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-7" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>,</span>
+<span id="cb603-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-8" tabindex="-1"></a>                    <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb603-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-9" tabindex="-1"></a>                    <span class="at">total =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb603-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-10" tabindex="-1"></a>                    <span class="at">test =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <table>
 <colgroup>
 <col width="28%" />
@@ -1058,17 +1057,17 @@ occas               no job 1 hour 2 hours 3 hours 4 or more hours &lt;NA&gt;
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-1" aria-hidden="true" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb602-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb602-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(gpa_1, gpa_2, gpa_3, gpa_4, gpa_5, gpa_6,</span>
-<span id="cb602-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>,</span>
-<span id="cb602-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb602-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">total =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb602-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">test =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb602-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">caption =</span> <span class="st">&quot;Hox Table 5.2 (page 77) GPA means at six occations, for male and female students&quot;</span>,</span>
-<span id="cb602-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb602-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">caption.above =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-1" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb604-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb604-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-3" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(gpa_1, gpa_2, gpa_3, gpa_4, gpa_5, gpa_6,</span>
+<span id="cb604-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-4" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>,</span>
+<span id="cb604-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-5" tabindex="-1"></a>                    <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb604-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-6" tabindex="-1"></a>                    <span class="at">total =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb604-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-7" tabindex="-1"></a>                    <span class="at">test =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb604-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-8" tabindex="-1"></a>                    <span class="at">caption =</span> <span class="st">&quot;Hox Table 5.2 (page 77) GPA means at six occations, for male and female students&quot;</span>,</span>
+<span id="cb604-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-9" tabindex="-1"></a>                    <span class="at">caption.above =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-490">Table 13.1: </span>Hox Table 5.2 (page 77) GPA means at six occations, for male and female students</caption>
+<caption><span id="tab:unnamed-chunk-481"><strong> Table  13.1</strong><br/> </span>Hox Table 5.2 (page 77) GPA means at six occations, for male and female students</caption>
 <thead>
 <tr class="header">
 <th></th>
@@ -1163,19 +1162,19 @@ occas               no job 1 hour 2 hours 3 hours 4 or more hours &lt;NA&gt;
 <h2><span class="header-section-number">13.2</span> MLM<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#mlm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="null-models-and-icc" class="section level3 hasAnchor" number="13.2.1">
 <h3><span class="header-section-number">13.2.1</span> Null Models and ICC<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#null-models-and-icc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-1" aria-hidden="true" tabindex="-1"></a>fit_lmer_0_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
-<span id="cb603-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
-<span id="cb603-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb603-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb604-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(fit_lmer_0_re)</span></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb605-1" tabindex="-1"></a>fit_lmer_0_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
+<span id="cb605-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb605-2" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
+<span id="cb605-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb605-3" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb606-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(fit_lmer_0_re)</span></code></pre></div>
 <pre><code># Intraclass Correlation Coefficient
 
     Adjusted ICC: 0.369
   Unadjusted ICC: 0.369</code></pre>
 <p>Over a third of the variance in the 6 GPA measures is variance between individuals, and about two-thirds is variance within individuals across time, <span class="math inline">\(\rho = .369\)</span>.</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb606-1" aria-hidden="true" tabindex="-1"></a>fit_lmer_1_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
-<span id="cb606-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb606-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
-<span id="cb606-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb606-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb607-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(fit_lmer_1_re)</span></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb608-1" tabindex="-1"></a>fit_lmer_1_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
+<span id="cb608-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb608-2" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
+<span id="cb608-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb608-3" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(fit_lmer_1_re)</span></code></pre></div>
 <pre><code># Intraclass Correlation Coefficient
 
     Adjusted ICC: 0.523
@@ -1187,24 +1186,24 @@ occas               no job 1 hour 2 hours 3 hours 4 or more hours &lt;NA&gt;
 </div>
 <div id="fixed-effects-2" class="section level3 hasAnchor" number="13.2.2">
 <h3><span class="header-section-number">13.2.2</span> Fixed Effects<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#fixed-effects-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-1" aria-hidden="true" tabindex="-1"></a>fit_lmer_0_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
-<span id="cb609-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
-<span id="cb609-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb609-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb609-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-5" aria-hidden="true" tabindex="-1"></a>fit_lmer_1_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
-<span id="cb609-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-6" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
-<span id="cb609-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb609-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb609-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb609-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-10" aria-hidden="true" tabindex="-1"></a>fit_lmer_2_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
-<span id="cb609-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-11" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
-<span id="cb609-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-12" aria-hidden="true" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb609-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb609-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb609-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-15" aria-hidden="true" tabindex="-1"></a>fit_lmer_3_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
-<span id="cb609-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-16" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
-<span id="cb609-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb609-17" aria-hidden="true" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb610-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lmer_0_ml, fit_lmer_1_ml, fit_lmer_2_ml, fit_lmer_3_ml))</span></code></pre></div>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-1" tabindex="-1"></a>fit_lmer_0_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
+<span id="cb611-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-2" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
+<span id="cb611-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-3" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb611-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-4" tabindex="-1"></a></span>
+<span id="cb611-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-5" tabindex="-1"></a>fit_lmer_1_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
+<span id="cb611-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-6" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
+<span id="cb611-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-7" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb611-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-8" tabindex="-1"></a></span>
+<span id="cb611-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-9" tabindex="-1"></a></span>
+<span id="cb611-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-10" tabindex="-1"></a>fit_lmer_2_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
+<span id="cb611-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-11" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
+<span id="cb611-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-12" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb611-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-13" tabindex="-1"></a></span>
+<span id="cb611-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-14" tabindex="-1"></a></span>
+<span id="cb611-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-15" tabindex="-1"></a>fit_lmer_3_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>student),</span>
+<span id="cb611-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-16" tabindex="-1"></a>                                <span class="at">data =</span> data_long,</span>
+<span id="cb611-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-17" tabindex="-1"></a>                                <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb612-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lmer_0_ml, fit_lmer_1_ml, fit_lmer_2_ml, fit_lmer_3_ml))</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
 <caption>
 Statistical models
@@ -1527,22 +1526,22 @@ Var: Residual
 </tr>
 </tfoot>
 </table>
-<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lmer_0_ml, fit_lmer_1_ml, fit_lmer_2_ml, fit_lmer_3_ml),</span>
-<span id="cb611-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;M1: Null&quot;</span>,</span>
-<span id="cb611-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;M2: Occ&quot;</span>,</span>
-<span id="cb611-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;M3: Job&quot;</span>,</span>
-<span id="cb611-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;M4: GPA, Sex&quot;</span>),</span>
-<span id="cb611-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.coef.map =</span> <span class="fu">list</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(Intercept)&quot;</span>,</span>
-<span id="cb611-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;I(sem - 1)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Semester&quot;</span>,</span>
-<span id="cb611-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-8" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;hrs&quot;</span> <span class="ot">=</span> <span class="st">&quot;Hours Working&quot;</span>,</span>
-<span id="cb611-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-9" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;highgpa&quot;</span> <span class="ot">=</span> <span class="st">&quot;High School GPA&quot;</span>,</span>
-<span id="cb611-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-10" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;sexfemale&quot;</span> <span class="ot">=</span> <span class="st">&quot;Female vs. Male&quot;</span>),</span>
-<span id="cb611-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">groups =</span> <span class="fu">list</span>(<span class="st">&quot;Level 1 Main Effects, Occasion-Specific&quot;</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb611-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-12" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Level 2 Main Effects,  Person-Specific&quot;</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>),</span>
-<span id="cb611-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.note =</span> <span class="st">&quot;%stars. </span><span class="sc">\n</span><span class="st">Note: Intercept refers to population mean for a Male who is not working during their first semester&quot;</span>,</span>
-<span id="cb611-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Hox Table 5.3 (page 78) Results of Multilevel Anlaysis of GPA, Fixed Effects&quot;</span>,</span>
-<span id="cb611-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">caption.above =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb611-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb611-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lmer_0_ml, fit_lmer_1_ml, fit_lmer_2_ml, fit_lmer_3_ml),</span>
+<span id="cb613-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-2" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;M1: Null&quot;</span>,</span>
+<span id="cb613-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-3" tabindex="-1"></a>                                       <span class="st">&quot;M2: Occ&quot;</span>,</span>
+<span id="cb613-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-4" tabindex="-1"></a>                                       <span class="st">&quot;M3: Job&quot;</span>,</span>
+<span id="cb613-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-5" tabindex="-1"></a>                                       <span class="st">&quot;M4: GPA, Sex&quot;</span>),</span>
+<span id="cb613-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-6" tabindex="-1"></a>                <span class="at">custom.coef.map =</span> <span class="fu">list</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(Intercept)&quot;</span>,</span>
+<span id="cb613-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-7" tabindex="-1"></a>                                       <span class="st">&quot;I(sem - 1)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Semester&quot;</span>,</span>
+<span id="cb613-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-8" tabindex="-1"></a>                                       <span class="st">&quot;hrs&quot;</span> <span class="ot">=</span> <span class="st">&quot;Hours Working&quot;</span>,</span>
+<span id="cb613-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-9" tabindex="-1"></a>                                       <span class="st">&quot;highgpa&quot;</span> <span class="ot">=</span> <span class="st">&quot;High School GPA&quot;</span>,</span>
+<span id="cb613-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-10" tabindex="-1"></a>                                       <span class="st">&quot;sexfemale&quot;</span> <span class="ot">=</span> <span class="st">&quot;Female vs. Male&quot;</span>),</span>
+<span id="cb613-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-11" tabindex="-1"></a>                <span class="at">groups =</span> <span class="fu">list</span>(<span class="st">&quot;Level 1 Main Effects, Occasion-Specific&quot;</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb613-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-12" tabindex="-1"></a>                              <span class="st">&quot;Level 2 Main Effects,  Person-Specific&quot;</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>),</span>
+<span id="cb613-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-13" tabindex="-1"></a>                <span class="at">custom.note =</span> <span class="st">&quot;%stars. </span><span class="sc">\n</span><span class="st">Note: Intercept refers to population mean for a Male who is not working during their first semester&quot;</span>,</span>
+<span id="cb613-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-14" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Hox Table 5.3 (page 78) Results of Multilevel Anlaysis of GPA, Fixed Effects&quot;</span>,</span>
+<span id="cb613-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-15" tabindex="-1"></a>                <span class="at">caption.above =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb613-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb613-16" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;color: #000000;border-top: 2px solid #000000;">
 <caption>
 Hox Table 5.3 (page 78) Results of Multilevel Anlaysis of GPA, Fixed Effects
@@ -1934,40 +1933,40 @@ Note: Intercept refers to population mean for a Male who is not working during t
 </tr>
 </tfoot>
 </table>
-<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb612-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit_lmer_0_ml, fit_lmer_1_ml, fit_lmer_2_ml, fit_lmer_3_ml)</span></code></pre></div>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb614-1" tabindex="-1"></a><span class="fu">anova</span>(fit_lmer_0_ml, fit_lmer_1_ml, fit_lmer_2_ml, fit_lmer_3_ml)</span></code></pre></div>
 <pre><code>Data: data_long
 Models:
 fit_lmer_0_ml: gpa ~ 1 + (1 | student)
 fit_lmer_1_ml: gpa ~ I(sem - 1) + (1 | student)
 fit_lmer_2_ml: gpa ~ I(sem - 1) + hrs + (1 | student)
 fit_lmer_3_ml: gpa ~ I(sem - 1) + hrs + highgpa + sex + (1 | student)
-              npar    AIC    BIC  logLik deviance   Chisq Df Pr(&gt;Chisq)    
-fit_lmer_0_ml    3 919.46 934.73 -456.73   913.46                          
-fit_lmer_1_ml    4 401.65 422.01 -196.82   393.65 519.807  1  &lt; 2.2e-16 ***
-fit_lmer_2_ml    5 318.40 343.85 -154.20   308.40  85.250  1  &lt; 2.2e-16 ***
-fit_lmer_3_ml    7 296.76 332.39 -141.38   282.76  25.639  2  2.707e-06 ***
+              npar    AIC    BIC  logLik -2*log(L)   Chisq Df Pr(&gt;Chisq)    
+fit_lmer_0_ml    3 919.46 934.73 -456.73    913.46                          
+fit_lmer_1_ml    4 401.65 422.01 -196.82    393.65 519.807  1  &lt; 2.2e-16 ***
+fit_lmer_2_ml    5 318.40 343.85 -154.20    308.40  85.250  1  &lt; 2.2e-16 ***
+fit_lmer_3_ml    7 296.76 332.39 -141.38    282.76  25.639  2  2.707e-06 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 <div id="variance-explained-by-linear-time-at-level-one" class="section level3 hasAnchor" number="13.2.3">
 <h3><span class="header-section-number">13.2.3</span> Variance Explained by linear TIME at Level ONE<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#variance-explained-by-linear-time-at-level-one" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb614-1" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">VarCorr</span>(fit_lmer_0_ml)  <span class="co"># baseline</span></span></code></pre></div>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb616-1" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">VarCorr</span>(fit_lmer_0_ml)  <span class="co"># baseline</span></span></code></pre></div>
 <pre><code> Groups   Name        Std.Dev.
  student  (Intercept) 0.23826 
  Residual             0.31239 </code></pre>
-<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb616-1" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">VarCorr</span>(fit_lmer_1_ml)  <span class="co"># model to compare</span></span></code></pre></div>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb618-1" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">VarCorr</span>(fit_lmer_1_ml)  <span class="co"># model to compare</span></span></code></pre></div>
 <pre><code> Groups   Name        Std.Dev.
  student  (Intercept) 0.25172 
  Residual             0.24090 </code></pre>
-<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb618-1" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">VarCorr</span>(fit_lmer_0_ml) <span class="sc">%&gt;%</span>  <span class="co"># baseline</span></span>
-<span id="cb618-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb618-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">comp =</span> <span class="fu">c</span>(<span class="st">&quot;Variance&quot;</span>, <span class="st">&quot;Std.Dev&quot;</span>),</span>
-<span id="cb618-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb618-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb620-1" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">VarCorr</span>(fit_lmer_0_ml) <span class="sc">%&gt;%</span>  <span class="co"># baseline</span></span>
+<span id="cb620-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb620-2" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">comp =</span> <span class="fu">c</span>(<span class="st">&quot;Variance&quot;</span>, <span class="st">&quot;Std.Dev&quot;</span>),</span>
+<span id="cb620-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb620-3" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code> Groups   Name        Variance Std.Dev.
  student  (Intercept) 0.0568   0.238   
  Residual             0.0976   0.312   </code></pre>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb620-1" aria-hidden="true" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">VarCorr</span>(fit_lmer_1_ml) <span class="sc">%&gt;%</span>  <span class="co"># model to compare</span></span>
-<span id="cb620-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb620-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">comp =</span> <span class="fu">c</span>(<span class="st">&quot;Variance&quot;</span>, <span class="st">&quot;Std.Dev&quot;</span>),</span>
-<span id="cb620-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb620-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb622-1" tabindex="-1"></a>lme4<span class="sc">::</span><span class="fu">VarCorr</span>(fit_lmer_1_ml) <span class="sc">%&gt;%</span>  <span class="co"># model to compare</span></span>
+<span id="cb622-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb622-2" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">comp =</span> <span class="fu">c</span>(<span class="st">&quot;Variance&quot;</span>, <span class="st">&quot;Std.Dev&quot;</span>),</span>
+<span id="cb622-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb622-3" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code> Groups   Name        Variance Std.Dev.
  student  (Intercept) 0.0634   0.252   
  Residual             0.0580   0.241   </code></pre>
@@ -1987,7 +1986,7 @@ approx \;R^2_1 = \frac{\sigma^2_{e-BL} - \sigma^2_{e-MC}}
 \]</span></span>
 </p>
 </div>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb622-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.098</span> <span class="sc">-</span> <span class="fl">0.058</span>) <span class="sc">/</span> <span class="fl">0.098</span></span></code></pre></div>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb624-1" tabindex="-1"></a>(<span class="fl">0.098</span> <span class="sc">-</span> <span class="fl">0.058</span>) <span class="sc">/</span> <span class="fl">0.098</span></span></code></pre></div>
 <pre><code>[1] 0.4081633</code></pre>
 </div>
 <div id="snijders-and-bosker-2" class="section level4 hasAnchor" number="13.2.3.2">
@@ -2003,7 +2002,7 @@ R^2_1 = 1 - \frac{\sigma^2_{e-MC} + \sigma^2_{u0-MC}}
 \]</span></span>
 </p>
 </div>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb624-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.058</span> <span class="sc">+</span> <span class="fl">0.063</span>)<span class="sc">/</span>(<span class="fl">0.098</span> <span class="sc">+</span> <span class="fl">0.057</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb626-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.058</span> <span class="sc">+</span> <span class="fl">0.063</span>)<span class="sc">/</span>(<span class="fl">0.098</span> <span class="sc">+</span> <span class="fl">0.057</span>)</span></code></pre></div>
 <pre><code>[1] 0.2193548</code></pre>
 </div>
 </div>
@@ -2021,7 +2020,7 @@ approx \; R^2_s = \frac{\sigma^2_{u0-BL} - \sigma^2_{u0-MC}}
 \]</span></span>
 </p>
 </div>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb626-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.057</span> <span class="sc">-</span> <span class="fl">0.063</span>)<span class="sc">/</span> <span class="fl">0.057</span></span></code></pre></div>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb628-1" tabindex="-1"></a>(<span class="fl">0.057</span> <span class="sc">-</span> <span class="fl">0.063</span>)<span class="sc">/</span> <span class="fl">0.057</span></span></code></pre></div>
 <pre><code>[1] -0.1052632</code></pre>
 <p>YIKES! Negative Variance explained!</p>
 </div>
@@ -2042,59 +2041,59 @@ but unless the clusters differ greatly in size, it doesn’t make a huge
 difference.
 </p>
 </div>
-<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb628-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.058</span><span class="sc">/</span><span class="dv">6</span> <span class="sc">+</span> <span class="fl">0.063</span>) <span class="sc">/</span> (<span class="fl">0.098</span><span class="sc">/</span><span class="dv">6</span> <span class="sc">+</span> <span class="fl">0.057</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.058</span><span class="sc">/</span><span class="dv">6</span> <span class="sc">+</span> <span class="fl">0.063</span>) <span class="sc">/</span> (<span class="fl">0.098</span><span class="sc">/</span><span class="dv">6</span> <span class="sc">+</span> <span class="fl">0.057</span>)</span></code></pre></div>
 <pre><code>[1] 0.009090909</code></pre>
-<p>Reason: The intercept only model overestimates the variance at the occasion level and underestimates the variance at the subject level (see chapter 4 of <span class="citation">Hox, Moerbeek, and Van de Schoot (<a href="references.html#ref-hox2017" role="doc-biblioref">2017</a>)</span>)</p>
+<p>Reason: The intercept only model overestimates the variance at the occasion level and underestimates the variance at the subject level (see chapter 4 of <span class="citation">Hox, Moerbeek, and Van de Schoot (<a href="references.html#ref-hox2017">2017</a>)</span>)</p>
 </div>
 </div>
 <div id="random-effects-2" class="section level3 hasAnchor" number="13.2.5">
 <h3><span class="header-section-number">13.2.5</span> Random Effects<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#random-effects-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-1" aria-hidden="true" tabindex="-1"></a>fit_lmer_3_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> </span>
-<span id="cb630-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-2" aria-hidden="true" tabindex="-1"></a>                                  (<span class="dv">1</span><span class="sc">|</span>student),</span>
-<span id="cb630-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
-<span id="cb630-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb630-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb630-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb630-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-7" aria-hidden="true" tabindex="-1"></a>fit_lmer_4_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span></span>
-<span id="cb630-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-8" aria-hidden="true" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
-<span id="cb630-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
-<span id="cb630-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb630-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb630-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">optimizer =</span><span class="st">&quot;Nelder_Mead&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb631-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit_lmer_3_re, fit_lmer_4_re, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-1" tabindex="-1"></a>fit_lmer_3_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> </span>
+<span id="cb632-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-2" tabindex="-1"></a>                                  (<span class="dv">1</span><span class="sc">|</span>student),</span>
+<span id="cb632-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-3" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
+<span id="cb632-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-4" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb632-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-5" tabindex="-1"></a></span>
+<span id="cb632-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-6" tabindex="-1"></a></span>
+<span id="cb632-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-7" tabindex="-1"></a>fit_lmer_4_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span></span>
+<span id="cb632-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-8" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
+<span id="cb632-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-9" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
+<span id="cb632-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-10" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb632-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb632-11" tabindex="-1"></a>                            <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">optimizer =</span><span class="st">&quot;Nelder_Mead&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-1" tabindex="-1"></a><span class="fu">anova</span>(fit_lmer_3_re, fit_lmer_4_re, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>Data: data_long
 Models:
 fit_lmer_3_re: gpa ~ I(sem - 1) + hrs + highgpa + sex + (1 | student)
 fit_lmer_4_re: gpa ~ I(sem - 1) + hrs + highgpa + sex + (I(sem - 1) | student)
-              npar    AIC    BIC  logLik deviance Chisq Df Pr(&gt;Chisq)    
-fit_lmer_3_re    7 328.84 364.47 -157.42   314.84                        
-fit_lmer_4_re    9 219.93 265.75 -100.97   201.94 112.9  2  &lt; 2.2e-16 ***
+              npar    AIC    BIC  logLik -2*log(L) Chisq Df Pr(&gt;Chisq)    
+fit_lmer_3_re    7 328.84 364.47 -157.42    314.84                        
+fit_lmer_4_re    9 219.93 265.75 -100.97    201.94 112.9  2  &lt; 2.2e-16 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 <div id="cross-level-interaction" class="section level3 hasAnchor" number="13.2.6">
 <h3><span class="header-section-number">13.2.6</span> Cross-Level Interaction<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cross-level-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-1" aria-hidden="true" tabindex="-1"></a>fit_lmer_4_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> </span>
-<span id="cb633-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-2" aria-hidden="true" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
-<span id="cb633-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
-<span id="cb633-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb633-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb633-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-6" aria-hidden="true" tabindex="-1"></a>fit_lmer_4_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> </span>
-<span id="cb633-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-7" aria-hidden="true" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
-<span id="cb633-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
-<span id="cb633-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb633-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">optimizer =</span><span class="st">&quot;Nelder_Mead&quot;</span>))</span>
-<span id="cb633-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb633-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-12" aria-hidden="true" tabindex="-1"></a>fit_lmer_5_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> <span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">:</span>sex <span class="sc">+</span> </span>
-<span id="cb633-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-13" aria-hidden="true" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
-<span id="cb633-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
-<span id="cb633-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb633-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb633-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-17" aria-hidden="true" tabindex="-1"></a>fit_lmer_5_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> <span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">:</span>sex <span class="sc">+</span> </span>
-<span id="cb633-18"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-18" aria-hidden="true" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
-<span id="cb633-19"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-19" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
-<span id="cb633-20"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb633-20" aria-hidden="true" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb634-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lmer_4_re, fit_lmer_5_re),</span>
-<span id="cb634-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb634-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-1" tabindex="-1"></a>fit_lmer_4_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> </span>
+<span id="cb635-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-2" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
+<span id="cb635-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-3" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
+<span id="cb635-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-4" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb635-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-5" tabindex="-1"></a></span>
+<span id="cb635-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-6" tabindex="-1"></a>fit_lmer_4_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> </span>
+<span id="cb635-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-7" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
+<span id="cb635-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-8" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
+<span id="cb635-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-9" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb635-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-10" tabindex="-1"></a>                            <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">optimizer =</span><span class="st">&quot;Nelder_Mead&quot;</span>))</span>
+<span id="cb635-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-11" tabindex="-1"></a></span>
+<span id="cb635-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-12" tabindex="-1"></a>fit_lmer_5_ml <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> <span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">:</span>sex <span class="sc">+</span> </span>
+<span id="cb635-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-13" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
+<span id="cb635-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-14" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
+<span id="cb635-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-15" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb635-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-16" tabindex="-1"></a></span>
+<span id="cb635-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-17" tabindex="-1"></a>fit_lmer_5_re <span class="ot">&lt;-</span> lmerTest<span class="sc">::</span><span class="fu">lmer</span>(gpa <span class="sc">~</span> <span class="fu">I</span>(sem<span class="dv">-1</span>) <span class="sc">+</span> hrs <span class="sc">+</span> highgpa <span class="sc">+</span> sex <span class="sc">+</span> <span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">:</span>sex <span class="sc">+</span> </span>
+<span id="cb635-18"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-18" tabindex="-1"></a>                                  (<span class="fu">I</span>(sem<span class="dv">-1</span>)<span class="sc">|</span>student),</span>
+<span id="cb635-19"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-19" tabindex="-1"></a>                            <span class="at">data =</span> data_long,</span>
+<span id="cb635-20"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-20" tabindex="-1"></a>                            <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb636-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lmer_4_re, fit_lmer_5_re),</span>
+<span id="cb636-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb636-2" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
 <caption>
 Statistical models
@@ -2287,23 +2286,23 @@ Var: Residual
 </tr>
 </tfoot>
 </table>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lmer_4_re, fit_lmer_5_re),</span>
-<span id="cb635-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb635-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;M5: Occ Rand&quot;</span>,</span>
-<span id="cb635-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;M6: Xlevel Int&quot;</span>),</span>
-<span id="cb635-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.coef.map =</span> <span class="fu">list</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(Intercept)&quot;</span>,</span>
-<span id="cb635-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;I(sem - 1)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Semester&quot;</span>,</span>
-<span id="cb635-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;hrs&quot;</span> <span class="ot">=</span> <span class="st">&quot;Hours Working&quot;</span>,</span>
-<span id="cb635-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-8" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;sexfemale&quot;</span> <span class="ot">=</span> <span class="st">&quot;Sex: Female vs. Male&quot;</span>,</span>
-<span id="cb635-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-9" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;highgpa&quot;</span> <span class="ot">=</span> <span class="st">&quot;High School GPA&quot;</span>,</span>
-<span id="cb635-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-10" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&quot;I(sem - 1):sexfemale&quot;</span> <span class="ot">=</span> <span class="st">&quot;Semester X Sex&quot;</span>),</span>
-<span id="cb635-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">groups =</span> <span class="fu">list</span>(<span class="st">&quot;Level 1 Main Effects, Occasion-Specific&quot;</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb635-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-12" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Level 2 Main Effects,  Person-Specific&quot;</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb635-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-13" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Cross Level Interaction&quot;</span> <span class="ot">=</span> <span class="dv">6</span>),</span>
-<span id="cb635-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.note =</span> <span class="st">&quot;%stars. </span><span class="sc">\n</span><span class="st">Note: Intercept refers to population mean for a Male who is not working during their first semester&quot;</span>,</span>
-<span id="cb635-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Hox Table 5.4 (page 80) Results of Multilevel Anlaysis of GPA, Varying Effects for Occation&quot;</span>,</span>
-<span id="cb635-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">caption.above =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb635-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb635-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lmer_4_re, fit_lmer_5_re),</span>
+<span id="cb637-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-2" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb637-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-3" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;M5: Occ Rand&quot;</span>,</span>
+<span id="cb637-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-4" tabindex="-1"></a>                                       <span class="st">&quot;M6: Xlevel Int&quot;</span>),</span>
+<span id="cb637-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-5" tabindex="-1"></a>                <span class="at">custom.coef.map =</span> <span class="fu">list</span>(<span class="st">&quot;(Intercept)&quot;</span> <span class="ot">=</span> <span class="st">&quot;(Intercept)&quot;</span>,</span>
+<span id="cb637-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-6" tabindex="-1"></a>                                       <span class="st">&quot;I(sem - 1)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Semester&quot;</span>,</span>
+<span id="cb637-7"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-7" tabindex="-1"></a>                                       <span class="st">&quot;hrs&quot;</span> <span class="ot">=</span> <span class="st">&quot;Hours Working&quot;</span>,</span>
+<span id="cb637-8"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-8" tabindex="-1"></a>                                       <span class="st">&quot;sexfemale&quot;</span> <span class="ot">=</span> <span class="st">&quot;Sex: Female vs. Male&quot;</span>,</span>
+<span id="cb637-9"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-9" tabindex="-1"></a>                                       <span class="st">&quot;highgpa&quot;</span> <span class="ot">=</span> <span class="st">&quot;High School GPA&quot;</span>,</span>
+<span id="cb637-10"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-10" tabindex="-1"></a>                                       <span class="st">&quot;I(sem - 1):sexfemale&quot;</span> <span class="ot">=</span> <span class="st">&quot;Semester X Sex&quot;</span>),</span>
+<span id="cb637-11"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-11" tabindex="-1"></a>                <span class="at">groups =</span> <span class="fu">list</span>(<span class="st">&quot;Level 1 Main Effects, Occasion-Specific&quot;</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb637-12"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-12" tabindex="-1"></a>                              <span class="st">&quot;Level 2 Main Effects,  Person-Specific&quot;</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb637-13"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-13" tabindex="-1"></a>                              <span class="st">&quot;Cross Level Interaction&quot;</span> <span class="ot">=</span> <span class="dv">6</span>),</span>
+<span id="cb637-14"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-14" tabindex="-1"></a>                <span class="at">custom.note =</span> <span class="st">&quot;%stars. </span><span class="sc">\n</span><span class="st">Note: Intercept refers to population mean for a Male who is not working during their first semester&quot;</span>,</span>
+<span id="cb637-15"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-15" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Hox Table 5.4 (page 80) Results of Multilevel Anlaysis of GPA, Varying Effects for Occation&quot;</span>,</span>
+<span id="cb637-16"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-16" tabindex="-1"></a>                <span class="at">caption.above =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb637-17"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb637-17" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;color: #000000;border-top: 2px solid #000000;">
 <caption>
 Hox Table 5.4 (page 80) Results of Multilevel Anlaysis of GPA, Varying Effects for Occation
@@ -2530,63 +2529,63 @@ Note: Intercept refers to population mean for a Male who is not working during t
 </tr>
 </tfoot>
 </table>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb636-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit_lmer_4_ml, fit_lmer_5_ml)</span></code></pre></div>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb638-1" tabindex="-1"></a><span class="fu">anova</span>(fit_lmer_4_ml, fit_lmer_5_ml)</span></code></pre></div>
 <pre><code>Data: data_long
 Models:
 fit_lmer_4_ml: gpa ~ I(sem - 1) + hrs + highgpa + sex + (I(sem - 1) | student)
 fit_lmer_5_ml: gpa ~ I(sem - 1) + hrs + highgpa + sex + I(sem - 1):sex + (I(sem - 1) | student)
-              npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)   
-fit_lmer_4_ml    9 188.12 233.93 -85.059   170.12                        
-fit_lmer_5_ml   10 182.97 233.87 -81.486   162.97 7.1464  1   0.007511 **
+              npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(&gt;Chisq)   
+fit_lmer_4_ml    9 188.12 233.93 -85.059    170.12                        
+fit_lmer_5_ml   10 182.97 233.87 -81.486    162.97 7.1464  1   0.007511 **
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 <div id="visualize-the-model-3" class="section level3 hasAnchor" number="13.2.7">
 <h3><span class="header-section-number">13.2.7</span> Visualize the Model<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#visualize-the-model-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb638-1" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_lmer_5_re,</span>
-<span id="cb638-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb638-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pred =</span> sem,</span>
-<span id="cb638-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb638-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">modx =</span> sex,</span>
-<span id="cb638-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb638-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-517"></span>
-<img src="eBook_multilevel_files/figure-html/unnamed-chunk-517-1.png" alt="Hox Figure 5.4 (page 82) Multilevel model (M6) comapring linear increase in GPA over semester, but student's sex." width="576" />
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_lmer_5_re,</span>
+<span id="cb640-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-2" tabindex="-1"></a>                            <span class="at">pred =</span> sem,</span>
+<span id="cb640-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-3" tabindex="-1"></a>                            <span class="at">modx =</span> sex,</span>
+<span id="cb640-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-4" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-508"></span>
+<img src="v5_mlm_files/figure-html/unnamed-chunk-508-1.png" alt="Hox Figure 5.4 (page 82) Multilevel model (M6) comapring linear increase in GPA over semester, but student's sex." width="576" />
 <p class="caption">
-Figure 13.1: Hox Figure 5.4 (page 82) Multilevel model (M6) comapring linear increase in GPA over semester, but student’s sex.
+<strong> Figure  13.1</strong><br/> Hox Figure 5.4 (page 82) Multilevel model (M6) comapring linear increase in GPA over semester, but student’s sex.
 </p>
 </div>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb639-1" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_lmer_5_re,</span>
-<span id="cb639-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb639-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pred =</span> sem,</span>
-<span id="cb639-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb639-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">modx =</span> sex,</span>
-<span id="cb639-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb639-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mod2 =</span> hrs,</span>
-<span id="cb639-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb639-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mod2.values =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb639-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb639-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-518-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-1" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_lmer_5_re,</span>
-<span id="cb640-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pred =</span> sem,</span>
-<span id="cb640-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">modx =</span> sex,</span>
-<span id="cb640-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mod2 =</span> highgpa,</span>
-<span id="cb640-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">mod2.values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb640-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb640-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="eBook_multilevel_files/figure-html/unnamed-chunk-519-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb641-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_lmer_5_re,</span>
+<span id="cb641-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb641-2" tabindex="-1"></a>                            <span class="at">pred =</span> sem,</span>
+<span id="cb641-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb641-3" tabindex="-1"></a>                            <span class="at">modx =</span> sex,</span>
+<span id="cb641-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb641-4" tabindex="-1"></a>                            <span class="at">mod2 =</span> hrs,</span>
+<span id="cb641-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb641-5" tabindex="-1"></a>                            <span class="at">mod2.values =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb641-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb641-6" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-509-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb642-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_lmer_5_re,</span>
+<span id="cb642-2"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb642-2" tabindex="-1"></a>                            <span class="at">pred =</span> sem,</span>
+<span id="cb642-3"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb642-3" tabindex="-1"></a>                            <span class="at">modx =</span> sex,</span>
+<span id="cb642-4"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb642-4" tabindex="-1"></a>                            <span class="at">mod2 =</span> highgpa,</span>
+<span id="cb642-5"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb642-5" tabindex="-1"></a>                            <span class="at">mod2.values =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb642-6"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb642-6" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-510-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="effect-sizes-1" class="section level3 hasAnchor" number="13.2.8">
 <h3><span class="header-section-number">13.2.8</span> Effect Sizes<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#effect-sizes-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="standardized-parameters" class="section level4 hasAnchor" number="13.2.8.1">
 <h4><span class="header-section-number">13.2.8.1</span> Standardized Parameters<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#standardized-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb641-1" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">standardize_parameters</span>(fit_lmer_5_re)</span></code></pre></div>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb643-1" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">standardize_parameters</span>(fit_lmer_5_re)</span></code></pre></div>
 <pre><code># Standardization method: refit
 
-Parameter            | Std. Coef. |         95% CI
---------------------------------------------------
-(Intercept)          |       0.18 | [ 0.02,  0.34]
-I(sem - 1)           |       0.38 | [ 0.31,  0.45]
-hrs                  |      -0.14 | [-0.18, -0.11]
-highgpa              |       0.13 | [ 0.06,  0.21]
-sexfemale            |       0.51 | [ 0.29,  0.73]
-I(sem - 1):sexfemale |       0.13 | [ 0.04,  0.22]</code></pre>
+Parameter              | Std. Coef. |         95% CI
+----------------------------------------------------
+(Intercept)            |       0.18 | [ 0.02,  0.34]
+sem - 1                |       0.38 | [ 0.31,  0.45]
+hrs                    |      -0.14 | [-0.18, -0.11]
+highgpa                |       0.13 | [ 0.06,  0.21]
+sex [female]           |       0.51 | [ 0.29,  0.73]
+sem - 1 × sex [female] |       0.13 | [ 0.04,  0.22]</code></pre>
 </div>
 <div id="r-squared-type-measures" class="section level4 hasAnchor" number="13.2.8.2">
 <h4><span class="header-section-number">13.2.8.2</span> R-squared type measures<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#r-squared-type-measures" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb643-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(fit_lmer_5_re, <span class="at">by_group =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb645-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(fit_lmer_5_re, <span class="at">by_group =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code># Explained Variance by Level
 
 Level   |    R2
@@ -2603,15 +2602,15 @@ student | 0.348</code></pre>
 <p>The Likelyhood Ratio Test (Deviance Difference Test) is best for establishing significance of fixed effects.</p>
 </blockquote>
 <p>Wald-tests</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb645-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_lmer_5_re)</span></code></pre></div>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb647-1" tabindex="-1"></a><span class="fu">summary</span>(fit_lmer_5_re)</span></code></pre></div>
 <pre><code>Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&#39;s
   method [lmerModLmerTest]
 Formula: gpa ~ I(sem - 1) + hrs + highgpa + sex + I(sem - 1):sex + (I(sem -  
     1) | student)
    Data: data_long
 
-     AIC      BIC   logLik deviance df.resid 
-   183.0    233.9    -81.5    163.0     1190 
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    183.0     233.9     -81.5     163.0      1190 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
@@ -2643,7 +2642,7 @@ highgpa     -0.871  0.001  0.022
 sexfemale   -0.265  0.312  0.030  0.066       
 I(sm-1):sxf  0.088 -0.724 -0.008  0.000 -0.430</code></pre>
 <p>F-test with Satterthwaite adjusted degrees of freedom</p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb647-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit_lmer_5_re)</span></code></pre></div>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb649-1" tabindex="-1"></a><span class="fu">anova</span>(fit_lmer_5_re)</span></code></pre></div>
 <pre><code>Type III Analysis of Variance Table with Satterthwaite&#39;s method
                 Sum Sq Mean Sq NumDF   DenDF  F value    Pr(&gt;F)    
 I(sem - 1)     14.5023 14.5023     1  199.46 348.9910 &lt; 2.2e-16 ***
@@ -2657,7 +2656,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <div id="random-effects-3" class="section level4 hasAnchor" number="13.2.9.2">
 <h4><span class="header-section-number">13.2.9.2</span> Random Effects<a href="mlm-longitudinal-hox-ch-5---student-gpa.html#random-effects-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Likelyhood Ratio Tests (Deviance Difference Test), by single term deletion</p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb649-1" aria-hidden="true" tabindex="-1"></a>lmerTest<span class="sc">::</span><span class="fu">ranova</span>(fit_lmer_5_re)</span></code></pre></div>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cb651-1" tabindex="-1"></a>lmerTest<span class="sc">::</span><span class="fu">ranova</span>(fit_lmer_5_re)</span></code></pre></div>
 <pre><code>ANOVA-like table for random-effects: Single term deletions
 
 Model:
@@ -2695,44 +2694,44 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section",
-"toc_depth": 3,
-"scroll_highlight": true
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "toc_depth": 3,
+    "scroll_highlight": true
+  }
 });
 });
 </script>
