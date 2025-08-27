@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>19 GLMM, Binary Outcome: Contraception &amp; Amenorrhea | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
+  <title>19 GLMM, Binary Outcome: Contraception &amp; Amenorrhea | Encyclopedia of Quantitative Methods in R</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="19 GLMM, Binary Outcome: Contraception &amp; Amenorrhea | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta property="og:title" content="19 GLMM, Binary Outcome: Contraception &amp; Amenorrhea | Encyclopedia of Quantitative Methods in R" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/EQM_v1_cover.png" />
+  <meta property="og:image" content="/hexwall_books.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="19 GLMM, Binary Outcome: Contraception &amp; Amenorrhea | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta name="twitter:title" content="19 GLMM, Binary Outcome: Contraception &amp; Amenorrhea | Encyclopedia of Quantitative Methods in R" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="twitter:image" content="/EQM_v1_cover.png" />
+  <meta name="twitter:image" content="/hexwall_books.png" />
 
 <meta name="author" content="Author: Sarah Schwartz, PhD" />
 
@@ -165,13 +165,13 @@ div.csl-indent {
 <li><a href="./">Vol. 5: Multilevel Models</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vol. 5: Multilevel &amp; Marginal Models</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html"><i class="fa fa-check"></i><b>1</b> What are MLM and Why do I care?</a>
 <ul>
@@ -823,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R</a>
           </h1>
         </div>
 
@@ -1035,7 +1035,7 @@ With permission of Elsevier.</p>
 <span id="cb916-16"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb916-16" tabindex="-1"></a>                                <span class="st">&quot;Second&quot;</span>,</span>
 <span id="cb916-17"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb916-17" tabindex="-1"></a>                                <span class="st">&quot;Third&quot;</span>,</span>
 <span id="cb916-18"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb916-18" tabindex="-1"></a>                                <span class="st">&quot;Fourth&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-686-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-692-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb917"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb917-1"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb917-1" tabindex="-1"></a>data_summary <span class="sc">%&gt;%</span> </span>
 <span id="cb917-2"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb917-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> occasion,</span>
 <span id="cb917-3"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb917-3" tabindex="-1"></a>             <span class="at">y =</span> M,</span>
@@ -1059,7 +1059,7 @@ With permission of Elsevier.</p>
 <span id="cb917-21"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb917-21" tabindex="-1"></a>                                <span class="st">&quot;Second&quot;</span>,</span>
 <span id="cb917-22"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb917-22" tabindex="-1"></a>                                <span class="st">&quot;Third&quot;</span>,</span>
 <span id="cb917-23"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb917-23" tabindex="-1"></a>                                <span class="st">&quot;Fourth&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-687-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-693-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="glmm---basic" class="section level2 hasAnchor" number="19.4">
@@ -1265,7 +1265,7 @@ Var: id (Intercept)
 <span id="cb925-4"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb925-4" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb925-5"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb925-5" tabindex="-1"></a>                            <span class="at">outcome.scale =</span> <span class="st">&quot;link&quot;</span>,</span>
 <span id="cb925-6"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb925-6" tabindex="-1"></a>                            <span class="at">y.label =</span> <span class="st">&quot;Likert Scale for Ammenorea&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-693-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-699-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="scale-probability" class="section level4 hasAnchor" number="19.4.3.2">
 <h4><span class="header-section-number">19.4.3.2</span> Scale = Probability<a href="glmm-binary-outcome-contraception-amenorrhea.html#scale-probability" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1275,7 +1275,7 @@ Var: id (Intercept)
 <span id="cb926-4"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb926-4" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb926-5"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb926-5" tabindex="-1"></a>                            <span class="at">outcome.scale =</span> <span class="st">&quot;response&quot;</span>,</span>
 <span id="cb926-6"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb926-6" tabindex="-1"></a>                            <span class="at">y.label =</span> <span class="st">&quot;Estimated Marginal Probability of Ammenorea&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-694-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-700-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb927"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb927-1"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb927-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_2,</span>
 <span id="cb927-2"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb927-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
 <span id="cb927-3"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb927-3" tabindex="-1"></a>                            <span class="at">modx =</span> dose,</span>
@@ -1299,7 +1299,7 @@ Var: id (Intercept)
 <span id="cb927-21"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb927-21" tabindex="-1"></a>                                <span class="st">&quot;3&quot;</span>,</span>
 <span id="cb927-22"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb927-22" tabindex="-1"></a>                                <span class="st">&quot;6&quot;</span>,</span>
 <span id="cb927-23"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb927-23" tabindex="-1"></a>                                <span class="st">&quot;9&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-695-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-701-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb928"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb928-1"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb928-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;dose&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
 <span id="cb928-2"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb928-2" tabindex="-1"></a>                <span class="at">xlevels =</span> <span class="fu">list</span>(<span class="at">time =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> .<span class="dv">1</span>)),</span>
 <span id="cb928-3"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb928-3" tabindex="-1"></a>                <span class="at">mod =</span> fit_2) <span class="sc">%&gt;%</span> </span>
@@ -1317,7 +1317,7 @@ Var: id (Intercept)
 <span id="cb928-15"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb928-15" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
 <span id="cb928-16"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb928-16" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb928-17"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb928-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Predicted Probability&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-696-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-702-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Remove the error bands:</p>
 <div class="sourceCode" id="cb929"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb929-1"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb929-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;dose&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
 <span id="cb929-2"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb929-2" tabindex="-1"></a>                <span class="at">xlevels =</span> <span class="fu">list</span>(<span class="at">time =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> .<span class="dv">1</span>)),</span>
@@ -1343,7 +1343,7 @@ Var: id (Intercept)
 <span id="cb929-22"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb929-22" tabindex="-1"></a>                                <span class="st">&quot;Second&quot;</span>,</span>
 <span id="cb929-23"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb929-23" tabindex="-1"></a>                                <span class="st">&quot;Third&quot;</span>,</span>
 <span id="cb929-24"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb929-24" tabindex="-1"></a>                                <span class="st">&quot;Fourth&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-697-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-703-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1713,7 +1713,7 @@ Var: id (Intercept)
 <span id="cb937-2"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb937-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
 <span id="cb937-3"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb937-3" tabindex="-1"></a>                            <span class="at">modx =</span> dose,</span>
 <span id="cb937-4"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb937-4" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-704-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-710-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb938"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb938-1"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb938-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;dose&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
 <span id="cb938-2"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb938-2" tabindex="-1"></a>                <span class="at">xlevels =</span> <span class="fu">list</span>(<span class="at">time =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">3</span>, <span class="at">by =</span> .<span class="dv">1</span>)),</span>
 <span id="cb938-3"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb938-3" tabindex="-1"></a>                <span class="at">mod =</span> fit_3d) <span class="sc">%&gt;%</span> </span>
@@ -1738,7 +1738,7 @@ Var: id (Intercept)
 <span id="cb938-22"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb938-22" tabindex="-1"></a>                                <span class="st">&quot;Second&quot;</span>,</span>
 <span id="cb938-23"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb938-23" tabindex="-1"></a>                                <span class="st">&quot;Third&quot;</span>,</span>
 <span id="cb938-24"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb938-24" tabindex="-1"></a>                                <span class="st">&quot;Fourth&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-705-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-711-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div id="post-hoc-compairsons" class="section level3 hasAnchor" number="19.6.1">
 <h3><span class="header-section-number">19.6.1</span> Post hoc compairsons<a href="glmm-binary-outcome-contraception-amenorrhea.html#post-hoc-compairsons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb939-1"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cb939-1" tabindex="-1"></a>fit_3d <span class="sc">%&gt;%</span> </span>

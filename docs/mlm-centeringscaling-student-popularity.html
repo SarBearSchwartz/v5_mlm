@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 MLM, Centering/Scaling: Student Popularity | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
+  <title>8 MLM, Centering/Scaling: Student Popularity | Encyclopedia of Quantitative Methods in R</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 MLM, Centering/Scaling: Student Popularity | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta property="og:title" content="8 MLM, Centering/Scaling: Student Popularity | Encyclopedia of Quantitative Methods in R" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/EQM_v1_cover.png" />
+  <meta property="og:image" content="/hexwall_books.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 MLM, Centering/Scaling: Student Popularity | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta name="twitter:title" content="8 MLM, Centering/Scaling: Student Popularity | Encyclopedia of Quantitative Methods in R" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="twitter:image" content="/EQM_v1_cover.png" />
+  <meta name="twitter:image" content="/hexwall_books.png" />
 
 <meta name="author" content="Author: Sarah Schwartz, PhD" />
 
@@ -165,13 +165,13 @@ div.csl-indent {
 <li><a href="./">Vol. 5: Multilevel Models</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vol. 5: Multilevel &amp; Marginal Models</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html"><i class="fa fa-check"></i><b>1</b> What are MLM and Why do I care?</a>
 <ul>
@@ -823,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R</a>
           </h1>
         </div>
 
@@ -904,7 +904,7 @@ $ popteach &lt;dbl&gt; 6, 5, 6, 5, 6, 5, 5, 5, 5, 3, 5, 5, 5, 6, 5, 5, 2, 3, 7, 
 <span id="cb341-18"><a href="mlm-centeringscaling-student-popularity.html#cb341-18" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb341-19"><a href="mlm-centeringscaling-student-popularity.html#cb341-19" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb341-20"><a href="mlm-centeringscaling-student-popularity.html#cb341-20" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-273-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-279-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="grand-mean-centering-and-standardizing-variables" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Grand-Mean-Centering and Standardizing Variables<a href="mlm-centeringscaling-student-popularity.html#grand-mean-centering-and-standardizing-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1338,7 +1338,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb355-22"><a href="mlm-centeringscaling-student-popularity.html#cb355-22" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb355-23"><a href="mlm-centeringscaling-student-popularity.html#cb355-23" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb355-24"><a href="mlm-centeringscaling-student-popularity.html#cb355-24" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-284-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-290-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="random-effects-intercepts" class="section level4 hasAnchor" number="8.3.1.2">
 <h4><span class="header-section-number">8.3.1.2</span> Random Effects: intercepts<a href="mlm-centeringscaling-student-popularity.html#random-effects-intercepts" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1364,7 +1364,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb360-2"><a href="mlm-centeringscaling-student-popularity.html#cb360-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Random_Intercepts =</span> <span class="st">&quot;(Intercept)&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb360-3"><a href="mlm-centeringscaling-student-popularity.html#cb360-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Random_Intercepts)) <span class="sc">+</span></span>
 <span id="cb360-4"><a href="mlm-centeringscaling-student-popularity.html#cb360-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> .<span class="dv">25</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-287-1.png" width="288" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-293-1.png" width="288" style="display: block; margin: auto;" /></p>
 </div>
 <div id="predictions" class="section level4 hasAnchor" number="8.3.1.3">
 <h4><span class="header-section-number">8.3.1.3</span> Predictions<a href="mlm-centeringscaling-student-popularity.html#predictions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1399,7 +1399,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb365-21"><a href="mlm-centeringscaling-student-popularity.html#cb365-21" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb365-22"><a href="mlm-centeringscaling-student-popularity.html#cb365-22" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb365-23"><a href="mlm-centeringscaling-student-popularity.html#cb365-23" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-290-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-296-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="combined-effects" class="section level4 hasAnchor" number="8.3.1.4">
 <h4><span class="header-section-number">8.3.1.4</span> Combined Effects<a href="mlm-centeringscaling-student-popularity.html#combined-effects" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1455,7 +1455,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb370-33"><a href="mlm-centeringscaling-student-popularity.html#cb370-33" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb370-34"><a href="mlm-centeringscaling-student-popularity.html#cb370-34" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb370-35"><a href="mlm-centeringscaling-student-popularity.html#cb370-35" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-293-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-299-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="comapre-the-centered-version" class="section level3 hasAnchor" number="8.3.2">
@@ -1501,7 +1501,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb371-39"><a href="mlm-centeringscaling-student-popularity.html#cb371-39" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb371-40"><a href="mlm-centeringscaling-student-popularity.html#cb371-40" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span>  <span class="dv">4</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb371-41"><a href="mlm-centeringscaling-student-popularity.html#cb371-41" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span>  <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-294-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-300-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="comapre-the-standardized-version" class="section level3 hasAnchor" number="8.3.3">
 <h3><span class="header-section-number">8.3.3</span> Comapre the Standardized Version<a href="mlm-centeringscaling-student-popularity.html#comapre-the-standardized-version" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1540,7 +1540,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb372-33"><a href="mlm-centeringscaling-student-popularity.html#cb372-33" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb372-34"><a href="mlm-centeringscaling-student-popularity.html#cb372-34" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span>  <span class="dv">4</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb372-35"><a href="mlm-centeringscaling-student-popularity.html#cb372-35" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span>  <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-295-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-301-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="rias-random-intercepts-and-slopes" class="section level2 hasAnchor" number="8.4">
@@ -1941,7 +1941,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb381-24"><a href="mlm-centeringscaling-student-popularity.html#cb381-24" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb381-25"><a href="mlm-centeringscaling-student-popularity.html#cb381-25" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb381-26"><a href="mlm-centeringscaling-student-popularity.html#cb381-26" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-302-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-308-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="random-effects-intercepts-1" class="section level4 hasAnchor" number="8.4.1.2">
 <h4><span class="header-section-number">8.4.1.2</span> Random Effects: intercepts<a href="mlm-centeringscaling-student-popularity.html#random-effects-intercepts-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1968,11 +1968,11 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb386-2"><a href="mlm-centeringscaling-student-popularity.html#cb386-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Random_Intercepts =</span> <span class="st">&quot;(Intercept)&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb386-3"><a href="mlm-centeringscaling-student-popularity.html#cb386-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Random_Intercepts)) <span class="sc">+</span></span>
 <span id="cb386-4"><a href="mlm-centeringscaling-student-popularity.html#cb386-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-305-1.png" width="288" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-311-1.png" width="288" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="mlm-centeringscaling-student-popularity.html#cb387-1" tabindex="-1"></a><span class="fu">ranef</span>(pop_lmer_2_raw)<span class="sc">$</span>class <span class="sc">%&gt;%</span> </span>
 <span id="cb387-2"><a href="mlm-centeringscaling-student-popularity.html#cb387-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(extrav)) <span class="sc">+</span></span>
 <span id="cb387-3"><a href="mlm-centeringscaling-student-popularity.html#cb387-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-306-1.png" width="288" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-312-1.png" width="288" style="display: block; margin: auto;" /></p>
 </div>
 <div id="predictions-1" class="section level4 hasAnchor" number="8.4.1.3">
 <h4><span class="header-section-number">8.4.1.3</span> Predictions<a href="mlm-centeringscaling-student-popularity.html#predictions-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -2007,7 +2007,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb392-21"><a href="mlm-centeringscaling-student-popularity.html#cb392-21" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb392-22"><a href="mlm-centeringscaling-student-popularity.html#cb392-22" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb392-23"><a href="mlm-centeringscaling-student-popularity.html#cb392-23" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-309-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-315-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="combined-effects-1" class="section level4 hasAnchor" number="8.4.1.4">
 <h4><span class="header-section-number">8.4.1.4</span> Combined Effects<a href="mlm-centeringscaling-student-popularity.html#combined-effects-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -2063,7 +2063,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb397-33"><a href="mlm-centeringscaling-student-popularity.html#cb397-33" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb397-34"><a href="mlm-centeringscaling-student-popularity.html#cb397-34" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb397-35"><a href="mlm-centeringscaling-student-popularity.html#cb397-35" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-312-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-318-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="comapre-the-centered-version-1" class="section level3 hasAnchor" number="8.4.2">
@@ -2109,7 +2109,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb398-39"><a href="mlm-centeringscaling-student-popularity.html#cb398-39" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb398-40"><a href="mlm-centeringscaling-student-popularity.html#cb398-40" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span>  <span class="dv">4</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb398-41"><a href="mlm-centeringscaling-student-popularity.html#cb398-41" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span>  <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-313-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-319-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="comapre-the-standardized-version-1" class="section level3 hasAnchor" number="8.4.3">
 <h3><span class="header-section-number">8.4.3</span> Comapre the Standardized Version<a href="mlm-centeringscaling-student-popularity.html#comapre-the-standardized-version-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -2148,7 +2148,7 @@ model fit statistics, including AIC, BIC, and the Log Loikelihood
 <span id="cb399-33"><a href="mlm-centeringscaling-student-popularity.html#cb399-33" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb399-34"><a href="mlm-centeringscaling-student-popularity.html#cb399-34" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span>  <span class="dv">4</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb399-35"><a href="mlm-centeringscaling-student-popularity.html#cb399-35" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span>  <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-314-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-320-1.png" width="576" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14 MLM, Longitudinal: RCT - Exercise and Diet | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
+  <title>14 MLM, Longitudinal: RCT - Exercise and Diet | Encyclopedia of Quantitative Methods in R</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14 MLM, Longitudinal: RCT - Exercise and Diet | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta property="og:title" content="14 MLM, Longitudinal: RCT - Exercise and Diet | Encyclopedia of Quantitative Methods in R" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/EQM_v1_cover.png" />
+  <meta property="og:image" content="/hexwall_books.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14 MLM, Longitudinal: RCT - Exercise and Diet | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta name="twitter:title" content="14 MLM, Longitudinal: RCT - Exercise and Diet | Encyclopedia of Quantitative Methods in R" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="twitter:image" content="/EQM_v1_cover.png" />
+  <meta name="twitter:image" content="/hexwall_books.png" />
 
 <meta name="author" content="Author: Sarah Schwartz, PhD" />
 
@@ -165,13 +165,13 @@ div.csl-indent {
 <li><a href="./">Vol. 5: Multilevel Models</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vol. 5: Multilevel &amp; Marginal Models</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html"><i class="fa fa-check"></i><b>1</b> What are MLM and Why do I care?</a>
 <ul>
@@ -823,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R</a>
           </h1>
         </div>
 
@@ -1100,7 +1100,7 @@ $ time     &lt;int&gt; 0, 228, 296, 639, 0, 56, 434, 538, 0, 150, 295, 541, 0, 1
 <span id="cb659-5"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb659-5" tabindex="-1"></a>                    <span class="at">caption =</span> <span class="st">&quot;Participants&quot;</span>,</span>
 <span id="cb659-6"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb659-6" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-521"><strong> Table  14.1</strong><br/> </span>Participants</caption>
+<caption><span id="tab:unnamed-chunk-527"><strong> Table  14.1</strong><br/> </span>Participants</caption>
 <thead>
 <tr class="header">
 <th></th>
@@ -1191,7 +1191,7 @@ $ time     &lt;int&gt; 0, 228, 296, 639, 0, 56, 434, 538, 0, 150, 295, 541, 0, 1
 <span id="cb661-5"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb661-5" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
 <span id="cb661-6"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb661-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(diet <span class="sc">~</span> exertype) <span class="sc">+</span></span>
 <span id="cb661-7"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb661-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-523-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-529-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="loess---moving-average-smoothers" class="section level4 hasAnchor" number="14.2.3.2">
 <h4><span class="header-section-number">14.2.3.2</span> Loess - Moving Average Smoothers<a href="mlm-longitudinal-rct---exercise-and-diet.html#loess---moving-average-smoothers" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1213,7 +1213,7 @@ $ time     &lt;int&gt; 0, 228, 296, 639, 0, 56, 434, 538, 0, 150, 295, 541, 0, 1
 <span id="cb662-16"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb662-16" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Time (Minutes Post-Baseline)&quot;</span>,</span>
 <span id="cb662-17"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb662-17" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Pulse (Beats per Minute)&quot;</span>,</span>
 <span id="cb662-18"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb662-18" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Diet Plan&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-524-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-530-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -2320,13 +2320,13 @@ fit_lmer_3ml | 8.217 |    5.07e-25 |     1.28e-23 |    2.42e-19 |            10.
 <div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb676-1" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(fit_lmer_5re,</span>
 <span id="cb676-2"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb676-2" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>,</span>
 <span id="cb676-3"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb676-3" tabindex="-1"></a>                   <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;time_min&quot;</span>, <span class="st">&quot;diet&quot;</span>, <span class="st">&quot;exertype&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-534-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-540-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb677-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(fit_lmer_5re,</span>
 <span id="cb677-2"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb677-2" tabindex="-1"></a>                            <span class="at">pred =</span> time_min,</span>
 <span id="cb677-3"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb677-3" tabindex="-1"></a>                            <span class="at">modx =</span> diet,</span>
 <span id="cb677-4"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb677-4" tabindex="-1"></a>                            <span class="at">mod2 =</span> exertype,</span>
 <span id="cb677-5"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb677-5" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-535-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-541-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb678-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;diet&quot;</span>, <span class="st">&quot;exertype&quot;</span>, <span class="st">&quot;time_min&quot;</span>),</span>
 <span id="cb678-2"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb678-2" tabindex="-1"></a>                <span class="at">mod =</span> fit_lmer_5re) <span class="sc">%&gt;%</span> </span>
 <span id="cb678-3"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb678-3" tabindex="-1"></a>  data.frame <span class="sc">%&gt;%</span> </span>
@@ -2345,7 +2345,7 @@ fit_lmer_3ml | 8.217 |    5.07e-25 |     1.28e-23 |    2.42e-19 |            10.
 <span id="cb678-16"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb678-16" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Marginal Mean</span><span class="sc">\n</span><span class="st">Pulse (Beats per Minute)&quot;</span>,</span>
 <span id="cb678-17"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb678-17" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Diet Plan&quot;</span>,</span>
 <span id="cb678-18"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb678-18" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Diet Plan&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-536-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-542-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb679-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;diet&quot;</span>, <span class="st">&quot;exertype&quot;</span>, <span class="st">&quot;time_min&quot;</span>),</span>
 <span id="cb679-2"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb679-2" tabindex="-1"></a>                <span class="at">mod =</span> fit_lmer_5re,</span>
 <span id="cb679-3"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb679-3" tabindex="-1"></a>                <span class="at">xlevels =</span> <span class="fu">list</span>(<span class="st">&quot;time_min&quot;</span> <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, </span>
@@ -2376,7 +2376,7 @@ fit_lmer_3ml | 8.217 |    5.07e-25 |     1.28e-23 |    2.42e-19 |            10.
 <span id="cb679-28"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb679-28" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;gray50&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb679-29"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb679-29" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;solid&quot;</span>, <span class="st">&quot;longdash&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb679-30"><a href="mlm-longitudinal-rct---exercise-and-diet.html#cb679-30" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">14</span>, <span class="at">by =</span> <span class="dv">5</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-537-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-543-1.png" width="576" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>15 GEE, Continuous Outcome: Beat the Blues | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
+  <title>15 GEE, Continuous Outcome: Beat the Blues | Encyclopedia of Quantitative Methods in R</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="15 GEE, Continuous Outcome: Beat the Blues | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta property="og:title" content="15 GEE, Continuous Outcome: Beat the Blues | Encyclopedia of Quantitative Methods in R" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/EQM_v1_cover.png" />
+  <meta property="og:image" content="/hexwall_books.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="15 GEE, Continuous Outcome: Beat the Blues | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta name="twitter:title" content="15 GEE, Continuous Outcome: Beat the Blues | Encyclopedia of Quantitative Methods in R" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="twitter:image" content="/EQM_v1_cover.png" />
+  <meta name="twitter:image" content="/hexwall_books.png" />
 
 <meta name="author" content="Author: Sarah Schwartz, PhD" />
 
@@ -165,13 +165,13 @@ div.csl-indent {
 <li><a href="./">Vol. 5: Multilevel Models</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vol. 5: Multilevel &amp; Marginal Models</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html"><i class="fa fa-check"></i><b>1</b> What are MLM and Why do I care?</a>
 <ul>
@@ -823,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R</a>
           </h1>
         </div>
 
@@ -1012,7 +1012,7 @@ div.csl-indent {
 <span id="cb690-10"><a href="gee-continuous-outcome-beat-the-blues.html#cb690-10" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span> treatment) <span class="sc">+</span></span>
 <span id="cb690-11"><a href="gee-continuous-outcome-beat-the-blues.html#cb690-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;BtheB - Observed Data Across Time with LM Smoother&quot;</span>,</span>
 <span id="cb690-12"><a href="gee-continuous-outcome-beat-the-blues.html#cb690-12" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Seperate by Treatment&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-545-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-551-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb691-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb691-1" tabindex="-1"></a>btb_long <span class="sc">%&gt;%</span> </span>
 <span id="cb691-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb691-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month,</span>
 <span id="cb691-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb691-3" tabindex="-1"></a>             <span class="at">y =</span> bdi)) <span class="sc">+</span></span>
@@ -1025,7 +1025,7 @@ div.csl-indent {
 <span id="cb691-10"><a href="gee-continuous-outcome-beat-the-blues.html#cb691-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb691-11"><a href="gee-continuous-outcome-beat-the-blues.html#cb691-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;BtheB - Observed Data Across Time with LM Smoother&quot;</span>,</span>
 <span id="cb691-12"><a href="gee-continuous-outcome-beat-the-blues.html#cb691-12" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Seperate by Treatment &amp; Antidepressant Use&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-546-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-552-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb692-1" tabindex="-1"></a>btb_long <span class="sc">%&gt;%</span> </span>
 <span id="cb692-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb692-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month,</span>
 <span id="cb692-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb692-3" tabindex="-1"></a>             <span class="at">y =</span> bdi)) <span class="sc">+</span></span>
@@ -1042,7 +1042,7 @@ div.csl-indent {
 <span id="cb692-14"><a href="gee-continuous-outcome-beat-the-blues.html#cb692-14" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb692-15"><a href="gee-continuous-outcome-beat-the-blues.html#cb692-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;BtheB - Observed Data Across Time with LM Smoother&quot;</span>,</span>
 <span id="cb692-16"><a href="gee-continuous-outcome-beat-the-blues.html#cb692-16" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Seperate by Treatment, Antidepressant Use, &amp; Length of Current Episode&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-547-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-553-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb693-1" tabindex="-1"></a>btb_long <span class="sc">%&gt;%</span> </span>
 <span id="cb693-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb693-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month,</span>
 <span id="cb693-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb693-3" tabindex="-1"></a>             <span class="at">y =</span> bdi,</span>
@@ -1052,7 +1052,7 @@ div.csl-indent {
 <span id="cb693-7"><a href="gee-continuous-outcome-beat-the-blues.html#cb693-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb693-8"><a href="gee-continuous-outcome-beat-the-blues.html#cb693-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;BtheB - Predictions from TWO Seperate Single Simple Linear Models (lm)&quot;</span>,</span>
 <span id="cb693-9"><a href="gee-continuous-outcome-beat-the-blues.html#cb693-9" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Assumes Independence of Repeated Measures&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-548-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-554-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="calculate-the-observed-correlation-structure" class="section level3 hasAnchor" number="15.3.2">
 <h3><span class="header-section-number">15.3.2</span> Calculate the Observed Correlation Structure<a href="gee-continuous-outcome-beat-the-blues.html#calculate-the-observed-correlation-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1072,7 +1072,7 @@ bdi.8m  0.3835090 0.7038158 0.7220149 0.8107773 1.0000000</code></pre>
 <h3><span class="header-section-number">15.3.3</span> Plot the correlation matrix to get a better feel for the pattern<a href="gee-continuous-outcome-beat-the-blues.html#plot-the-correlation-matrix-to-get-a-better-feel-for-the-pattern" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb696-1" tabindex="-1"></a>bdi_corr <span class="sc">%&gt;%</span> </span>
 <span id="cb696-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb696-2" tabindex="-1"></a>  corrplot<span class="sc">::</span><span class="fu">corrplot.mixed</span>(<span class="at">upper =</span> <span class="st">&quot;ellipse&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-550-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-556-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="multiple-regression-ols" class="section level2 hasAnchor" number="15.4">
@@ -1529,14 +1529,14 @@ Num. obs.
 <span id="cb699-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb699-3" tabindex="-1"></a>                            <span class="at">modx =</span> treatment,</span>
 <span id="cb699-4"><a href="gee-continuous-outcome-beat-the-blues.html#cb699-4" tabindex="-1"></a>                            <span class="at">main.title =</span> <span class="st">&quot;LM with 95% CI&quot;</span>,</span>
 <span id="cb699-5"><a href="gee-continuous-outcome-beat-the-blues.html#cb699-5" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)                 <span class="co"># default = 95% confidence interval</span></span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-553-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-559-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb700-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> btb_lm_1,</span>
 <span id="cb700-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb700-2" tabindex="-1"></a>                            <span class="at">pred =</span> month,</span>
 <span id="cb700-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb700-3" tabindex="-1"></a>                            <span class="at">modx =</span> treatment,</span>
 <span id="cb700-4"><a href="gee-continuous-outcome-beat-the-blues.html#cb700-4" tabindex="-1"></a>                            <span class="at">main.title =</span> <span class="st">&quot;LM with 68% CI (M +/- SEM)&quot;</span>,</span>
 <span id="cb700-5"><a href="gee-continuous-outcome-beat-the-blues.html#cb700-5" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb700-6"><a href="gee-continuous-outcome-beat-the-blues.html#cb700-6" tabindex="-1"></a>                            <span class="at">int.width =</span> <span class="fl">0.68</span>)  <span class="co"># change to 68% CI, which is +/- 1 SEM</span></span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-554-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-560-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb701-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> btb_lm_1,</span>
 <span id="cb701-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb701-2" tabindex="-1"></a>                            <span class="at">pred =</span> month,</span>
 <span id="cb701-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb701-3" tabindex="-1"></a>                            <span class="at">modx =</span> treatment,</span>
@@ -1550,7 +1550,7 @@ Num. obs.
 <span id="cb701-11"><a href="gee-continuous-outcome-beat-the-blues.html#cb701-11" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb701-12"><a href="gee-continuous-outcome-beat-the-blues.html#cb701-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title    =</span> <span class="st">&quot;BtheB - Predictions from the LM model (95% CI)&quot;</span>,</span>
 <span id="cb701-13"><a href="gee-continuous-outcome-beat-the-blues.html#cb701-13" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trajectory for a person with BL depression &lt; 6 months and randomized to TAU&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-555-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-561-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb702-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb702-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="at">focal.predictors =</span> <span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;month&quot;</span>), </span>
 <span id="cb702-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb702-2" tabindex="-1"></a>                <span class="at">mod =</span> btb_lm_1) <span class="sc">%&gt;%</span> </span>
 <span id="cb702-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb702-3" tabindex="-1"></a>  data.frame <span class="sc">%&gt;%</span> </span>
@@ -1572,7 +1572,7 @@ Num. obs.
 <span id="cb702-19"><a href="gee-continuous-outcome-beat-the-blues.html#cb702-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
 <span id="cb702-20"><a href="gee-continuous-outcome-beat-the-blues.html#cb702-20" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">1.1</span>),</span>
 <span id="cb702-21"><a href="gee-continuous-outcome-beat-the-blues.html#cb702-21" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-556-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-562-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="multilevel-models-mlm" class="section level2 hasAnchor" number="15.5">
@@ -1989,7 +1989,7 @@ btb_lm_1      |    6.20e-27 |             0.00%</code></pre>
 <span id="cb709-8"><a href="gee-continuous-outcome-beat-the-blues.html#cb709-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
 <span id="cb709-9"><a href="gee-continuous-outcome-beat-the-blues.html#cb709-9" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>),</span>
 <span id="cb709-10"><a href="gee-continuous-outcome-beat-the-blues.html#cb709-10" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-561-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-567-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb710-1" tabindex="-1"></a>effects<span class="sc">::</span><span class="fu">Effect</span>(<span class="fu">c</span>(<span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;drug&quot;</span>), </span>
 <span id="cb710-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb710-2" tabindex="-1"></a>                <span class="at">mod =</span> btb_lmer_RI) <span class="sc">%&gt;%</span> </span>
 <span id="cb710-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb710-3" tabindex="-1"></a>  data.frame <span class="sc">%&gt;%</span>   </span>
@@ -2007,7 +2007,7 @@ btb_lm_1      |    6.20e-27 |             0.00%</code></pre>
 <span id="cb710-15"><a href="gee-continuous-outcome-beat-the-blues.html#cb710-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
 <span id="cb710-16"><a href="gee-continuous-outcome-beat-the-blues.html#cb710-16" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>),</span>
 <span id="cb710-17"><a href="gee-continuous-outcome-beat-the-blues.html#cb710-17" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-562-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-568-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="general-estimating-equations-gee" class="section level2 hasAnchor" number="15.6">
@@ -2891,7 +2891,7 @@ Num. obs.
 <div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb742-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> btb_geeglm_ex,</span>
 <span id="cb742-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb742-2" tabindex="-1"></a>                            <span class="at">pred =</span> <span class="st">&quot;month&quot;</span>,</span>
 <span id="cb742-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb742-3" tabindex="-1"></a>                            <span class="at">modx =</span> <span class="st">&quot;treatment&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-575-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-581-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Do not worry about confidence intervals.</p>
 <div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb743-1" tabindex="-1"></a><span class="fu">expand.grid</span>(<span class="at">bdi.pre =</span> <span class="dv">23</span>,</span>
 <span id="cb743-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb743-2" tabindex="-1"></a>            <span class="at">length =</span> <span class="st">&quot;&lt;6m&quot;</span>,</span>
@@ -2932,7 +2932,7 @@ Num. obs.
 <span id="cb743-37"><a href="gee-continuous-outcome-beat-the-blues.html#cb743-37" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;solid&quot;</span>, <span class="st">&quot;longdash&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb743-38"><a href="gee-continuous-outcome-beat-the-blues.html#cb743-38" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb743-39"><a href="gee-continuous-outcome-beat-the-blues.html#cb743-39" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> covR)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-576-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-582-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb744-1" tabindex="-1"></a><span class="fu">expand.grid</span>(<span class="at">bdi.pre =</span> <span class="dv">23</span>,</span>
 <span id="cb744-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb744-2" tabindex="-1"></a>            <span class="at">length =</span> <span class="st">&quot;&lt;6m&quot;</span>,</span>
 <span id="cb744-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb744-3" tabindex="-1"></a>            <span class="at">drug =</span> <span class="st">&quot;No&quot;</span>,</span>
@@ -2978,7 +2978,7 @@ Num. obs.
 <span id="cb744-43"><a href="gee-continuous-outcome-beat-the-blues.html#cb744-43" tabindex="-1"></a>                                   <span class="st">&quot;blue&quot;</span>,</span>
 <span id="cb744-44"><a href="gee-continuous-outcome-beat-the-blues.html#cb744-44" tabindex="-1"></a>                                   <span class="st">&quot;darkgreen&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb744-45"><a href="gee-continuous-outcome-beat-the-blues.html#cb744-45" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;cm&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-577-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-583-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="investigate-interactions-not-with-time-month" class="section level3 hasAnchor" number="15.6.3">
@@ -4056,7 +4056,7 @@ Num. clust.
 <div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb749-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> btb_geeglm_ex,</span>
 <span id="cb749-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb749-2" tabindex="-1"></a>                            <span class="at">pred =</span> <span class="st">&quot;month&quot;</span>,</span>
 <span id="cb749-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb749-3" tabindex="-1"></a>                            <span class="at">modx =</span> <span class="st">&quot;bdi.pre&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-582-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-588-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="gee-continuous-outcome-beat-the-blues.html#cb750-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> btb_geeglm_ex,</span>
 <span id="cb750-2"><a href="gee-continuous-outcome-beat-the-blues.html#cb750-2" tabindex="-1"></a>                            <span class="at">pred =</span> <span class="st">&quot;month&quot;</span>,</span>
 <span id="cb750-3"><a href="gee-continuous-outcome-beat-the-blues.html#cb750-3" tabindex="-1"></a>                            <span class="at">modx =</span> <span class="st">&quot;bdi.pre&quot;</span>,</span>
@@ -4073,7 +4073,7 @@ Num. clust.
 <span id="cb750-14"><a href="gee-continuous-outcome-beat-the-blues.html#cb750-14" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb750-15"><a href="gee-continuous-outcome-beat-the-blues.html#cb750-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title    =</span> <span class="st">&quot;BtheB - Predictions from the GEE model (exchangable)&quot;</span>,</span>
 <span id="cb750-16"><a href="gee-continuous-outcome-beat-the-blues.html#cb750-16" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trajectory for a person with BL depression &lt; 6 months and randomized to TAU&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-583-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-589-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="conclusion" class="section level2 hasAnchor" number="15.7">

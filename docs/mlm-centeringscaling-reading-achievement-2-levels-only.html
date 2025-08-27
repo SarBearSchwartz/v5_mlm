@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 MLM, Centering/Scaling: Reading Achievement (2-levels only) | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
+  <title>7 MLM, Centering/Scaling: Reading Achievement (2-levels only) | Encyclopedia of Quantitative Methods in R</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 MLM, Centering/Scaling: Reading Achievement (2-levels only) | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta property="og:title" content="7 MLM, Centering/Scaling: Reading Achievement (2-levels only) | Encyclopedia of Quantitative Methods in R" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/EQM_v1_cover.png" />
+  <meta property="og:image" content="/hexwall_books.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 MLM, Centering/Scaling: Reading Achievement (2-levels only) | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta name="twitter:title" content="7 MLM, Centering/Scaling: Reading Achievement (2-levels only) | Encyclopedia of Quantitative Methods in R" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="twitter:image" content="/EQM_v1_cover.png" />
+  <meta name="twitter:image" content="/hexwall_books.png" />
 
 <meta name="author" content="Author: Sarah Schwartz, PhD" />
 
@@ -165,13 +165,13 @@ div.csl-indent {
 <li><a href="./">Vol. 5: Multilevel Models</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vol. 5: Multilevel &amp; Marginal Models</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html"><i class="fa fa-check"></i><b>1</b> What are MLM and Why do I care?</a>
 <ul>
@@ -823,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R</a>
           </h1>
         </div>
 
@@ -1598,7 +1598,7 @@ gevocab       82       95      110      120       140
 <span id="cb252-7"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb252-7" tabindex="-1"></a>             <span class="at">color =</span> age)) <span class="sc">+</span></span>
 <span id="cb252-8"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb252-8" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb252-9"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb252-9" tabindex="-1"></a>  <span class="fu">geom_line</span>() </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-205-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-211-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Here is a better version of the plot.</p>
 <p>Age is in months, so we want multiples of 12 for good visualization</p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb253-1" tabindex="-1"></a><span class="fu">summary</span>(data_achieve<span class="sc">$</span>age)<span class="sc">/</span><span class="dv">12</span>   <span class="co"># divide by 12 to change months to years</span></span></code></pre></div>
@@ -2091,7 +2091,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb272-8"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb272-8" tabindex="-1"></a>                <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb272-9"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb272-9" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb272-10"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb272-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-218-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-224-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="proportion-of-variance-explained" class="section level4 hasAnchor" number="7.5.1.2">
 <h4><span class="header-section-number">7.5.1.2</span> Proportion of Variance Explained<a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#proportion-of-variance-explained" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -2490,7 +2490,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb295-8"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb295-8" tabindex="-1"></a>             <span class="at">color =</span> age_yr)) <span class="sc">+</span></span>
 <span id="cb295-9"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb295-9" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb295-10"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb295-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-235-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-241-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>There is a positive association between vocabulary and reading, but it is strongest for older childred. Among younger children, reading scores are more stable across vocabulary differences.</p>
 <!-- ========================================================= -->
 </div>
@@ -2965,7 +2965,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb304-8"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb304-8" tabindex="-1"></a>             <span class="at">color =</span> age_yr)) <span class="sc">+</span></span>
 <span id="cb304-9"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb304-9" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb304-10"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb304-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-243-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-249-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>We are seeming much the same trends, but perhaps more separation between the lines.</p>
 <!-- ========================================================= -->
 </div>
@@ -3826,13 +3826,13 @@ fit_read_5ml_c |      0.321 |      0.282 | 0.054 | 1.897 | 1.913</code></pre>
 <div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb321-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_read_5ml_c,</span>
 <span id="cb321-2"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb321-2" tabindex="-1"></a>                            <span class="at">pred  =</span> gevocab,</span>
 <span id="cb321-3"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb321-3" tabindex="-1"></a>                            <span class="at">modx  =</span> age)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-256-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-262-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb322-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_read_5ml_c,</span>
 <span id="cb322-2"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb322-2" tabindex="-1"></a>                            <span class="at">pred  =</span> gevocab,</span>
 <span id="cb322-3"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb322-3" tabindex="-1"></a>                            <span class="at">modx  =</span> age,</span>
 <span id="cb322-4"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb322-4" tabindex="-1"></a>                            <span class="at">modx.values =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">110</span>, <span class="dv">150</span>),</span>
 <span id="cb322-5"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb322-5" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-257-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-263-1.png" width="576" style="display: block; margin: auto;" /></p>
 <!-- ========================================================= -->
 </div>
 </div>
@@ -4459,7 +4459,7 @@ Var: Residual
 <span id="cb333-2"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb333-2" tabindex="-1"></a>                            <span class="at">pred  =</span> gevocab,         <span class="co"># x-axis, main independent variable (continuous, ordinal)</span></span>
 <span id="cb333-3"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb333-3" tabindex="-1"></a>                            <span class="at">modx  =</span> age,             <span class="co"># lines by moderator, another independent variable</span></span>
 <span id="cb333-4"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb333-4" tabindex="-1"></a>                            <span class="at">mod2 =</span> ses)              <span class="co"># panel by 2nd moderator, another indep var</span></span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-265-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-271-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Define values for the moderator(s):</p>
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb334-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_read_6ml_s,</span>
 <span id="cb334-2"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb334-2" tabindex="-1"></a>                            <span class="at">pred  =</span> gevocab,</span>
@@ -4468,7 +4468,7 @@ Var: Residual
 <span id="cb334-5"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb334-5" tabindex="-1"></a>                            <span class="at">modx.values =</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">110</span>, <span class="dv">130</span>),</span>
 <span id="cb334-6"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb334-6" tabindex="-1"></a>                            <span class="at">mod2.values =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">55</span>, <span class="dv">90</span>),</span>
 <span id="cb334-7"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb334-7" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-266-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-272-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Swap the moderators:</p>
 <div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb335-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> fit_read_6ml_s,</span>
 <span id="cb335-2"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb335-2" tabindex="-1"></a>                            <span class="at">pred  =</span> gevocab,</span>
@@ -4477,7 +4477,7 @@ Var: Residual
 <span id="cb335-5"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb335-5" tabindex="-1"></a>                            <span class="at">mod2.values =</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">110</span>, <span class="dv">130</span>),</span>
 <span id="cb335-6"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb335-6" tabindex="-1"></a>                            <span class="at">modx.values =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">55</span>, <span class="dv">90</span>),</span>
 <span id="cb335-7"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#cb335-7" tabindex="-1"></a>                            <span class="at">interval =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-267-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-273-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="interpretation-of-model" class="section level3 hasAnchor" number="7.11.2">

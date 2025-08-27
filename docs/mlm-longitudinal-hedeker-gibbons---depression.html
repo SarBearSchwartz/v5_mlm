@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12 MLM, Longitudinal: Hedeker &amp; Gibbons - Depression | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
+  <title>12 MLM, Longitudinal: Hedeker &amp; Gibbons - Depression | Encyclopedia of Quantitative Methods in R</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12 MLM, Longitudinal: Hedeker &amp; Gibbons - Depression | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta property="og:title" content="12 MLM, Longitudinal: Hedeker &amp; Gibbons - Depression | Encyclopedia of Quantitative Methods in R" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/EQM_v1_cover.png" />
+  <meta property="og:image" content="/hexwall_books.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12 MLM, Longitudinal: Hedeker &amp; Gibbons - Depression | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta name="twitter:title" content="12 MLM, Longitudinal: Hedeker &amp; Gibbons - Depression | Encyclopedia of Quantitative Methods in R" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="twitter:image" content="/EQM_v1_cover.png" />
+  <meta name="twitter:image" content="/hexwall_books.png" />
 
 <meta name="author" content="Author: Sarah Schwartz, PhD" />
 
@@ -165,13 +165,13 @@ div.csl-indent {
 <li><a href="./">Vol. 5: Multilevel Models</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vol. 5: Multilevel &amp; Marginal Models</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html"><i class="fa fa-check"></i><b>1</b> What are MLM and Why do I care?</a>
 <ul>
@@ -823,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R</a>
           </h1>
         </div>
 
@@ -998,7 +998,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb511-1" tabindex="-1"></a>data_wide <span class="sc">%&gt;%</span> </span>
 <span id="cb511-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb511-2" tabindex="-1"></a>  VIM<span class="sc">::</span><span class="fu">aggr</span>(<span class="at">numbers =</span> <span class="cn">TRUE</span>,   <span class="co"># shows the number to the far right</span></span>
 <span id="cb511-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb511-3" tabindex="-1"></a>            <span class="at">prop =</span> <span class="cn">FALSE</span>)     <span class="co"># shows counts instead of proportions</span></span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-415-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-421-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="naniar-package-1" class="section level4 hasAnchor" number="12.2.2.2">
 <h4><span class="header-section-number">12.2.2.2</span> <code>naniar</code> package<a href="mlm-longitudinal-hedeker-gibbons---depression.html#naniar-package-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1010,7 +1010,7 @@ div.csl-indent {
 <span id="cb512-6"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb512-6" tabindex="-1"></a>                                 <span class="st">&quot;hamd_1_NA&quot;</span>,</span>
 <span id="cb512-7"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb512-7" tabindex="-1"></a>                                 <span class="st">&quot;hamd_0_NA&quot;</span>),</span>
 <span id="cb512-8"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb512-8" tabindex="-1"></a>                        <span class="at">keep.order =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-416-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-422-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="depression-over-time-by-group" class="section level3 hasAnchor" number="12.2.3">
@@ -1036,7 +1036,7 @@ div.csl-indent {
 <span id="cb513-13"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb513-13" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>,</span>
 <span id="cb513-14"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb513-14" tabindex="-1"></a>                    <span class="at">caption =</span> <span class="st">&quot;Hamilton Depression Scores Across Time, by Depression Type for Participants with 6 Complete Weeks&quot;</span>)           </span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-417"><strong> Table  12.1</strong><br/> </span>Hamilton Depression Scores Across Time, by Depression Type for Participants with 6 Complete Weeks</caption>
+<caption><span id="tab:unnamed-chunk-423"><strong> Table  12.1</strong><br/> </span>Hamilton Depression Scores Across Time, by Depression Type for Participants with 6 Complete Weeks</caption>
 <thead>
 <tr class="header">
 <th></th>
@@ -1159,7 +1159,7 @@ div.csl-indent {
 <span id="cb514-13"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb514-13" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>,</span>
 <span id="cb514-14"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb514-14" tabindex="-1"></a>                    <span class="at">caption =</span> <span class="st">&quot;Hamilton Depression Scores Across Time, by Depression Type for All Participants&quot;</span>)  </span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-418"><strong> Table  12.2</strong><br/> </span>Hamilton Depression Scores Across Time, by Depression Type for All Participants</caption>
+<caption><span id="tab:unnamed-chunk-424"><strong> Table  12.2</strong><br/> </span>Hamilton Depression Scores Across Time, by Depression Type for All Participants</caption>
 <thead>
 <tr class="header">
 <th></th>
@@ -1549,7 +1549,7 @@ div.csl-indent {
 <span id="cb517-7"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb517-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb517-8"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb517-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb517-9"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb517-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-421-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-427-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb518-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb518-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb518-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb518-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb518-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week,</span>
@@ -1559,7 +1559,7 @@ div.csl-indent {
 <span id="cb518-7"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb518-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb518-8"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb518-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb518-9"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb518-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-422-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-428-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb519-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb519-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb519-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb519-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb519-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week,</span>
@@ -1569,7 +1569,7 @@ div.csl-indent {
 <span id="cb519-7"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb519-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb519-8"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb519-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb519-9"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb519-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-423-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-429-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb520-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb520-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb520-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb520-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb520-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week <span class="sc">%&gt;%</span> <span class="fu">factor</span>(),</span>
@@ -1579,7 +1579,7 @@ div.csl-indent {
 <span id="cb520-7"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb520-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb520-8"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb520-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb520-9"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb520-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>)         </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-424-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-430-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb521-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb521-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb521-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb521-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb521-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week <span class="sc">%&gt;%</span> <span class="fu">factor</span>(),</span>
@@ -1593,7 +1593,7 @@ div.csl-indent {
 <span id="cb521-11"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb521-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb521-12"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb521-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb521-13"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb521-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>)          </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-425-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-431-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb522-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb522-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb522-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb522-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb522-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week,</span>
@@ -1610,7 +1610,7 @@ div.csl-indent {
 <span id="cb522-14"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb522-14" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb522-15"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb522-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb522-16"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb522-16" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-426-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-432-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb523-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb523-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb523-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb523-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb523-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week,</span>
@@ -1624,7 +1624,7 @@ div.csl-indent {
 <span id="cb523-11"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb523-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb523-12"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb523-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb523-13"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb523-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-427-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-433-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb524-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb524-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb524-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb524-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb524-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week,</span>
@@ -1643,7 +1643,7 @@ div.csl-indent {
 <span id="cb524-16"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb524-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
 <span id="cb524-17"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb524-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb524-18"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb524-18" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-428-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-434-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb525-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb525-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb525-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week,</span>
 <span id="cb525-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb525-3" tabindex="-1"></a>             <span class="at">y =</span> hamd,</span>
@@ -1661,7 +1661,7 @@ div.csl-indent {
 <span id="cb525-15"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb525-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb525-16"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb525-16" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Scale&quot;</span>,</span>
 <span id="cb525-17"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb525-17" tabindex="-1"></a>       <span class="at">linetype =</span> <span class="st">&quot;Type of Depression&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-429-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-435-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb526-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb526-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb526-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb526-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb526-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week,</span>
@@ -1680,7 +1680,7 @@ div.csl-indent {
 <span id="cb526-16"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb526-16" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb526-17"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb526-17" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;EsStimated Hamilton Depression Scale&quot;</span>,</span>
 <span id="cb526-18"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb526-18" tabindex="-1"></a>       <span class="at">linetype =</span> <span class="st">&quot;Type of Depression&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-430-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-436-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb527-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb527-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb527-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hamd)) <span class="sc">%&gt;%</span> </span>
 <span id="cb527-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb527-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week,</span>
@@ -1699,7 +1699,7 @@ div.csl-indent {
 <span id="cb527-16"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb527-16" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb527-17"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb527-17" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;EStimated Hamilton Depression Scale&quot;</span>,</span>
 <span id="cb527-18"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb527-18" tabindex="-1"></a>       <span class="at">linetype =</span> <span class="st">&quot;Type of Depression&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-431-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-437-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1783,7 +1783,7 @@ hamd_5   0.18   0.22   0.46   0.57   0.65   1.00</code></pre>
 <span id="cb538-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb538-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;hamd_&quot;</span>)) <span class="sc">%&gt;%</span> <span class="co"># just the outcome(s)</span></span>
 <span id="cb538-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb538-3" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>) <span class="sc">%&gt;%</span>   <span class="co"># correlation matrix</span></span>
 <span id="cb538-4"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb538-4" tabindex="-1"></a>  corrplot<span class="sc">::</span><span class="fu">corrplot.mixed</span>(<span class="at">upper =</span> <span class="st">&quot;ellipse&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-437-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-443-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="for-each-group" class="section level3 hasAnchor" number="12.3.3">
@@ -1797,7 +1797,7 @@ hamd_5   0.18   0.22   0.46   0.57   0.65   1.00</code></pre>
 <span id="cb539-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb539-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;hamd_&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb539-4"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb539-4" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>) <span class="sc">%&gt;%</span>   </span>
 <span id="cb539-5"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb539-5" tabindex="-1"></a>  corrplot<span class="sc">::</span><span class="fu">corrplot.mixed</span>(<span class="at">upper =</span> <span class="st">&quot;ellipse&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-438-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-444-1.png" width="576" style="display: block; margin: auto;" /></p>
 <blockquote>
 <p>Endogenous Depression</p>
 </blockquote>
@@ -1806,7 +1806,7 @@ hamd_5   0.18   0.22   0.46   0.57   0.65   1.00</code></pre>
 <span id="cb540-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb540-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;hamd_&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb540-4"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb540-4" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>) <span class="sc">%&gt;%</span>   </span>
 <span id="cb540-5"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb540-5" tabindex="-1"></a>  corrplot<span class="sc">::</span><span class="fu">corrplot.mixed</span>(<span class="at">upper =</span> <span class="st">&quot;ellipse&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-439-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-445-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="mlm---null-or-emptly-models" class="section level2 hasAnchor" number="12.4">
@@ -1861,7 +1861,7 @@ Reproduction of Hedeker’s table 4.3 on page 55, except using REML here instead
 <div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb543-1" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(fit_lmer_week_RI_reml,</span>
 <span id="cb543-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb543-2" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>,</span>
 <span id="cb543-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb543-3" tabindex="-1"></a>                   <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;week&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-441-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-447-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="estimated-marginal-means-and-emperical-bayes-plots" class="section level3 hasAnchor" number="12.4.4">
 <h3><span class="header-section-number">12.4.4</span> Estimated Marginal Means and Emperical Bayes Plots<a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-means-and-emperical-bayes-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1899,7 +1899,7 @@ Reproduction of Hedeker’s table 4.3 on page 55, except using REML here instead
 <span id="cb544-31"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb544-31" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb544-32"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb544-32" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb544-33"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb544-33" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-442-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-448-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Notice that in this model, all the BLUPs are parallel. That is because we are only letting the intercept vary from person-to-person while keeping the effect of time (slope) constant.</p>
 <blockquote>
 <p>Reproduce Table 4.4 on page 55 <span class="citation">(<a href="references.html#ref-hedeker2006">Hedeker and Gibbons 2006</a>)</span></p>
@@ -2178,7 +2178,7 @@ fit_lmer_week_RI_reml   |    1.63e-12 |            12.50%</code></pre>
 <div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb563-1" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(fit_lmer_week_RIAS_reml,</span>
 <span id="cb563-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb563-2" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>,</span>
 <span id="cb563-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb563-3" tabindex="-1"></a>                   <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;week&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-453-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-459-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Adding the random slopes didn’t change the estimates for the fixed effects much.</p>
 </div>
 <div id="estimated-marginal-means-and-emperical-bayes-plots-1" class="section level3 hasAnchor" number="12.5.4">
@@ -2216,7 +2216,7 @@ fit_lmer_week_RI_reml   |    1.63e-12 |            12.50%</code></pre>
 <span id="cb564-31"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb564-31" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb564-32"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb564-32" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb564-33"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb564-33" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-454-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-460-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>BLUPs are also refered to as <strong>Empirical Bayes Estimates</strong> and may be extracted from a model fit. In this cases there will be a specific intercept (<code>(Intercept)</code>) and time slope (<code>week</code>) for each individual or person (<code>id</code>).</p>
 <div id="fixed-effects-1" class="section level4 hasAnchor" number="12.5.4.1">
 <h4><span class="header-section-number">12.5.4.1</span> Fixed Effects<a href="mlm-longitudinal-hedeker-gibbons---depression.html#fixed-effects-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -2265,7 +2265,7 @@ fit_lmer_week_RI_reml   |    1.63e-12 |            12.50%</code></pre>
 <span id="cb571-12"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb571-12" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Week Change in Depression&quot;</span>,</span>
 <span id="cb571-13"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb571-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Baseline Depression Level&quot;</span>) <span class="sc">+</span></span>
 <span id="cb571-14"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb571-14" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-458-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-464-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -2376,7 +2376,7 @@ Hedeker table table 4.5 on page 58 and table 4.6 on page 61, except using REML h
 <span id="cb574-31"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb574-31" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb574-32"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb574-32" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb574-33"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb574-33" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Score (HD)&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-460-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-466-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>Again, centering time doesn’t change the interpretation at all, since there are no interactions.</strong></p>
 </div>
 </div>
@@ -2411,7 +2411,7 @@ Hedeker table table 4.5 on page 58 and table 4.6 on page 61, except using REML h
 <span id="cb576-11"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb576-11" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
 <span id="cb576-12"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb576-12" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>),</span>
 <span id="cb576-13"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb576-13" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">1.75</span>, <span class="st">&quot;cm&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-462-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-468-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="likelihood-ratio-test-1" class="section level3 hasAnchor" number="12.7.3">
 <h3><span class="header-section-number">12.7.3</span> Likelihood Ratio Test<a href="mlm-longitudinal-hedeker-gibbons---depression.html#likelihood-ratio-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -2583,7 +2583,7 @@ fit_lmer_week_RIAS_ml |       0.998 |            12.50%</code></pre>
 <div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb588-1" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(fit_lmer_quad_RIAS_ml,</span>
 <span id="cb588-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb588-2" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>,</span>
 <span id="cb588-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb588-3" tabindex="-1"></a>                   <span class="at">terms =</span> <span class="st">&quot;week&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-469-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-475-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>At the population level, the curviture is very slight.</p>
 </div>
 <div id="blups-or-emperical-bayes-estimates" class="section level3 hasAnchor" number="12.8.5">
@@ -2692,8 +2692,8 @@ fit_lmer_week_RIAS_ml |       0.998 |            12.50%</code></pre>
 <span id="cb592-21"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb592-21" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Scores (HD)&quot;</span>,</span>
 <span id="cb592-22"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb592-22" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Similar to Hedeker&#39;s Figure 5.3 on page 84&quot;</span>,</span>
 <span id="cb592-23"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb592-23" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Marginal Mean show in thicker blue</span><span class="sc">\n</span><span class="st">BLUPs for two of the participant in thinner black&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-472"></span>
-<img src="v5_mlm_files/figure-html/unnamed-chunk-472-1.png" alt="Two Example BLUPS for two different participants" width="576" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-478"></span>
+<img src="v5_mlm_files/figure-html/unnamed-chunk-478-1.png" alt="Two Example BLUPS for two different participants" width="576" />
 <p class="caption">
 <strong> Figure  12.1</strong><br/> Two Example BLUPS for two different participants
 </p>
@@ -2737,8 +2737,8 @@ fit_lmer_week_RIAS_ml |       0.998 |            12.50%</code></pre>
 <span id="cb593-32"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb593-32" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Weeks Since Baseline&quot;</span>,</span>
 <span id="cb593-33"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb593-33" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Hamilton Depression Scores&quot;</span>,</span>
 <span id="cb593-34"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb593-34" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Hedeker&#39;s Figure 5.4 on page 85&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-473"></span>
-<img src="v5_mlm_files/figure-html/unnamed-chunk-473-1.png" alt="EStimated curvilinear trends" width="576" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-479"></span>
+<img src="v5_mlm_files/figure-html/unnamed-chunk-479-1.png" alt="EStimated curvilinear trends" width="576" />
 <p class="caption">
 <strong> Figure  12.2</strong><br/> EStimated curvilinear trends
 </p>

@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</title>
+  <title>21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta property="og:title" content="21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/EQM_v1_cover.png" />
+  <meta property="og:image" content="/hexwall_books.png" />
   <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
   <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models" />
+  <meta name="twitter:title" content="21 GLMM, Count Outcome: Bolous | Encyclopedia of Quantitative Methods in R" />
   
   <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="twitter:image" content="/EQM_v1_cover.png" />
+  <meta name="twitter:image" content="/hexwall_books.png" />
 
 <meta name="author" content="Author: Sarah Schwartz, PhD" />
 
@@ -165,13 +165,13 @@ div.csl-indent {
 <li><a href="./">Vol. 5: Multilevel Models</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vol. 5: Multilevel &amp; Marginal Models</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html"><i class="fa fa-check"></i><b>1</b> What are MLM and Why do I care?</a>
 <ul>
@@ -823,7 +823,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 5: Multilevel Models</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R</a>
           </h1>
         </div>
 
@@ -1243,7 +1243,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1030-2"><a href="glmm-count-outcome-bolous.html#cb1030-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;time_&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1030-3"><a href="glmm-count-outcome-bolous.html#cb1030-3" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb1030-4"><a href="glmm-count-outcome-bolous.html#cb1030-4" tabindex="-1"></a>  corrplot<span class="sc">::</span><span class="fu">corrplot.mixed</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-767-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-773-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="visualize-6" class="section level3 hasAnchor" number="21.3.2">
@@ -1258,7 +1258,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1031-6"><a href="glmm-count-outcome-bolous.html#cb1031-6" tabindex="-1"></a>            <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
 <span id="cb1031-7"><a href="glmm-count-outcome-bolous.html#cb1031-7" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
 <span id="cb1031-8"><a href="glmm-count-outcome-bolous.html#cb1031-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-768-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-774-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb1032"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1032-1"><a href="glmm-count-outcome-bolous.html#cb1032-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb1032-2"><a href="glmm-count-outcome-bolous.html#cb1032-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
 <span id="cb1032-3"><a href="glmm-count-outcome-bolous.html#cb1032-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
@@ -1268,7 +1268,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1032-7"><a href="glmm-count-outcome-bolous.html#cb1032-7" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb1032-8"><a href="glmm-count-outcome-bolous.html#cb1032-8" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
 <span id="cb1032-9"><a href="glmm-count-outcome-bolous.html#cb1032-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-769-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-775-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1033-1"><a href="glmm-count-outcome-bolous.html#cb1033-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb1033-2"><a href="glmm-count-outcome-bolous.html#cb1033-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
 <span id="cb1033-3"><a href="glmm-count-outcome-bolous.html#cb1033-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
@@ -1279,7 +1279,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1033-8"><a href="glmm-count-outcome-bolous.html#cb1033-8" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb1033-9"><a href="glmm-count-outcome-bolous.html#cb1033-9" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
 <span id="cb1033-10"><a href="glmm-count-outcome-bolous.html#cb1033-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-770-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-776-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb1034"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1034-1"><a href="glmm-count-outcome-bolous.html#cb1034-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb1034-2"><a href="glmm-count-outcome-bolous.html#cb1034-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
 <span id="cb1034-3"><a href="glmm-count-outcome-bolous.html#cb1034-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
@@ -1292,7 +1292,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1034-10"><a href="glmm-count-outcome-bolous.html#cb1034-10" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb1034-11"><a href="glmm-count-outcome-bolous.html#cb1034-11" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
 <span id="cb1034-12"><a href="glmm-count-outcome-bolous.html#cb1034-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-771-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-777-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb1035"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1035-1"><a href="glmm-count-outcome-bolous.html#cb1035-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb1035-2"><a href="glmm-count-outcome-bolous.html#cb1035-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
 <span id="cb1035-3"><a href="glmm-count-outcome-bolous.html#cb1035-3" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">log</span>(count <span class="sc">+</span> .<span class="dv">1</span>))) <span class="sc">+</span></span>
@@ -1305,7 +1305,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1035-10"><a href="glmm-count-outcome-bolous.html#cb1035-10" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb1035-11"><a href="glmm-count-outcome-bolous.html#cb1035-11" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> group) <span class="sc">+</span> </span>
 <span id="cb1035-12"><a href="glmm-count-outcome-bolous.html#cb1035-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-772-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-778-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1036-1"><a href="glmm-count-outcome-bolous.html#cb1036-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb1036-2"><a href="glmm-count-outcome-bolous.html#cb1036-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, </span>
 <span id="cb1036-3"><a href="glmm-count-outcome-bolous.html#cb1036-3" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
@@ -1328,7 +1328,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1036-20"><a href="glmm-count-outcome-bolous.html#cb1036-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Type of Smoother&quot;</span>) <span class="sc">+</span></span>
 <span id="cb1036-21"><a href="glmm-count-outcome-bolous.html#cb1036-21" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
 <span id="cb1036-22"><a href="glmm-count-outcome-bolous.html#cb1036-22" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;cm&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-773-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-779-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="means-over-time-by-group" class="section level4 hasAnchor" number="21.3.2.2">
 <h4><span class="header-section-number">21.3.2.2</span> Means over Time, BY Group<a href="glmm-count-outcome-bolous.html#means-over-time-by-group" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1345,7 +1345,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1037-11"><a href="glmm-count-outcome-bolous.html#cb1037-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
 <span id="cb1037-12"><a href="glmm-count-outcome-bolous.html#cb1037-12" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Sample Mean Count&quot;</span>,</span>
 <span id="cb1037-13"><a href="glmm-count-outcome-bolous.html#cb1037-13" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-774-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-780-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb1038"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1038-1"><a href="glmm-count-outcome-bolous.html#cb1038-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb1038-2"><a href="glmm-count-outcome-bolous.html#cb1038-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group, timeF) <span class="sc">%&gt;%</span> </span>
 <span id="cb1038-3"><a href="glmm-count-outcome-bolous.html#cb1038-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">M =</span> <span class="fu">mean</span>(<span class="fu">log</span>(count <span class="sc">+</span> .<span class="dv">1</span>))) <span class="sc">%&gt;%</span> </span>
@@ -1359,7 +1359,7 @@ GLMM FAQ by: Ben Bolker and others
 <span id="cb1038-11"><a href="glmm-count-outcome-bolous.html#cb1038-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Four-week Intervals&quot;</span>,</span>
 <span id="cb1038-12"><a href="glmm-count-outcome-bolous.html#cb1038-12" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Sample Mean Count&quot;</span>,</span>
 <span id="cb1038-13"><a href="glmm-count-outcome-bolous.html#cb1038-13" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) </span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-775-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-781-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1945,7 +1945,7 @@ Number of clusters:   65  Maximum cluster size: 11 </code></pre>
 <div class="sourceCode" id="cb1067"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1067-1"><a href="glmm-count-outcome-bolous.html#cb1067-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_geeglm_ar,</span>
 <span id="cb1067-2"><a href="glmm-count-outcome-bolous.html#cb1067-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
 <span id="cb1067-3"><a href="glmm-count-outcome-bolous.html#cb1067-3" tabindex="-1"></a>                            <span class="at">modx =</span> group)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-787-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-793-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="predict-over-a-grid" class="section level4 hasAnchor" number="21.4.4.3">
 <h4><span class="header-section-number">21.4.4.3</span> Predict over a Grid<a href="glmm-count-outcome-bolous.html#predict-over-a-grid" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1987,7 +1987,7 @@ Number of clusters:   65  Maximum cluster size: 11 </code></pre>
 <span id="cb1070-13"><a href="glmm-count-outcome-bolous.html#cb1070-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Populaton Mean Count&quot;</span>,</span>
 <span id="cb1070-14"><a href="glmm-count-outcome-bolous.html#cb1070-14" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb1070-15"><a href="glmm-count-outcome-bolous.html#cb1070-15" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-789-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-795-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -2118,7 +2118,7 @@ mod_glmer_rias2    9 3968 4009  -1975      3950  0.14  2       0.93</code></pre>
 <div class="sourceCode" id="cb1082"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1082-1"><a href="glmm-count-outcome-bolous.html#cb1082-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_glmer_rias,</span>
 <span id="cb1082-2"><a href="glmm-count-outcome-bolous.html#cb1082-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
 <span id="cb1082-3"><a href="glmm-count-outcome-bolous.html#cb1082-3" tabindex="-1"></a>                            <span class="at">modx =</span> group)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-797-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-803-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="estimated-marginal-means" class="section level4 hasAnchor" number="21.5.4.2">
 <h4><span class="header-section-number">21.5.4.2</span> Estimated Marginal Means<a href="glmm-count-outcome-bolous.html#estimated-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -2162,7 +2162,7 @@ mod_glmer_rias2    9 3968 4009  -1975      3950  0.14  2       0.93</code></pre>
 <span id="cb1085-15"><a href="glmm-count-outcome-bolous.html#cb1085-15" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Dose&quot;</span>,</span>
 <span id="cb1085-16"><a href="glmm-count-outcome-bolous.html#cb1085-16" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Dose&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb1085-17"><a href="glmm-count-outcome-bolous.html#cb1085-17" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-799-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-805-1.png" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb1086"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1086-1"><a href="glmm-count-outcome-bolous.html#cb1086-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
 <span id="cb1086-2"><a href="glmm-count-outcome-bolous.html#cb1086-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">predict</span>(mod_glmer_rias,</span>
 <span id="cb1086-3"><a href="glmm-count-outcome-bolous.html#cb1086-3" tabindex="-1"></a>                              <span class="at">newdata =</span> .,</span>
@@ -2172,7 +2172,7 @@ mod_glmer_rias2    9 3968 4009  -1975      3950  0.14  2       0.93</code></pre>
 <span id="cb1086-7"><a href="glmm-count-outcome-bolous.html#cb1086-7" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
 <span id="cb1086-8"><a href="glmm-count-outcome-bolous.html#cb1086-8" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span> group) <span class="sc">+</span></span>
 <span id="cb1086-9"><a href="glmm-count-outcome-bolous.html#cb1086-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-800-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-806-1.png" width="576" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
