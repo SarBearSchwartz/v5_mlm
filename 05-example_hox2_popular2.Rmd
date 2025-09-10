@@ -20,7 +20,7 @@ Download/install a new GitHub package
 
 ```{r, eval=FALSE}
 install.packages("devtools")
-devtools::install_github("sarbearschwartz/apaSupp")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 9/10/2025
 ```
 
 Load/activate these packages
@@ -30,7 +30,6 @@ library(tidyverse)
 library(haven)        # read in SPSS dataset
 
 library(apaSupp)
-library(furniture)    # nice table1() descriptives
 library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
 
 library(psych)        # contains some useful functions, like headTail
@@ -119,8 +118,6 @@ Visual inspection reveals that most of the variables are measurements at level 1
 Most posters, journal articles, and reports start with a table of descriptive statistics. Since it tends to come first, this type of table is often refered to as *Table 1*. 
 
 
-
-
 ```{r, echo=FALSE, results='asis'}
 data_pop %>% 
   dplyr::select(sex,
@@ -131,20 +128,15 @@ data_pop %>%
 ```
 
 
-
-#### The `furniture` package
-
-Tyson Barrett's **furniture** package includes the extremely useful function `table1()` which simplifies the common task of creating a stratified, comparative table of descriptive statistics. Full documentation can be accessed by executing `?furniture::table1`.
-
-
 ```{r, eval = FALSE}
 data_pop %>% 
   dplyr::select(sex,
-                "Teacher Experience"  = texp, 
-                "Pupil Extroversion"   = extrav, 
-                "Pupil Popularity" = popular) %>% 
-  apaSupp::table1_apa(split = sex,
-                      caption    = "Compare genders on four main variables")
+                "Teacher Experience" = texp, 
+                "Pupil Extroversion" = extrav, 
+                "Pupil Popularity"   = popular) %>% 
+  apaSupp::tab1(split = "sex",
+                total_last = FALSE,
+                caption    = "Compare genders on four main variables")
 ```
 
 
@@ -200,19 +192,17 @@ data_pop %>%
 
 The argument could be made that the extroversion score should be treated as an ordinal factor instead of as a truly continuous scale since the only valid values are the whole number 1 through 10 and there is no assurance that these category assignments represent a true ratio measurement scale. However, we must keep in mind that this was an observational study, ans as such, the number of pupils assignment each level of extroversion is not equal.
 
-```{r test14}
-1+1
-```
+
 
 
 ```{r flextab2}
 # count the number of pupils in assigned each extroversion value, 1:10
 data_pop %>%
-group_by(extrav) %>%
-summarise(count = n_distinct(id),
-percent  = 100 * count / 2000) %>%
-flextable::flextable() %>%
-apaSupp::theme_apa(caption = "Distribution of extroversion in pupils")
+  dplyr::group_by(extrav) %>%
+  dplyr::summarise(Count = n_distinct(id),
+                   Percent  = 100 * Count / 2000) %>%
+  flextable::flextable() %>%
+  apaSupp::theme_apa(caption = "Distribution of extroversion in pupils")
 ```
 
 
@@ -247,9 +237,6 @@ ggplot(data_pop,                        # dataset's name
 
 Up to this point, all investigation of this dataset has been only at the pupil level and any nesting or clustering within classes has been ignored. Plotting is a good was to start to get an idea of the class-to-class variability.
 
-```{r test17}
-1+1
-```
 
 ```{r scatter3x3, fig.cap="Illustration of the degree of class level variability in the association between extroversion and popularity. Each panel represents a class and each point a pupil in that class.  First nice classes shown."}
 # compare the first 9 classrooms becuase all of there are too many at once
@@ -313,10 +300,6 @@ data_pop %>%
   scale_y_continuous(breaks = seq(from = 0, to = 10, by = 2))   # y-ticks
 ```
 
-```{r test21}
-1+1
-```
-
 
 ```{block type='rmdlink', echo=TRUE}
 A helpful resource for choosing colors to use in plots: [R color cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf)
@@ -359,8 +342,8 @@ data_pop %>%
 **Single-Level Regression Equation - Null Model**
 $$
 \overbrace{POP_{ij}}^{Outcome} = 
-         \underbrace{\beta_{0}}_{\text{Fixed}\atop\text{intercept}}  + 
-         \underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}} 
+\underbrace{\beta_{0}}_{\text{Fixed}\atop\text{intercept}}  + 
+\underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}} 
 $$
 ```
 
@@ -384,7 +367,7 @@ $\hat{\beta_0}$ = `r coef(pop_lm_0) %>% round(2)` is the grand mean
 
 ```{r}
 pop_glm_0 <- glm(popular ~ 1,        #  The 1 represents the intercept
-               data = data_pop) 
+                 data = data_pop) 
 
 summary(pop_glm_0)
 ```
@@ -450,10 +433,10 @@ var(data_pop$popular)
 **Single-Level Regression Equation** 
 $$
 \overbrace{POP_{ij}}^{Outcome} = 
-         \underbrace{\beta_{0}}_{\text{Fixed}\atop\text{intercept}}  + 
-         \underbrace{\beta_{1}}_{\text{Fixed}\atop\text{slope}} \overbrace{GEN_{ij}}^{\text{Predictor 1}}  + 
-         \underbrace{\beta_{2}}_{\text{Fixed}\atop\text{slope}} \overbrace{EXT_{ij}}^{\text{Predictor 2}} + 
-         \underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}} 
+\underbrace{\beta_{0}}_{\text{Fixed}\atop\text{intercept}}  + 
+\underbrace{\beta_{1}}_{\text{Fixed}\atop\text{slope}} \overbrace{GEN_{ij}}^{\text{Predictor 1}}  + 
+\underbrace{\beta_{2}}_{\text{Fixed}\atop\text{slope}} \overbrace{EXT_{ij}}^{\text{Predictor 2}} + 
+\underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}} 
 \tag{Hox 2.1}
 $$
 ```
@@ -478,7 +461,7 @@ summary(pop_lm_1)
 
 ```{r}
 pop_glm_1 <- glm(popular ~ sex + extrav,    # implies: 1 + sex + extrav
-               data = data_pop) 
+                 data = data_pop) 
 
 summary(pop_glm_1)
 ```
@@ -541,17 +524,12 @@ On average, girls were rated `r coef(pop_lm_1)[2] %>% round(2)` points more popu
 
 Create a table to compare the two nested models:
 
-```{r, results='asis'}
-texreg::knitreg(list(pop_glm_0, 
-                     pop_glm_1),
-                custom.model.names = c("Null Model",
-                                       "With Predictors"),
-                caption            = "Single Level Models: ML with the `glm()` function",
-                caption.above      = TRUE,
-                single.row         = TRUE,
-                bold = TRUE,
-                label = "wow")
+```{r}
+apaSupp::tab_lms(list("Null Model"     = pop_lm_0, 
+                      "With Predictors" = pop_lm_1),
+                 caption = "Single Level Models: ML with the `glm()` function")
 ```
+
 
 
 
@@ -563,9 +541,6 @@ When comparing the fit of two single-level models fit via the `lm()` function, t
 anova(pop_lm_0, pop_lm_1)
 ```
 
-```{r}
-anova(pop_glm_0, pop_glm_1)
-```
 
 Obviously the model with predictors fits better than the model with no predictors.
 
@@ -625,49 +600,6 @@ deviance(pop_lm_0)  # returns the RSS, not deviance = -2LL
 
 
 
-
-
-```{r, include=FALSE}
-pop_lm_2  <- lm(popular ~ sex + extrav*texp, 
-                data = data_pop)
-summary(pop_lm_2)
-```
-
-```{r, include=FALSE}
-interactions::interact_plot(model = pop_lm_2,
-                            pred = extrav,
-                            modx = texp,
-                            mod2 = sex) +
-  theme_bw()
-```
-
-
-
-```{r, include=FALSE}
-interactions::interact_plot(model = pop_lm_2,
-                            pred = extrav,
-                            modx = texp,
-                            modx.values = c(5, 15, 25),
-                            mod2 = sex,
-                            legend.main = "Teacher\nExperience",
-                            interval = TRUE) +
-  theme_bw() +
-  labs(x = "Pupil Extroversion",
-       y = "Estimated Mean Pupil Popularity")
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Multi-level Regression Analysis
 
 ### Intercept-only or Null Model
@@ -675,7 +607,7 @@ interactions::interact_plot(model = pop_lm_2,
 > In a Null, intercept-only, or Empty model, no predictors are included.
 
 ```{block type='rmdlightbulb', echo=TRUE}
- "The intercept-only model is useful as a null-model that serves as a benchmark with which other models are compared." @hox2017, page 13
+"The intercept-only model is useful as a null-model that serves as a benchmark with which other models are compared." @hox2017, page 13
 ```
 
 #### Equations
@@ -684,8 +616,8 @@ interactions::interact_plot(model = pop_lm_2,
 
 $$
 \overbrace{Y_{ij}}^{Outcome} = 
-         \underbrace{\beta_{0j}}_{\text{Level 2}\atop\text{intercepts}}  + 
-         \underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}}
+\underbrace{\beta_{0j}}_{\text{Level 2}\atop\text{intercepts}}  + 
+\underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}}
 \tag{Hox 2.6}
 $$
 
@@ -693,8 +625,8 @@ $$
 
 $$
 \overbrace{\beta_{0j}}^{\text{Level 2}\atop\text{intercepts}} = 
-      \underbrace{\gamma_{00}}_{\text{Fixed}\atop\text{intercept}} + 
-      \underbrace{u_{0j}}_{\text{Random}\atop\text{intercepts}}
+\underbrace{\gamma_{00}}_{\text{Fixed}\atop\text{intercept}} + 
+\underbrace{u_{0j}}_{\text{Random}\atop\text{intercepts}}
 \tag{Hox 2.7}
 $$
 
@@ -704,9 +636,9 @@ Substitute equation (2.7) into equation (2.6):
 **Combined, Multilevel Model Equation - Null Model**
 $$ 
 \overbrace{Y_{ij}}^{Outcome} = 
-    \underbrace{\gamma_{00}}_{\text{Fixed}\atop\text{intercept}} + 
-    \underbrace{u_{0j}}_{\text{Random}\atop\text{intercepts}} + 
-    \underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}}
+\underbrace{\gamma_{00}}_{\text{Fixed}\atop\text{intercept}} + 
+\underbrace{u_{0j}}_{\text{Random}\atop\text{intercepts}} + 
+\underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}}
 \tag{Hox 2.8}
 $$
 ```
@@ -726,9 +658,9 @@ $$
 **Combined, Multilevel Model Equation - Popularity,** Random Intercepts Only!
 $$ 
 \overbrace{POP_{ij}}^{Outcome} = 
-    \underbrace{\gamma_{00}}_{\text{Fixed}\atop\text{intercept}} + 
-    \underbrace{u_{0j}}_{\text{Random}\atop\text{intercepts}} + 
-    \underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}}
+\underbrace{\gamma_{00}}_{\text{Fixed}\atop\text{intercept}} + 
+\underbrace{u_{0j}}_{\text{Random}\atop\text{intercepts}} + 
+\underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}}
 \tag{M0: intercept only}
 $$
 
@@ -746,19 +678,27 @@ pop_lmer_0_re <- lmerTest::lmer(popular ~ 1 + (1|class),  # include a fixed and 
 summary(pop_lmer_0_re)
 ```
 
+```{r}
+apaSupp::tab_lmer(pop_lmer_0_re,
+                  caption = "Null Model: No predictors")
+```
+
+
+
+
 ```{block type='rmdimportant', echo=TRUE}
 **Estimation Methods**
 
 Multilevel models may be fit by various methods.  The most commonly used (and availabel in 'lme4') optimize various criterions: Maximum Likelihood *(ML)* -or- Restricted Maximum Likelihood *(REML)*.  @hox2017 discusses these and other methods in chapter 3.  At the end of chapter 2, the authors' second note staes that the details of estimation methods are glossed over in the current example in an effort to simplfy the introductory.  Here we follow these guidelines:
 
 * Use **ML** for fitting:
-    + nested models that differ only by inclusion/exclusion of FIXED effects, to test parameter significance via a likelihood ratio test   
-    
++ nested models that differ only by inclusion/exclusion of FIXED effects, to test parameter significance via a likelihood ratio test   
+
 * Use **REML** for fitting: 
-    + the NULL model, on which to base ICC calculations
-    + nested models that differ only by inclusion/exclusion of RANDOM effects, to test parameter significance via a likelihood ratio test   
-    + the FINAL model
-    
++ the NULL model, on which to base ICC calculations
++ nested models that differ only by inclusion/exclusion of RANDOM effects, to test parameter significance via a likelihood ratio test   
++ the FINAL model
+
 This often leads to refitting identical models via BOTH estimation methods.    
 ```
 
@@ -775,7 +715,7 @@ Although the Null model above does not explain any variance in the dependent var
 $$
 \overbrace{\rho}^{\text{ICC}} = 
 \frac{\overbrace{\sigma^2_{u0}}^{\text{Random Intercept}\atop\text{Variance}}}
-     {\underbrace{\sigma^2_{u0}+\sigma^2_{e}}_{\text{Total}\atop\text{Variance}}}
+{\underbrace{\sigma^2_{u0}+\sigma^2_{e}}_{\text{Total}\atop\text{Variance}}}
 \tag{Hox 2.9}
 $$
 
@@ -811,14 +751,14 @@ Calculate the ICC by hand:
 
 $$
 \overbrace{\rho}^{\text{ICC}} 
-     = 
+= 
 \frac{\overbrace{\sigma^2_{u0}}^{\text{Random Intercept}\atop\text{Variance}}}
-     {\underbrace{\sigma^2_{u0}+\sigma^2_{e}}_{\text{Total}\atop\text{Variance}}} 
-     = \frac{0.702}
-            {0.702+1.222} 
-     = \frac{0.702}
-            {1.924}
-     = 0.3648649
+{\underbrace{\sigma^2_{u0}+\sigma^2_{e}}_{\text{Total}\atop\text{Variance}}} 
+= \frac{0.702}
+{0.702+1.222} 
+= \frac{0.702}
+{1.924}
+= 0.3648649
 $$
 
 ```{r}
@@ -826,10 +766,6 @@ $$
 ```
 
 #### The `performance` package
-
-```{r}
-citation("performance")
-```
 
 Calculate the **ICC** with the `icc()` function in the `performance` package:
 
@@ -859,6 +795,10 @@ performance::r2(pop_lmer_0_re)  # for MLM's it computes Nakagawa's R2
 performance::performance(pop_lmer_0_re)
 ```
 
+
+
+
+
 ### Add Predictors to the Model
 
 [@hox2017] labeled this as "$M_1$" in chapter 2 for their Table 2.1 (page 14), but adjusted it for Tables 2.2 (page 15) and 2.3 (page 17).
@@ -880,12 +820,12 @@ Include main effects for `sex` and `extrav`
 
 $$
 \overbrace{POP_{ij}}^{Outcome} = 
-    \underbrace{\beta_{0j}}_{\text{Level 2}\atop\text{intercept}} + 
-    \underbrace{\beta_{1j}}_{\text{Level 2}\atop\text{slopes}} 
-    \overbrace{GEN_{ij}}^{\text{Level 1}\atop\text{Predictor 1}} + 
-    \underbrace{\beta_{2j}}_{\text{Level 2}\atop\text{slopes}} 
-    \overbrace{EXT_{ij}}^{\text{Level 1}\atop\text{Predictor 2}} + 
-    \underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}}
+\underbrace{\beta_{0j}}_{\text{Level 2}\atop\text{intercept}} + 
+\underbrace{\beta_{1j}}_{\text{Level 2}\atop\text{slopes}} 
+\overbrace{GEN_{ij}}^{\text{Level 1}\atop\text{Predictor 1}} + 
+\underbrace{\beta_{2j}}_{\text{Level 2}\atop\text{slopes}} 
+\overbrace{EXT_{ij}}^{\text{Level 1}\atop\text{Predictor 2}} + 
+\underbrace{e_{ij}}_{\text{Random}\atop\text{residuals}}
 $$
 
 **Level 2 Model Equations:**
@@ -898,26 +838,26 @@ We will assume this is due to some theoretical reasoning to be our starting poin
 
 $$
 \overbrace{\beta_{0j}}^{\text{Level 2}\atop\text{intercepts}} = 
-     \underbrace{\gamma_{00}}_{\text{Fixed}\atop\text{intercept}}  + 
-     \underbrace{\gamma_{01}}_{\text{Fixed}\atop\text{slope } Z}
-     \overbrace{YRS_{j}}^{\text{Level 2}\atop\text{Predictor 3}}  + 
-     \underbrace{u_{0j}}_{\text{Intercept}\atop\text{residual}} 
+\underbrace{\gamma_{00}}_{\text{Fixed}\atop\text{intercept}}  + 
+\underbrace{\gamma_{01}}_{\text{Fixed}\atop\text{slope } Z}
+\overbrace{YRS_{j}}^{\text{Level 2}\atop\text{Predictor 3}}  + 
+\underbrace{u_{0j}}_{\text{Intercept}\atop\text{residual}} 
 $$
 
 -   Random Slopes, for the first predictor, `sex`:
 
 $$
 \overbrace{\beta_{1j}}^{\text{Level 2}\atop\text{slopes}} = 
-     \underbrace{\gamma_{10}}_{\text{Fixed}\atop\text{Slope  } X_1}  + 
-     \underbrace{u_{1j}}_{\text{Slope } X_1\atop\text{residual}} 
+\underbrace{\gamma_{10}}_{\text{Fixed}\atop\text{Slope  } X_1}  + 
+\underbrace{u_{1j}}_{\text{Slope } X_1\atop\text{residual}} 
 $$
 
 -   Random Slopes, for the second predictor, `extrav`:
 
 $$
 \overbrace{\beta_{2j}}^{\text{Level 2}\atop\text{slopes}} = 
-     \underbrace{\gamma_{20}}_{\text{Fixed}\atop\text{Slope  } X_2}  + 
-     \underbrace{u_{2j}}_{\text{Slope } X_2\atop\text{residual}} 
+\underbrace{\gamma_{20}}_{\text{Fixed}\atop\text{Slope  } X_2}  + 
+\underbrace{u_{2j}}_{\text{Slope } X_2\atop\text{residual}} 
 $$
 
 Substitute the level 2 equations into the level 1 equation:
@@ -926,11 +866,11 @@ Substitute the level 2 equations into the level 1 equation:
 **Combined, Multilevel Model Equation - Popularity,** Include Predictors (no cross-level interactions)
 $$
 \overbrace{POP_{ij}}^{Outcome}
-        = \overbrace{\gamma_{00} + 
-                      \gamma_{10} GEN_{ij} + 
-                      \gamma_{20} EXT_{ij} + 
-                      \gamma_{01} YRS_{j}}^{\text{Fixed part}\atop\text{Deterministic}} + \\
-         \underbrace{u_{0j} + u_{1j} GEN_{ij} + u_{2j} EXT_{ij} + e_{ij} }_{\text{Random part}\atop\text{Stochastic}}
+= \overbrace{\gamma_{00} + 
+\gamma_{10} GEN_{ij} + 
+\gamma_{20} EXT_{ij} + 
+\gamma_{01} YRS_{j}}^{\text{Fixed part}\atop\text{Deterministic}} + \\
+\underbrace{u_{0j} + u_{1j} GEN_{ij} + u_{2j} EXT_{ij} + e_{ij} }_{\text{Random part}\atop\text{Stochastic}}
 \tag{M1}
 $$
 ```
@@ -993,21 +933,15 @@ After accounting for the heiarchical nesting of students in classes, girls were 
 
 Reproduce Table 2.1 on the top of page 14 [@hox2017]
 
-```{r, results='asis'}
-texreg::knitreg(list(pop_lm_0, 
-                     pop_glm_0,
-                     pop_lmer_0_ml, 
-                     pop_lmer_1_ml),
-                custom.model.names = c("Single-level, OLS", 
-                                       "Single-level, ML",
-                                       "M0: int only", 
-                                       "M1: w pred"),
-                caption            = "Hox Table 2.1 on the top of page 14",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("M0: intercept only" = pop_lmer_0_ml, 
+                        "M1: w/predictors" = pop_lmer_1_ml),
+                   var_labels = c("sex" = "Pupil Gender",
+                                  "extrav" = "Pupil Extraversion",
+                                  "texp" = "Teacher Experience"),
+                   general_note = "Covariances included here but left off in the book.")
 ```
 
-The regression tables from the `texreg` package include estimates of the covariances between random components.
 
 > "These covarianes are rarely interpreted *(for an exception see Chapter 5 and Chapter 16 where growth models are discussed)*, and for that reason they are often not included in the reported tables. However, as Table 2.2 demonstrates, they can be quite large adn significant, so as a rule they are always included in the model."
 >
@@ -1064,13 +998,26 @@ Create a table to compare the three nested models:
 
 The middle column below reproduces Hox's Table 2.2 found on the bottom of page 15 [@hox2017], except the values differ slightly becuase here the model was fit via `REML` where as in the text, Hox used `ML`.
 
-```{r, results='asis'}
-texreg::knitreg(list(pop_lmer_1_re, pop_lmer_1a_re, pop_lmer_1b_re),
-                custom.model.names = c("M1", "M1a", "M1b"),
-                caption            = "Assessing Significance of Random Slopes",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("M1\nAll"  = pop_lmer_1_re,
+                        "M1a\nNon-zero" = pop_lmer_1a_re,
+                        "M1b\nNone" = pop_lmer_1b_re),
+                   narrow = TRUE,
+                   caption = "Assessing Significance of Random Slopes",
+                   general_note = "Models all include the same fixed effects, but differ by inclusing of random slopes.")
 ```
+
+```{r}
+apaSupp::tab_lmer_fits(list("M1: All"  = pop_lmer_1_re,
+                            "M1a: Non-zero" = pop_lmer_1a_re,
+                            "M1b: None" = pop_lmer_1b_re),
+                       caption = "Compare Fit of Models Differing in Inclusion of Random Slopes",
+                       general_note = "These models all include the same fixed effects, but differ by inclusing of random slopes.")
+```
+
+
+
+
 
 #### Compare Fit
 
@@ -1086,13 +1033,13 @@ When comparing the fit of two multi-level models fit via the `lmer()` function, 
 When using the 'anova()' function to conduct a LRT for RANDOM effects, make sure:
 
 1. the nested models have identical FIXED effects
-  + never test models that differ in fixed and random effects at the same time
++ never test models that differ in fixed and random effects at the same time
 
 2. the models were fit with 'REML = TRUE'
-  +  this results in the best variance/covariance component estimation
-  
++  this results in the best variance/covariance component estimation
+
 2. add the 'refit = FALSE' option to the 'anova()' call
-  + without this $R$ re-runs the models with 'REML = FALSE' for you
++ without this $R$ re-runs the models with 'REML = FALSE' for you
 
 ```
 
@@ -1126,12 +1073,12 @@ We have already seen formulas of this form for a NULL or emply models, as well a
 
 -   intercept only
 
-    -   `Y ~ 1`
+-   `Y ~ 1`
 
 -   intercept implied
 
-    -   `Y ~ A` = `Y ~ 1 + A`
-    -   `Y ~ A + B` = `Y ~ 1 + A + B`
+-   `Y ~ A` = `Y ~ 1 + A`
+-   `Y ~ A + B` = `Y ~ 1 + A + B`
 
 ```{block type='rmdlightbulb', echo=TRUE}
 **Including Interactions in Formulas**
@@ -1173,32 +1120,30 @@ pop_lmer_4_ml  <- lmerTest::lmer(popular ~ extrav*texp*sex + (extrav|class),
                                  data = data_pop,
                                  REML = FALSE,
                                  control = lmerControl(optimizer ="Nelder_Mead"))
-                                 
 ```
 
 Create a table to compare the two nested models:
 
-```{r, results='asis'}
-texreg::knitreg(list(pop_lmer_1a_ml, pop_lmer_2_ml),
-                custom.model.names = c("M1a: Main Effects",
-                                       "M2: With Interaction"),
-                caption            = "Hox Table 2.3 on page 17",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("M1a\nMain Effects"    = pop_lmer_1a_ml,
+                        "M2\nWith Interaction" = pop_lmer_2_ml),
+                   caption = "Hox Table 2.3 on page 17",
+                   general_note = "These models all include the same random effects, but differ by inclusion of fixed effects.")
 ```
+
 
 Investigate further interactions, not shown in by [@hox2017].
 
-```{r, results='asis'}
-texreg::knitreg(list(pop_lmer_1a_ml, pop_lmer_2_ml, pop_lmer_3_ml, pop_lmer_4_ml),
-                custom.model.names = c("M1a: Main Effects",
-                                       "M2: With Interaction",
-                                       "Add 2-way Inter",
-                                       "Add 3-way Interaction"),
-                caption            = "Hox Table 2.3 on page 17",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("M1a: Main Effects"     = pop_lmer_1a_ml,
+                        "M2: With Interaction"  = pop_lmer_2_ml,
+                        "Add 2-way Inter"       = pop_lmer_3_ml,
+                        "Add 3-way Interaction" = pop_lmer_4_ml),
+                   narrow = TRUE,
+                   caption = "Hox Table 2.3 on page 17")
 ```
+
+
 
 #### Compare Fit
 
@@ -1223,12 +1168,12 @@ anova(pop_lmer_2_ml, pop_lmer_4_ml)
 The significance likelihood ratio test (LRT: $\chi^2(3) = 3.36$, $p=.339$) conveys that the more complex model does NOT fit the data better. Thus the more SIMPLE model does just as good of a job. This is evidence for the EXCLUSION of the additional 3-way interactions as a fixed components.
 
 ```{r}
-performance::compare_performance(pop_lmer_1a_ml, 
-                                 pop_lmer_2_ml,
-                                 pop_lmer_3_ml,
-                                 pop_lmer_4_ml,
-                                 rank = TRUE)
+apaSupp::tab_lmer_fits(list(pop_lmer_1a_ml, 
+                            pop_lmer_2_ml,
+                            pop_lmer_3_ml,
+                            pop_lmer_4_ml))
 ```
+
 
 ### Final Model
 
@@ -1242,13 +1187,21 @@ pop_lmer_2_re  <- lmerTest::lmer(popular ~ sex + extrav*texp + (extrav|class),
 
 #### Parameter Summary Table
 
-```{r, results='asis'}
-texreg::knitreg(list(pop_lmer_2_re),
-                custom.model.names = c("Final Model"),
-                caption            = "MLM for Popularity",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+
+```{r}
+apaSupp::tab_lmer(pop_lmer_2_re,
+                  var_labels = c(sex = "Pupil Gender",
+                                 extrav = "Pupil Extraversion",
+                                 texp = "Teacher Experience",
+                                 "extrav * texp" = "Extrav X Exp",
+                                 "class.var__(Intercept)" = "Var: Class Means",
+                                 "class.cov__(Intercept).extrav" = "Covar: Class Means X Extrav",
+                                 "class.var__extrav" = "Var: Class Exrav",
+                                 "Residual.var__Observation" = "Var: Residual"),
+                  caption = "MLM for Popularity")
 ```
+
+
 
 #### Visualization - `interactions` package
 
