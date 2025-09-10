@@ -28,17 +28,11 @@ Load/activate these packages
 ```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
 library(tidyverse)
 library(haven)        # read in SPSS dataset
-
-library(apaSupp)
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-
+library(apaSupp)      # Tables
 library(psych)        # contains some useful functions, like headTail
 library(car)          # Companion to Applied Regression
-
 library(lme4)         # Linear, generalized linear, & nonlinear mixed models
 library(lmerTest)     # Tests on lmer objects
-library(glmmTMB)
-
 library(performance)  # icc and r-squared functions **NEWER**
 library(interactions) # interaction plots **NEWER**
 ```
