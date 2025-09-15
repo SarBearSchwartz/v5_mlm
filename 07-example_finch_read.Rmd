@@ -15,15 +15,12 @@ knitr::opts_chunk$set(comment     = "",
 ```{r, message=FALSE, error=FALSE}
 library(tidyverse)    # all things tidy
 library(haven)        # read in SPSS dataset
-library(furniture)    # nice table1() descriptives
-library(stargazer)    # display nice tables: summary & regression
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
 library(psych)        # contains some useful functions, like headTail
 library(performance)  # ICC and R2 calculations
 library(effects)      # Effects for regression models
 library(optimx)       # Different optimizers to solve mlm's
 library(lme4)         # non-linear mixed-effects models
-library(haven)        # read in SPSS dataset
+library(lmerTest)        
 ```
 
 
@@ -146,66 +143,26 @@ num_subjects
 
 ### Summarize Descriptive Statistics
 
-#### The `stargazer` package
-
-Most posters, journal articles, and reports start with a table of descriptive statistics.  Since it tends to come first, this type of table is often refered to as Table 1.  The `stargazer()` function can be used to create such a table, but only for the entire dataset.  I haven't been able to find a way to get it to summarize subsamples and compare them in the standard format.  Also, it only summarises continuous, not categorical variables.
-
-```{r eval = FALSE}
-# Knit to Website: type = "html" 
-# Knit to PDF:     type = "latex"
-# View on Screen:  type = "text"
-
+```{r}
 data_achieve %>% 
   dplyr::select(classize, gender, geread, gevocab, age, ses, senroll) %>% 
-  data.frame() %>% 
-  stargazer::stargazer(header = FALSE,
-                      title = "Summary of the numeric variables with `stargazer`",
-                       type = "text")
+  apaSupp::tab_desc(caption = "Summary of the numeric variables")
 ```
 
-```{r sumtable0, echo=FALSE,results='asis'}
+
+
+```{r}
 data_achieve %>% 
-  dplyr::select(classize, gender, geread, gevocab, age, ses, senroll) %>% 
-  data.frame() %>% 
-  stargazer::stargazer(header = FALSE,
-                      title = "Summary of the numeric variables with `stargazer`",
-                       type = "html")
+  dplyr::select(gender,
+                "Reading Score"       = geread, 
+                "Vocabulary Score"    = gevocab, 
+                "Age (in months)"     = age, 
+                "School SES"          = ses, 
+                "School's Enrollment" = senroll) %>% 
+  apaSupp::tab1(split = "gender",
+                caption = "Summary by Gender")
 ```
 
-
-#### The `furniture` package
-
-Tyson Barrett's **furniture** package includes the extremely useful function `table1()` which simplifies the common task of creating a stratified, comparative table of descriptive statistics.  Full documentation can be accessed by executing `?furniture::table1`.
-
-```{r, eval=FALSE}
-# Knit to Website: output = "html" 
-# Knit to PDF:     output = "latex2"
-# View on Screen:  output = ""text", or "markdown", "html"
-
-data_achieve %>% 
-  furniture:: table1("Reading Score"       = geread, 
-                     "Vocabulary Score"    = gevocab, 
-                     "Age (in months)"     = age, 
-                     "School SES"          = ses, 
-                     "School's Enrollment" = senroll,
-                     splitby   = ~ gender,                                        # var to divide sample by
-                     test      = TRUE,                                            # test groups different?
-                     caption   = "Summary of the numeric variables with `table1`", 
-                     output    = "html")
-```
-
-```{r sumtable1, echo=FALSE, output="asis"}
-data_achieve %>% 
-  furniture:: table1("Reading Score"       = geread, 
-                     "Vocabulary Score"    = gevocab, 
-                     "Age (in months)"     = age, 
-                     "School SES"          = ses, 
-                     "School's Enrollment" = senroll,
-                     splitby   = ~ gender,                                        # var to divide sample by
-                     test      = TRUE,                                            # test groups different?
-                     caption   = "Summary of the numeric variables with `table1`", 
-                     output    = "html")
-```
 
 
 ### Visualization of Raw Data
@@ -316,20 +273,15 @@ fit_read_lm_3 <- lm(formula = geread ~ gevocab*age,    # interation+main effects
 
 Now compare the models:
 
-
-```{r regLM, results='asis'}
-texreg::knitreg(list(fit_read_lm_0, 
-                     fit_read_lm_1, 
-                     fit_read_lm_2, 
-                     fit_read_lm_3),
-                custom.model.names = c("Null",
-                                       "1 IV",
-                                       "2 IV",
-                                       "Interaction"),
-                caption            = "OLS: Investigate Fixed, Pupil-level Predictors",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lms(list("Null" = fit_read_lm_0,
+                      "1 IV" = fit_read_lm_1,
+                      "2 IV" = fit_read_lm_2,
+                      "Interaction" = fit_read_lm_3),
+                 narrow = TRUE,
+                 caption = "OLS: Investigate Fixed, Pupil-level Predictors")
 ```
+
 
 
 Assess the significance of terms in the last 'best' model
@@ -422,30 +374,27 @@ A so called *Empty Model* only includes random intercepts.  No independent varia
 ### Fit the Model
 
 ```{r}
-fit_read_0ml <- lme4::lmer(geread ~ 1 + (1|school), 
-                           data = data_achieve,
-                           REML = FALSE)                  # fit via ML (not the default)
+fit_read_0ml <- lmerTest::lmer(geread ~ 1 + (1|school), 
+                               data = data_achieve,
+                               REML = FALSE)                  # fit via ML (not the default)
 
-fit_read_0re <- lme4::lmer(geread ~ 1 + (1|school) , 
-                           data = data_achieve,
-                           REML = TRUE)                   # fit = REML (the default)
+fit_read_0re <- lmerTest::lmer(geread ~ 1 + (1|school) , 
+                               data = data_achieve,
+                               REML = TRUE)                   # fit = REML (the default)
 ```
 
 
 Compare the two models to OLS:
 
-
-```{r mlmNull, results='asis'}
-texreg::knitreg(list(fit_read_lm_0, 
-                     fit_read_0ml, 
-                     fit_read_0re),
-                custom.model.names = c("OLS", 
-                                       "MLM-ML", 
-                                       "MLM-REML"),
-                caption            = "MLM: NULL Model,two estimation methods",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("MLM-ML"   = fit_read_0ml, 
+                        "MLM-REML" = fit_read_0re),
+                   caption = "MLM: NULL Model,two estimation methods")
 ```
+
+
+
+
 
 Notice that the estimate for the intercept is nearly the same in the linear regression and intercept only models, but the standard errors are quite different.  When there is clustering in sample, the result of ignoring it is under estimation of the standard errors and over stating the significance of associations.  This table was made with the `screenreg()` function in the self named package.  I tend to prefer this display over `stargazer()`.
 
@@ -482,7 +431,7 @@ $$
 $$
 \overbrace{\rho}^{\text{ICC}} = 
 \frac{\overbrace{\sigma^2_{u0}}^{\text{Random Intercept}\atop\text{Variance}}}
-     {\underbrace{\sigma^2_{u0}+\sigma^2_{e}}_{\text{Total}\atop\text{Variance}}}
+{\underbrace{\sigma^2_{u0}+\sigma^2_{e}}_{\text{Total}\atop\text{Variance}}}
 \tag{Hox 2.9}
 $$
 ```
@@ -524,26 +473,23 @@ Fixed effects selection should come **prior** to random effects.  You should use
 ### Add pupil's vocab score as a fixed effects predictor
 
 ```{r}
-fit_read_1ml <- lme4::lmer(geread ~ gevocab + (1|school), 
-                           data = data_achieve,
-                           REML = FALSE)            # to compare fixed var sig
+fit_read_1ml <- lmerTest::lmer(geread ~ gevocab + (1|school), 
+                               data = data_achieve,
+                               REML = FALSE)            # to compare fixed var sig
 
-fit_read_1re <- lme4::lmer(geread ~ gevocab + (1|school), 
-                           data = data_achieve,
-                           REML = TRUE)             # for R-sq calcs
+fit_read_1re <- lmerTest::lmer(geread ~ gevocab + (1|school), 
+                               data = data_achieve,
+                               REML = TRUE)             # for R-sq calcs
+```
+
+```{r}
+apaSupp::tab_lmers(list("Null"   = fit_read_0ml,
+                        "w/Pred" = fit_read_1ml),
+                   caption = "MLM: Investigate a Fixed Pupil-level Predictor")
 ```
 
 
 
-```{r, results='asis'}
-texreg::knitreg(list(fit_read_0ml, 
-                     fit_read_1ml),
-                custom.model.names = c("Null", 
-                                       "w Pred"),
-                caption = "MLM: Investigate a Fixed Pupil-level Predictor",
-                caption.above = TRUE,
-                digits = 4)
-```
 
 
 #### Assess Significance of Effects
@@ -567,7 +513,7 @@ effects::Effect(focal.predictors = c("gevocab"),
              y = fit)) +
   geom_ribbon(aes(ymin = lower,
                   ymax = upper),
-                alpha = .3) +
+              alpha = .3) +
   geom_line() +
   theme_bw()
 ```
@@ -613,7 +559,7 @@ Found on page 47 [@finch2016], the proportion of variance in the outcome explain
 **Snijders and Bosker Formula - Level 1 ** 
 $$
 R^2_1 = 1 - \frac{\sigma^2_{e-MC} + \sigma^2_{u0-MC}}
-                 {\sigma^2_{e-BL} + \sigma^2_{u0-BL}}
+{\sigma^2_{e-BL} + \sigma^2_{u0-BL}}
 $$
 ```
 
@@ -649,7 +595,7 @@ This means nearly 30% of the variance in reading scores, above and beyond that a
 **Raudenbush and Bryk Approximate Formula - Level 1 ** 
 $$
 approx\; R^2_1 = \frac{\sigma^2_{e-BL} - \sigma^2_{e-MC}}
-              {\sigma^2_{e-BL} }
+{\sigma^2_{e-BL} }
 \tag{Hox 4.8}
 $$
 ```
@@ -675,7 +621,7 @@ Although slightly different in value and meaning, this value also conveys that v
 **Snijders and Bosker Formula Extended - Level 2 ** 
 $$
 R^2_2 = 1 - \frac{\frac{\sigma^2_{e-MC}}{B} + \sigma^2_{u0-MC}}
-                 {\frac{\sigma^2_{e-BL}}{B} + \sigma^2_{u0-BL}}
+{\frac{\sigma^2_{e-BL}}{B} + \sigma^2_{u0-BL}}
 $$
 
 $B$ is the average size of the Level 2 units (schools).  Technically, you should use the *harmonic mean*, but unless the clusters differ greatly in size, it doesn't make a huge difference.
@@ -704,7 +650,7 @@ This means that over two-thirds in school mean reading levels may be explained b
 **Raudenbush and Bryk Approximate Formula - Level 2 ** 
 $$
 R^2_1 = \frac{\sigma^2_{u0-BL} - \sigma^2_{u0-MC}}
-                 {\sigma^2_{u0-BL} }
+{\sigma^2_{u0-BL} }
 \tag{Hox 4.9}
 $$
 ```
@@ -724,29 +670,27 @@ Remeber that these 'variance accounted for' estimations are not as straight forw
 Part of investigating lower level explanatory variables, is checking for interactions between these variables.  The interaction between fixed effects is also considered to be a fixed effect, so we need to employ *Maximum Likelihood* estimation to compare nested models.
 
 ```{r}
-fit_read_2ml <- lmer(geread ~ gevocab + age + (1 | school), # add main effect of age
-                     data = data_achieve,
-                     REML = FALSE)
+fit_read_2ml <- lmerTest::lmer(geread ~ gevocab + age + (1 | school), # add main effect of age
+                               data = data_achieve,
+                               REML = FALSE)
 
-fit_read_3ml <- lmer(geread ~ gevocab*age + (1 | school), # add interaction between vocab and age
-                     data = data_achieve,
-                     REML = FALSE)
+fit_read_3ml <- lmerTest::lmer(geread ~ gevocab*age + (1 | school), # add interaction between vocab and age
+                               data = data_achieve,
+                               REML = FALSE)
+```
+
+
+```{r}
+apaSupp::tab_lmers(list("Only Vocab"        = fit_read_1ml, 
+                        "Both Main Effects" = fit_read_2ml, 
+                        "Interaction"       = fit_read_3ml),
+                   narrow = TRUE,
+                   caption = "MLM: Investigate Other Fixed Pupil-level Predictors")
 ```
 
 
 
 
-```{r, results='asis'}
-texreg::knitreg(list(fit_read_1ml, 
-                     fit_read_2ml, 
-                     fit_read_3ml),
-                custom.model.names = c("Only Vocab", 
-                                       "Both Main Effects", 
-                                       "Interaction"),
-                caption = "MLM: Investigate Other Fixed Pupil-level Predictors",
-                caption.above = TRUE,
-                digits = 4)
-```
 
 #### Assess Significance of Effects
 
@@ -762,7 +706,7 @@ Not only is student's age predictive of their reading level (I could have guesse
 
 #### Visulaize the Interation
 
-Visulaizations are extremely helpful to interpred interactions.
+Visualizations are extremely helpful to interpred interactions.
 
 ```{r}
 summary(data_achieve$age)
@@ -792,25 +736,22 @@ There is a positive association between vocabulary and reading, but it is strong
 School enrollment (`senroll`) applies to each school as a whole.  When a variable is measured at a higher level, all units in the same group have the same value.  In this case, all student in the same school have the same value for `senroll`.  
 
 ```{r}
-fit_read_4ml <- lme4::lmer(geread ~ gevocab*age + senroll + (1 | school), 
-                           data = data_achieve,
-                           REML = FALSE)
+fit_read_4ml <- lmerTest::lmer(geread ~ gevocab*age + senroll + (1 | school), 
+                               data = data_achieve,
+                               REML = FALSE)
 ```
 
 
-
-
-```{r, results='asis'}
-texreg::knitreg(list(fit_read_0ml, 
-                     fit_read_3ml, 
-                     fit_read_4ml),
-                custom.model.names = c("Null", 
-                                       "Level 1 only", 
-                                       "Level 2 Pred"),
-                caption            = "MLM: Investigate a Fixed School-Level Predictor",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("Null"         = fit_read_0ml, 
+                        "Level 1 only" = fit_read_3ml, 
+                        "Level 2 Pred" = fit_read_4ml),
+                   narrow = TRUE,
+                   d = 3,
+                   caption = "MLM: Investigate a Fixed School-Level Predictor")
 ```
+
+
 
 
 ### Assess Significance of Effects
@@ -832,34 +773,31 @@ School enrollment (or size) does not seem be related to reading scores.
 The fixed effect of the predictor captures the overall association it has with the outcome (intercept), while the random effect of the predictor captures the group-to-group variation in the association (slope).  *Note: A variable can be fit as BOTH a fixed and random effect.*  
 
 ```{r}
-fit_read_3re <- lme4::lmer(geread ~ gevocab*age + (1 | school), # refit the previous 'best' model via REML
-                     data = data_achieve,
-                     REML = TRUE)
+fit_read_3re <- 
+  lmerTest::lmer(geread ~ gevocab*age + (1 | school), # refit the previous 'best' model via REML
+                 data = data_achieve,
+                 REML = TRUE)
 
 #fit_read_5re <- lmer(geread ~ gevocab + (gevocab | school), 
 #                     data = achieve,
 #                     REML = TRUE)         # failed to converge :(
 
-fit_read_5re <- lme4::lmer(geread ~ gevocab*age + (gevocab | school), 
-                           data = data_achieve,
-                           REML = TRUE,
-                           control = lmerControl(optimizer = "optimx",    # get it to converge
-                                                 calc.derivs = FALSE,
-                                                 optCtrl = list(method = "nlminb",
-                                                                starttests = FALSE,
-                                                                kkt = FALSE))) 
+fit_read_5re <- 
+  lmerTest::lmer(geread ~ gevocab*age + (gevocab | school), 
+                 data = data_achieve,
+                 REML = TRUE,
+                 control = lmerControl(optimizer = "optimx",    # get it to converge
+                                       calc.derivs = FALSE,
+                                       optCtrl = list(method = "nlminb",
+                                                      starttests = FALSE,
+                                                      kkt = FALSE))) 
 ```
 
 
-
-```{r, results='asis'}
-texreg::knitreg(list(fit_read_3re, 
-                       fit_read_5re),
-                  custom.model.names = c("Rand Int", 
-                                         "Rand Int and Slopes"),
-                  caption            = "MLM: Investigate Random Effects",
-                  caption.above      = TRUE,
-                  single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("Rand Int"            = fit_read_3re, 
+                        "Rand Int and Slopes" = fit_read_5re),
+                   caption = "MLM: Investigate Random Effects")
 ```
 
 
@@ -911,27 +849,28 @@ Cross-level interacitons involve variables at different levels.  Here we will in
 Remember that an interaction beween fixed effects is also fixed.  
 
 ```{r}
-fit_read_5ml <- lme4::lmer(geread ~ gevocab*age + (gevocab | school), 
-                           data = data_achieve,
-                           REML = FALSE,
-                           control = lmerControl(optimizer = "optimx", 
-                                                 calc.derivs = FALSE,
-                                                 optCtrl = list(method = "nlminb",
-                                                                starttests = FALSE,
-                                                                kkt = FALSE)))
+fit_read_5ml <- lmerTest::lmer(geread ~ gevocab*age + (gevocab | school), 
+                               data = data_achieve,
+                               REML = FALSE,
+                               control = lmerControl(optimizer = "optimx", 
+                                                     calc.derivs = FALSE,
+                                                     optCtrl = list(method = "nlminb",
+                                                                    starttests = FALSE,
+                                                                    kkt = FALSE)))
 
-fit_read_6ml <- lme4::lmer(geread ~ gevocab*age + senroll + (gevocab | school), 
-                           data = data_achieve,
-                           REML = FALSE,
-                           control = lmerControl(optimizer ="Nelder_Mead"))
+fit_read_6ml <- lmerTest::lmer(geread ~ gevocab*age + senroll + (gevocab | school), 
+                               data = data_achieve,
+                               REML = FALSE,
+                               control = lmerControl(optimizer ="Nelder_Mead"))
 
-fit_read_7ml <- lme4::lmer(geread ~ gevocab*age + gevocab*senroll + (gevocab | school), 
-                           data = data_achieve,
-                           REML = FALSE)
+fit_read_7ml <- lmerTest::lmer(geread ~ gevocab*age + gevocab*senroll + (gevocab | school), 
+                               data = data_achieve,
+                               REML = FALSE)
 
-fit_read_8ml <- lme4::lmer(geread ~ gevocab*age*senroll + (gevocab | school), 
-                           data = data_achieve,
-                           REML = FALSE)
+fit_read_8ml <- lmerTest::lmer(geread ~ gevocab*age*senroll + (gevocab | school), 
+                               data = data_achieve,
+                               control = lmerControl(optimizer ="Nelder_Mead"),
+                               REML = FALSE)
 ```
 
 ```{block type='rmdlightbulb', echo=TRUE}
@@ -948,20 +887,16 @@ data_achieve %>%
 
 For now, let us look at the results.
 
-```{r, results='asis'}
-texreg::knitreg(list(fit_read_5ml, 
-                     fit_read_6ml, 
-                     fit_read_7ml,
-                     fit_read_8ml),
-                custom.model.names = c("Level 1 only", 
-                                       "Both Levels", 
-                                       "Cross-Level",
-                                       "3-way"),
-                caption            = "MLM: Investigate a Fixed Cross-level Interaction",
-                caption.above      = TRUE,
-                digits = 3,
-                bold = TRUE)
+```{r}
+apaSupp::tab_lmers(list("Level 1 only" = fit_read_5ml, 
+                        "Both Levels"  = fit_read_6ml, 
+                        "Cross-Level"  = fit_read_7ml,
+                        "3-way"        = fit_read_8ml),
+                   narrow = TRUE,
+                   caption = "MLM: Investigate a Fixed Cross-level Interaction")
 ```
+
+
 
 
 There is no evidence school enrollment moderates either of age or vocabulary's effects.
@@ -976,6 +911,7 @@ When you have a list of sequentially nested models, you can test them in order w
 ```{r}
 anova(fit_read_5ml, fit_read_6ml)
 ```
+
 ```{r}
 anova(fit_read_5ml, fit_read_7ml)
 ```
@@ -1008,10 +944,11 @@ data_achieve %>%
 NOTE:  The models with CENTERED variables are able to be fit with the default optimizer settings and do not return the error: `"unable to evaluate scaled gradientModel failed to converge: degenerate  Hessian with 1 negative eigenvalues"`
 
 ```{r}
-fit_read_5ml_c <- lme4::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
-                               (I(gevocab - 4.494) | school), 
-                             data = data_achieve,
-                             REML = FALSE)
+fit_read_5ml_c <- 
+  lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
+                   (I(gevocab - 4.494) | school), 
+                 data = data_achieve,
+                 REML = FALSE)
 ```
 
 
@@ -1019,18 +956,15 @@ fit_read_5ml_c <- lme4::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) +
 
 #### Compare the Models
 
-```{r, results='asis'}
-texreg::knitreg(list(fit_read_5ml, 
-                     fit_read_5ml_c),
-                custom.model.names = c("Raw Units", 
-                                       "Grand Mean Centered"),
-                groups = list("Raw Scale" = 2:4,
-                              "Mean Centered" = 5:7),
-                caption            = "MLM: Investigate Centering Variables Involved in an Interaction",
-                caption.above      = TRUE,
-                single.row         = TRUE,
-                digits             = 3)
+```{r}
+apaSupp::tab_lmers(list("Raw Units"           = fit_read_5ml, 
+                        "Grand Mean Centered" = fit_read_5ml_c),
+                   d = 3,
+                   caption = "MLM: Investigate Centering Variables Involved in an Interaction")
 ```
+
+
+
 
 
 Notice that the interactions yield the exact same parameter estimates and significances, but the main effects (including the interactions) are different.  Model fit statistics include $-2LL$ are exactly the same, too.
@@ -1094,38 +1028,38 @@ For this situation, lets only divide SES by ten.
 Using the new versions of our variables, investigate is SES has an effect, either in 2-way or 3-way interactions with age and vocabulary.
 
 ```{r}
-fit_read_5ml_s <- lme4::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
-                                     (I(gevocab - 4.494) | school), 
-                             data   = data_achieve,
-                             REML   = FALSE)
+fit_read_5ml_s <- 
+  lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
+                   (I(gevocab - 4.494) | school), 
+                 data   = data_achieve,
+                 REML   = FALSE)
 
-fit_read_6ml_s <- lme4::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
-                                      I(gevocab - 4.494) * I(ses/10) +
-                                     (I(gevocab - 4.494) | school), 
-                             data   = data_achieve,
-                             REML   = FALSE,
-                             control = lmerControl(optimizer ="Nelder_Mead"))
+fit_read_6ml_s <- 
+  lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
+                   I(gevocab - 4.494) * I(ses/10) +
+                   (I(gevocab - 4.494) | school), 
+                 data   = data_achieve,
+                 REML   = FALSE,
+                 control = lmerControl(optimizer ="Nelder_Mead"))
 
-fit_read_7ml_s <- lme4::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) * I(ses/10) +
-                                     (I(gevocab - 4.494) | school),  
-                             data   = data_achieve,
-                             REML  = FALSE,
-                             control = lmerControl(optimizer ="Nelder_Mead"))
+fit_read_7ml_s <- 
+  lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) * I(ses/10) +
+                   (I(gevocab - 4.494) | school),  
+                 data   = data_achieve,
+                 REML  = FALSE,
+                 control = lmerControl(optimizer ="Nelder_Mead"))
 ```
 
 
-
-```{r, results='asis'}
-texreg::knitreg(list(fit_read_5ml_s, 
-                     fit_read_6ml_s, 
-                     fit_read_7ml_s),
-                custom.model.names = c("no SES", 
-                                       "2-way", 
-                                       "3-way"),
-                caption            = "MLM: Investigate More Complex Fixed Interactions (with Scalling)",
-                caption.above      = TRUE,
-                digits = 3)
+```{r}
+apaSupp::tab_lmers(list("no SES" = fit_read_5ml_s, 
+                        "2-way"  = fit_read_6ml_s, 
+                        "3-way"  = fit_read_7ml_s),
+                   narrow = TRUE,
+                   caption = "MLM: Investigate More Complex Fixed Interactions (with Scalling)")
 ```
+
+
 
 
 ```{r}
@@ -1140,22 +1074,31 @@ There is evidence that SES moderates the main effect of vocabulary, after accoun
 Always refit the final model via REML.
 
 ```{r}
-fit_read_6re_s <- lme4::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
-                                      I(gevocab - 4.494) * I(ses/10) +
-                                     (I(gevocab - 4.494) | school), 
+fit_read_6re_s <- lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
+                               I(gevocab - 4.494) * I(ses/10) +
+                               (I(gevocab - 4.494) | school), 
                              data   = data_achieve,
                              REML   = TRUE)
 ```
 
 ### Table
 
-```{r, results='asis'}
-texreg::knitreg(fit_read_6re_s,
-                caption            = "MLM: Final Model",
-                caption.above      = TRUE,
-                single.row         = TRUE,
-                digits = 3)
+```{r}
+apaSupp::tab_lmer(fit_read_6re_s,
+                  var_labels = c("(Intercept)" = "Mean Vocab, Age, SES",
+                                 "I(gevocab - 4.494)" = "Vocab, points",
+                                 "I(age - 107.5)" = "Age, months",
+                                 "I(ses/10)" = "SES, 10 points",
+                                 "I(gevocab - 4.494) * I(age - 107.5)" = "Vocab X Age",
+                                 "I(gevocab - 4.494) * I(ses/10)" = "Vocab X SES",
+                                 "school.var__(Intercept)" = "Variance: School Intecepts",
+                                 "school.cov__(Intercept).I(gevocab - 4.494)" = "Covariance: Intercepts & Slope",
+                                 "school.var__I(gevocab - 4.494)" = "Variance: Slope of Vocab",
+                                 "Residual.var__Observation" = "Variance: Residual"),
+                  caption = "MLM: Final Model")
 ```
+
+
 
 
 #### Visualize the Model
@@ -1184,7 +1127,8 @@ interactions::interact_plot(model = fit_read_6ml_s,
                             mod2 = ses,
                             modx.values = c(90, 110, 130),
                             mod2.values = c(20, 55, 90),
-                            interval = TRUE)
+                            interval = TRUE) +
+  theme_bw()
 ```
 
 Swap the moderators:
@@ -1196,8 +1140,49 @@ interactions::interact_plot(model = fit_read_6ml_s,
                             modx = ses,
                             mod2.values = c(90, 110, 130),
                             modx.values = c(20, 55, 90),
-                            interval = TRUE)
+                            interval = TRUE) +
+  theme_bw()
 ```
+
+```{r}
+fit_read_6ml_s %>% 
+  emmeans::emmeans(~ gevocab*age*ses,
+                   at = list(gevocab = seq(from = 0, to = 10, by = .1),
+                             age = c(7*12, 9*12, 11*12),
+                             ses = c(20, 55, 90))) %>% 
+  data.frame() %>% 
+  dplyr::mutate(ses = factor(ses)) %>% 
+  dplyr::mutate(age = factor(age/12) %>% 
+                  forcats::fct_recode("Age = 7" = "7",
+                                      "Age = 9" = "9",
+                                      "Age = 11" = "11")) %>% 
+  ggplot(aes(x = gevocab,
+             y = emmean,
+             group = ses)) +
+  geom_ribbon(aes(ymin = emmean - SE,
+                  ymax = emmean + SE,
+                  fill = ses),
+              alpha = .25) +
+  geom_line(aes(color = ses,
+                linetype = ses)) +
+  facet_grid(~ age) +
+  theme_bw() +
+  labs(x = "Vocab Score",
+       y = "Estimated Marginal Mean\nReading Score",
+       color = "SES:",
+       linetype = "SES:",
+       fill = "SES:") +
+  scale_x_continuous(breaks = seq(from = 0, to = 10, by = 3)) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(0, 1),
+        legend.justification = c(-.1, 1.1),
+        legend.key.width = unit(1.5, "cm"),
+        legend.background = element_rect(color = "black"))
+```
+
+
+
+
 
 ### Interpretation of model
 
