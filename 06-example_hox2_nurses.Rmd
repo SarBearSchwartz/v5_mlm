@@ -16,17 +16,30 @@ knitr::opts_chunk$set(comment     = "",
 ```
 
 
+Download/install a new GitHub package
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
+```
+
+Load/activate these packages
+
+
 ```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # basically everything ;)
-library(haven)        # read in SPSS dataset
-library(psych)        # contains some useful functions, like headTail
-library(car)          # Companion to Applied Regression
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
-library(lmerTest)     # Tests on lmer objects
-library(performance)  # ICC calculations
-library(interactions) # plotting interactions
-library(effects)      # Effects for regression models
-library(optimx)       # Different optimizers to solve mlm's
+library(haven)  
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(lme4)        
+library(lmerTest)  
+library(optimx) 
+library(insight)
+library(performance)
+library(interactions)
+library(emmeans)
+library(effects)
+library(sjPlot)
 ```
 
 

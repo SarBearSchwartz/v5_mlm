@@ -12,16 +12,33 @@ knitr::opts_chunk$set(comment     = "",
                       fig.height  = 4)        # set default figure height to 3 inches
 ```
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(haven)        # read in SPSS dataset
-library(psych)        # contains some useful functions, like headTail
-library(performance)  # ICC and R2 calculations
-library(effects)      # Effects for regression models
-library(optimx)       # Different optimizers to solve mlm's
-library(lme4)         # non-linear mixed-effects models
-library(lmerTest)        
+
+
+Download/install a new GitHub package
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
 ```
+
+Load/activate these packages
+
+
+```{r, message=FALSE, error=FALSE}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(lme4)        
+library(lmerTest)  
+library(optimx) 
+library(insight)
+library(performance)
+library(interactions)
+library(emmeans)
+library(effects)
+library(sjPlot)
+```
+
 
 
 

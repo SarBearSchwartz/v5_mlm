@@ -1,31 +1,36 @@
 # MLM, Longitudinal: Hedeker & Gibbons - Depression
 
-```{r, echo=FALSE}
-library(pander)
 
-panderOptions('digits', 2)
-panderOptions('round', 2)
-panderOptions('keep.trailing.zeros', TRUE)
-panderOptions('keep.line.breaks', TRUE)
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
 ```
 
-```{r, warning=FALSE, error=FALSE, message=FALSE, results='hide'}
-library(tidyverse)    # all things tidy
-library(pander)       # nice looking general tabulations
-library(furniture)    # nice table1() descriptions
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
+Load/activate these packages
 
-library(psych)        # contains some useful functions, like headTail()
-library(sjstats)      # ICC calculations
-library(effects)      # Estimated Marginal Means
-library(performance)
-library(VIM)          # Visualization and Imputation of Missing Values 
-library(naniar)       # Summaries and Visualizations for Missing Data
-library(corrplot)     # Visualize correlation matrix
-
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(HLMdiag)      # package with the dataset
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(psych)
+library(VIM)         
+library(naniar) 
+library(lme4)        
 library(lmerTest)
 library(optimx)
+library(performance)
+library(interactions)
+library(emmeans)
+library(ggResidpanel)
+library(HLMdiag)
+library(sjPlot)
+
+
+library(sjstats)      # ICC calculations
+library(effects)      # Estimated Marginal Means
+
+library(corrplot)     # Visualize correlation matrix
 ```
 
 ## Background
@@ -113,8 +118,8 @@ data_wide %>%
 
 ```{r, results="asis"}
 data_wide %>% 
-  furniture::table1("Depression Type" = endog,
-                    output = "markdown")
+  dplyr::select("Depression Type" = endog) %>% 
+  apaSupp::tab_freq() 
 ```
 
 ### Missing Data & Attrition
@@ -146,71 +151,46 @@ data_wide %>%
 
 #### Table of Means
 
-> Default = COMPLETE CASES ONLY!!!
-
-Note - the sample size at each time point is the same, but subjects are only included if they have data at every time point
 
 ```{r}
 data_wide %>%          
-  dplyr::group_by(endog) %>% 
-  furniture::table1("Baseline" = hamd_0,
-                    "Week 1" = hamd_1,
-                    "Week 2" = hamd_2,
-                    "Week 3" = hamd_3,
-                    "Week 4" = hamd_4,
-                    "Week 5" = hamd_5,
-                    total = TRUE,
-                    test = TRUE,
-                    na.rm = TRUE,              # default: COMPLETE CASES ONLY!!!!!
-                    digits = 2,
-                    output = "markdown",
-                    caption = "Hamilton Depression Scores Across Time, by Depression Type for Participants with 6 Complete Weeks")           
+  dplyr::select(endog,
+                "Baseline" = hamd_0,
+                "Week 1" = hamd_1,
+                "Week 2" = hamd_2,
+                "Week 3" = hamd_3,
+                "Week 4" = hamd_4,
+                "Week 5" = hamd_5) %>% 
+  apaSupp::tab1(split = "endog",
+                caption = "Hamilton Depression Scores Across Time, by Depression Type")           
 ```
 
-> Specify All data:
-
-note - that the smaple sizes will be different for each time point
-
-```{r, results='asis'}
-data_wide %>%                
-  dplyr::group_by(endog) %>% 
-  furniture::table1("Baseline" = hamd_0,
-                    "Week 1" = hamd_1,
-                    "Week 2" = hamd_2,
-                    "Week 3" = hamd_3,
-                    "Week 4" = hamd_4,
-                    "Week 5" = hamd_5,
-                    total = TRUE,
-                    test = TRUE,
-                    na.rm = FALSE,              # default: COMPLETE CASES ONLY!!!!!
-                    digits = 2,
-                    output = "markdown",
-                    caption = "Hamilton Depression Scores Across Time, by Depression Type for All Participants")  
-```
 
 #### Using the LONG formatted dataset
 
 Each person's data is stored on multiple lines, one for each time point.
 
-> FOR ALL DATA!
+> FOR ALL DATA AVAILABLE!
 
 ```{r}
-data_sum_all <- data_long %>% 
+data_long %>% 
   dplyr::group_by(endog, week) %>%                # specify the groups
   dplyr::filter(!is.na(hamd)) %>% 
   dplyr::summarise(hamd_n    = n(),                      # count of valid scores
                    hamd_mean = mean(hamd),               # mean score
                    hamd_sd   = sd(hamd),                 # standard deviation of scores
-                   hamd_sem  = hamd_sd / sqrt(hamd_n))   # stadard error for the mean of scores
-
-data_sum_all %>% 
-  pander::pander()
+                   hamd_sem  = hamd_sd / sqrt(hamd_n)) %>%  # stadard error for the mean of scores 
+  flextable::as_grouped_data(groups = "endog") %>% 
+  flextable::flextable() %>% 
+  flextable::separate_header() %>% 
+  apaSupp::theme_apa() %>% 
+  flextable::hline(part = "header", i = 1)
 ```
 
 > FOR COMPLETE CASES ONLY!!!
 
 ```{r}
-data_sum_cc <- data_long %>% 
+data_long %>% 
   dplyr::group_by(id) %>%               # group-by participant
   dplyr::filter(!is.na(hamd)) %>% 
   dplyr::mutate(person_vsae_n = n()) %>%    # count the number of valid VSAE scores
@@ -219,10 +199,12 @@ data_sum_cc <- data_long %>%
   dplyr::summarise(hamd_n    = n(),                      # count of valid scores
                    hamd_mean = mean(hamd),               # mean score
                    hamd_sd   = sd(hamd),                 # standard deviation of scores
-                   hamd_sem  = hamd_sd / sqrt(hamd_n))   # stadard error for the mean of scores
-
-data_sum_cc %>% 
-  pander::pander()
+                   hamd_sem  = hamd_sd / sqrt(hamd_n)) %>%  # stadard error for the mean of scores 
+  flextable::as_grouped_data(groups = "endog") %>% 
+  flextable::flextable() %>% 
+  flextable::separate_header() %>% 
+  apaSupp::theme_apa() %>% 
+  flextable::hline(part = "header", i = 1)
 ```
 
 #### Person-Profile Plot or Spaghetti Plot
@@ -528,12 +510,10 @@ fit_lmer_week_RI_reml <- lmerTest::lmer(hamd ~ week + (1|id),
 
 
 
-```{r mlmRI, results='asis'}
-texreg::screenreg(fit_lmer_week_RI_reml, 
-                single.row = TRUE,
-                caption = "MLM: Random Intercepts Null Model fit w/REML",
-                caption.above = TRUE,
-                custom.note = "Reproduction of Hedeker's table 4.3 on page 55, except using REML here instead of ML")
+```{r}
+apaSupp::tab_lmer(fit_lmer_week_RI_reml, 
+                  caption = "MLM: Random Intercepts Null Model fit w/REML",
+                  general_note = "Reproduction of Hedeker's table 4.3 on page 55, except using REML here instead of ML")
 ```
 
 On average, patients start off with HDRS scores of `r fixef(fit_lmer_week_RI_reml)["(Intercept)"] %>% round(2)` and then change by `r fixef(fit_lmer_week_RI_reml)["week"] %>% round(2)` points each week. This weekly improvement of about 2 points a week is statistically significant via the Wald test.
@@ -616,7 +596,8 @@ effects::Effect(focal.predictors = "week",
   dplyr::left_join(obs, by = "week") %>% 
   dplyr::select(week, observed, estimated) %>% 
   dplyr::mutate(diff = observed - estimated) %>% 
-  pander::pander(caption = "Observed and Estimated Means")
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Observed and Estimated Means")
 ```
 
 ### Intra-individual Correlation (ICC)
@@ -666,11 +647,11 @@ fit_lm_week_ml <- lm(hamd ~ week,
 
 ```{r olsvsmlm, results='asis'}
 texreg::screenreg(list(fit_lm_week_ml, fit_lmer_week_RI_reml),
-                custom.model.names = c("Single-Level", "Multilevel"),
-                single.row = TRUE,
-                caption = "MLM: Longitudinal Null Models",
-                caption.above = TRUE,
-                custom.note = "The singel-level model treats are observations as being independent and unrelated to each other, even if they were made on the same person.")
+                  custom.model.names = c("Single-Level", "Multilevel"),
+                  single.row = TRUE,
+                  caption = "MLM: Longitudinal Null Models",
+                  caption.above = TRUE,
+                  custom.note = "The singel-level model treats are observations as being independent and unrelated to each other, even if they were made on the same person.")
 ```
 
 For the multilevel model, the Wald tests indicated the fixed intercept is significant *(no surprised that the depressions scores are not zero at baseline)*. More of note is the significance of the fixed effect of time. This signifies that depression scores are declining over time. On average, patients are improving (Hamilton Depression Scores get smaller) across time, by an average of 2.4'ish points a week.
@@ -712,14 +693,10 @@ fit_lmer_week_RIAS_reml <- lmerTest::lmer(hamd ~ week + (week|id), #     MLM-RIA
 
 
 ```{r mlmRS, results='asis'}
-texreg::screenreg(list(fit_lmer_week_RI_reml, 
-                     fit_lmer_week_RIAS_reml),
-                custom.model.names = c("Random Intercepts",
-                                       " And Random Slopes"),
-                single.row = TRUE,
-                caption = "MLM: Null models fit w/REML",
-                caption.above = TRUE,
-                custom.note = "Hedeker table 4.4 on page 55 and table 4.5 on page 58, except using REML here instead of ML")
+apaSupp::tab_lmers(list("Random Intercepts" = fit_lmer_week_RI_reml, 
+                        " And Random Slopes" = fit_lmer_week_RIAS_reml),
+                   caption = "MLM: Null models fit w/REML",
+                   general_note = "Hedeker table 4.4 on page 55 and table 4.5 on page 58, except using REML here instead of ML")
 ```
 
 
@@ -738,17 +715,15 @@ Note: the negative covariance between random intercepts and random slopes ($\sig
 ```{r}
 anova(fit_lmer_week_RI_reml, fit_lmer_week_RIAS_reml, 
       model.names = c("RI", "RIAS"),
-      refit = FALSE) %>% 
-  pander::pander(caption = "LRT: Assess Significance of Random Slopes")
+      refit = FALSE) 
 ```
 
 Including the random slope for time significantly improved the model fit via the formal **Likelihood Ratio Test**. This rejects the assumption of compound symmetry.
 
 
 ```{r}
-performance::compare_performance(fit_lmer_week_RI_reml, 
-                                 fit_lmer_week_RIAS_reml,
-                                 rank = TRUE)
+apaSupp::tab_lmer_fits(list("RI" = fit_lmer_week_RI_reml, 
+                            "RIAS" = fit_lmer_week_RIAS_reml))
 ```
 
 
@@ -861,23 +836,20 @@ But We could CENTER week at the middle of the study (`week` = 2.5).
 ### Fit the Model
 
 ```{r}
-fit_lmer_week_RIAS_reml_wc <- lme4::lmer(hamd ~ I(week-2.5) + (I(week-2.5)|id), #     MLM-RIAS
-                                         data = data_long,
-                                         REML = TRUE)
+fit_lmer_week_RIAS_reml_wc <- 
+  lmerTest::lmer(hamd ~ I(week-2.5) + (I(week-2.5)|id), #     MLM-RIAS
+                 data = data_long,
+                 REML = TRUE)
 ```
 
 ### Table of Parameter Estimates
 
 
-```{r mlmwc, results='asis'}
-texreg::screenreg(list(fit_lmer_week_RIAS_reml, 
-                     fit_lmer_week_RIAS_reml_wc),
-                custom.model.names = c("Random Intercepts",
-                                       " And Random Slopes"),
-                single.row = TRUE,
-                caption = "MLM: Null models fit w/REML",
-                caption.above = TRUE,
-                custom.note = "Hedeker table table 4.5 on page 58 and table 4.6 on page 61, except using REML here instead of ML")
+```{r}
+apaSupp::tab_lmers(list("Random Intercepts" = fit_lmer_week_RIAS_reml, 
+                        " And Random Slopes" = fit_lmer_week_RIAS_reml_wc),
+                   caption = "MLM: Null models fit w/REML",
+                   general_note = "Hedeker table table 4.5 on page 58 and table 4.6 on page 61, except using REML here instead of ML")
 ```
 
 * Unchanged    
@@ -890,15 +862,15 @@ texreg::screenreg(list(fit_lmer_week_RIAS_reml,
 + variance for random slopes   
 + covariance between random intercepts and random slopes
 
-    -   model fit: AIC, BIC, -2LL, residual variance\
-    -   fixed effect of week\
-    -   variance for random intercepts
+-   model fit: AIC, BIC, -2LL, residual variance\
+-   fixed effect of week\
+-   variance for random intercepts
 
 -   Changed
 
-    -   fixed intercept\
-    -   variance for random slopes\
-    -   covariance between random intercepts and random slopes
+-   fixed intercept\
+-   variance for random slopes\
+-   covariance between random intercepts and random slopes
 
 ### Estimated Marginal Means and Emperical Bayes Plots
 
@@ -986,15 +958,13 @@ interactions::interact_plot(fit_lmer_wkdx_RIAS_ml,
 anova(fit_lmer_week_RIAS_ml, 
       fit_lmer_wkdx_RIAS_ml, 
       model.names = c("Just Time", 
-                      "Time X Dx")) %>% 
-  pander::pander(caption = "LRT: Assess Significance of Diagnosis Moderation of Trend")
+                      "Time X Dx")) 
 ```
 
 
 ```{r}
-performance::compare_performance(fit_lmer_week_RIAS_ml, 
-                                 fit_lmer_wkdx_RIAS_ml,
-                                 rank = TRUE)
+apaSupp::tab_lmer_fits(list("Just Time" = fit_lmer_week_RIAS_ml, 
+                            "Time X Dx" = fit_lmer_wkdx_RIAS_ml))
 ```
 
 
@@ -1009,28 +979,25 @@ The more complicated model (including the moderating effect of diagnosis) is **N
 ### Fit the Model
 
 ```{r}
-fit_lmer_quad_RIAS_ml <- lme4::lmer(hamd ~ week + I(week^2) + (week+ I(week^2)|id), 
-                                    data = data_long,
-                                    REML = FALSE,
-                                    control = lmerControl(optimizer = "optimx",    # get it to converge
-                                                          calc.derivs = FALSE,
-                                                          optCtrl = list(method = "nlminb",
-                                                                         starttests = FALSE,
-                                                                         kkt = FALSE))) 
+fit_lmer_quad_RIAS_ml <- 
+  lmerTest::lmer(hamd ~ week + I(week^2) + (week+ I(week^2)|id), 
+                 data = data_long,
+                 REML = FALSE,
+                 control = lmerControl(optimizer = "optimx",    # get it to converge
+                                       calc.derivs = FALSE,
+                                       optCtrl = list(method = "nlminb",
+                                                      starttests = FALSE,
+                                                      kkt = FALSE))) 
 ```
 
 ### Table of Parameter Estimates
 
 
-```{r mlmquad, results='asis'}
-texreg::screenreg(list(fit_lmer_week_RIAS_ml,
-                     fit_lmer_quad_RIAS_ml),
-                custom.model.names = c("Linear Trend",
-                                       "QUadratic Trend"),
-                single.row = TRUE,
-                caption = "MLM: RIAS models fit w/ML",
-                caption.above = TRUE,
-                custom.note = "Hedeker table 4.5 on page 58 and table 5.1 on page 84")
+```{r}
+apaSupp::tab_lmers(list("Linear Trend" = fit_lmer_week_RIAS_ml,
+                        "Quadratic Trend" = fit_lmer_quad_RIAS_ml),
+                  caption = "MLM: RIAS models fit w/ML",
+                  general_note = "Hedeker table 4.5 on page 58 and table 5.1 on page 84")
 ```
 
 ### Likelihood Ratio Test
@@ -1040,9 +1007,8 @@ anova(fit_lmer_week_RIAS_ml, fit_lmer_quad_RIAS_ml)
 ```
 
 ```{r}
-performance::compare_performance(fit_lmer_week_RIAS_ml, 
-                                 fit_lmer_quad_RIAS_ml,
-                                 rank = TRUE)
+apaSupp::tab_lmer_fits(list("Linear Trend" = fit_lmer_week_RIAS_ml,
+                            "Quadratic Trend" = fit_lmer_quad_RIAS_ml))
 ```
 
 

@@ -56,8 +56,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -67,7 +68,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -379,7 +380,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="8.4.1" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#fit-mlm-with-all-3-versions-of-the-predictor-1"><i class="fa fa-check"></i><b>8.4.1</b> Fit MLM with all 3 versions of the predictor</a></li>
 <li class="chapter" data-level="8.4.2" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#comapre-the-centered-version-1"><i class="fa fa-check"></i><b>8.4.2</b> Comapre the Centered Version</a></li>
-<li class="chapter" data-level="8.4.3" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#comapre-the-standardized-version-1"><i class="fa fa-check"></i><b>8.4.3</b> Comapre the Standardized Version</a></li>
+<li class="chapter" data-level="8.4.3" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#compare-the-standardized-version"><i class="fa fa-check"></i><b>8.4.3</b> Compare the Standardized Version</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="effect-size-variance-explained.html"><a href="effect-size-variance-explained.html"><i class="fa fa-check"></i><b>9</b> Effect Size: Variance Explained</a>
@@ -841,27 +842,27 @@ div.csl-indent {
 <h2><span class="header-section-number">18.1</span> Packages<a href="gee-count-outcome-antibiotics-for-leprosy.html#packages-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="cran-3" class="section level3 hasAnchor" number="18.1.1">
 <h3><span class="header-section-number">18.1.1</span> CRAN<a href="gee-count-outcome-antibiotics-for-leprosy.html#cran-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># all things tidy</span></span>
-<span id="cb843-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-2" tabindex="-1"></a><span class="fu">library</span>(pander)       <span class="co"># nice looking genderal tabulations</span></span>
-<span id="cb843-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-3" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># nice table1() descriptives</span></span>
-<span id="cb843-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-4" tabindex="-1"></a><span class="fu">library</span>(texreg)       <span class="co"># Convert Regression Output to LaTeX or HTML Tables</span></span>
-<span id="cb843-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-5" tabindex="-1"></a><span class="fu">library</span>(psych)        <span class="co"># contains some useful functions, like headTail</span></span>
-<span id="cb843-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-6" tabindex="-1"></a></span>
-<span id="cb843-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-7" tabindex="-1"></a><span class="fu">library</span>(interactions)</span>
-<span id="cb843-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-8" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
-<span id="cb843-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-9" tabindex="-1"></a><span class="fu">library</span>(lme4)         <span class="co"># Linear, generalized linear, &amp; nonlinear mixed models</span></span>
-<span id="cb843-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-10" tabindex="-1"></a></span>
-<span id="cb843-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-11" tabindex="-1"></a><span class="fu">library</span>(corrplot)     <span class="co"># Vizualize correlation matrix</span></span>
-<span id="cb843-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-12" tabindex="-1"></a><span class="fu">library</span>(gee)          <span class="co"># Genderalized Estimation Equation Solver</span></span>
-<span id="cb843-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-13" tabindex="-1"></a><span class="fu">library</span>(geepack)      <span class="co"># Genderalized Estimation Equation Package </span></span>
-<span id="cb843-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb843-14" tabindex="-1"></a><span class="fu">library</span>(MuMIn)        <span class="co"># Multi-Model Inference (caluclate QIC)</span></span></code></pre></div>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># all things tidy</span></span>
+<span id="cb849-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-2" tabindex="-1"></a><span class="fu">library</span>(pander)       <span class="co"># nice looking genderal tabulations</span></span>
+<span id="cb849-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-3" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># nice table1() descriptives</span></span>
+<span id="cb849-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-4" tabindex="-1"></a><span class="fu">library</span>(texreg)       <span class="co"># Convert Regression Output to LaTeX or HTML Tables</span></span>
+<span id="cb849-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-5" tabindex="-1"></a><span class="fu">library</span>(psych)        <span class="co"># contains some useful functions, like headTail</span></span>
+<span id="cb849-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-6" tabindex="-1"></a></span>
+<span id="cb849-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-7" tabindex="-1"></a><span class="fu">library</span>(interactions)</span>
+<span id="cb849-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-8" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb849-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-9" tabindex="-1"></a><span class="fu">library</span>(lme4)         <span class="co"># Linear, generalized linear, &amp; nonlinear mixed models</span></span>
+<span id="cb849-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-10" tabindex="-1"></a></span>
+<span id="cb849-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-11" tabindex="-1"></a><span class="fu">library</span>(corrplot)     <span class="co"># Vizualize correlation matrix</span></span>
+<span id="cb849-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-12" tabindex="-1"></a><span class="fu">library</span>(gee)          <span class="co"># Genderalized Estimation Equation Solver</span></span>
+<span id="cb849-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-13" tabindex="-1"></a><span class="fu">library</span>(geepack)      <span class="co"># Genderalized Estimation Equation Package </span></span>
+<span id="cb849-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb849-14" tabindex="-1"></a><span class="fu">library</span>(MuMIn)        <span class="co"># Multi-Model Inference (caluclate QIC)</span></span></code></pre></div>
 </div>
 <div id="github-3" class="section level3 hasAnchor" number="18.1.2">
 <h3><span class="header-section-number">18.1.2</span> GitHub<a href="gee-count-outcome-antibiotics-for-leprosy.html#github-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Helper <code>extract</code> functions for exponentiating parameters form generalized regression models within a <code>texreg</code> table of model parameters.</p>
-<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb844-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb844-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;sarbearschwartz/texreghelpr&quot;) # first time</span></span>
-<span id="cb844-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb844-2" tabindex="-1"></a></span>
-<span id="cb844-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb844-3" tabindex="-1"></a><span class="fu">library</span>(texreghelpr)</span></code></pre></div>
+<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb850-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;sarbearschwartz/texreghelpr&quot;) # first time</span></span>
+<span id="cb850-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-2" tabindex="-1"></a></span>
+<span id="cb850-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-3" tabindex="-1"></a><span class="fu">library</span>(texreghelpr)</span></code></pre></div>
 </div>
 </div>
 <div id="background-10" class="section level2 hasAnchor" number="18.2">
@@ -903,33 +904,33 @@ Ames, Iowa: Iowa State University Press</p>
 </ul>
 <div id="enter-the-data-by-hand" class="section level3 hasAnchor" number="18.2.1">
 <h3><span class="header-section-number">18.2.1</span> Enter the data by hand!<a href="gee-count-outcome-antibiotics-for-leprosy.html#enter-the-data-by-hand" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb845-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-1" tabindex="-1"></a>data_raw <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb845-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-2" tabindex="-1"></a>  <span class="sc">~</span>drug, <span class="sc">~</span>count_pre, <span class="sc">~</span>count_post,</span>
-<span id="cb845-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-3" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">11</span>,     <span class="dv">6</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">6</span>,     <span class="dv">0</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">16</span>,    <span class="dv">13</span>,</span>
-<span id="cb845-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-4" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">8</span>,     <span class="dv">0</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">6</span>,     <span class="dv">2</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">13</span>,    <span class="dv">10</span>,</span>
-<span id="cb845-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-5" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">5</span>,     <span class="dv">2</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">7</span>,     <span class="dv">3</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">11</span>,    <span class="dv">18</span>,</span>
-<span id="cb845-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-6" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">14</span>,     <span class="dv">8</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">8</span>,     <span class="dv">1</span>,    <span class="st">&quot;C&quot;</span>,       <span class="dv">9</span>,     <span class="dv">5</span>,</span>
-<span id="cb845-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-7" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">19</span>,    <span class="dv">11</span>,    <span class="st">&quot;B&quot;</span>,      <span class="dv">18</span>,    <span class="dv">18</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">21</span>,    <span class="dv">23</span>,</span>
-<span id="cb845-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-8" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">6</span>,     <span class="dv">4</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">8</span>,     <span class="dv">4</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">16</span>,    <span class="dv">12</span>,</span>
-<span id="cb845-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-9" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">10</span>,    <span class="dv">13</span>,    <span class="st">&quot;B&quot;</span>,      <span class="dv">19</span>,    <span class="dv">14</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">12</span>,     <span class="dv">5</span>,</span>
-<span id="cb845-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-10" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">6</span>,     <span class="dv">1</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">8</span>,     <span class="dv">9</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">12</span>,    <span class="dv">16</span>,</span>
-<span id="cb845-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-11" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">11</span>,     <span class="dv">8</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">5</span>,     <span class="dv">1</span>,    <span class="st">&quot;C&quot;</span>,       <span class="dv">7</span>,     <span class="dv">1</span>,</span>
-<span id="cb845-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb845-12" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">3</span>,     <span class="dv">0</span>,    <span class="st">&quot;B&quot;</span>,      <span class="dv">15</span>,     <span class="dv">9</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">12</span>,    <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-1" tabindex="-1"></a>data_raw <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb851-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-2" tabindex="-1"></a>  <span class="sc">~</span>drug, <span class="sc">~</span>count_pre, <span class="sc">~</span>count_post,</span>
+<span id="cb851-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-3" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">11</span>,     <span class="dv">6</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">6</span>,     <span class="dv">0</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">16</span>,    <span class="dv">13</span>,</span>
+<span id="cb851-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-4" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">8</span>,     <span class="dv">0</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">6</span>,     <span class="dv">2</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">13</span>,    <span class="dv">10</span>,</span>
+<span id="cb851-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-5" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">5</span>,     <span class="dv">2</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">7</span>,     <span class="dv">3</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">11</span>,    <span class="dv">18</span>,</span>
+<span id="cb851-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-6" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">14</span>,     <span class="dv">8</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">8</span>,     <span class="dv">1</span>,    <span class="st">&quot;C&quot;</span>,       <span class="dv">9</span>,     <span class="dv">5</span>,</span>
+<span id="cb851-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-7" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">19</span>,    <span class="dv">11</span>,    <span class="st">&quot;B&quot;</span>,      <span class="dv">18</span>,    <span class="dv">18</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">21</span>,    <span class="dv">23</span>,</span>
+<span id="cb851-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-8" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">6</span>,     <span class="dv">4</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">8</span>,     <span class="dv">4</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">16</span>,    <span class="dv">12</span>,</span>
+<span id="cb851-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-9" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">10</span>,    <span class="dv">13</span>,    <span class="st">&quot;B&quot;</span>,      <span class="dv">19</span>,    <span class="dv">14</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">12</span>,     <span class="dv">5</span>,</span>
+<span id="cb851-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-10" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">6</span>,     <span class="dv">1</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">8</span>,     <span class="dv">9</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">12</span>,    <span class="dv">16</span>,</span>
+<span id="cb851-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-11" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,      <span class="dv">11</span>,     <span class="dv">8</span>,    <span class="st">&quot;B&quot;</span>,       <span class="dv">5</span>,     <span class="dv">1</span>,    <span class="st">&quot;C&quot;</span>,       <span class="dv">7</span>,     <span class="dv">1</span>,</span>
+<span id="cb851-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb851-12" tabindex="-1"></a>  <span class="st">&quot;A&quot;</span>,       <span class="dv">3</span>,     <span class="dv">0</span>,    <span class="st">&quot;B&quot;</span>,      <span class="dv">15</span>,     <span class="dv">9</span>,    <span class="st">&quot;C&quot;</span>,      <span class="dv">12</span>,    <span class="dv">20</span>)</span></code></pre></div>
 </div>
 <div id="wide-format-5" class="section level3 hasAnchor" number="18.2.2">
 <h3><span class="header-section-number">18.2.2</span> Wide Format<a href="gee-count-outcome-antibiotics-for-leprosy.html#wide-format-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb846"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb846-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb846-1" tabindex="-1"></a>data_wide <span class="ot">&lt;-</span> data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb846-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb846-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug =</span> <span class="fu">factor</span>(drug)) <span class="sc">%&gt;%</span> </span>
-<span id="cb846-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb846-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb846-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb846-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, drug, count_pre, count_post)</span>
-<span id="cb846-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb846-5" tabindex="-1"></a></span>
-<span id="cb846-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb846-6" tabindex="-1"></a><span class="fu">str</span>(data_wide)</span></code></pre></div>
+<div class="sourceCode" id="cb852"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb852-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb852-1" tabindex="-1"></a>data_wide <span class="ot">&lt;-</span> data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb852-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb852-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug =</span> <span class="fu">factor</span>(drug)) <span class="sc">%&gt;%</span> </span>
+<span id="cb852-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb852-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb852-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb852-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, drug, count_pre, count_post)</span>
+<span id="cb852-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb852-5" tabindex="-1"></a></span>
+<span id="cb852-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb852-6" tabindex="-1"></a><span class="fu">str</span>(data_wide)</span></code></pre></div>
 <pre><code>tibble [30 × 4] (S3: tbl_df/tbl/data.frame)
  $ id        : int [1:30] 1 2 3 4 5 6 7 8 9 10 ...
  $ drug      : Factor w/ 3 levels &quot;A&quot;,&quot;B&quot;,&quot;C&quot;: 1 2 3 1 2 3 1 2 3 1 ...
  $ count_pre : num [1:30] 11 6 16 8 6 13 5 7 11 14 ...
  $ count_post: num [1:30] 6 0 13 0 2 10 2 3 18 8 ...</code></pre>
-<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb848-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_wide)</span></code></pre></div>
+<div class="sourceCode" id="cb854"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb854-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb854-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_wide)</span></code></pre></div>
 <pre><code>   id drug count_pre count_post
 1   1    A        11          6
 2   2    B         6          0
@@ -943,22 +944,22 @@ Ames, Iowa: Iowa State University Press</p>
 </div>
 <div id="long-format-5" class="section level3 hasAnchor" number="18.2.3">
 <h3><span class="header-section-number">18.2.3</span> Long Format<a href="gee-count-outcome-antibiotics-for-leprosy.html#long-format-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb850-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-1" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb850-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-2" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">gather</span>(<span class="at">key =</span> obs,</span>
-<span id="cb850-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-3" tabindex="-1"></a>                <span class="at">value =</span> count,</span>
-<span id="cb850-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-4" tabindex="-1"></a>                <span class="fu">starts_with</span>(<span class="st">&quot;count&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb850-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">case_when</span>(obs <span class="sc">==</span> <span class="st">&quot;count_pre&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb850-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-6" tabindex="-1"></a>                                 obs <span class="sc">==</span> <span class="st">&quot;count_post&quot;</span> <span class="sc">~</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb850-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, drug, time, count) <span class="sc">%&gt;%</span> </span>
-<span id="cb850-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(id, time)</span>
-<span id="cb850-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-9" tabindex="-1"></a></span>
-<span id="cb850-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb850-10" tabindex="-1"></a><span class="fu">str</span>(data_long)</span></code></pre></div>
+<div class="sourceCode" id="cb856"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb856-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-1" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb856-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-2" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">gather</span>(<span class="at">key =</span> obs,</span>
+<span id="cb856-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-3" tabindex="-1"></a>                <span class="at">value =</span> count,</span>
+<span id="cb856-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-4" tabindex="-1"></a>                <span class="fu">starts_with</span>(<span class="st">&quot;count&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb856-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">case_when</span>(obs <span class="sc">==</span> <span class="st">&quot;count_pre&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb856-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-6" tabindex="-1"></a>                                 obs <span class="sc">==</span> <span class="st">&quot;count_post&quot;</span> <span class="sc">~</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb856-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, drug, time, count) <span class="sc">%&gt;%</span> </span>
+<span id="cb856-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(id, time)</span>
+<span id="cb856-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-9" tabindex="-1"></a></span>
+<span id="cb856-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-10" tabindex="-1"></a><span class="fu">str</span>(data_long)</span></code></pre></div>
 <pre><code>tibble [60 × 4] (S3: tbl_df/tbl/data.frame)
  $ id   : int [1:60] 1 1 2 2 3 3 4 4 5 5 ...
  $ drug : Factor w/ 3 levels &quot;A&quot;,&quot;B&quot;,&quot;C&quot;: 1 1 2 2 3 3 1 1 2 2 ...
  $ time : num [1:60] 0 1 0 1 0 1 0 1 0 1 ...
  $ count: num [1:60] 11 6 6 0 16 13 8 0 6 2 ...</code></pre>
-<div class="sourceCode" id="cb852"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb852-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb852-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_long)</span></code></pre></div>
+<div class="sourceCode" id="cb858"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb858-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb858-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_long)</span></code></pre></div>
 <pre><code>   id drug time count
 1   1    A    0    11
 2   1    A    1     6
@@ -975,21 +976,21 @@ Ames, Iowa: Iowa State University Press</p>
 <h2><span class="header-section-number">18.3</span> Exploratory Data Analysis<a href="gee-count-outcome-antibiotics-for-leprosy.html#exploratory-data-analysis-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="summary-statistics-1" class="section level3 hasAnchor" number="18.3.1">
 <h3><span class="header-section-number">18.3.1</span> Summary Statistics<a href="gee-count-outcome-antibiotics-for-leprosy.html#summary-statistics-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb854"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb854-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb854-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb854-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb854-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(drug, time) <span class="sc">%&gt;%</span> </span>
-<span id="cb854-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb854-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">N =</span> <span class="fu">n</span>(),</span>
-<span id="cb854-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb854-4" tabindex="-1"></a>                   <span class="at">M =</span> <span class="fu">mean</span>(count),</span>
-<span id="cb854-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb854-5" tabindex="-1"></a>                   <span class="at">VAR =</span> <span class="fu">var</span>(count),</span>
-<span id="cb854-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb854-6" tabindex="-1"></a>                   <span class="at">SD =</span> <span class="fu">sd</span>(count)) <span class="sc">%&gt;%</span> </span>
-<span id="cb854-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb854-7" tabindex="-1"></a>  pander<span class="sc">::</span><span class="fu">pander</span>()</span></code></pre></div>
-<table style="width:53%;">
+<div class="sourceCode" id="cb860"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb860-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb860-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(drug, time) <span class="sc">%&gt;%</span> </span>
+<span id="cb860-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">N =</span> <span class="fu">n</span>(),</span>
+<span id="cb860-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-4" tabindex="-1"></a>                   <span class="at">M =</span> <span class="fu">mean</span>(count),</span>
+<span id="cb860-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-5" tabindex="-1"></a>                   <span class="at">VAR =</span> <span class="fu">var</span>(count),</span>
+<span id="cb860-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-6" tabindex="-1"></a>                   <span class="at">SD =</span> <span class="fu">sd</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb860-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-7" tabindex="-1"></a>  pander<span class="sc">::</span><span class="fu">pander</span>()</span></code></pre></div>
+<table style="width:58%;">
 <colgroup>
 <col width="9%" />
 <col width="9%" />
 <col width="6%" />
 <col width="9%" />
-<col width="8%" />
-<col width="8%" />
+<col width="11%" />
+<col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1007,112 +1008,112 @@ Ames, Iowa: Iowa State University Press</p>
 <td align="center">0</td>
 <td align="center">10</td>
 <td align="center">9.3</td>
-<td align="center">23</td>
-<td align="center">4.8</td>
+<td align="center">22.68</td>
+<td align="center">4.762</td>
 </tr>
 <tr class="even">
 <td align="center">A</td>
 <td align="center">1</td>
 <td align="center">10</td>
 <td align="center">5.3</td>
-<td align="center">22</td>
-<td align="center">4.6</td>
+<td align="center">21.57</td>
+<td align="center">4.644</td>
 </tr>
 <tr class="odd">
 <td align="center">B</td>
 <td align="center">0</td>
 <td align="center">10</td>
-<td align="center">10.0</td>
-<td align="center">28</td>
-<td align="center">5.2</td>
+<td align="center">10</td>
+<td align="center">27.56</td>
+<td align="center">5.249</td>
 </tr>
 <tr class="even">
 <td align="center">B</td>
 <td align="center">1</td>
 <td align="center">10</td>
 <td align="center">6.1</td>
-<td align="center">38</td>
-<td align="center">6.2</td>
+<td align="center">37.88</td>
+<td align="center">6.154</td>
 </tr>
 <tr class="odd">
 <td align="center">C</td>
 <td align="center">0</td>
 <td align="center">10</td>
 <td align="center">12.9</td>
-<td align="center">16</td>
-<td align="center">4.0</td>
+<td align="center">15.66</td>
+<td align="center">3.957</td>
 </tr>
 <tr class="even">
 <td align="center">C</td>
 <td align="center">1</td>
 <td align="center">10</td>
 <td align="center">12.3</td>
-<td align="center">51</td>
-<td align="center">7.2</td>
+<td align="center">51.12</td>
+<td align="center">7.15</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="visualize-2" class="section level3 hasAnchor" number="18.3.2">
 <h3><span class="header-section-number">18.3.2</span> Visualize<a href="gee-count-outcome-antibiotics-for-leprosy.html#visualize-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb855-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
-<span id="cb855-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-3" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb855-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-4" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb855-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug_name =</span> <span class="fu">fct_recode</span>(drug,</span>
-<span id="cb855-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-6" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic A&quot;</span> <span class="ot">=</span> <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb855-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-7" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic B&quot;</span> <span class="ot">=</span> <span class="st">&quot;B&quot;</span>,</span>
-<span id="cb855-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-8" tabindex="-1"></a>                                       <span class="st">&quot;Placebo&quot;</span> <span class="ot">=</span> <span class="st">&quot;C&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb855-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_name,</span>
-<span id="cb855-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-10" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
-<span id="cb855-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb855-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-12" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span> drug_name) <span class="sc">+</span></span>
-<span id="cb855-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb855-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb855-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb855-15" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-658-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb856"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb856-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb856-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
-<span id="cb856-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-3" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb856-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-4" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb856-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug_name =</span> <span class="fu">fct_recode</span>(drug,</span>
-<span id="cb856-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-6" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic A&quot;</span> <span class="ot">=</span> <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb856-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-7" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic B&quot;</span> <span class="ot">=</span> <span class="st">&quot;B&quot;</span>,</span>
-<span id="cb856-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-8" tabindex="-1"></a>                                       <span class="st">&quot;Placebo&quot;</span> <span class="ot">=</span> <span class="st">&quot;C&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb856-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
-<span id="cb856-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-10" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
-<span id="cb856-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id),</span>
-<span id="cb856-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-12" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
-<span id="cb856-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-13" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> drug),</span>
-<span id="cb856-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-14" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb856-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-15" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span> drug_name) <span class="sc">+</span></span>
-<span id="cb856-16"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-16" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb856-17"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb856-18"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb856-18" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-659-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb857-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
-<span id="cb857-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-3" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb857-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-4" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb857-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug_name =</span> <span class="fu">fct_recode</span>(drug,</span>
-<span id="cb857-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-6" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic A&quot;</span> <span class="ot">=</span> <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb857-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-7" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic B&quot;</span> <span class="ot">=</span> <span class="st">&quot;B&quot;</span>,</span>
-<span id="cb857-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-8" tabindex="-1"></a>                                       <span class="st">&quot;Placebo&quot;</span> <span class="ot">=</span> <span class="st">&quot;C&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb857-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
-<span id="cb857-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-10" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
-<span id="cb857-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-11" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> drug,</span>
-<span id="cb857-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-12" tabindex="-1"></a>                  <span class="at">color =</span> drug_name,</span>
-<span id="cb857-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-13" tabindex="-1"></a>                  <span class="at">fill =</span> drug_name),</span>
-<span id="cb857-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-14" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb857-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-15" tabindex="-1"></a>              <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb857-16"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-16" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb857-17"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb857-18"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-18" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>,</span>
-<span id="cb857-19"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-19" tabindex="-1"></a>       <span class="at">color =</span> <span class="cn">NULL</span>,</span>
-<span id="cb857-20"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-20" tabindex="-1"></a>       <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb857-21"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-21" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,</span>
-<span id="cb857-22"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb857-22" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre-Treatment&quot;</span>, <span class="st">&quot;Post-Treatment&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-660-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb861-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb861-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
+<span id="cb861-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-3" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb861-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-4" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb861-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug_name =</span> <span class="fu">fct_recode</span>(drug,</span>
+<span id="cb861-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-6" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic A&quot;</span> <span class="ot">=</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb861-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-7" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic B&quot;</span> <span class="ot">=</span> <span class="st">&quot;B&quot;</span>,</span>
+<span id="cb861-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-8" tabindex="-1"></a>                                       <span class="st">&quot;Placebo&quot;</span> <span class="ot">=</span> <span class="st">&quot;C&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb861-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_name,</span>
+<span id="cb861-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-10" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb861-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb861-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-12" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span> drug_name) <span class="sc">+</span></span>
+<span id="cb861-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb861-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb861-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb861-15" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-667-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb862"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb862-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb862-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
+<span id="cb862-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-3" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb862-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-4" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb862-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug_name =</span> <span class="fu">fct_recode</span>(drug,</span>
+<span id="cb862-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-6" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic A&quot;</span> <span class="ot">=</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb862-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-7" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic B&quot;</span> <span class="ot">=</span> <span class="st">&quot;B&quot;</span>,</span>
+<span id="cb862-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-8" tabindex="-1"></a>                                       <span class="st">&quot;Placebo&quot;</span> <span class="ot">=</span> <span class="st">&quot;C&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb862-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
+<span id="cb862-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-10" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb862-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id),</span>
+<span id="cb862-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-12" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb862-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-13" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> drug),</span>
+<span id="cb862-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-14" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb862-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-15" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span> drug_name) <span class="sc">+</span></span>
+<span id="cb862-16"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-16" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb862-17"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb862-18"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-18" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-668-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb863-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-1" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb863-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
+<span id="cb863-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-3" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb863-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-4" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb863-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug_name =</span> <span class="fu">fct_recode</span>(drug,</span>
+<span id="cb863-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-6" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic A&quot;</span> <span class="ot">=</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb863-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-7" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic B&quot;</span> <span class="ot">=</span> <span class="st">&quot;B&quot;</span>,</span>
+<span id="cb863-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-8" tabindex="-1"></a>                                       <span class="st">&quot;Placebo&quot;</span> <span class="ot">=</span> <span class="st">&quot;C&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb863-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time,</span>
+<span id="cb863-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-10" tabindex="-1"></a>             <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<span id="cb863-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-11" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> drug,</span>
+<span id="cb863-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-12" tabindex="-1"></a>                  <span class="at">color =</span> drug_name,</span>
+<span id="cb863-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-13" tabindex="-1"></a>                  <span class="at">fill =</span> drug_name),</span>
+<span id="cb863-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-14" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb863-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-15" tabindex="-1"></a>              <span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb863-16"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-16" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb863-17"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-17" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb863-18"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-18" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>,</span>
+<span id="cb863-19"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-19" tabindex="-1"></a>       <span class="at">color =</span> <span class="cn">NULL</span>,</span>
+<span id="cb863-20"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-20" tabindex="-1"></a>       <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb863-21"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-21" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,</span>
+<span id="cb863-22"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb863-22" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre-Treatment&quot;</span>, <span class="st">&quot;Post-Treatment&quot;</span>))</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-669-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="generalized-estimating-equations-gee-2" class="section level2 hasAnchor" number="18.4">
@@ -1122,40 +1123,40 @@ Ames, Iowa: Iowa State University Press</p>
 <div id="fit-the-models---to-determine-correlation-structure" class="section level4 hasAnchor" number="18.4.1.1">
 <h4><span class="header-section-number">18.4.1.1</span> Fit the models - to determine correlation structure<a href="gee-count-outcome-antibiotics-for-leprosy.html#fit-the-models---to-determine-correlation-structure" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The <code>gee()</code> function in the <code>gee</code> package</p>
-<div class="sourceCode" id="cb858"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb858-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb858-1" tabindex="-1"></a>mod_gee_ind <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> drug<span class="sc">*</span>time,</span>
-<span id="cb858-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb858-2" tabindex="-1"></a>                        <span class="at">data =</span> data_long,</span>
-<span id="cb858-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb858-3" tabindex="-1"></a>                        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb858-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb858-4" tabindex="-1"></a>                        <span class="at">id =</span> id,</span>
-<span id="cb858-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb858-5" tabindex="-1"></a>                        <span class="at">corstr =</span> <span class="st">&quot;independence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb864"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb864-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-1" tabindex="-1"></a>mod_gee_ind <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> drug<span class="sc">*</span>time,</span>
+<span id="cb864-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-2" tabindex="-1"></a>                        <span class="at">data =</span> data_long,</span>
+<span id="cb864-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-3" tabindex="-1"></a>                        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb864-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-4" tabindex="-1"></a>                        <span class="at">id =</span> id,</span>
+<span id="cb864-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-5" tabindex="-1"></a>                        <span class="at">corstr =</span> <span class="st">&quot;independence&quot;</span>)</span></code></pre></div>
 <pre><code>(Intercept)       drugB       drugC        time  drugB:time  drugC:time 
  2.23001440  0.07257069  0.32721291 -0.56230758  0.06801126  0.51467953 </code></pre>
-<div class="sourceCode" id="cb860"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb860-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-1" tabindex="-1"></a>mod_gee_exc <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> drug<span class="sc">*</span>time,</span>
-<span id="cb860-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-2" tabindex="-1"></a>                        <span class="at">data =</span> data_long,</span>
-<span id="cb860-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-3" tabindex="-1"></a>                        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb860-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-4" tabindex="-1"></a>                        <span class="at">id =</span> id,</span>
-<span id="cb860-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb860-5" tabindex="-1"></a>                        <span class="at">corstr =</span> <span class="st">&quot;exchangeable&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb866"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb866-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb866-1" tabindex="-1"></a>mod_gee_exc <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> drug<span class="sc">*</span>time,</span>
+<span id="cb866-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb866-2" tabindex="-1"></a>                        <span class="at">data =</span> data_long,</span>
+<span id="cb866-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb866-3" tabindex="-1"></a>                        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb866-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb866-4" tabindex="-1"></a>                        <span class="at">id =</span> id,</span>
+<span id="cb866-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb866-5" tabindex="-1"></a>                        <span class="at">corstr =</span> <span class="st">&quot;exchangeable&quot;</span>)</span></code></pre></div>
 <pre><code>(Intercept)       drugB       drugC        time  drugB:time  drugC:time 
  2.23001440  0.07257069  0.32721291 -0.56230758  0.06801126  0.51467953 </code></pre>
-<div class="sourceCode" id="cb862"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb862-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-1" tabindex="-1"></a>mod_gee_uns <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> drug<span class="sc">*</span>time,</span>
-<span id="cb862-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-2" tabindex="-1"></a>                        <span class="at">data =</span> data_long,</span>
-<span id="cb862-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-3" tabindex="-1"></a>                        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb862-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-4" tabindex="-1"></a>                        <span class="at">id =</span> id,</span>
-<span id="cb862-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb862-5" tabindex="-1"></a>                        <span class="at">corstr =</span> <span class="st">&quot;unstructured&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb868"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb868-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb868-1" tabindex="-1"></a>mod_gee_uns <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> drug<span class="sc">*</span>time,</span>
+<span id="cb868-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb868-2" tabindex="-1"></a>                        <span class="at">data =</span> data_long,</span>
+<span id="cb868-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb868-3" tabindex="-1"></a>                        <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb868-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb868-4" tabindex="-1"></a>                        <span class="at">id =</span> id,</span>
+<span id="cb868-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb868-5" tabindex="-1"></a>                        <span class="at">corstr =</span> <span class="st">&quot;unstructured&quot;</span>)</span></code></pre></div>
 <pre><code>(Intercept)       drugB       drugC        time  drugB:time  drugC:time 
  2.23001440  0.07257069  0.32721291 -0.56230758  0.06801126  0.51467953 </code></pre>
 <p>The GEE models display the robust (sandwich) standard errors.</p>
 </div>
 <div id="raw-estimates-logit-scale-2" class="section level4 hasAnchor" number="18.4.1.2">
 <h4><span class="header-section-number">18.4.1.2</span> Raw Estimates (Logit Scale)<a href="gee-count-outcome-antibiotics-for-leprosy.html#raw-estimates-logit-scale-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb864"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb864-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(mod_gee_ind, </span>
-<span id="cb864-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-2" tabindex="-1"></a>                     mod_gee_exc, </span>
-<span id="cb864-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-3" tabindex="-1"></a>                     mod_gee_uns), </span>
-<span id="cb864-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-4" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Independence&quot;</span>,</span>
-<span id="cb864-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-5" tabindex="-1"></a>                                       <span class="st">&quot;Exchangeable&quot;</span>,</span>
-<span id="cb864-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-6" tabindex="-1"></a>                                       <span class="st">&quot;Unstructured&quot;</span>),</span>
-<span id="cb864-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-7" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb864-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-8" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb864-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb864-9" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GEE - Estimates on Log Scale&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb870"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb870-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(mod_gee_ind, </span>
+<span id="cb870-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-2" tabindex="-1"></a>                     mod_gee_exc, </span>
+<span id="cb870-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-3" tabindex="-1"></a>                     mod_gee_uns), </span>
+<span id="cb870-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-4" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Independence&quot;</span>,</span>
+<span id="cb870-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-5" tabindex="-1"></a>                                       <span class="st">&quot;Exchangeable&quot;</span>,</span>
+<span id="cb870-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-6" tabindex="-1"></a>                                       <span class="st">&quot;Unstructured&quot;</span>),</span>
+<span id="cb870-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-7" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb870-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-8" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb870-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-9" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GEE - Estimates on Log Scale&quot;</span>)</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
 <caption>
 GEE - Estimates on Log Scale
@@ -1301,16 +1302,16 @@ Num. obs.
 </div>
 <div id="exponentiate-the-estimates-odds-ratio-scale-2" class="section level4 hasAnchor" number="18.4.1.3">
 <h4><span class="header-section-number">18.4.1.3</span> Exponentiate the Estimates (odds ratio scale)<a href="gee-count-outcome-antibiotics-for-leprosy.html#exponentiate-the-estimates-odds-ratio-scale-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb865-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_gee_exp</span>(mod_gee_ind), </span>
-<span id="cb865-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-2" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_exc), </span>
-<span id="cb865-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-3" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_uns)),</span>
-<span id="cb865-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-4" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Independence&quot;</span>,</span>
-<span id="cb865-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-5" tabindex="-1"></a>                                       <span class="st">&quot;Exchangeable&quot;</span>,</span>
-<span id="cb865-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-6" tabindex="-1"></a>                                       <span class="st">&quot;Unstructured&quot;</span>),</span>
-<span id="cb865-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-7" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb865-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-8" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb865-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-9" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>,</span>
-<span id="cb865-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb865-10" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GEE - Estimates on Count Scale (RR)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb871"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb871-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_gee_exp</span>(mod_gee_ind), </span>
+<span id="cb871-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-2" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_exc), </span>
+<span id="cb871-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-3" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_uns)),</span>
+<span id="cb871-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-4" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Independence&quot;</span>,</span>
+<span id="cb871-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-5" tabindex="-1"></a>                                       <span class="st">&quot;Exchangeable&quot;</span>,</span>
+<span id="cb871-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-6" tabindex="-1"></a>                                       <span class="st">&quot;Unstructured&quot;</span>),</span>
+<span id="cb871-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-7" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb871-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-8" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb871-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-9" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>,</span>
+<span id="cb871-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb871-10" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;GEE - Estimates on Count Scale (RR)&quot;</span>)</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
 <caption>
 GEE - Estimates on Count Scale (RR)
@@ -1442,10 +1443,10 @@ Dispersion
 </div>
 <div id="manual-extraction-1" class="section level4 hasAnchor" number="18.4.1.4">
 <h4><span class="header-section-number">18.4.1.4</span> Manual Extraction<a href="gee-count-outcome-antibiotics-for-leprosy.html#manual-extraction-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb866"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb866-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb866-1" tabindex="-1"></a>mod_gee_exc <span class="sc">%&gt;%</span> <span class="fu">coef</span>() <span class="sc">%&gt;%</span> <span class="fu">exp</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb872-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb872-1" tabindex="-1"></a>mod_gee_exc <span class="sc">%&gt;%</span> <span class="fu">coef</span>() <span class="sc">%&gt;%</span> <span class="fu">exp</span>()</span></code></pre></div>
 <pre><code>(Intercept)       drugB       drugC        time  drugB:time  drugC:time 
   9.3000000   1.0752688   1.3870968   0.5698925   1.0703774   1.6731022 </code></pre>
-<div class="sourceCode" id="cb868"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb868-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb868-1" tabindex="-1"></a><span class="fl">0.5699</span><span class="sc">*</span><span class="fl">1.6731</span></span></code></pre></div>
+<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb874-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb874-1" tabindex="-1"></a><span class="fl">0.5699</span><span class="sc">*</span><span class="fl">1.6731</span></span></code></pre></div>
 <pre><code>[1] 0.9534997</code></pre>
 </div>
 </div>
@@ -1461,13 +1462,13 @@ Dispersion
 <h3><span class="header-section-number">18.4.3</span> Visualize the Final Model<a href="gee-count-outcome-antibiotics-for-leprosy.html#visualize-the-final-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refit-with-the-geeglm-function-in-the-geepack-package" class="section level4 hasAnchor" number="18.4.3.1">
 <h4><span class="header-section-number">18.4.3.1</span> Refit with the <code>geeglm()</code> function in the <code>geepack</code> package<a href="gee-count-outcome-antibiotics-for-leprosy.html#refit-with-the-geeglm-function-in-the-geepack-package" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb870"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb870-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-1" tabindex="-1"></a>mod_geeglm_exc <span class="ot">&lt;-</span> geepack<span class="sc">::</span><span class="fu">geeglm</span>(count <span class="sc">~</span> drug<span class="sc">*</span>time,</span>
-<span id="cb870-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-2" tabindex="-1"></a>                                  <span class="at">data =</span> data_long,</span>
-<span id="cb870-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-3" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb870-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-4" tabindex="-1"></a>                                  <span class="at">id =</span> id,</span>
-<span id="cb870-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-5" tabindex="-1"></a>                                  <span class="at">corstr =</span> <span class="st">&quot;exchangeable&quot;</span>)</span>
-<span id="cb870-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-6" tabindex="-1"></a></span>
-<span id="cb870-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb870-7" tabindex="-1"></a><span class="fu">summary</span>(mod_geeglm_exc)</span></code></pre></div>
+<div class="sourceCode" id="cb876"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb876-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb876-1" tabindex="-1"></a>mod_geeglm_exc <span class="ot">&lt;-</span> geepack<span class="sc">::</span><span class="fu">geeglm</span>(count <span class="sc">~</span> drug<span class="sc">*</span>time,</span>
+<span id="cb876-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb876-2" tabindex="-1"></a>                                  <span class="at">data =</span> data_long,</span>
+<span id="cb876-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb876-3" tabindex="-1"></a>                                  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb876-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb876-4" tabindex="-1"></a>                                  <span class="at">id =</span> id,</span>
+<span id="cb876-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb876-5" tabindex="-1"></a>                                  <span class="at">corstr =</span> <span class="st">&quot;exchangeable&quot;</span>)</span>
+<span id="cb876-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb876-6" tabindex="-1"></a></span>
+<span id="cb876-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb876-7" tabindex="-1"></a><span class="fu">summary</span>(mod_geeglm_exc)</span></code></pre></div>
 <pre><code>
 Call:
 geepack::geeglm(formula = count ~ drug * time, family = poisson(link = &quot;log&quot;), 
@@ -1498,16 +1499,16 @@ Number of clusters:   30  Maximum cluster size: 2 </code></pre>
 </div>
 <div id="quick-1" class="section level4 hasAnchor" number="18.4.3.2">
 <h4><span class="header-section-number">18.4.3.2</span> Quick<a href="gee-count-outcome-antibiotics-for-leprosy.html#quick-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb872-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb872-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_geeglm_exc,</span>
-<span id="cb872-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb872-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
-<span id="cb872-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb872-3" tabindex="-1"></a>                            <span class="at">modx =</span> drug)</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-667-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb878-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb878-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_geeglm_exc,</span>
+<span id="cb878-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb878-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
+<span id="cb878-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb878-3" tabindex="-1"></a>                            <span class="at">modx =</span> drug)</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-676-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="more-polished" class="section level4 hasAnchor" number="18.4.3.3">
 <h4><span class="header-section-number">18.4.3.3</span> More Polished<a href="gee-count-outcome-antibiotics-for-leprosy.html#more-polished" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb873"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb873-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb873-1" tabindex="-1"></a>mod_geeglm_exc <span class="sc">%&gt;%</span> </span>
-<span id="cb873-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb873-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> drug<span class="sc">*</span>time,</span>
-<span id="cb873-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb873-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb879-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb879-1" tabindex="-1"></a>mod_geeglm_exc <span class="sc">%&gt;%</span> </span>
+<span id="cb879-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb879-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> drug<span class="sc">*</span>time,</span>
+<span id="cb879-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb879-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <pre><code> drug time rate   SE df lower.CL upper.CL
  A       0  9.3 1.43 54     6.83    12.65
  B       0 10.0 1.57 54     7.29    13.71
@@ -1519,10 +1520,10 @@ Number of clusters:   30  Maximum cluster size: 2 </code></pre>
 Covariance estimate used: vbeta 
 Confidence level used: 0.95 
 Intervals are back-transformed from the log scale </code></pre>
-<div class="sourceCode" id="cb875"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb875-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb875-1" tabindex="-1"></a>mod_geeglm_exc <span class="sc">%&gt;%</span> </span>
-<span id="cb875-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb875-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> drug<span class="sc">*</span>time,</span>
-<span id="cb875-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb875-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb875-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb875-4" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb881"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb881-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb881-1" tabindex="-1"></a>mod_geeglm_exc <span class="sc">%&gt;%</span> </span>
+<span id="cb881-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb881-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> drug<span class="sc">*</span>time,</span>
+<span id="cb881-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb881-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb881-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb881-4" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span></code></pre></div>
 <pre><code>  drug time rate    SE df lower.CL upper.CL
 1    A    0  9.3 1.429 54    6.835   12.654
 2    B    0 10.0 1.575 54    7.293   13.713
@@ -1530,36 +1531,36 @@ Intervals are back-transformed from the log scale </code></pre>
 4    A    1  5.3 1.393 54    3.129    8.978
 5    B    1  6.1 1.846 54    3.325   11.191
 6    C    1 12.3 2.145 54    8.671   17.448</code></pre>
-<div class="sourceCode" id="cb877"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb877-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-1" tabindex="-1"></a>mod_geeglm_exc <span class="sc">%&gt;%</span> </span>
-<span id="cb877-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> drug<span class="sc">*</span>time,</span>
-<span id="cb877-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
-<span id="cb877-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-4" tabindex="-1"></a>                   <span class="at">level =</span> .<span class="dv">68</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb877-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-5" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb877-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
-<span id="cb877-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-7" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb877-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-8" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb877-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug_name =</span> <span class="fu">fct_recode</span>(drug,</span>
-<span id="cb877-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-10" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic A&quot;</span> <span class="ot">=</span> <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb877-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-11" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic B&quot;</span> <span class="ot">=</span> <span class="st">&quot;B&quot;</span>,</span>
-<span id="cb877-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-12" tabindex="-1"></a>                                       <span class="st">&quot;Placebo&quot;</span> <span class="ot">=</span> <span class="st">&quot;C&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb877-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-13" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_name,</span>
-<span id="cb877-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-14" tabindex="-1"></a>             <span class="at">y =</span> rate,</span>
-<span id="cb877-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-15" tabindex="-1"></a>             <span class="at">group =</span> drug_name <span class="sc">%&gt;%</span> fct_rev,</span>
-<span id="cb877-16"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-16" tabindex="-1"></a>             <span class="at">color =</span> drug_name <span class="sc">%&gt;%</span> fct_rev)) <span class="sc">+</span></span>
-<span id="cb877-17"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-17" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL,</span>
-<span id="cb877-18"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-18" tabindex="-1"></a>                    <span class="at">ymax =</span> upper.CL),</span>
-<span id="cb877-19"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-19" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">3</span>,</span>
-<span id="cb877-20"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-20" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
-<span id="cb877-21"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-21" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
-<span id="cb877-22"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-22" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
-<span id="cb877-23"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-23" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb877-24"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-24" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb877-25"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-25" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Marginal Mean</span><span class="sc">\n</span><span class="st">Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>,</span>
-<span id="cb877-26"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-26" tabindex="-1"></a>       <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb877-27"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-27" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb877-28"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-28" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>),</span>
-<span id="cb877-29"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb877-29" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-670-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb883"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb883-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-1" tabindex="-1"></a>mod_geeglm_exc <span class="sc">%&gt;%</span> </span>
+<span id="cb883-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> drug<span class="sc">*</span>time,</span>
+<span id="cb883-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
+<span id="cb883-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-4" tabindex="-1"></a>                   <span class="at">level =</span> .<span class="dv">68</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb883-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-5" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb883-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
+<span id="cb883-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-7" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb883-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-8" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb883-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">drug_name =</span> <span class="fu">fct_recode</span>(drug,</span>
+<span id="cb883-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-10" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic A&quot;</span> <span class="ot">=</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb883-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-11" tabindex="-1"></a>                                       <span class="st">&quot;Antibiotic B&quot;</span> <span class="ot">=</span> <span class="st">&quot;B&quot;</span>,</span>
+<span id="cb883-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-12" tabindex="-1"></a>                                       <span class="st">&quot;Placebo&quot;</span> <span class="ot">=</span> <span class="st">&quot;C&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb883-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-13" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_name,</span>
+<span id="cb883-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-14" tabindex="-1"></a>             <span class="at">y =</span> rate,</span>
+<span id="cb883-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-15" tabindex="-1"></a>             <span class="at">group =</span> drug_name <span class="sc">%&gt;%</span> fct_rev,</span>
+<span id="cb883-16"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-16" tabindex="-1"></a>             <span class="at">color =</span> drug_name <span class="sc">%&gt;%</span> fct_rev)) <span class="sc">+</span></span>
+<span id="cb883-17"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-17" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL,</span>
+<span id="cb883-18"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-18" tabindex="-1"></a>                    <span class="at">ymax =</span> upper.CL),</span>
+<span id="cb883-19"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-19" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">3</span>,</span>
+<span id="cb883-20"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-20" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb883-21"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-21" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb883-22"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-22" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb883-23"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-23" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb883-24"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-24" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb883-25"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-25" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Marginal Mean</span><span class="sc">\n</span><span class="st">Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>,</span>
+<span id="cb883-26"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-26" tabindex="-1"></a>       <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb883-27"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-27" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb883-28"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-28" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>),</span>
+<span id="cb883-29"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-29" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-679-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1567,21 +1568,21 @@ Intervals are back-transformed from the log scale </code></pre>
 <h2><span class="header-section-number">18.5</span> Follow-up Analysis<a href="gee-count-outcome-antibiotics-for-leprosy.html#follow-up-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="collapse-the-predictor" class="section level3 hasAnchor" number="18.5.1">
 <h3><span class="header-section-number">18.5.1</span> Collapse the Predictor<a href="gee-count-outcome-antibiotics-for-leprosy.html#collapse-the-predictor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb878-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb878-1" tabindex="-1"></a>data_remodel <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb878-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb878-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">antibiotic =</span> drug <span class="sc">%&gt;%</span> </span>
-<span id="cb878-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb878-3" tabindex="-1"></a>                  forcats<span class="sc">::</span><span class="fu">fct_collapse</span>(<span class="at">yes =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
-<span id="cb878-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb878-4" tabindex="-1"></a>                                        <span class="at">no =</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb884"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb884-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-1" tabindex="-1"></a>data_remodel <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb884-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">antibiotic =</span> drug <span class="sc">%&gt;%</span> </span>
+<span id="cb884-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-3" tabindex="-1"></a>                  forcats<span class="sc">::</span><span class="fu">fct_collapse</span>(<span class="at">yes =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb884-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-4" tabindex="-1"></a>                                        <span class="at">no =</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>)))</span></code></pre></div>
 </div>
 <div id="reduce-the-model---geegee" class="section level3 hasAnchor" number="18.5.2">
 <h3><span class="header-section-number">18.5.2</span> Reduce the Model - <code>gee::gee()</code><a href="gee-count-outcome-antibiotics-for-leprosy.html#reduce-the-model---geegee" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb879-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb879-1" tabindex="-1"></a>mod_gee_exc2 <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> antibiotic<span class="sc">:</span>time ,</span>
-<span id="cb879-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb879-2" tabindex="-1"></a>                         <span class="at">data =</span> data_remodel,</span>
-<span id="cb879-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb879-3" tabindex="-1"></a>                         <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb879-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb879-4" tabindex="-1"></a>                         <span class="at">id =</span> id,</span>
-<span id="cb879-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb879-5" tabindex="-1"></a>                         <span class="at">corstr =</span> <span class="st">&quot;exchangeable&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb885"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb885-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-1" tabindex="-1"></a>mod_gee_exc2 <span class="ot">&lt;-</span> gee<span class="sc">::</span><span class="fu">gee</span>(count <span class="sc">~</span> antibiotic<span class="sc">:</span>time ,</span>
+<span id="cb885-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-2" tabindex="-1"></a>                         <span class="at">data =</span> data_remodel,</span>
+<span id="cb885-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-3" tabindex="-1"></a>                         <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb885-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-4" tabindex="-1"></a>                         <span class="at">id =</span> id,</span>
+<span id="cb885-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-5" tabindex="-1"></a>                         <span class="at">corstr =</span> <span class="st">&quot;exchangeable&quot;</span>)</span></code></pre></div>
 <pre><code>       (Intercept) antibioticyes:time  antibioticno:time 
             2.3734            -0.6329             0.1362 </code></pre>
-<div class="sourceCode" id="cb881"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb881-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb881-1" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_exc2)</span></code></pre></div>
+<div class="sourceCode" id="cb887"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb887-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb887-1" tabindex="-1"></a><span class="fu">summary</span>(mod_gee_exc2)</span></code></pre></div>
 <pre><code>
  GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA
  gee S-function, version 4.13 modified 98/01/27 (1998) 
@@ -1616,14 +1617,14 @@ Working Correlation
 </div>
 <div id="compare-parameters" class="section level3 hasAnchor" number="18.5.3">
 <h3><span class="header-section-number">18.5.3</span> Compare Parameters<a href="gee-count-outcome-antibiotics-for-leprosy.html#compare-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb883"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb883-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_gee_exp</span>(mod_gee_exc), </span>
-<span id="cb883-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-2" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_exc2)), </span>
-<span id="cb883-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-3" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Original&quot;</span>,</span>
-<span id="cb883-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-4" tabindex="-1"></a>                                       <span class="st">&quot;Refit&quot;</span>),</span>
-<span id="cb883-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-5" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb883-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-6" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb883-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-7" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>,</span>
-<span id="cb883-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb883-8" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Estimates on Count Scale (Exchangeable)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb889"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb889-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(<span class="fu">extract_gee_exp</span>(mod_gee_exc), </span>
+<span id="cb889-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-2" tabindex="-1"></a>                     <span class="fu">extract_gee_exp</span>(mod_gee_exc2)), </span>
+<span id="cb889-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-3" tabindex="-1"></a>                <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Original&quot;</span>,</span>
+<span id="cb889-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-4" tabindex="-1"></a>                                       <span class="st">&quot;Refit&quot;</span>),</span>
+<span id="cb889-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-5" tabindex="-1"></a>                <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb889-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-6" tabindex="-1"></a>                <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb889-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-7" tabindex="-1"></a>                <span class="at">ci.test =</span> <span class="dv">1</span>,</span>
+<span id="cb889-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-8" tabindex="-1"></a>                <span class="at">caption =</span> <span class="st">&quot;Estimates on Count Scale (Exchangeable)&quot;</span>)</span></code></pre></div>
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
 <caption>
 Estimates on Count Scale (Exchangeable)
@@ -1762,51 +1763,51 @@ Dispersion
 <h3><span class="header-section-number">18.5.5</span> Visualize<a href="gee-count-outcome-antibiotics-for-leprosy.html#visualize-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refit-with-geepackgeeglm" class="section level4 hasAnchor" number="18.5.5.1">
 <h4><span class="header-section-number">18.5.5.1</span> Refit with <code>geepack::geeglm()</code><a href="gee-count-outcome-antibiotics-for-leprosy.html#refit-with-geepackgeeglm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb884"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb884-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-1" tabindex="-1"></a>mod_geeglm_exc2 <span class="ot">&lt;-</span> geepack<span class="sc">::</span><span class="fu">geeglm</span>(count <span class="sc">~</span> antibiotic<span class="sc">:</span>time,</span>
-<span id="cb884-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-2" tabindex="-1"></a>                                   <span class="at">data =</span> data_remodel,</span>
-<span id="cb884-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-3" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
-<span id="cb884-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-4" tabindex="-1"></a>                                   <span class="at">id =</span> id,</span>
-<span id="cb884-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb884-5" tabindex="-1"></a>                                   <span class="at">corstr =</span> <span class="st">&quot;exchangeable&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb890"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb890-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb890-1" tabindex="-1"></a>mod_geeglm_exc2 <span class="ot">&lt;-</span> geepack<span class="sc">::</span><span class="fu">geeglm</span>(count <span class="sc">~</span> antibiotic<span class="sc">:</span>time,</span>
+<span id="cb890-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb890-2" tabindex="-1"></a>                                   <span class="at">data =</span> data_remodel,</span>
+<span id="cb890-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb890-3" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb890-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb890-4" tabindex="-1"></a>                                   <span class="at">id =</span> id,</span>
+<span id="cb890-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb890-5" tabindex="-1"></a>                                   <span class="at">corstr =</span> <span class="st">&quot;exchangeable&quot;</span>)</span></code></pre></div>
 </div>
 <div id="quick-2" class="section level4 hasAnchor" number="18.5.5.2">
 <h4><span class="header-section-number">18.5.5.2</span> Quick<a href="gee-count-outcome-antibiotics-for-leprosy.html#quick-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb885"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb885-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_geeglm_exc2,</span>
-<span id="cb885-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
-<span id="cb885-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-3" tabindex="-1"></a>                            <span class="at">modx =</span> antibiotic) <span class="sc">+</span></span>
-<span id="cb885-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb885-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-675-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb891"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb891-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb891-1" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(<span class="at">model =</span> mod_geeglm_exc2,</span>
+<span id="cb891-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb891-2" tabindex="-1"></a>                            <span class="at">pred =</span> time,</span>
+<span id="cb891-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb891-3" tabindex="-1"></a>                            <span class="at">modx =</span> antibiotic) <span class="sc">+</span></span>
+<span id="cb891-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb891-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-684-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="more-polished-1" class="section level4 hasAnchor" number="18.5.5.3">
 <h4><span class="header-section-number">18.5.5.3</span> More Polished<a href="gee-count-outcome-antibiotics-for-leprosy.html#more-polished-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb886"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb886-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-1" tabindex="-1"></a>mod_geeglm_exc2 <span class="sc">%&gt;%</span> </span>
-<span id="cb886-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> antibiotic<span class="sc">*</span>time,</span>
-<span id="cb886-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
-<span id="cb886-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-4" tabindex="-1"></a>                   <span class="at">level =</span> .<span class="dv">68</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb886-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-5" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb886-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
-<span id="cb886-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-7" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb886-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-8" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb886-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_name,</span>
-<span id="cb886-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-10" tabindex="-1"></a>             <span class="at">y =</span> rate,</span>
-<span id="cb886-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-11" tabindex="-1"></a>             <span class="at">group =</span> antibiotic,</span>
-<span id="cb886-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-12" tabindex="-1"></a>             <span class="at">color =</span> antibiotic)) <span class="sc">+</span></span>
-<span id="cb886-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-13" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL,</span>
-<span id="cb886-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-14" tabindex="-1"></a>                    <span class="at">ymax =</span> upper.CL),</span>
-<span id="cb886-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-15" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">3</span>,</span>
-<span id="cb886-16"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-16" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
-<span id="cb886-17"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-17" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
-<span id="cb886-18"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-18" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
-<span id="cb886-19"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-19" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb886-20"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb886-21"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-21" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Marginal Mean</span><span class="sc">\n</span><span class="st">Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>,</span>
-<span id="cb886-22"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-22" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Antibiotic A or B&quot;</span>) <span class="sc">+</span></span>
-<span id="cb886-23"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-23" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb886-24"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-24" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>),</span>
-<span id="cb886-25"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb886-25" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
-<p><img src="v5_mlm_files/figure-html/unnamed-chunk-676-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb887"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb887-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb887-1" tabindex="-1"></a>mod_geeglm_exc2 <span class="sc">%&gt;%</span> </span>
-<span id="cb887-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb887-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(pairwise <span class="sc">~</span> time <span class="sc">|</span> antibiotic,</span>
-<span id="cb887-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb887-3" tabindex="-1"></a>                   <span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb892"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb892-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-1" tabindex="-1"></a>mod_geeglm_exc2 <span class="sc">%&gt;%</span> </span>
+<span id="cb892-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> antibiotic<span class="sc">*</span>time,</span>
+<span id="cb892-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
+<span id="cb892-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-4" tabindex="-1"></a>                   <span class="at">level =</span> .<span class="dv">68</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb892-5"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-5" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb892-6"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">time_name =</span> <span class="fu">case_when</span>(time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Pre&quot;</span>,</span>
+<span id="cb892-7"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-7" tabindex="-1"></a>                                      time <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Post&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb892-8"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-8" tabindex="-1"></a>                  <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Pre&quot;</span>, <span class="st">&quot;Post&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb892-9"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_name,</span>
+<span id="cb892-10"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-10" tabindex="-1"></a>             <span class="at">y =</span> rate,</span>
+<span id="cb892-11"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-11" tabindex="-1"></a>             <span class="at">group =</span> antibiotic,</span>
+<span id="cb892-12"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-12" tabindex="-1"></a>             <span class="at">color =</span> antibiotic)) <span class="sc">+</span></span>
+<span id="cb892-13"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-13" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL,</span>
+<span id="cb892-14"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-14" tabindex="-1"></a>                    <span class="at">ymax =</span> upper.CL),</span>
+<span id="cb892-15"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-15" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">3</span>,</span>
+<span id="cb892-16"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-16" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb892-17"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-17" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb892-18"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-18" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> .<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb892-19"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-19" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb892-20"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-20" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb892-21"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-21" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Estimated Marginal Mean</span><span class="sc">\n</span><span class="st">Number of Leprosy Bacilli at Six Sites of the Body&quot;</span>,</span>
+<span id="cb892-22"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-22" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Antibiotic A or B&quot;</span>) <span class="sc">+</span></span>
+<span id="cb892-23"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-23" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb892-24"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-24" tabindex="-1"></a>        <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>),</span>
+<span id="cb892-25"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb892-25" tabindex="-1"></a>        <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>))</span></code></pre></div>
+<p><img src="v5_mlm_files/figure-html/unnamed-chunk-685-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb893"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb893-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb893-1" tabindex="-1"></a>mod_geeglm_exc2 <span class="sc">%&gt;%</span> </span>
+<span id="cb893-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb893-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(pairwise <span class="sc">~</span> time <span class="sc">|</span> antibiotic,</span>
+<span id="cb893-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb893-3" tabindex="-1"></a>                   <span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>$emmeans
 antibiotic = yes:
  time emmean     SE df lower.CL upper.CL
@@ -1832,10 +1833,10 @@ antibiotic = no:
  time0 - time1   0.0029 0.157 57   0.018  0.9855
 
 Results are given on the log (not the response) scale. </code></pre>
-<div class="sourceCode" id="cb889"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb889-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-1" tabindex="-1"></a>mod_geeglm_exc2 <span class="sc">%&gt;%</span> </span>
-<span id="cb889-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(pairwise <span class="sc">~</span> time <span class="sc">|</span> antibiotic,</span>
-<span id="cb889-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
-<span id="cb889-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb889-4" tabindex="-1"></a>                   <span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb895"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb895-1"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb895-1" tabindex="-1"></a>mod_geeglm_exc2 <span class="sc">%&gt;%</span> </span>
+<span id="cb895-2"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb895-2" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(pairwise <span class="sc">~</span> time <span class="sc">|</span> antibiotic,</span>
+<span id="cb895-3"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb895-3" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
+<span id="cb895-4"><a href="gee-count-outcome-antibiotics-for-leprosy.html#cb895-4" tabindex="-1"></a>                   <span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code>$emmeans
 antibiotic = yes:
  time  rate   SE df lower.CL upper.CL

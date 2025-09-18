@@ -1,26 +1,31 @@
 # MLM, Longitudinal: Autism
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(pander)       # nice looking general tabulations
-library(furniture)    # nice table1() descriptive
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-library(psych)        # contains some useful functions, like headTail
-library(performance)
-library(sjstats)      # ICC calculations
+Download/install a new GitHub package
 
-library(sjPlot)       # Quick predictive and diagnostic plots 
-library(effects)      # Estimated Marginal Means
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
+```
 
-library(VIM)          # Visualization and Imputation of Missing Values 
-library(naniar)       # Summaries and Visualizations for Missing Data
+Load/activate these packages
 
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
-library(optimx)
-library(interactions)
-library(ggResidpanel)
-
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
 library(HLMdiag)      # package with the dataset
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(psych)
+library(VIM)         
+library(naniar) 
+library(lme4)        
+library(lmerTest)
+library(optimx)
+library(performance)
+library(interactions)
+library(emmeans)
+library(ggResidpanel)
+library(HLMdiag)
+library(sjPlot)
 ```
 
 ## Background
@@ -39,9 +44,9 @@ Study participants were children who had had consecutive referrals to one of two
 
 -   `vsae` Vineland Socialization Age Equivalent, Parent-reported measure of socialization, including measures of:
 
-    -   interpersonal relationships
-    -   play/leisure time activities
-    -   coping skills
+-   interpersonal relationships
+-   play/leisure time activities
+-   coping skills
 
 -   `gender` Child's gender - a factor. Levels are `male` and `female`
 
@@ -72,7 +77,9 @@ data_long <- autism %>%                                    # save the dataset as
 
 ```{r}
 data_long %>% 
-  psych::headTail(top = 11, bottom = 6)
+  psych::headTail(top = 11, bottom = 6) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Part of the Dataset")
 ```
 
 ### Wide Format
@@ -84,7 +91,10 @@ data_wide <- data_long %>%                            # save the dataset as a ne
                      values_from = vsae,              # variable repeated
                      names_prefix = "vsae_") %>%      # prefix in from of the 
   dplyr::arrange(childid)                             # sort observations
+```
 
+
+```{r}
 tibble::glimpse(data_wide)
 ```
 
@@ -105,15 +115,12 @@ Each person's data is only stored on a single line
 
 ```{r}
 data_wide %>% 
-  dplyr::group_by("Initial Language Development" = sicdegp) %>%     # how split into columns
-  furniture::table1("Diagnosis" = bestest2, 
-                    "Gender"    = gender, 
-                    "Race"      = race,  
-                    digits = 2,
-                    na.rm  = FALSE,  
-                    total  = TRUE,
-                    test   = TRUE,               # compare the groups
-                    output = "markdown")           
+  dplyr::select(sicdegp,
+                "Diagnosis" = bestest2, 
+                "Gender"    = gender, 
+                "Race"      = race) %>% 
+  apaSupp::tab1(split = "sicdegp",
+                caption = "Demographic Summary by Initial Lanuguage Development")          
 ```
 
 #### Using the LONG formatted dataset
@@ -123,16 +130,13 @@ Each person's data is stored on multiple lines, one for each time point. To ensu
 ```{r}
 # Note: One person is missing Age 2
 data_long %>% 
-  dplyr::filter(age == 2) %>%                                      # restrict to one-line per person
-  dplyr::group_by("Initial Language Development" = sicdegp) %>%    # how split into columns
-  furniture::table1("Diagnosis" = bestest2, 
-                    "Gender"    = gender, 
-                    "Race"      = race, 
-                    digits = 2,
-                    na.rm  = FALSE,
-                    total  = TRUE,
-                    test   = TRUE,               # compare the groups
-                    output = "markdown")           
+  dplyr::filter(age == 2) %>% # restrict to one-line per person
+  dplyr::select(sicdegp,
+                "Diagnosis" = bestest2, 
+                "Gender"    = gender, 
+                "Race"      = race) %>% 
+  apaSupp::tab1(split = "sicdegp",
+                caption = "Demographic Summary by Initial Lanuguage Development")        
 ```
 
 ### Baseline Summary
@@ -143,13 +147,8 @@ Each person's data is only stored on a single line
 
 ```{r}
 data_wide %>%
-  dplyr::group_by("Initial Language Development" = sicdegp) %>%    # how split into columns
-  furniture::table1(vsae_2,
-                    digits = 2,
-                    na.rm  = FALSE,
-                    total  = TRUE,
-                    test   = TRUE,               # compare the groups
-                    output = "markdown")
+  dplyr::select(sicdegp, vsae_2) %>% 
+  apaSupp::tab1(split = "sicdegp") 
 ```
 
 #### Using the LONG formatted dataset
@@ -159,10 +158,8 @@ Each person's data is stored on multiple lines, one for each time point. To ensu
 ```{r, results="asis"}
 data_long %>% 
   dplyr::filter(age == 2) %>% 
-  dplyr::group_by("Initial Language Development" = sicdegp) %>%    # how split into columns
-  furniture::table1(vsae, 
-                    test = TRUE,
-                    output = "markdown")
+  dplyr::select(sicdegp, vsae) %>% 
+  apaSupp::tab1(split = "sicdegp")
 ```
 
 ### Missing Data & Attrition
@@ -215,34 +212,19 @@ data_wide %>%
 
 #### Using the WIDE formatted dataset
 
-> Default = COMPLETE CASES ONLY!!!
-
-Note - the sample size at each time point is the same, but subjects are only included if they have data at every time point (total n = 41)
-
 ```{r}
 data_wide %>%
-  dplyr::group_by("Initial Language Development" = sicdegp) %>%    # how split into columns
-  dplyr::select(starts_with("vsae_")) %>% 
-  furniture::table1(digits = 2,
-                    total  = TRUE,
-                    test   = TRUE,               # compare the groups
-                    output = "markdown")
+  dplyr::select(sicdegp,
+                "Age 2" = vsae_2,
+                "Age 3" = vsae_3,
+                "Age 5" = vsae_5,
+                "Age 9" = vsae_9,
+                "Age 13" = vsae_13) %>% 
+  apaSupp::tab1(split = "sicdegp",
+                caption = "Summary of Vineland Socialization at each Observation by Initial Lanuguage Development",
+                general_note = "The Vineland Socialization is an Age Equivalent, Parent-reported measure of socialization combined score that included assessments of interpersonal relationships, play/leisure time activities, and coping skills.") 
 ```
 
-> Specify All data:
-
-note - that the smaple sizes will be different for each time point (total n = 155)
-
-```{r, results="asis"}
-data_wide %>%
-  dplyr::group_by("Initial Language Development" = sicdegp) %>%    # how split into columns
-  dplyr::select(starts_with("vsae_")) %>% 
-  furniture::table1(digits = 2,
-                    na.rm  = FALSE,
-                    total  = TRUE,
-                    test   = TRUE,               # compare the groups
-                    output = "markdown")
-```
 
 #### Using the LONG formatted dataset
 
@@ -251,30 +233,33 @@ Each person's data is stored on multiple lines, one for each time point.
 > FOR ALL DATA!
 
 ```{r}
-data_sum_all <- data_long %>% 
-  dplyr::group_by(sicdegp, age2) %>%                     # specify the groups
-  dplyr::summarise(vsae_n    = n(),                      # count of valid scores
-                   vsae_mean = mean(vsae),               # mean score
-                   vsae_sd   = sd(vsae),                 # standard deviation of scores
-                   vsae_sem  = vsae_sd / sqrt(vsae_n))   # stadard error for the mean of scores
+data_long %>% 
+  dplyr::group_by(sicdegp, age2) %>%                       # specify the groups
+  dplyr::summarise(vsae_n    = n(),                        # count of valid scores
+                   vsae_mean = mean(vsae),                 # mean score
+                   vsae_sd   = sd(vsae),                   # standard deviation of scores
+                   vsae_sem  = vsae_sd / sqrt(vsae_n)) %>% # stadard error for the mean of scores
+  flextable::as_grouped_data(groups = "sicdegp") %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa()
 
-data_sum_all
 ```
 
 > FOR COMPLETE CASES ONLY!!!
 
 ```{r}
-data_sum_cc <- data_long %>% 
-  dplyr::group_by(childid) %>%        # group-by child
-  dplyr::mutate(child_vsae_n = n()) %>%    # count the number of valid VSAE scores
-  dplyr::filter(child_vsae_n == 5) %>%     # restrict to only thoes children with 5 valid scores
+data_long %>% 
+  dplyr::group_by(childid) %>%                    # group-by child
+  dplyr::mutate(child_vsae_n = n()) %>%           # count the number of valid VSAE scores
+  dplyr::filter(child_vsae_n == 5) %>%            # restrict to only thoes children with 5 valid scores
   dplyr::group_by(sicdegp, age2) %>%              # specify the groups
   dplyr::summarise(vsae_n    = n(),                      # count of valid scores
                    vsae_mean = mean(vsae),               # mean score
                    vsae_sd   = sd(vsae),                 # standard deviation of scores
-                   vsae_sem  = vsae_sd / sqrt(vsae_n))   # stadard error for the mean of scores
-
-data_sum_cc
+                   vsae_sem  = vsae_sd / sqrt(vsae_n)) %>%    # stadard error for the mean of scores
+  flextable::as_grouped_data(groups = "sicdegp") %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa()
 ```
 
 ### Person Profile Plots
@@ -394,7 +379,12 @@ data_long %>%
 #### Manually Summarized
 
 ```{r, fig.width=8, fig.height=6}
-data_sum_all %>% 
+data_long %>% 
+  dplyr::group_by(sicdegp, age2) %>%                     # specify the groups
+  dplyr::summarise(vsae_n    = n(),                      # count of valid scores
+                   vsae_mean = mean(vsae),               # mean score
+                   vsae_sd   = sd(vsae),                 # standard deviation of scores
+                   vsae_sem  = vsae_sd / sqrt(vsae_n)) %>% 
   dplyr::mutate(age = age2 + 2) %>% 
   ggplot() +
   aes(x = age,
@@ -427,37 +417,35 @@ Take top-down approach: Quadratic regression model, describing `vsae` as a funct
 
 -   Fixed-effects
 
-    -   `I(age-2)` age
-    -   `I((age-2)^2)` quadratic age or age-squared, 
-    -   `sicdegp` SICD group (reference group = low)
-    -   SICD group x age/age-squared interactions
+-   `I(age-2)` age
+-   `I((age-2)^2)` quadratic age or age-squared, 
+-   `sicdegp` SICD group (reference group = low)
+-   SICD group x age/age-squared interactions
 
 -   Random-effects
 
-    -   intercept
-    -   age and age-squared
+-   intercept
+-   age and age-squared
 
 ### Fit the Model
 
 ```{r}
-fit_lmer_1_re <- lmerTest::lmer(vsae ~ I(age-2)*sicdegp + I(I(age-2)^2)*sicdegp + 
+fit_lmer_1_re <- lmerTest::lmer(vsae ~ I(age-2)*sicdegp + I((age-2)^2)*sicdegp + 
                                   (I(age-2) + I((age-2)^2) | childid), 
                                 data = data_long,
                                 REML = TRUE,
                                 control = lmerControl(optimizer = "optimx",    # get it to converge
-                                                 calc.derivs = FALSE,
-                                                 optCtrl = list(method = "nlminb",
-                                                                starttests = FALSE,
-                                                                kkt = FALSE)))
+                                                      calc.derivs = FALSE,
+                                                      optCtrl = list(method = "nlminb",
+                                                                     starttests = FALSE,
+                                                                     kkt = FALSE)))
 ```
 
 ### Table of Prameter Estimates
 
-```{r, results='asis'}
-texreg::knitreg(fit_lmer_1_re,
-                caption            = "MLM: Full Model",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmer(fit_lmer_1_re,
+                  caption = "MLM: Full Model")
 ```
 
 ### Plot of the Estimated Marginal Means
@@ -469,7 +457,8 @@ interactions::interact_plot(model = fit_lmer_1_re, # model name
                             pred = age,            # x-axis variable (must be continuous)
                             modx = sicdegp,        # seperate lines
                             interval = TRUE) +     # shaded bands
-  scale_x_continuous(breaks = c(2, 3, 5, 9, 13))
+  scale_x_continuous(breaks = c(2, 3, 5, 9, 13)) +
+  theme_bw()
 ```
 
 ## Model 2A: Drop Random Intercepts
@@ -551,12 +540,9 @@ The more complicated model *(including fixed interaction between quadratic time 
 ### Table of Parameter Esitmates
 
 
-```{r, results='asis'}
-texreg::knitreg(fit_lmer_2a_re,
-                caption            = "MLM: Final Model",
-                caption.above      = TRUE,
-                single.row         = TRUE,
-                digits             = 4)
+```{r}
+apaSupp::tab_lmer(fit_lmer_2a_re,
+                  caption            = "MLM: Final Model")
 ```
 
 ### Interpretation of Fixed Effects
@@ -572,11 +558,11 @@ Thus the equation for the estimated marginal mean VASE trajectory for the `low` 
 $$
 \begin{align*}
 VASE =& \gamma_{0} + 
-        \gamma_{a}   (AGE - 2) + 
-        \gamma_{a^2} (AGE - 2)^2 \\
-     =& `r  fixef(fit_lmer_2a_re)["(Intercept)"]      %>% round(3)` + 
-        `r  fixef(fit_lmer_2a_re)["I(age - 2)"]       %>% round(3)` (AGE - 2)  + 
-        `r  fixef(fit_lmer_2a_re)["I((age - 2)^2)"]   %>% round(3)` (AGE - 2)^2 \\ 
+\gamma_{a}   (AGE - 2) + 
+\gamma_{a^2} (AGE - 2)^2 \\
+=& `r  fixef(fit_lmer_2a_re)["(Intercept)"]      %>% round(3)` + 
+`r  fixef(fit_lmer_2a_re)["I(age - 2)"]       %>% round(3)` (AGE - 2)  + 
+`r  fixef(fit_lmer_2a_re)["I((age - 2)^2)"]   %>% round(3)` (AGE - 2)^2 \\ 
 \end{align*}
 $$
 
@@ -591,20 +577,20 @@ Thus the equation for the estimated marginal mean VASE trajectory for the `mediu
 $$
 \begin{align*}
 VASE =& (\gamma_{0}   + \gamma_{med}) + 
-        (\gamma_{a}   + \gamma_{med:\;a})  (AGE - 2) + 
-        (\gamma_{a^2} + \gamma_{med:\;a^2})(AGE - 2)^2 \\
-     =& (`r  fixef(fit_lmer_2a_re)["(Intercept)"] %>% round(3)` + 
-         `r  fixef(fit_lmer_2a_re)["sicdegpmed"] %>% round(3)`) + 
-        (`r  fixef(fit_lmer_2a_re)["I(age - 2)"]            %>% round(3)` + 
-         `r  fixef(fit_lmer_2a_re)["I(age - 2):sicdegpmed"] %>% round(3)`)  (AGE - 2) + 
-        (`r  fixef(fit_lmer_2a_re)["I((age - 2)^2)"]            %>% round(3)` + 
-         `r  fixef(fit_lmer_2a_re)["sicdegpmed:I((age - 2)^2)"] %>% round(3)`)(AGE - 2)^2 \\
-     =& `r  (fixef(fit_lmer_2a_re)["(Intercept)"] + 
-             fixef(fit_lmer_2a_re)["sicdegpmed"] ) %>% round(3)` + 
-        `r  (fixef(fit_lmer_2a_re)["I(age - 2)"] + 
-             fixef(fit_lmer_2a_re)["I(age - 2):sicdegpmed"]) %>% round(3)`  (AGE - 2) + 
-        `r  (fixef(fit_lmer_2a_re)["I((age - 2)^2)"] + 
-             fixef(fit_lmer_2a_re)["sicdegpmed:I((age - 2)^2)"]) %>% round(3)` (AGE - 2)^2 \\
+(\gamma_{a}   + \gamma_{med:\;a})  (AGE - 2) + 
+(\gamma_{a^2} + \gamma_{med:\;a^2})(AGE - 2)^2 \\
+=& (`r  fixef(fit_lmer_2a_re)["(Intercept)"] %>% round(3)` + 
+`r  fixef(fit_lmer_2a_re)["sicdegpmed"] %>% round(3)`) + 
+(`r  fixef(fit_lmer_2a_re)["I(age - 2)"]            %>% round(3)` + 
+`r  fixef(fit_lmer_2a_re)["I(age - 2):sicdegpmed"] %>% round(3)`)  (AGE - 2) + 
+(`r  fixef(fit_lmer_2a_re)["I((age - 2)^2)"]            %>% round(3)` + 
+`r  fixef(fit_lmer_2a_re)["sicdegpmed:I((age - 2)^2)"] %>% round(3)`)(AGE - 2)^2 \\
+=& `r  (fixef(fit_lmer_2a_re)["(Intercept)"] + 
+fixef(fit_lmer_2a_re)["sicdegpmed"] ) %>% round(3)` + 
+`r  (fixef(fit_lmer_2a_re)["I(age - 2)"] + 
+fixef(fit_lmer_2a_re)["I(age - 2):sicdegpmed"]) %>% round(3)`  (AGE - 2) + 
+`r  (fixef(fit_lmer_2a_re)["I((age - 2)^2)"] + 
+fixef(fit_lmer_2a_re)["sicdegpmed:I((age - 2)^2)"]) %>% round(3)` (AGE - 2)^2 \\
 \end{align*}
 $$
 
@@ -619,20 +605,20 @@ Thus the equation for the estimated marginal mean VASE trajectory for the `high`
 $$
 \begin{align*}
 VASE =& (\gamma_{0}   + \gamma_{hi}) + 
-        (\gamma_{a}   + \gamma_{hi:\;a})  (AGE - 2) + 
-        (\gamma_{a^2} + \gamma_{hi:\;a^2})(AGE - 2)^2 \\
-     =& (`r  fixef(fit_lmer_2a_re)["(Intercept)"] %>% round(3)` + 
-         `r  fixef(fit_lmer_2a_re)["sicdegphigh"] %>% round(3)`) + 
-        (`r  fixef(fit_lmer_2a_re)["I(age - 2)"]            %>% round(3)` + 
-         `r  fixef(fit_lmer_2a_re)["I(age - 2):sicdegphigh"] %>% round(3)`)  (AGE - 2) + 
-        (`r  fixef(fit_lmer_2a_re)["I((age - 2)^2)"]            %>% round(3)` + 
-         `r  fixef(fit_lmer_2a_re)["sicdegphigh:I((age - 2)^2)"] %>% round(3)`)(AGE - 2)^2 \\
-     =& `r  (fixef(fit_lmer_2a_re)["(Intercept)"] + 
-             fixef(fit_lmer_2a_re)["sicdegphigh"] ) %>% round(3)` + 
-        `r  (fixef(fit_lmer_2a_re)["I(age - 2)"] + 
-             fixef(fit_lmer_2a_re)["I(age - 2):sicdegphigh"]) %>% round(3)`  (AGE - 2) + 
-        `r  (fixef(fit_lmer_2a_re)["I((age - 2)^2)"] + 
-             fixef(fit_lmer_2a_re)["sicdegphigh:I((age - 2)^2)"]) %>% round(3)` (AGE - 2)^2 \\
+(\gamma_{a}   + \gamma_{hi:\;a})  (AGE - 2) + 
+(\gamma_{a^2} + \gamma_{hi:\;a^2})(AGE - 2)^2 \\
+=& (`r  fixef(fit_lmer_2a_re)["(Intercept)"] %>% round(3)` + 
+`r  fixef(fit_lmer_2a_re)["sicdegphigh"] %>% round(3)`) + 
+(`r  fixef(fit_lmer_2a_re)["I(age - 2)"]            %>% round(3)` + 
+`r  fixef(fit_lmer_2a_re)["I(age - 2):sicdegphigh"] %>% round(3)`)  (AGE - 2) + 
+(`r  fixef(fit_lmer_2a_re)["I((age - 2)^2)"]            %>% round(3)` + 
+`r  fixef(fit_lmer_2a_re)["sicdegphigh:I((age - 2)^2)"] %>% round(3)`)(AGE - 2)^2 \\
+=& `r  (fixef(fit_lmer_2a_re)["(Intercept)"] + 
+fixef(fit_lmer_2a_re)["sicdegphigh"] ) %>% round(3)` + 
+`r  (fixef(fit_lmer_2a_re)["I(age - 2)"] + 
+fixef(fit_lmer_2a_re)["I(age - 2):sicdegphigh"]) %>% round(3)`  (AGE - 2) + 
+`r  (fixef(fit_lmer_2a_re)["I((age - 2)^2)"] + 
+fixef(fit_lmer_2a_re)["sicdegphigh:I((age - 2)^2)"]) %>% round(3)` (AGE - 2)^2 \\
 \end{align*}
 $$
 
@@ -681,8 +667,8 @@ sigma_e
 
 $$
 \sigma^2 = \sigma^2_e 
-         = VAR[e_{ti}] 
-         = `r round(sigma2_e, 3)`
+= VAR[e_{ti}] 
+= `r round(sigma2_e, 3)`
 $$
 
 #### 2 Variance Components
@@ -712,8 +698,8 @@ tau_11
 
 $$
 \tau_{11} = \sigma^2_{u1} 
-          = VAR[u_{1i}] 
-          = `r tau_11 %>% round(2)`
+= VAR[u_{1i}] 
+= `r tau_11 %>% round(2)`
 $$
 
 Random QUADRATIC effect of age variance
@@ -739,8 +725,8 @@ tau_22
 
 $$
 \tau_{22} = \sigma^2_{u2} 
-          = VAR[u_{2i}] 
-          = `r tau_22 %>% round(2)`
+= VAR[u_{2i}] 
+= `r tau_22 %>% round(2)`
 $$
 
 #### 1 Covariance (or correlation) Components
@@ -768,8 +754,8 @@ tau_12
 
 $$
 \tau_{12} = \sigma^2_{u12} 
-          = COV[u_{1i}, u_{2i}] 
-          = `r tau_12 %>% round(2)`
+= COV[u_{1i}, u_{2i}] 
+= `r tau_12 %>% round(2)`
 $$
 $$
 Correlation(u_{1i}, u_{2i}) = -0.324
@@ -946,7 +932,7 @@ This version would be better for a publication.
 ```{r}
 effects::Effect(focal.predictors = c("age","sicdegp"),
                 mod = fit_lmer_2a_re,
-                xlevels = list(age2 = seq(from = 2, to = 13, by = .1))) %>% 
+                xlevels = list(age2 = seq(from = 2, to = 13, by = .05))) %>% 
   data.frame() %>% 
   dplyr::mutate(sicdegp = factor(sicdegp,
                                  levels = c("high", "med", "low"),
@@ -990,27 +976,46 @@ fit_lmer_2a_re %>%
 
 
 ```{r}
-totalSD <- VarCorr(fit_lmer_2a_re) %>% 
-  data.frame() %>% 
-  dplyr::summarise(tot_var = sum(vcov)) %>% 
-  dplyr::pull(tot_var) %>% 
-  sqrt()
-  
+totalSD <- apaSupp::lmer_sd(fit_lmer_2a_re)
+
 totalSD
 ```
 
 ```{r}
 fit_lmer_2a_re %>% 
   emmeans::emmeans(~ sicdegp,
-                   at = list(age = 13)) %>% 
-  emmeans::eff_size(sigma = totalSD,        # which SD to divide by???
-                    edf = 50)               # df  
+                   at = list(age = 13))
 ```
 
 
+```{r}
+fit_lmer_2a_re %>% 
+  emmeans::emmeans(~ sicdegp,
+                   at = list(age = 13)) %>% 
+  pairs()
+```
 
-
-
+```{r}
+fit_lmer_2a_re %>% 
+  emmeans::emmeans(~ sicdegp,
+                   at = list(age = 13)) %>% 
+  pairs() %>% 
+  data.frame() %>% 
+  dplyr::mutate(SE = glue::glue("({apaSupp::apan(SE, 2)})")) %>% 
+  dplyr::mutate(SMD = estimate/apaSupp::lmer_sd(fit_lmer_2a_re)) %>% 
+  dplyr::mutate(p_Unadj = apaSupp::p_num(p.value)) %>% 
+  dplyr::mutate(p_Adj = p.adjust(p.value, method = "fdr")%>% 
+                  apaSupp::p_num()) %>% 
+  dplyr::select("Compare" = contrast,
+                "Difference in EMM_Est" = estimate,
+                "Difference in EMM_(SE)" = SE,
+                SMD, p_Unadj, p_Adj) %>% 
+  flextable::flextable() %>% 
+  flextable::separate_header() %>% 
+  apaSupp::theme_apa(caption = "Pairwise Comparisons of Estimated Marginal Means",
+                     general_note = "SMD = Standardized mean difference, a Cohen's d like effect size. Significance is provided as unadjusted (Unadj) and adjusted (Adj) using the false discovery rate method.") %>% 
+  flextable::hline(part = "header", i = 1)
+```
 
 
 

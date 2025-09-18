@@ -20,21 +20,23 @@ Download/install a new GitHub package
 
 ```{r, eval=FALSE}
 install.packages("devtools")
-devtools::install_github("sarbearschwartz/apaSupp") # updated 9/10/2025
+devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
 ```
 
 Load/activate these packages
 
 ```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
-library(tidyverse)
-library(haven)        # read in SPSS dataset
-library(apaSupp)      # Tables
-library(psych)        # contains some useful functions, like headTail
-library(car)          # Companion to Applied Regression
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
-library(lmerTest)     # Tests on lmer objects
-library(performance)  # icc and r-squared functions **NEWER**
-library(interactions) # interaction plots **NEWER**
+library(haven)  
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(performance)
+library(lme4)        
+library(lmerTest)   
+library(insight)
+library(interactions)
+library(effects)
+library(sjPlot)
 ```
 
 ## Background

@@ -14,16 +14,25 @@ knitr::opts_chunk$set(comment     = "",
                       fig.height  = 4)        # set default figure height to 3 inches
 ```
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(broom)        # converst stats objestcs to tidy tibbles
-library(haven)        # read in SPSS dataset
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-library(psych)        # contains some useful functions, like headTail
-library(sjstats)      # ICC calculations
 
-library(lme4)         # non-linear mixed-effects models
-library(lmerTest)
+Download/install a new GitHub package
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
+```
+
+Load/activate these packages
+
+
+```{r, message=FALSE, error=FALSE}
+library(haven)
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(lme4)        
+library(lmerTest)  
+library(optimx) 
 ```
 
 ## Background
@@ -44,14 +53,22 @@ The following example is used through out @hox2017's chapater 2.
 
 ```{r}
 data_raw <- haven::read_sav("data/popular2.sav") %>% 
-  haven::as_factor()             # retain the labels from SPSS --> factor
+  haven::as_factor() %>%              # retain the labels from SPSS --> factor
+  haven::zap_label() %>% 
+  haven::zap_widths()
+```
 
+
+```{r}
 data_pop <- data_raw %>%   
   dplyr::mutate(id = paste(class, pupil,
                            sep = "_") %>%   # create a unique id for each student (char)
                   factor()) %>%             # declare id is a factor
   dplyr::select(id, pupil:popteach)         # reduce the variables included
+```
 
+
+```{r}
 tibble::glimpse(data_pop)
 ```
 
@@ -120,23 +137,14 @@ data_pop <- data_pop %>%
 
 
 
-```{r, include = FALSE}
+```{r}
 data_pop %>% 
-  dplyr::select(extrav, extravG, extravZ) %>% 
-  data.frame() %>% 
-  stargazer::stargazer(title  = "Descriptive statistics: Three versions of Extraversion",
-                       header = FALSE,
-                       type   = "text")
+  dplyr::select("Original" = extrav, 
+                "Centered" = extravG, 
+                "Standardized" = extravZ) %>% 
+  apaSupp::tab_desc(caption  = "Descriptive statistics: Three versions of Extraversion")
 ```
 
-```{r, echo=FALSE, results="asis"}
-data_pop %>% 
-  dplyr::select(extrav, extravG, extravZ) %>% 
-  data.frame() %>% 
-  stargazer::stargazer(title  = "Descriptive statistics: Three versions of Extraversion",
-                       header = FALSE,
-                       type   = "html")
-```
 
 
 ## RI = ONLY Random Intercepts
@@ -144,32 +152,29 @@ data_pop %>%
 ### Fit MLM with all 3 versions of the predictor
 
 ```{r}
-pop_lmer_1_raw <- lme4::lmer(popular ~ extrav + (1|class),
-                           data = data_pop,
-                           REML = FALSE)
+pop_lmer_1_raw <- lmerTest::lmer(popular ~ extrav + (1|class),
+                                 data = data_pop,
+                                 REML = FALSE)
 
-pop_lmer_1_cen <- lme4::lmer(popular ~ extravG + (1|class),
-                           data = data_pop,
-                           REML = FALSE)
+pop_lmer_1_cen <- lmerTest::lmer(popular ~ extravG + (1|class),
+                                 data = data_pop,
+                                 REML = FALSE)
 
-pop_lmer_1_std <- lme4::lmer(popular ~ extravZ + (1|class),
-                           data = data_pop,
-                           REML = FALSE)
+pop_lmer_1_std <- lmerTest::lmer(popular ~ extravZ + (1|class),
+                                 data = data_pop,
+                                 REML = FALSE)
 ```
 
 
 
 
-```{r, results='asis'}
-texreg::knitreg(list(pop_lmer_1_raw, 
-                     pop_lmer_1_cen, 
-                     pop_lmer_1_std),
-                custom.model.names = c("Raw", 
-                                       "Centered", 
-                                       "Standardized"),
-                caption            = "MLM - RI: Effect of Grand-Mean Centering and Standardizing",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("Original"     = pop_lmer_1_raw, 
+                        "Centered"     = pop_lmer_1_cen, 
+                        "Standardized" = pop_lmer_1_std),
+                   narrow = TRUE,
+                   caption = "MLM - RI: Effect of Grand-Mean Centering and Standardizing",
+                   general_note = "The extraversion variable is on different scales.")
 ```
 
 
@@ -181,23 +186,23 @@ texreg::knitreg(list(pop_lmer_1_raw,
 1. Grand-Mean Centering a Predictor    
 
 * Different than when using the Raw Predictor:    
-    + fixed intercept
-    
++ fixed intercept
+
 * Same as when using the Raw Predictor: 
-    + fixed estimates or slopes for all predictors (main effects and interactions)    
-    + random estimates, i.e. variance and covariance components, includin the residual variance
-    + model fit statistics, including AIC, BIC, and the Log Loikelihood (-2LL or deviance)
-    
++ fixed estimates or slopes for all predictors (main effects and interactions)    
++ random estimates, i.e. variance and covariance components, includin the residual variance
++ model fit statistics, including AIC, BIC, and the Log Loikelihood (-2LL or deviance)
+
 
 2. Standardize a Predictor    
 
 * Different than when using the Raw Predictor:    
-    + fixed intercept (same as if using the grand-mean centered predictor)    
-    + fixed estimate (slope) for that variable
-    
++ fixed intercept (same as if using the grand-mean centered predictor)    
++ fixed estimate (slope) for that variable
+
 * Stays the SAME:    
-    + random estimates, i.e. variance and covariance components, includin the residual variance  
-    + model fit statistics, including AIC, BIC, and the Log Loikelihood (-2LL or deviance)    
++ random estimates, i.e. variance and covariance components, includin the residual variance  
++ model fit statistics, including AIC, BIC, and the Log Loikelihood (-2LL or deviance)    
 ```
 
 
@@ -270,11 +275,10 @@ ranef(pop_lmer_1_raw)$class %>%
   head()                  # onle line per group (100 classes)
 ```
 
-```{r, fig.width=3, fig.height=2.25}
+```{r}
 ranef(pop_lmer_1_raw)$class %>% 
   dplyr::rename(Random_Intercepts = "(Intercept)") %>% 
-  ggplot(aes(Random_Intercepts)) +
-  geom_histogram(binwidth = .25)
+  apaSupp::spicy_histos(Random_Intercepts)
 ```
 
 
@@ -473,31 +477,28 @@ data_pop %>%
 ### Fit MLM with all 3 versions of the predictor
 
 ```{r}
-pop_lmer_2_raw <- lme4::lmer(popular ~ extrav + (extrav|class),
-                           data = data_pop,
-                           REML = FALSE)
+pop_lmer_2_raw <- lmerTest::lmer(popular ~ extrav + (extrav|class),
+                                 data = data_pop,
+                                 control = lmerControl(optimizer = "Nelder_Mead"),
+                                 REML = FALSE)
 
-pop_lmer_2_cen <- lme4::lmer(popular ~ extravG + (extravG|class),
-                           data = data_pop,
-                           REML = FALSE)
+pop_lmer_2_cen <- lmerTest::lmer(popular ~ extravG + (extravG|class),
+                                 data = data_pop,
+                                 REML = FALSE)
 
-pop_lmer_2_std <- lme4::lmer(popular ~ extravZ + (extravZ|class),
-                           data = data_pop,
-                           REML = FALSE)
+pop_lmer_2_std <- lmerTest::lmer(popular ~ extravZ + (extravZ|class),
+                                 data = data_pop,
+                                 REML = FALSE)
 ```
 
 
 
-```{r, results='asis'}
-texreg::knitreg(list(pop_lmer_2_raw, 
-                     pop_lmer_2_cen, 
-                     pop_lmer_2_std),
-                custom.model.names = c("Raw", 
-                                       "Centered", 
-                                       "Standardized"),
-                caption            = "MLM - RIAS: Effect of Grand-Mean Centering and Standardizing",
-                caption.above      = TRUE,
-                single.row         = TRUE)
+```{r}
+apaSupp::tab_lmers(list("Original"     = pop_lmer_2_raw, 
+                        "Centered"     = pop_lmer_2_cen, 
+                        "Standardized" = pop_lmer_2_std),
+                   narrow = TRUE,
+                   caption = "MLM - RIAS: Effect of Grand-Mean Centering and Standardizing")
 ```
 
 
@@ -508,23 +509,23 @@ texreg::knitreg(list(pop_lmer_2_raw,
 1. Grand-Mean Centering a Predictor    
 
 * Different than when using the Raw Predictor:    
-    + fixed intercept
-    + random estimates, i.e. variance and covariance components, includin the residual variance
-    
++ fixed intercept
++ random estimates, i.e. variance and covariance components, includin the residual variance
+
 * Same as when using the Raw Predictor: 
-    + fixed estimates or slopes for all predictors (main effects and interactions)    
-    + model fit statistics, including AIC, BIC, and the Log Loikelihood (-2LL or deviance)
-    
++ fixed estimates or slopes for all predictors (main effects and interactions)    
++ model fit statistics, including AIC, BIC, and the Log Loikelihood (-2LL or deviance)
+
 
 2. Standardize a Predictor    
 
 * Different than when using the Raw Predictor:    
-    + fixed intercept (same as if using the grand-mean centered predictor)    
-    + fixed estimate (slope) for that variable
-    + random estimates, i.e. variance and covariance components, includin the residual variance  
-    
++ fixed intercept (same as if using the grand-mean centered predictor)    
++ fixed estimate (slope) for that variable
++ random estimates, i.e. variance and covariance components, includin the residual variance  
+
 * Stays the SAME:    
-    + model fit statistics, including AIC, BIC, and the Log Loikelihood (-2LL or deviance)    
++ model fit statistics, including AIC, BIC, and the Log Loikelihood (-2LL or deviance)    
 ```
 
 
@@ -595,17 +596,15 @@ ranef(pop_lmer_2_raw)$class %>%
   head()                  # onle line per group (100 classes)
 ```
 
-```{r, fig.width=3, fig.height=2.25}
+```{r}
 ranef(pop_lmer_2_raw)$class %>% 
   dplyr::rename(Random_Intercepts = "(Intercept)") %>% 
-  ggplot(aes(Random_Intercepts)) +
-  geom_histogram()
+  apaSupp::spicy_histos(Random_Intercepts)
 ```
 
-```{r, fig.width=3, fig.height=2.25}
+```{r}
 ranef(pop_lmer_2_raw)$class %>% 
-  ggplot(aes(extrav)) +
-  geom_histogram()
+  apaSupp::spicy_histos(extrav)
 ```
 
 
@@ -762,7 +761,7 @@ data_pop %>%
 
 
 
-### Comapre the Standardized Version
+### Compare the Standardized Version
 
 ```{r}
 data_pop %>% 
