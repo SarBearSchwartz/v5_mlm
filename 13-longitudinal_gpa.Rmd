@@ -391,13 +391,6 @@ fit_lmer_4_ml <- lmerTest::lmer(gpa ~ I(sem-1) +
                                   (I(sem-1)|student),
                                 data = df_gpa_long,
                                 REML = FALSE)
-
-fit_lmer_4_re <- lmerTest::lmer(gpa ~ I(sem-1) + 
-                                  hrs + highgpa + sex + 
-                                  (I(sem-1)|student),
-                                data = df_gpa_long,
-                                REML = TRUE,
-                                control = lmerControl(optimizer ="Nelder_Mead"))
 ```
 
 
@@ -419,8 +412,8 @@ fit_lmer_5_re <- lmerTest::lmer(gpa ~ I(sem-1) +
 
 
 ```{r}
-apaSupp::tab_lmers(list("M5: Occ Rand"   = fit_lmer_4_re,
-                        "M6: Xlevel Int" = fit_lmer_5_re),
+apaSupp::tab_lmers(list("M5: Occ Rand"   = fit_lmer_4_ml,
+                        "M6: Xlevel Int" = fit_lmer_5_ml),
                    var_labels = c("(Intercept)" = "(Intercept)",
                                   "I(sem - 1)" = "Semester",
                                   "hrs" = "Hours Working",
