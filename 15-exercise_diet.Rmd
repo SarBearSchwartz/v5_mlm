@@ -1,37 +1,53 @@
 # MLM, Longitudinal: RCT - Exercise and Diet
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(pander)       # nice looking genderal tabulations
-library(furniture)    # nice table1() descriptives
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-library(psych)        # contains some useful functions, like headTail
-library(performance) # ICC calculations
-library(interactions)
-library(sjPlot)       # Visualization for Models
-library(effects)      # Effec displays for Models
 
-library(lme4)         # non-linear mixed-effects models
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
 ```
+
+Load/activate these packages
+
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(psych)
+library(VIM)         
+library(naniar) 
+library(lme4)        
+library(lmerTest)
+library(optimx)
+library(performance)
+library(interactions)
+library(effects)
+library(emmeans)
+library(ggResidpanel)
+library(HLMdiag)
+library(sjPlot)
+library(sjstats)     
+```
+
 
 ## The dataset
 
 This comes from a **Randomized Controled Trial**.
 
 ```{r}
-data_raw <- read.table("data/exercise_diet.txt",
-                  header = TRUE, 
-                  sep = ",")
+df_ex_raw <- read.table("data/exercise_diet.txt",
+                        header = TRUE, 
+                        sep = ",")
 ```
 
 ```{r}
-tibble::glimpse(data_raw)
+tibble::glimpse(df_ex_raw)
 ```
 
 
 
 ```{r}
-data_long <- data_raw %>% 
+df_ex_long <- df_ex_raw %>% 
   dplyr::mutate(id = id %>% factor) %>% 
   dplyr::mutate(exertype = exertype %>% 
                   factor(levels = 1:3,
@@ -49,9 +65,10 @@ data_long <- data_raw %>%
 
 
 ```{r}
-data_long %>% 
+df_ex_long %>% 
   psych::headTail(top = 10, bottom = 10) %>% 
-  pander::pander(caption = "Raw Data")
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Raw Data")
 ```
 
 ## Exploratory Data Analysis
@@ -60,13 +77,15 @@ data_long %>%
 
 In this experiment, both exercise (`exertype`) and diet (`diet`) were randomized at the subject level to create a 2x3 = 6 combinations each with exactly 5 participants.
 
-```{r, results='asis'}
-data_long %>% 
+```{r}
+df_ex_long %>% 
   dplyr::filter(time == 0) %>% 
-  dplyr::group_by(exertype) %>% 
-  furniture::table1("Diet, randomized" = diet, 
-                    caption = "Participants",
-                    output = "markdown")
+  dplyr::select(exertype,
+                "Diet, randomized" = diet) %>% 
+  apaSupp::tab1(split = "exertype",
+                total = FALSE,
+                test = FALSE,
+                caption = "Participants")
 ```
 
 ### Baseline Summary
@@ -74,15 +93,16 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_ex_long %>% 
   dplyr::filter(time == 0) %>% 
   dplyr::group_by(exertype, diet) %>% 
   dplyr::summarise(mean = mean(pulse)) %>% 
   dplyr::ungroup() %>% 
   tidyr::pivot_wider(names_from = diet,
                      values_from = mean) %>% 
-  pander::pander(caption = "Baseline Pulse, Means")
-  
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Baseline Pulse, Group Means")
+
 ```
 
 ### Raw Trajectories - Person Profile Plot
@@ -90,7 +110,7 @@ data_long %>%
 #### Connect the dots
 
 ```{r}
-data_long %>% 
+df_ex_long %>% 
   ggplot(aes(x = time_min,
              y = pulse)) +
   geom_point() +
@@ -102,7 +122,7 @@ data_long %>%
 #### Loess - Moving Average Smoothers
 
 ```{r}
-data_long %>% 
+df_ex_long %>% 
   ggplot(aes(x = time_min,
              y = pulse,
              color = diet)) +
@@ -131,12 +151,12 @@ data_long %>%
 
 ```{r}
 fit_lmer_0re <- lmerTest::lmer(pulse ~ 1 + (1 | id),
-                               data = data_long)
+                               data = df_ex_long)
 ```
 
 
-```{r, results='asis'}
-texreg::knitreg(fit_lmer_0re, single.row = TRUE)
+```{r}
+apaSupp::tab_lmer(fit_lmer_0re)
 ```
 
 ### ICC & R-squared
@@ -158,43 +178,49 @@ performance::r2(fit_lmer_0re)
 ```{r}
 # Null Model (random intercept only)
 fit_lmer_0ml <- lmerTest::lmer(pulse ~ 1 + (1 | id),
-                               data = data_long,
+                               data = df_ex_long,
                                REML = FALSE)
 
 # Add quadratic time
 fit_lmer_1ml <- lmerTest::lmer(pulse ~ time_min + I(time_min^2) + (1 | id),
-                               data = data_long,
+                               data = df_ex_long,
                                REML = FALSE)
 
 # Add main effects for 2 interventions (person-specific, i.e. level-2 factors)
 fit_lmer_2ml <- lmerTest::lmer(pulse ~ diet + exertype + time_min + I(time_min^2) + (1 | id),
-                               data = data_long,
+                               data = df_ex_long,
                                REML = FALSE)
 
 # Add interaction between level-2 factors
 fit_lmer_3ml <- lmerTest::lmer(pulse ~ diet*exertype + time_min + I(time_min^2) + (1 | id),
-                               data = data_long,
+                               data = df_ex_long,
                                REML = FALSE)
 
 # Add exercise interacting with [time & time-squared]
 fit_lmer_4ml <- lmerTest::lmer(pulse ~ diet*exertype + exertype*time_min + exertype*I(time_min^2) + (1 | id),
-                               data = data_long,
+                               data = df_ex_long,
                                REML = FALSE)
 
 # Add diet interacting with [time & time-squared]
 fit_lmer_5ml <- lmerTest::lmer(pulse ~ diet*exertype*time_min + diet*exertype*I(time_min^2) + (1 | id),
-                               data = data_long,
+                               data = df_ex_long,
                                REML = FALSE)
 ```
 
 
-```{r, results='asis'}
-texreg::knitreg(list(fit_lmer_1ml, 
-                     fit_lmer_2ml, 
-                     fit_lmer_3ml, 
-                     fit_lmer_4ml, 
-                     fit_lmer_5ml))
+```{r}
+apaSupp::tab_lmers(list("M0" = fit_lmer_0re,
+                        "M1" = fit_lmer_1ml, 
+                        "M2" = fit_lmer_2ml),
+                   narrow = TRUE)
 ```
+```{r}
+apaSupp::tab_lmers(list("M3" = fit_lmer_3ml,
+                        "M4" = fit_lmer_4ml, 
+                        "M5" = fit_lmer_5ml),
+                   narrow = TRUE)
+```
+
 
 #### Evaluate Model Fit, i.e. variable significance
 
@@ -207,12 +233,11 @@ anova(fit_lmer_1ml,
 ```
 
 ```{r}
-performance::compare_performance(fit_lmer_1ml, 
-                                 fit_lmer_2ml, 
-                                 fit_lmer_3ml, 
-                                 fit_lmer_4ml, 
-                                 fit_lmer_5ml,
-                                 rank = TRUE)
+apaSupp::tab_lmer_fits(list("M1" = fit_lmer_1ml, 
+                            "M2" = fit_lmer_2ml, 
+                            "M3" = fit_lmer_3ml, 
+                            "M4" = fit_lmer_4ml, 
+                            "M5" = fit_lmer_5ml))
 ```
 
 
@@ -224,7 +249,7 @@ Refit via REML
 ```{r}
 fit_lmer_5re <- lmerTest::lmer(pulse ~ diet*exertype*time_min + 
                                  diet*exertype*I(time_min^2) + (1 | id),
-                               data = data_long,
+                               data = df_ex_long,
                                REML = TRUE)
 ```
 
@@ -285,7 +310,7 @@ effects::Effect(focal.predictors = c("diet", "exertype", "time_min"),
                   fill = diet),
               alpha = 0.3) +
   geom_line(aes(linetype = diet),
-                size = 1) +
+            size = 1) +
   theme_bw() +
   facet_grid(~ exertype) +
   theme(legend.position = c(0.12, 0.85),
@@ -304,6 +329,66 @@ effects::Effect(focal.predictors = c("diet", "exertype", "time_min"),
 ```
 
 
+```{r}
+fit_lmer_5re %>% 
+  emmeans::emmeans(~ diet*exertype*time_min,
+                   at = list("time_min" = seq(from = 0, 
+                                                to   = 12, 
+                                                by   = 0.5))) %>% 
+  data.frame %>% 
+  dplyr::mutate(diet = fct_rev(diet)) %>%  # reverse the order of the levels
+  ggplot(aes(x = time_min,
+             y = emmean)) +
+  geom_ribbon(aes(ymin = emmean - SE,
+                  ymax = emmean + SE,
+                  fill = diet),
+              alpha = 0.3) +
+  geom_line(aes(linetype = diet),
+            size = 1) +
+  theme_bw() +
+  facet_grid(~ exertype) +
+  theme(legend.position = c(0.12, 0.85),
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(2, "cm")) +
+  labs(title = "Raw Pulse Trajectories",
+       subtitle = "By Randomized Exercise and Diet Intervention",
+       x = "Time (Minutes Post-Baseline)",
+       y = "Estimated Marginal Mean\nPulse (Beats per Minute)",
+       fill = "Diet Plan",
+       color = "Diet Plan",
+       linetype = "Diet Plan") +
+  scale_fill_manual(values = c("black", "gray50")) +
+  scale_linetype_manual(values = c("solid", "longdash")) +
+  scale_x_continuous(breaks = seq(from = 0, to = 14, by = 5))
+```
 
 
+#### Pairwise Differences in Means
+
+
+
+```{r}
+fit_lmer_5re %>% 
+  emmeans::emmeans(~diet|exertype*time_min,
+                   at = list(time_min = c(0, 5, 10))) %>% 
+  pairs(adjust = "none") %>% 
+  data.frame() %>% 
+  dplyr::mutate(p_Unadj = apaSupp::p_num(p.value)) %>% 
+  dplyr::mutate(p_Adj = apaSupp::p_num(p.adjust(p.value, method = "fdr"))) %>% 
+  dplyr::mutate(SMD = estimate/apaSupp::lmer_sd(fit_lmer_5re)) %>% 
+  dplyr::arrange(exertype, time_min) %>% 
+  dplyr::select("Exercise" = exertype,
+                "Time, min" = time_min,
+                "EMM Difference_Est" = estimate, 
+                "EMM Difference_(SE)" = SE,
+                SMD,
+                p_Unadj,
+                p_Adj) %>% 
+  flextable::as_grouped_data(groups = "Exercise") %>% 
+  flextable::flextable() %>% 
+  flextable::separate_header() %>% 
+  apaSupp::theme_apa(caption = "Diet Differences in Estimated Marginal Mean Pulse for each Exercise Program",
+                     general_note = "EMM = estimated marginal means. SMD = standardized mean difference. P-values given both unadjusted (Unadj) and adjusted (Adj) via the method of Benjamini, Hochberg, and Yekutieli to control the false discovery rate (FDR)") %>% 
+  flextable::hline(part = "header", i = 1)
+```
 
