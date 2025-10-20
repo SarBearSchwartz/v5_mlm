@@ -1,40 +1,38 @@
 # GEE, Continuous Outcome: Beat the Blues
 
-## Packages
+## PREPARATION 
 
-### CRAN
+### Load Packages
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(pander)       # nice looking genderal tabulations
-library(furniture)    # nice table1() descriptives
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-library(psych)        # contains some useful functions, like headTail
 
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 10/14/2025
+```
+
+Load/activate these packages
+
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(psych) 
+library(lme4)         
+library(lmerTest)
+library(corrplot)     
+library(gee)          
+library(geepack)       
+library(MuMIn)  
 library(interactions)
-library(performance)
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
-
-library(corrplot)     # Vizualize correlation matrix
-library(gee)          # Genderalized Estimation Equation Solver
-library(geepack)      # Genderalized Estimation Equation Package 
-library(MuMIn)        # Multi-Model Inference (caluclate QIC)
+library(performance)      
 
 library(HSAUR)        # package with the dataset
 ```
 
-### GitHub
-
-Helper `extract` functions for exponentiation of parameters form generalized regression models within a `texreg` table of model parameters.
-
-```{r, message=FALSE, error=FALSE}
-# remotes::install_github("sarbearschwartz/texreghelpr") # first time
-
-library(texreghelpr)
-```
 
 
-## Background
+
+### Background
 
 
 > This dataset was used as an example in Chapter 11 of "A Handbook of Statistical Analysis using R" by Brian S. Everitt and Torsten Hothorn.  The authors include this data set in their **HSAUR** package on `CRAN`. 
@@ -56,18 +54,18 @@ Net of other factors (use of antidepressants and length of the current episode),
 
 The variables are as follows:   
 
-  * `drug` did the patient take anti-depressant drugs (No or Yes)    
-  * `length`  the length of the current episode of depression, a factor with levels:    
-    + "<6m" *less than six months*     
-    + ">6m" *more than six months*   
-  * `treatment` treatment group, a factor with levels:   
-    + "TAU" *treatment as usual*     
-    + "BtheB" *Beat the Blues*    
-  * `bdi.pre` Beck Depression Inventory II, before treatment    
-  * `bdi.2m` Beck Depression Inventory II, after 2 months    
-  * `bdi.4m` Beck Depression Inventory II, after 4 months    
-  * `bdi.6m` Beck Depression Inventory II, after 6 months    
-  * `bdi.8m` Beck Depression Inventory II, after 8 months    
+* `drug` did the patient take anti-depressant drugs (No or Yes)    
+* `length`  the length of the current episode of depression, a factor with levels:    
++ "<6m" *less than six months*     
++ ">6m" *more than six months*   
+* `treatment` treatment group, a factor with levels:   
++ "TAU" *treatment as usual*     
++ "BtheB" *Beat the Blues*    
+* `bdi.pre` Beck Depression Inventory II, before treatment    
+* `bdi.2m` Beck Depression Inventory II, after 2 months    
+* `bdi.4m` Beck Depression Inventory II, after 4 months    
+* `bdi.6m` Beck Depression Inventory II, after 6 months    
+* `bdi.8m` Beck Depression Inventory II, after 8 months    
 
 
 ### Read in the data
@@ -80,7 +78,7 @@ BtheB %>%
 ```
 
 
-### Wide Format
+#### Wide Format
 
 Tidy up the dataset
 
@@ -90,19 +88,21 @@ Tidy up the dataset
 
 
 ```{r}
-btb_wide <- BtheB %>% 
-  dplyr::mutate(id = row_number()) %>%           # create a new variable to ID participants
-  dplyr::select(id, treatment,                    # specify that ID variable is first
+df_btb_wide <- BtheB %>% 
+  dplyr::mutate(id = row_number()) %>% # create a new variable to ID participants
+  dplyr::select(id, treatment,         # specify that ID variable is first
                 drug, length,
                 bdi.pre, bdi.2m, bdi.4m, bdi.6m, bdi.8m)
 ```
 
 ```{r}
-btb_wide %>% 
-  psych::headTail(top = 10, bottom = 10) 
+df_btb_wide %>% 
+  psych::headTail(top = 10, bottom = 10) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Wide Format")
 ```
 
-### Long Format
+#### Long Format
 
 Restructure to long format
 
@@ -111,8 +111,8 @@ Restructure to long format
 * Good for plots and modeling
 
 ```{r}
-btb_long <- btb_wide %>% 
-  tidyr::pivot_longer(cols = c(bdi.2m, bdi.4m, bdi.6m, bdi.8m),  # all existing variables (not quoted)
+df_btb_long <- df_btb_wide %>% 
+  tidyr::pivot_longer(cols = c(bdi.2m, bdi.4m, bdi.6m, bdi.8m),
                       names_to = "month", 
                       names_pattern = "bdi.(.)m",
                       values_to = "bdi") %>% 
@@ -124,18 +124,23 @@ btb_long <- btb_wide %>%
 
 
 ```{r}
-btb_long %>% 
-  psych::headTail(top = 10, bottom = 10) 
+df_btb_long %>% 
+  psych::headTail(top = 10, bottom = 10) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Long Format")
 ```
 
-## Exploratory Data Analysis
+## EXPLORATORY DATA ANLAYSIS
 
 ### Visualize: Person-profile Plots
 
 Create spaghetti plots of the raw, observed data
 
-```{r}
-btb_long %>% 
+```{r, fig.cap="Observed Trajectories of Depression Across Time with LM Smoother by Treatment"}
+df_btb_long %>% 
+  dplyr::mutate(treatment = treatment %>% 
+                  forcats::fct_recode("Treatment as Usual" = "TAU",
+                                      "Beat the Blues Program" = "BtheB")) %>% 
   ggplot(aes(x = month,
              y = bdi)) +
   geom_point() +
@@ -145,31 +150,39 @@ btb_long %>%
   geom_smooth(method = "lm") +
   theme_bw() +
   facet_grid(.~ treatment) +
-  labs(title = "BtheB - Observed Data Across Time with LM Smoother",
-       subtitle = "Seperate by Treatment")
+  labs(x = "Time from Baseline, months",
+       y = "Beck Depression Inventory Score")
 ```
-
-
-```{r}
-btb_long %>% 
+```{r, fig.cap="Observed Trajectories of Depression Across Time with LM Smoother by Treatment and Antidepressant Use"}
+df_btb_long %>% 
+  dplyr::mutate(treatment = treatment %>% 
+                  forcats::fct_recode("Treatment as Usual" = "TAU",
+                                      "Beat the Blues Program" = "BtheB")) %>% 
+  dplyr::mutate(drug = drug %>% 
+                  forcats::fct_recode("Not Using Antidepressants" = "No",
+                                      "Using Antidepressants" = "Yes")) %>% 
   ggplot(aes(x = month,
              y = bdi)) +
-  geom_point() +
   geom_line(aes(group = id), 
             size = 1, 
             alpha = 0.3) +
   geom_smooth(method = "lm") +
-  facet_grid(drug~ treatment, labeller = label_both) +
+  facet_grid(drug ~ treatment) +
   theme_bw() +
-  labs(title = "BtheB - Observed Data Across Time with LM Smoother",
-       subtitle = "Seperate by Treatment & Antidepressant Use")
+  labs(x = "Time from Baseline, months",
+       y = "Beck Depression Inventory Score")
 ```
 
-```{r}
-btb_long %>% 
+```{r, fig.cap="Observed Trajectories of Depression Across Time with LM Smoother by Treatment, Antidepressant Use, and Length of Current Episode"}
+df_btb_long %>% 
+  dplyr::mutate(treatment = treatment %>% 
+                  forcats::fct_recode("Treatment as Usual" = "TAU",
+                                      "Beat the Blues Program" = "BtheB")) %>% 
+  dplyr::mutate(drug = drug %>% 
+                  forcats::fct_recode("Not Using Antidepressants" = "No",
+                                      "Using Antidepressants" = "Yes")) %>% 
   ggplot(aes(x = month,
              y = bdi)) +
-  geom_point() +
   geom_line(aes(group = id,
                 color = length), 
             size = 1, 
@@ -178,36 +191,60 @@ btb_long %>%
               method = "lm",
               size = 1.25,
               se = FALSE) +
-  facet_grid(drug~ treatment, labeller = label_both) +
+  facet_grid(drug ~ treatment) +
   theme_bw() +
-  labs(title = "BtheB - Observed Data Across Time with LM Smoother",
-       subtitle = "Seperate by Treatment, Antidepressant Use, & Length of Current Episode")
+  labs(x = "Time from Baseline, months",
+       y = "Beck Depression Inventory Score",
+       color = "Current Episode Length") +
+  theme(legend.position = "inside",
+        legend.position.inside = c(1, 1),
+        legend.justification = c(1.1, 1.1),
+        legend.key.width = unit(2, "cm"),
+        legend.background = element_rect(color = "black"))
 ```
 
 
 
-```{r}
-btb_long %>% 
+```{r, fig.cap="Linear Regression Line for Subgroup Analysis by Treatment"}
+df_btb_long %>% 
+  dplyr::mutate(treatment = treatment %>% 
+                  forcats::fct_recode("Treatment as Usual" = "TAU",
+                                      "Beat the Blues Program" = "BtheB")) %>% 
   ggplot(aes(x = month,
              y = bdi,
              color = treatment,
              fill = treatment)) +
   geom_smooth(method = "lm") +
-  theme_bw() +
-  labs(title = "BtheB - Predictions from TWO Seperate Single Simple Linear Models (lm)",
-       subtitle = "Assumes Independence of Repeated Measures")
+  theme_bw()  +
+  labs(x = "Time from Baseline, months",
+       y = "Beck Depression Inventory Score",
+       color = NULL,
+       fill = NULL) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(1, 1),
+        legend.justification = c(1.1, 1.1),
+        legend.key.width = unit(2, "cm"),
+        legend.background = element_rect(color = "black"))
 ```
 
 ### Calculate the Observed Correlation Structure
 
 
 ```{r}
-bdi_corr <- btb_wide %>% 
+bdi_corr <- df_btb_wide %>% 
   dplyr::select(starts_with("bdi")) %>% 
   stats::cor(use="pairwise.complete.obs")
 
 bdi_corr
 ```
+
+
+```{r}
+df_btb_wide %>% 
+  dplyr::select(starts_with("bdi")) %>% 
+  apaSupp::tab_cor(caption = "Correlation Between Repeated Measures of Depression")
+```
+
 
 
 ### Plot the correlation matrix to get a better feel for the pattern
@@ -218,127 +255,69 @@ bdi_corr %>%
 ```
 
 
-
-
-## Multiple Regression (OLS)
+## LINEAR REGRESSION, LM
 
 This ignores any correlation between repeated measures on the same individual and treats all observations as independent.
 
-### Fit the models
+###  Fit the models
 
 ```{r}
 btb_lm_1 <- stats::lm(bdi ~ bdi.pre + length + drug + treatment + month,
-                    data = btb_long)
+                    data = df_btb_long)
 
 btb_lm_2 <- stats::lm(bdi ~ bdi.pre + length + drug + treatment*month,
-                    data = btb_long)
+                    data = df_btb_long)
 
 btb_lm_3 <- stats::lm(bdi ~ bdi.pre + length + drug + treatment + drug*month,
-                    data = btb_long)
+                    data = df_btb_long)
 
 btb_lm_4 <- stats::lm(bdi ~ bdi.pre + length + drug*treatment*month,
-                    data = btb_long)
+                    data = df_btb_long)
 ```
-
 
 ### Parameter Estimates Table
 
-
-```{r, results='asis'}
-texreg::knitreg(list(btb_lm_1, btb_lm_2, btb_lm_3, btb_lm_4),
-                label = "lm",
-                caption = "OLS")
-```
-
-### Plot the model predictions
-
 ```{r}
-interactions::interact_plot(model = btb_lm_1,
-                            pred = month,
-                            modx = treatment,
-                            main.title = "LM with 95% CI",
-                            interval = TRUE)                 # default = 95% confidence interval
+apaSupp::tab_lms(list(btb_lm_1, btb_lm_2, btb_lm_3, btb_lm_4),
+                 narrow = TRUE,
+                 caption = "Multiple Linear Regression - Ignoring correlation WRONG!")
 ```
 
 
-```{r}
-interactions::interact_plot(model = btb_lm_1,
-                            pred = month,
-                            modx = treatment,
-                            main.title = "LM with 68% CI (M +/- SEM)",
-                            interval = TRUE,
-                            int.width = 0.68)  # change to 68% CI, which is +/- 1 SEM
-```
-
-```{r}
-interactions::interact_plot(model = btb_lm_1,
-                            pred = month,
-                            modx = treatment,
-                            interval = TRUE,
-                            colors = rep("black", times = 3),
-                            x.label = "Month",
-                            y.label = "Predicted BDI",
-                            legend.main    = "Baseline BDI:") +
-  theme_bw() +
-  theme(legend.position = "bottom",
-        legend.key.width = unit(2, "cm")) +
-  labs(title    = "BtheB - Predictions from the LM model (95% CI)",
-       subtitle = "Trajectory for a person with BL depression < 6 months and randomized to TAU") 
-```
 
 
-```{r}
-effects::Effect(focal.predictors = c("treatment", "month"), 
-                mod = btb_lm_1) %>% 
-  data.frame %>% 
-  dplyr::mutate(treatment = fct_reorder2(treatment, month, fit)) %>%  
-  ggplot(aes(x = month,
-             y = fit)) +
-  geom_line(aes(color = treatment)) +
-  geom_ribbon(aes(ymin = lower,            # 95% confidence intervals
-                  ymax = upper,
-                  fill = treatment), 
-              alpha = 0.3) +
-  geom_ribbon(aes(ymin = fit - se,         # Mean +/- 1 standard error for the mean (SEM)
-                  ymax = fit + se,
-                  fill = treatment), 
-              alpha = 0.3) +
-  theme_bw() +
-  labs(title = "BtheB - Predictions from a Single Linear Model (lm)",
-       subtitle = "Assumes Independence of Repeated Measures") +
-  theme(legend.position = c(1, 1),
-        legend.justification = c(1.1, 1.1),
-        legend.background = element_rect(color = "black"))
-```
 
 
-## Multilevel Models (MLM)
+## MULTILEVEL MODELING, MLM
 
 ### Fit the models
 
 
 ```{r}
-btb_lmer_RI   <- lmerTest::lmer(bdi ~ bdi.pre + length + drug + treatment + month + (1 | id), 
-                            data = btb_long, 
-                            REML = TRUE)
+btb_lmer_RI   <- lmerTest::lmer(bdi ~ bdi.pre + length + drug + treatment + 
+                                  month + (1 | id), 
+                                data = df_btb_long, 
+                                REML = TRUE)
 
-btb_lmer_RIAS <- lmerTest::lmer(bdi ~ bdi.pre + length + drug + treatment + month + (month | id), 
-                            data = btb_long, 
-                            REML = TRUE,
-                            control = lmerControl(optimizer = "Nelder_Mead"))
+btb_lmer_RIAS <- lmerTest::lmer(bdi ~ bdi.pre + length + drug + treatment + 
+                                  month + (month | id), 
+                                data = df_btb_long, 
+                                REML = TRUE,
+                                control = lmerControl(optimizer = "Nelder_Mead"))
 ```
 
 
 ### Parameter Estimates Table
 
 
-
-```{r, results='asis'}
-texreg::knitreg(list(btb_lm_1, btb_lmer_RI, btb_lmer_RIAS), 
-                custom.model.names = c("OLS", "MLM-RI", "MLM-RIAS"),
-                label = "mlm",
-                caption = "LM vs. MLM")
+```{r}
+apaSupp::tab_lmers(list("MLM - RI"   = btb_lmer_RI,
+                        "MLM - RIAS" = btb_lmer_RIAS))
 ```
+
+
+
+
 
 
 ### Likelihood Ratio Test
@@ -351,28 +330,30 @@ anova(btb_lmer_RI,
 ```
 
 
-```{r}
-performance::compare_performance(btb_lm_1, 
-                                 btb_lmer_RI, 
-                                 btb_lmer_RIAS,
-                                 rank = TRUE)
-```
+
 
 
 
 ### Plot the model predictions
 
-```{r}
+```{r, fig.cap="Estimated Marginal Means from a Multilevel Model (MLM)"}
 interactions::interact_plot(model = btb_lmer_RI,
                             pred = month,
                             modx = treatment,
+                            modx.labels = c("Treatment as Usual",
+                                            "Beat the Blues Program"),
                             mod2 = drug,
+                            mod2.labels = c("Not Using Antidepressants",
+                                            "Using Antidepressants"),
+                            legend.main = "Treatment",
                             interval = TRUE) +
-  theme_bw() +
-  labs(title = "BtheB - Predictions from a Multilevel Model (lmer)") +
+  theme_bw()  +
+  labs(x = "Time from Baseline, months",
+       y = "Estimated Margial Mean\nBeck Depression Inventory Score") +
   theme(legend.position = c(0, 0),
         legend.justification = c(-0.1, -0.1),
-        legend.background = element_rect(color = "black"))
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(1.5, "cm"))
 ```
 
 
@@ -381,78 +362,76 @@ interactions::interact_plot(model = btb_lmer_RI,
 effects::Effect(c("treatment", "month", "drug"), 
                 mod = btb_lmer_RI) %>% 
   data.frame %>%   
+  dplyr::mutate(treatment = treatment %>% 
+                  forcats::fct_recode("Treatment as Usual" = "TAU",
+                                      "Beat the Blues Program" = "BtheB")) %>% 
+  dplyr::mutate(drug = drug %>% 
+                  forcats::fct_recode("Not Using Antidepressants" = "No",
+                                      "Using Antidepressants" = "Yes")) %>% 
   dplyr::mutate(treatment = fct_reorder2(treatment, month, fit)) %>%
   ggplot(aes(x = month,
              y = fit)) +
-  geom_line(aes(color = treatment)) +
+  geom_line(aes(color = treatment,
+                linetype = treatment),
+            size = 1) +
   geom_ribbon(aes(ymin = lower,
                   ymax = upper,
                   fill = treatment), 
               alpha = 0.3) +
   theme_bw() +
-  facet_grid(.~ drug, labeller = label_both) +
-  labs(title = "BtheB - Predictions from a Multilevel Model (lmer)") +
+  facet_grid(.~ drug)+
+  labs(x = "Time from Baseline, months",
+       y = "Estimated Margial Mean\nBeck Depression Inventory Score") +
   theme(legend.position = c(0, 0),
         legend.justification = c(-0.1, -0.1),
-        legend.background = element_rect(color = "black"))
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(1.5, "cm"))
 ```
 
 
 
 
-## General Estimating Equations, GEE
+## GENERAL ESTIMATING EQUATIONS, GEE
 
 ### Explore Various Correlation Structures
 
 
 #### Fit the models - Main effects to determine correlation structure
 
-**Use the `gee()` function from the `gee` package for the results to be used in a `texreg::knitreg()` tables.**
 
 The output below each model is the 'starting' model assuming independence, so they will all be the same here.
 
 ```{r}
-btb_gee_in <- gee::gee(bdi ~ bdi.pre + length + drug + treatment + month, 
-                       data = btb_long, 
-                       id = id, 
-                       family = gaussian, 
-                       corstr = 'independence')
+btb_geeglm_in <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + month, 
+                                 data = df_btb_long, 
+                                 id = id,
+                                 wave = month,
+                                 family = gaussian, 
+                                 corstr = 'independence')
 
-btb_gee_ex <- gee::gee(bdi ~ bdi.pre + length + drug + treatment + month, 
-                       data = btb_long, 
-                       id = id, 
-                       family = gaussian, 
-                       corstr = 'exchangeable')
+btb_geeglm_ex <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + month, 
+                                 data = df_btb_long, 
+                                 id = id, 
+                                 wave = month,
+                                 family = gaussian, 
+                                 corstr = 'exchangeable')
 
-# The AR-1 fails if any subjects have only 1 observation
-# to use this one, we would need to remove participants with only 1 BDI
+btb_geeglm_ar <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + month, 
+                                 data = df_btb_long, 
+                                 id = id, 
+                                 wave = month,
+                                 family = gaussian, 
+                                 corstr = 'ar1')
 
-# btb_gee_ar <- gee(bdi ~ bdi.pre + length + drug + treatment + month,
-#                  data = btb_long,
-#                  id = id,
-#                  family = gaussian,
-#                  corstr = 'AR-M',
-#                  Mv = 1)
-
-btb_gee_un <- gee::gee(bdi ~ bdi.pre + length + drug + treatment + month, 
-                       data = btb_long, 
-                       id = id, 
-                       family = gaussian, 
-                       corstr = 'unstructured')
-```
-
-```{r}
-summary(btb_gee_in)
-```
-
-```{r}
-summary(btb_gee_ex)
+btb_geeglm_un <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + month, 
+                                 data = df_btb_long, 
+                                 id = id,
+                                 wave = month,
+                                 family = gaussian, 
+                                 corstr = 'unstructured')
 ```
 
 
-```{r}
-summary(btb_gee_un)
-```
 
 
 
@@ -460,60 +439,14 @@ summary(btb_gee_un)
 #### Parameter Estimates Table
 
 
-```{r,  results='asis'}
-texreg::knitreg(list(btb_lm_1, 
-                     btb_lmer_RI, 
-                     btb_gee_in, 
-                     btb_gee_ex, 
-                     btb_gee_un),
-                custom.model.names = c("OLS", 
-                                       "MLM-RI", 
-                                       "GEE-in", 
-                                       "GEE-ex", 
-                                       "GEE-un"),
-                  label = "GEEs",
-                  caption = "LM, MLM, and GEE")
-```
-
-
-
-
-#### Re-Fit Models
-
-**Use the `geeglm()` function from the `geepack` package for the results to be used in a `anova()` table and interaction plots.**
-
-This function does NOT produce the same starting model output as `gee::gee()`.
-
 ```{r}
-btb_geeglm_in <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + month, 
-                                 data = btb_long, 
-                                 id = id,
-                                 wave = month,
-                                 family = gaussian, 
-                                 corstr = 'independence')
-
-btb_geeglm_ex <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + month, 
-                                 data = btb_long, 
-                                 id = id, 
-                                 wave = month,
-                                 family = gaussian, 
-                                 corstr = 'exchangeable')
-
-
-btb_geeglm_ar <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + month, 
-                                 data = btb_long, 
-                                 id = id, 
-                                 wave = month,
-                                 family = gaussian, 
-                                 corstr = 'ar1')
-
-btb_geeglm_un <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + month, 
-                                 data = btb_long, 
-                                 id = id,
-                                 wave = month,
-                                 family = gaussian, 
-                                 corstr = 'unstructured')
+apaSupp::tab_gees(list("Exchangeable" = btb_geeglm_ex,
+                       "Autoregressive" = btb_geeglm_ar,
+                       "Unstructured" = btb_geeglm_un),
+                  narrow = TRUE)
 ```
+
+
 
 
 > Can't Use the Likelihood Ratio Test
@@ -548,8 +481,7 @@ MuMIn::QIC(btb_geeglm_in,
            btb_geeglm_ex, 
            btb_geeglm_ar, 
            btb_geeglm_un, 
-           typeR = FALSE) %>%  # default
-  pander::pander(caption = "QIC")
+           typeR = FALSE)
 ```
 
 
@@ -592,11 +524,14 @@ MuMIn::model.sel(btb_geeglm_in,
 
 #### Tabulate Model Parameters
 
-```{r,  results='asis'}
-texreg::knitreg(list(btb_gee_ex),
-                custom.model.names = c("GEE-ex"),
-                single.row = TRUE,
-                caption = "Final GEE, exchangeable correlation")
+```{r}
+apaSupp::tab_gee(btb_geeglm_ex,
+                 var_labels = c("bdi.pre" = "Baseline BDI",
+                                "length" = "Current Episode Length",
+                                "drug" = "Antidepressant Use",
+                                "treatment" = "Intervention",
+                                "month" = "Time, Months"),
+                 caption = "Final GEE, exchangeable correlation")
 ```
 
 
@@ -621,7 +556,7 @@ Do not worry about confidence intervals.
 expand.grid(bdi.pre = 23,
             length = "<6m",
             drug = "No",
-            treatment = levels(btb_long$treatment),
+            treatment = levels(df_btb_long$treatment),
             month = seq(from = 2, to = 8, by = 2)) %>%  
   dplyr::mutate(fit_in = predict(btb_geeglm_in,
                                  newdata = .,
@@ -668,7 +603,7 @@ expand.grid(bdi.pre = 23,
 expand.grid(bdi.pre = 23,
             length = "<6m",
             drug = "No",
-            treatment = levels(btb_long$treatment),
+            treatment = levels(df_btb_long$treatment),
             month = seq(from = 2, to = 8, by = 2)) %>%  
   dplyr::mutate(fit_in = predict(btb_geeglm_in,
                                  newdata = .,
@@ -716,21 +651,21 @@ expand.grid(bdi.pre = 23,
 
 ```{r}
 btb_geeglm_ex_1 <- geepack::geeglm(bdi ~ bdi.pre*length + drug + treatment + month, 
-                                   data = btb_long, 
+                                   data = df_btb_long, 
                                    id = id, 
                                    wave = month,
                                    family = gaussian, 
                                    corstr = 'exchangeable')
 
 btb_geeglm_ex_2 <- geepack::geeglm(bdi ~ bdi.pre*drug + length + treatment + month, 
-                                   data = btb_long, 
+                                   data = df_btb_long, 
                                    id = id, 
                                    wave = month,
                                    family = gaussian, 
                                    corstr = 'exchangeable')
 
 btb_geeglm_ex_3 <- geepack::geeglm(bdi ~  bdi.pre*treatment + length + drug + month, 
-                                   data = btb_long, 
+                                   data = df_btb_long, 
                                    id = id, 
                                    wave = month,
                                    family = gaussian, 
@@ -739,17 +674,12 @@ btb_geeglm_ex_3 <- geepack::geeglm(bdi ~  bdi.pre*treatment + length + drug + mo
 
 
 
-```{r,  results='asis'}
-texreg::knitreg(list(btb_geeglm_ex, 
-                    btb_geeglm_ex_1, 
-                    btb_geeglm_ex_2,
-                    btb_geeglm_ex_3),
-               custom.model.names = c("None",
-                                      "Length",
-                                      "Antidpressant",
-                                      "Treatment"),
-               label = "GEE_inter1",
-               caption = "GEE (exchangable): Interactions, not with Time")
+```{r}
+apaSupp::tab_gees(list("Episode Length" = btb_geeglm_ex_1,
+                       "Antidepressant" = btb_geeglm_ex_2,
+                       "Intervention" = btb_geeglm_ex_3),
+                  narrow = TRUE,
+                  caption = "GEE (exchangable): Interactions, not with Time")
 ```
 
 
@@ -757,52 +687,47 @@ texreg::knitreg(list(btb_geeglm_ex,
 
 ```{r}
 btb_geeglm_ex_11 <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment*month, 
-                                   data = btb_long, 
-                                   id = id, 
-                                   wave = month,
-                                   family = gaussian, 
-                                   corstr = 'exchangeable')
+                                    data = df_btb_long, 
+                                    id = id, 
+                                    wave = month,
+                                    family = gaussian, 
+                                    corstr = 'exchangeable')
 
 btb_geeglm_ex_12 <- geepack::geeglm(bdi ~ bdi.pre + length + treatment + drug*month, 
-                                   data = btb_long, 
-                                   id = id, 
-                                   wave = month,
-                                   family = gaussian, 
-                                   corstr = 'exchangeable')
+                                    data = df_btb_long, 
+                                    id = id, 
+                                    wave = month,
+                                    family = gaussian, 
+                                    corstr = 'exchangeable')
 
 btb_geeglm_ex_13 <- geepack::geeglm(bdi ~ bdi.pre + drug + treatment +  length*month, 
-                                   data = btb_long, 
-                                   id = id, 
-                                   wave = month,
-                                   family = gaussian, 
-                                   corstr = 'exchangeable')
+                                    data = df_btb_long, 
+                                    id = id, 
+                                    wave = month,
+                                    family = gaussian, 
+                                    corstr = 'exchangeable')
 
 btb_geeglm_ex_14 <- geepack::geeglm(bdi ~ length + drug + treatment + bdi.pre*month, 
-                                   data = btb_long, 
-                                   id = id, 
-                                   wave = month,
-                                   family = gaussian, 
-                                   corstr = 'exchangeable')
+                                    data = df_btb_long, 
+                                    id = id, 
+                                    wave = month,
+                                    family = gaussian, 
+                                    corstr = 'exchangeable')
+```
+
+
+```{r}
+apaSupp::tab_gees(list("Intervention"   = btb_geeglm_ex_11,
+                       "Antidepressant" = btb_geeglm_ex_12,
+                       "Episode length" = btb_geeglm_ex_13,
+                       "Baseline BDI"   = btb_geeglm_ex_14),
+                  narrow = TRUE,
+                  caption = "GEE (exchangable): Interactions with Time")
 ```
 
 
 
-```{r, results='asis'}
-texreg::knitreg(list(btb_geeglm_ex, 
-                       btb_geeglm_ex_11, 
-                       btb_geeglm_ex_12,
-                       btb_geeglm_ex_13,
-                       btb_geeglm_ex_14),
-               custom.model.names = c("None",
-                                      "Treatment",
-                                      "Antidepressant",
-                                      "Length",
-                                      "BL BDI"),
-               label="GEEinter2",
-               caption = "GEE (exchangable): Interactions with Time")
-```
-
-
+## Plot Best Model
 
 Now only plot the significant variables for the 'best' model.
 

@@ -10,40 +10,41 @@ knitr::opts_chunk$set(comment     = "",
                       fig.height  = 4)        # set default figure height to 3 inches
 ```
 
-## Packages
 
-### CRAN
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(pander)       # nice looking genderal tabulations
-library(furniture)    # nice table1() descriptives
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-library(psych)        # contains some useful functions, like headTail
 
+## PREPARATION 
+
+### Load Packages
+
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 10/14/2025
+```
+
+Load/activate these packages
+
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(psych) 
+library(lme4)         
+library(lmerTest)
+library(corrplot)      
+library(geepack)       
+library(MuMIn)  
 library(interactions)
-library(performance)
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
+library(performance)      
 
-library(corrplot)     # Vizualize correlation matrix
-library(gee)          # Genderalized Estimation Equation Solver
-library(geepack)      # Genderalized Estimation Equation Package 
-library(MuMIn)        # Multi-Model Inference (caluclate QIC)
+library(HSAUR)        # package with the dataset
 ```
 
 
-### GitHub
 
-Helper `extract` functions for exponentiating parameters form generalized regression models within a `texreg` table of model parameters.
+### Background
 
-```{r, message=FALSE, error=FALSE}
-# remotes::install_github("sarbearschwartz/texreghelpr") # first time
-
-library(texreghelpr)
-```
-
-
-## Background
 
 
 ```{block type='rmdlink', echo=TRUE}
@@ -92,7 +93,7 @@ In this study, the question of main scientific interest is whether treatment wit
 ### Enter the data by hand!
 
 ```{r}
-data_raw <- tibble::tribble(
+df_raw <- tibble::tribble(
   ~drug, ~count_pre, ~count_post,
   "A",      11,     6,    "B",       6,     0,    "C",      16,    13,
   "A",       8,     0,    "B",       6,     2,    "C",      13,    10,
@@ -111,20 +112,29 @@ data_raw <- tibble::tribble(
 
 
 ```{r}
-data_wide <- data_raw %>% 
+df_wide <- df_raw %>% 
   dplyr::mutate(drug = factor(drug)) %>% 
   dplyr::mutate(id = row_number()) %>% 
   dplyr::select(id, drug, count_pre, count_post)
+```
 
-str(data_wide)
 
-psych::headTail(data_wide)
+```{r}
+str(df_wide)
+```
+
+
+```{r}
+df_wide %>%
+  psych::headTail() %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Wide format of the Data")
 ```
 
 ### Long Format
 
 ```{r}
-data_long <- data_wide %>% 
+df_long <- df_wide %>% 
   tidyr::gather(key = obs,
                 value = count,
                 starts_with("count")) %>% 
@@ -132,10 +142,19 @@ data_long <- data_wide %>%
                                  obs == "count_post" ~ 1)) %>% 
   dplyr::select(id, drug, time, count) %>% 
   dplyr::arrange(id, time)
+```
 
-str(data_long)
 
-psych::headTail(data_long)
+```{r}
+str(df_long)
+```
+
+
+```{r}
+df_long %>%
+  psych::headTail() %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Long format of the Data")
 ```
 
 ## Exploratory Data Analysis
@@ -144,30 +163,23 @@ psych::headTail(data_long)
 ### Summary Statistics
 
 
-```{r, include=FALSE}
-data_wide %>% 
-  furniture::table1(count_pre, count_post,
-                    splitby = ~ drug,
-                    test = TRUE,
-                    output = "html")
-```
-
-
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::group_by(drug, time) %>% 
   dplyr::summarise(N = n(),
                    M = mean(count),
                    VAR = var(count),
                    SD = sd(count)) %>% 
-  pander::pander()
+  flextable::as_grouped_data(groups = "drug") %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Summary for each group at each time")
 ```
 
 ### Visualize
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::mutate(time_name = case_when(time == 0 ~ "Pre",
                                       time == 1 ~ "Post") %>% 
                   factor(levels = c("Pre", "Post"))) %>% 
@@ -186,7 +198,7 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::mutate(time_name = case_when(time == 0 ~ "Pre",
                                       time == 1 ~ "Post") %>% 
                   factor(levels = c("Pre", "Post"))) %>% 
@@ -209,7 +221,7 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::mutate(time_name = case_when(time == 0 ~ "Pre",
                                       time == 1 ~ "Post") %>% 
                   factor(levels = c("Pre", "Post"))) %>% 
@@ -245,59 +257,40 @@ data_long %>%
 The `gee()` function in the `gee` package 
 
 ```{r}
-mod_gee_ind <- gee::gee(count ~ drug*time,
-                        data = data_long,
-                        family = poisson(link = "log"),
-                        id = id,
-                        corstr = "independence")
+mod_geeglm_ind <- geepack::geeglm(count ~ drug*time,
+                                  data = df_long,
+                                  family = poisson(link = "log"),
+                                  id = id,
+                                  waves = time,
+                                  corstr = "independence")
 
-
-mod_gee_exc <- gee::gee(count ~ drug*time,
-                        data = data_long,
-                        family = poisson(link = "log"),
-                        id = id,
-                        corstr = "exchangeable")
-
-
-mod_gee_uns <- gee::gee(count ~ drug*time,
-                        data = data_long,
-                        family = poisson(link = "log"),
-                        id = id,
-                        corstr = "unstructured")
+mod_geeglm_exc <- geepack::geeglm(count ~ drug*time,
+                                  data = df_long,
+                                  family = poisson(link = "log"),
+                                  id = id,
+                                  waves = time,
+                                  corstr = "exchangeable")
 ```
 
 
-The GEE models display the robust (sandwich) standard errors.
-
-#### Raw Estimates (Logit Scale)
-
-```{r, results="asis"}
-texreg::knitreg(list(mod_gee_ind, 
-                     mod_gee_exc, 
-                     mod_gee_uns), 
-                custom.model.names = c("Independence",
-                                       "Exchangeable",
-                                       "Unstructured"),
-                single.row = TRUE,
-                digits = 3,
-                caption = "GEE - Estimates on Log Scale")
+```{r}
+summary(mod_geeglm_ind)
 ```
 
 
-#### Exponentiate the Estimates (odds ratio scale)
 
 
-```{r, results="asis"}
-texreg::knitreg(list(extract_gee_exp(mod_gee_ind), 
-                     extract_gee_exp(mod_gee_exc), 
-                     extract_gee_exp(mod_gee_uns)),
-                custom.model.names = c("Independence",
-                                       "Exchangeable",
-                                       "Unstructured"),
-                single.row = TRUE,
-                digits = 3,
-                ci.test = 1,
-                caption = "GEE - Estimates on Count Scale (RR)")
+```{r}
+summary(mod_geeglm_exc)
+```
+
+
+#### Parameter Estimates
+
+```{r}
+apaSupp::tab_gees(list("Independence" = mod_geeglm_ind,
+                       "Exchangeable" = mod_geeglm_exc),
+                  caption = "GEE - Estimates on Count Scale (RR)")
 ```
 
 
@@ -305,7 +298,7 @@ texreg::knitreg(list(extract_gee_exp(mod_gee_ind),
 #### Manual Extraction
 
 ```{r}
-mod_gee_exc %>% coef() %>% exp()
+mod_geeglm_exc %>% coef() %>% exp()
 ```
 
 ```{r}
@@ -325,19 +318,6 @@ mod_gee_exc %>% coef() %>% exp()
 
 
 ### Visualize the Final Model
-
-#### Refit with the `geeglm()` function in the `geepack` package 
-
-
-```{r}
-mod_geeglm_exc <- geepack::geeglm(count ~ drug*time,
-                                  data = data_long,
-                                  family = poisson(link = "log"),
-                                  id = id,
-                                  corstr = "exchangeable")
-
-summary(mod_geeglm_exc)
-```
 
 #### Quick
 
@@ -407,7 +387,7 @@ mod_geeglm_exc %>%
 ### Collapse the Predictor
 
 ```{r}
-data_remodel <- data_long %>% 
+df_remodel <- df_long %>% 
   dplyr::mutate(antibiotic = drug %>% 
                   forcats::fct_collapse(yes = c("A", "B"),
                                         no = c("C")))
@@ -416,29 +396,25 @@ data_remodel <- data_long %>%
 ### Reduce the Model - `gee::gee()`
 
 ```{r}
-mod_gee_exc2 <- gee::gee(count ~ antibiotic:time ,
-                         data = data_remodel,
-                         family = poisson(link = "log"),
-                         id = id,
-                         corstr = "exchangeable")
+mod_geeglm_exc2 <- geepack::geeglm(count ~ antibiotic:time ,
+                                data = df_remodel,
+                                family = poisson(link = "log"),
+                                id = id,
+                                waves = time,
+                                corstr = "exchangeable")
 
-summary(mod_gee_exc2)
+summary(mod_geeglm_exc2)
 ```
 
 ### Compare Parameters
 
 
-
-```{r, results="asis"}
-texreg::knitreg(list(extract_gee_exp(mod_gee_exc), 
-                     extract_gee_exp(mod_gee_exc2)), 
-                custom.model.names = c("Original",
-                                       "Refit"),
-                single.row = TRUE,
-                digits = 3,
-                ci.test = 1,
-                caption = "Estimates on Count Scale (Exchangeable)")
+```{r}
+apaSupp::tab_gees(list("Original" = mod_geeglm_exc,
+                       "Refit" = mod_geeglm_exc2))
 ```
+
+
 
 ### Interpretation
  
@@ -450,15 +426,6 @@ texreg::knitreg(list(extract_gee_exp(mod_gee_exc),
 
 ### Visualize
 
-#### Refit with `geepack::geeglm()`
-
-```{r}
-mod_geeglm_exc2 <- geepack::geeglm(count ~ antibiotic:time,
-                                   data = data_remodel,
-                                   family = poisson(link = "log"),
-                                   id = id,
-                                   corstr = "exchangeable")
-```
 
 #### Quick
 

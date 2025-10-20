@@ -10,39 +10,40 @@ knitr::opts_chunk$set(comment     = "",
                       fig.height  = 4)        # set default figure height to 3 inches
 ```
 
-## Packages
 
-### CRAN
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(pander)       # nice looking genderal tabulations
-library(furniture)    # nice table1() descriptives
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-library(psych)        # contains some useful functions, like headTail
 
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
+## PREPARATION 
 
-library(corrplot)     # Vizualize correlation matrix
-library(gee)          # Genderalized Estimation Equation Solver
-library(geepack)      # Genderalized Estimation Equation Package 
-library(MuMIn)        # Multi-Model Inference (caluclate QIC)
+### Load Packages
+
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("sarbearschwartz/apaSupp") # updated 10/14/2025
+```
+
+Load/activate these packages
+
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(psych) 
+library(lme4)         
+library(lmerTest)
+library(corrplot)      
+library(geepack)       
+library(MuMIn)  
+library(interactions)
+library(performance)      
 
 library(HSAUR)        # package with the dataset
 ```
 
 
-### GitHub
 
-Helper `extract` functions for exponentiating parameters form generalized regression models within a `texreg` table of model parameters.
-
-```{r, message=FALSE, error=FALSE}
-# remotes::install_github("sarbearschwartz/texreghelpr") # first time
-
-library(texreghelpr)
-```
-
-## Background
+### Background
 
 
 > This dataset was used as an example in Chapter 11 of "A Handbook of Statistical Analysis using R" by Brian S. Everitt and Torsten Hothorn.  The authors include this data set in their **HSAUR** package on `CRAN`. 
@@ -104,15 +105,24 @@ Solution:  We need to include an `offset` term in the model that indicates the L
 ### Long Format
 
 ```{r}
-data_long <- epilepsy %>% 
+df_long <- epilepsy %>% 
   dplyr::select(subject, age, treatment, base, 
                 period, seizure.rate) %>% 
   dplyr::mutate(per = log(2)) %>%                  # new variable to use with the offset
   dplyr::mutate(base_wk = base/8)
-  
-str(data_long)
+```
 
-psych::headTail(data_long, top = 10, bottom = 6)
+
+```{r}
+str(df_long)
+```
+
+
+```{r}
+df_long %>% 
+  psych::headTail(, top = 10, bottom = 6) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Long Form of the Data")
 ```
 
 
@@ -120,15 +130,24 @@ psych::headTail(data_long, top = 10, bottom = 6)
 ### Wide Format
 
 ```{r}
-data_wide <- data_long %>% 
+df_wide <- df_long %>% 
   tidyr::spread(key = period,
                 value = seizure.rate,
                 sep = "_") %>% 
   dplyr::arrange(subject)
+```
 
-str(data_wide)
 
-psych::headTail(data_wide)
+```{r}
+str(df_wide)
+```
+
+
+```{r}
+df_wide %>% 
+  psych::headTail(, top = 10, bottom = 6) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Wide Form of the Data")
 ```
 
 ## Exploratory Data Analysis
@@ -138,14 +157,12 @@ psych::headTail(data_wide)
 #### Demographics and Baseline
 
 ```{r}
-data_wide %>% 
-  dplyr::group_by(treatment) %>% 
-  furniture::table1(age, base, base_wk,
-                    total = TRUE,
-                    test = TRUE,
-                    digits = 2,
-                    type = "full",
-                    output = "markdown")
+df_wide %>% 
+  dplyr::select(treatment,
+                "Baseline Age" = age, 
+                "Seizures, 8 wk total" = base, 
+                "Seizures, weekly" = base_wk) %>% 
+  apaSupp::tab1(split = "treatment")
 ```
 
 #### Outcome Across Time
@@ -155,13 +172,15 @@ data_wide %>%
 In this dataset, the variance is much larger than the mean, at all time points for both groups.  This is evidence of **overdispersion** and suggest the scale parameter should be **greater than one**.
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::group_by(treatment, period) %>% 
   dplyr::summarise(N = n(),
                    M = mean(seizure.rate),
                    VAR = var(seizure.rate),
                    SD = sd(seizure.rate)) %>% 
-  pander::pander()
+  flextable::as_grouped_data(groups = "treatment") %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Check for OVERDISPERSION (mean = variance)")
 ```
 
 #### Correlation Across Time
@@ -169,7 +188,7 @@ data_long %>%
 Raw Scale
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::select(subject, period, seizure.rate ) %>% 
   tidyr::spread(key = period,
                 value = seizure.rate ) %>% 
@@ -181,7 +200,7 @@ data_long %>%
 Log Scale
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::mutate(rate_wk = log(seizure.rate + 1)) %>% 
   dplyr::select(subject, period, rate_wk) %>% 
   tidyr::spread(key = period,
@@ -195,14 +214,14 @@ data_long %>%
 
 ### Visualize
 
-#### Oucome on the Raw Scale
+#### Outcome on the Raw Scale
 
 There appear to be quite a few extreme values or outliers, particularly for the Progabide group during period one.
 
 Since the outcome is truely a **COUNT**, we will model it with a **Poisson** distribution combined with a **LOG** link.
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = period,
              y = seizure.rate)) +
   geom_boxplot() +
@@ -215,7 +234,7 @@ To investigate possible outliers, we should transform the outcome with the `log`
 > Note: Since some participants reported no seizures during a two week period and the `log(0)` is **unndefinded**, we must add some amount to the values before transforming.  Here we have chosen to add the value of $1$.
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = period,
              y = log(seizure.rate + 1))) +
   geom_boxplot() +
@@ -225,7 +244,7 @@ data_long %>%
 ```
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = period,
              y = log(seizure.rate + 1))) +
   geom_line(aes(group = subject)) +
@@ -235,7 +254,7 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = period,
              y = log(seizure.rate + 1))) +
   geom_smooth(aes(group = subject),
@@ -260,7 +279,7 @@ data_long %>%
 
 ```{r}
 fit_glm <- glm(seizure.rate ~ base + age + treatment + offset(per),
-               data = data_long,
+               data = df_long,
                family = poisson(link = "log"))
 
 summary(fit_glm)
@@ -269,15 +288,9 @@ summary(fit_glm)
 
 ### Tabulate the Model Parameters
 
-```{r, results='asis'}
-texreg::knitreg(list(fit_glm,
-                     texreghelpr::extract_glm_exp(fit_glm,
-                                                  include.any = FALSE)),
-                custom.model.names = c("b (SE)", "IRR [95 CI]"),
-                caption = "Poisson Generalized Linear Regression (GLM)",
-                single.row = TRUE,
-                digits = 3,
-                ci.test = 1)
+```{r}
+apaSupp::tab_glm(fit_glm,
+                caption = "Poisson Generalized Linear Regression (GLM) - WRONG!")
 ```
 
 
@@ -290,20 +303,18 @@ texreg::knitreg(list(fit_glm,
 * scale parameter = $1$
 
 ```{r}
-fit_gee_ind_s1 <- gee::gee(seizure.rate ~ base + age + treatment + offset(per),
-                           data = data_long,
-                           family = poisson(link = "log"),
-                           id = subject,
-                           corstr = "independence",
-                           scale.fix = TRUE,
-                           scale.value = 1)
+fit_gee_ind_s1 <- geepack::geeglm(seizure.rate ~ base + age + treatment + offset(per),
+                                  data = df_long,
+                                  family = poisson(link = "log"),
+                                  id = subject,
+                                  waves = period,
+                                  corstr = "independence",
+                                  scale.fix = TRUE)
 
 summary(fit_gee_ind_s1)
 ```
 
-* The estimates and the naive standard errors match the GLM exactly.  
 
-* The naive SE's are much smaller (*half*) than the robust (sandwich) SE's, suggesting a poor fit.
 
 
 ### Change Correlation Sturucture
@@ -312,23 +323,21 @@ summary(fit_gee_ind_s1)
 * scale parameter = $1$
 
 ```{r}
-fit_gee_exc_s1 <- gee::gee(seizure.rate ~ base + age + treatment + offset(per),
-                           data = data_long,
+fit_gee_exc_s1 <- geepack::geeglm(seizure.rate ~ base + age + treatment + offset(per),
+                           data = df_long,
                            family = poisson(link = "log"),
                            id = subject,
+                                  waves = period,
                            corstr = "exchangeable",
-                           scale.fix = TRUE,
-                           scale.value = 1)
+                           scale.fix = TRUE)
 
 summary(fit_gee_exc_s1)
 ```
 
 
-* Although the estimated beta parameters are not much different, the naive SE's are some closer to the robust SE's.
 
 #### Interpretation
 
-> For determining significance, no p-values are given, however the p-value will be < .05 when the z-score is > 1.96.
 
 "For this example, the estimates of standard errors under the independence are about half of the corresponding robust estimates, and the the situation improves only a little when an exchangeable structure is fitted.  Using naive standard errors leads, in particular, to a highly significant treatment effect which disappears when the robust estimates are used."
 
@@ -346,65 +355,35 @@ summary(fit_gee_exc_s1)
 
 
 ```{r}
-fit_gee_exc_sf <- gee::gee(seizure.rate ~ base + age + treatment + offset(per),
-                           data = data_long,
+fit_gee_exc_sf <- geepack::geeglm(seizure.rate ~ base + age + treatment + offset(per),
+                           data = df_long,
                            family = poisson(link = "log"),
                            id = subject,
+                                  waves = period,
                            corstr = "exchangeable",
                            scale.fix = FALSE)
 
 summary(fit_gee_exc_sf)
 ```
 
-* The naive SE's are much closer inline with the robust SE's.
-
-* The scale parameter is estimated to be much larger than $1$.
 
 
-"When this is done *(scale parameter is freely estimated)* it gives the last set of results shown above.  THe estimate of $\phi$ is 5.09 and the naive and robust estimates of the standard errors are now very similar.  "
+
+"When this is done *(scale parameter is freely estimated)* it gives the last set of results shown above.  The estimate of $\phi$ is 5."
 
 
 
 ### Compare Models
 
-
-#### Raw Estimates (logit scale) 
-
-
-
-```{r, results="asis"}
-texreg::knitreg(list(fit_glm, 
-                     fit_gee_ind_s1, 
-                     fit_gee_exc_s1, 
-                     fit_gee_exc_sf),
-                custom.model.names = c("GLM",
-                                       "GEE-Indep(1)",
-                                       "GEE-Exchg(1)",
-                                       "GEE-Exchg(free)"),
-                caption = "Estimates on Logit Scale",
-                digits = 3)
+```{r}
+apaSupp::tab_gees(list("Independence" = fit_gee_ind_s1,
+                       "Exchg, fixed" = fit_gee_exc_s1,
+                       "Exchg, freed" = fit_gee_exc_sf),
+                  narrow = TRUE,
+                  caption = "Estimates on Odds-Ratio Scale")
 ```
 
 
-
-#### Exponentiate the Estimates (odds ratio scale)
-
-
-
-```{r, results="asis"}
-texreg::knitreg(list(extract_glm_exp(fit_glm), 
-                     extract_gee_exp(fit_gee_ind_s1), 
-                     extract_gee_exp(fit_gee_exc_s1), 
-                     extract_gee_exp(fit_gee_exc_sf)),
-                custom.model.names = c("GLM",
-                                       "GEE-Indep(1)",
-                                       "GEE-Exchg(1)",
-                                       "GEE-Exchg(free)"),
-                digits = 3,
-                caption = "Estimates on Odds-Ratio Scale",
-                caption.above = TRUE,
-                ci.test = 1)
-```
 
 ## Conculsion
 
