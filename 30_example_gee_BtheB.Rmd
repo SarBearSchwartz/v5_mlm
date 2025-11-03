@@ -263,16 +263,16 @@ This ignores any correlation between repeated measures on the same individual an
 
 ```{r}
 btb_lm_1 <- stats::lm(bdi ~ bdi.pre + length + drug + treatment + month,
-                    data = df_btb_long)
+                      data = df_btb_long)
 
 btb_lm_2 <- stats::lm(bdi ~ bdi.pre + length + drug + treatment*month,
-                    data = df_btb_long)
+                      data = df_btb_long)
 
 btb_lm_3 <- stats::lm(bdi ~ bdi.pre + length + drug + treatment + drug*month,
-                    data = df_btb_long)
+                      data = df_btb_long)
 
 btb_lm_4 <- stats::lm(bdi ~ bdi.pre + length + drug*treatment*month,
-                    data = df_btb_long)
+                      data = df_btb_long)
 ```
 
 ### Parameter Estimates Table
@@ -395,8 +395,68 @@ effects::Effect(c("treatment", "month", "drug"),
 
 ### Explore Various Correlation Structures
 
+Main effects to determine correlation structure
 
-#### Fit the models - Main effects to determine correlation structure
+#### Fit the models - `gee::gee()`
+
+```{r}
+btb_gee_in <- gee::gee(bdi ~ bdi.pre + length + drug + treatment + month, 
+                       data = df_btb_long, 
+                       id = id,
+                       family = gaussian, 
+                       corstr = 'independence',
+                                 scale.fix = TRUE, 
+                                 scale.value = 1)
+
+btb_gee_ex <- gee::gee(bdi ~ bdi.pre + length + drug + treatment + month, 
+                       data = df_btb_long, 
+                       id = id, 
+                       family = gaussian, 
+                       corstr = 'exchangeable',
+                                 scale.fix = TRUE, 
+                                 scale.value = 1)
+
+# btb_gee_ar <- gee::gee(bdi ~ bdi.pre + length + drug + treatment + month,
+#                        data = df_btb_long,
+#                        id = id,
+#                        family = gaussian,
+#                        corstr = "AR-M", Mv = 1,
+                                 # scale.fix = TRUE, 
+                                 # scale.value = 1)
+# 
+# cgee: M-dependence, M=1, but clustsize=1
+# fatal error for this model
+
+btb_gee_un <- gee::gee(bdi ~ bdi.pre + length + drug + treatment + month, 
+                       data = df_btb_long, 
+                       id = id,
+                       family = gaussian, 
+                       corstr = 'unstructured',
+                                 scale.fix = TRUE, 
+                                 scale.value = 1)
+```
+
+```{r}
+summary(btb_gee_in)
+```
+
+
+```{r}
+summary(btb_gee_ex)
+```
+
+
+```{r}
+# summary(btb_gee_ar)
+```
+
+
+
+```{r}
+summary(btb_gee_un)
+```
+
+#### Fit the models - `geepack::geeglm()`
 
 
 The output below each model is the 'starting' model assuming independence, so they will all be the same here.
@@ -432,7 +492,20 @@ btb_geeglm_un <- geepack::geeglm(bdi ~ bdi.pre + length + drug + treatment + mon
 ```
 
 
+#### Working Correlation Matrix
 
+
+```{r}
+btb_geeglm_ex$geese$alpha
+```
+
+```{r}
+btb_geeglm_ar$geese$alpha
+```
+
+```{r}
+btb_geeglm_un$geese$alpha
+```
 
 
 
