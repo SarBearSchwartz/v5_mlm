@@ -1,0 +1,175 @@
+# GLMM, Binary Outcome: Thailand Education (Hox ch 6.3)
+
+https://stats.oarc.ucla.edu/other/examples/ma-hox/
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment     = "",
+                      echo        = TRUE, 
+                      warning     = FALSE, 
+                      message     = FALSE,
+                      fig.align   = "center", # center all figures
+                      fig.width   = 6,        # set default figure width to 4 inches
+                      fig.height  = 4)        # set default figure height to 3 inches
+```
+
+## Packages
+
+
+```{r, message=FALSE, error=FALSE}
+library(tidyverse)  
+library(haven)
+library(psych)        
+
+library(lme4)         
+library(R2MLwiN)  
+library(MCMCglmm)
+
+library(emmeans)
+library(effects)      
+library(performance)
+library(interactions)
+
+library(patchwork)    
+```
+
+
+## Data
+
+```{r}
+df_long <- haven::read_sav("data/thaieduc.sav") %>% 
+  haven::as_factor() %>% 
+  haven::zap_label() %>% 
+  haven::zap_formats() %>% 
+  haven::zap_widths() %>% 
+  dplyr::rename_all(tolower) %>% 
+  dplyr::rename(re = `repeat`) %>% 
+  dplyr::mutate_if(is.factor, ~forcats::fct_relabel(.x, stringr::str_to_title)) %>% 
+  dplyr::mutate(re01 = case_when(re == "No" ~ 0,
+                                     re == "Yes" ~ 1))
+```
+
+```{r}
+names(df_long)
+```
+
+
+```{r}
+str(df_long)
+```
+
+
+```{r}
+tibble::glimpse(df_long)
+```
+
+```{r}
+summary(df_long)
+```
+
+
+
+https://stats.oarc.ucla.edu/r/dae/mixed-effects-logistic-regression/
+
+
+### ML with Laplace Approx
+
+```{r}
+fit_glmer_1 <- lme4::glmer(re01 ~ sex + pped + msesc + (1|schoolid),
+                           data = df_long,
+                           family = binomial)
+```
+
+```{r}
+summary(fit_glmer_1)
+```
+
+### ML with Adaptive Gauss-Hermite Quadrature
+
+```{r}
+fit_glmer_2 <- lme4::glmer(re01 ~ sex + pped + msesc + (1|schoolid),
+                           data = df_long,
+                           family = binomial,
+                           control = glmerControl(optimizer = "bobyqa"),
+                           nAGQ = 10)
+```
+
+```{r}
+summary(fit_glmer_2)
+```
+
+
+
+## Data
+
+```{r}
+df_long <- haven::read_sav("data/metaresp.sav") %>% 
+  haven::as_factor() %>% 
+  haven::zap_label() %>% 
+  haven::zap_formats() %>% 
+  haven::zap_widths() %>% 
+  dplyr::rename_all(tolower) %>% 
+  dplyr::mutate_if(is.factor, ~forcats::fct_relabel(.x, stringr::str_to_title)) %>% 
+  dplyr::mutate(res  = round(response*denom, 0)) %>% 
+  dplyr::mutate(tel  = as.numeric(mode == "Tel"))%>% 
+  dplyr::mutate(mail = as.numeric(mode == "Mail"))
+```
+
+
+```{r}
+df_long
+```
+
+
+
+
+
+### ML with Laplace Approx
+
+```{r}
+fit_glmer_1 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + (1|source),
+                           data = df_long,
+                           family = binomial)
+```
+
+```{r}
+summary(fit_glmer_1)
+```
+
+
+
+```{r}
+fit_glmer_2 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + (1|source),
+                           data = df_long,
+                           family = binomial)
+```
+
+```{r}
+summary(fit_glmer_2)
+```
+
+
+```{r}
+fit_glmer_2b <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + 
+                              (1|source) + (0 + tel|source) + (0+ mail|source),
+                           data = df_long,
+                           family = binomial)
+```
+
+```{r}
+summary(fit_glmer_2b)
+```
+
+```{r}
+fit_glmer_3 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + 
+                             year + saliency +
+                             (1|source),
+                           data = df_long,
+                           family = binomial)
+```
+
+```{r}
+summary(fit_glmer_3)
+```
+
+
+
