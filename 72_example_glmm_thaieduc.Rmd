@@ -1,18 +1,32 @@
-# GLMM, Binary Outcome: Thailand Education (Hox ch 6.3)
+# GLMM, Binary Outcome: Thailand Education (Hox ch 6)
+
+
+Article: https://www.nature.com/articles/s41598-023-34478-0
 
 https://stats.oarc.ucla.edu/other/examples/ma-hox/
+
+
+chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.lesahoffman.com/CLDP945/CLDP945_Lecture07_Generalized.pdf
+
+
+
+https://stats.oarc.ucla.edu/r/dae/mixed-effects-logistic-regression/
+
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(comment     = "",
                       echo        = TRUE, 
                       warning     = FALSE, 
                       message     = FALSE,
-                      fig.align   = "center", # center all figures
-                      fig.width   = 6,        # set default figure width to 4 inches
-                      fig.height  = 4)        # set default figure height to 3 inches
+                      fig.align   = "center", 
+                      fig.width   = 6,        
+                      fig.height  = 4)        
 ```
 
-## Packages
+
+## PREPARATION 
+
+### Load Packages
 
 
 ```{r, message=FALSE, error=FALSE}
@@ -20,62 +34,225 @@ library(tidyverse)
 library(haven)
 library(psych)        
 
-library(lme4)         
-library(R2MLwiN)  
-library(MCMCglmm)
+library(lme4) 
+library(optimx)
 
-library(emmeans)
-library(effects)      
+library(emmeans)     
 library(performance)
-library(interactions)
-
-library(patchwork)    
+library(interactions) 
 ```
 
 
-## Data
+
+
+
+### Background
+
+NESTING
+* `schoolid` identify school each student attends
+
+
+OUCOME
+* `re` student repeated a grade during primary school: Yes or No
+
+
+PREDICTORS
+* `sex`  sex: Girl or Boy
+* `pped` attended preschool: Yes or No
+* `msesc` school's mean SES, missing for some schools, grand mean centered
+
+
+
+### Read in the data
 
 ```{r}
-df_long <- haven::read_sav("data/thaieduc.sav") %>% 
+df_raw <- haven::read_sav("data/thaieduc.sav") %>% 
   haven::as_factor() %>% 
   haven::zap_label() %>% 
   haven::zap_formats() %>% 
-  haven::zap_widths() %>% 
+  haven::zap_widths()
+```
+
+```{r}
+tibble::glimpse(df_raw)
+```
+
+
+### Long Format
+
+One line per child
+
+```{r}
+df_long <- df_raw %>%   
   dplyr::rename_all(tolower) %>% 
   dplyr::rename(re = `repeat`) %>% 
-  dplyr::mutate_if(is.factor, ~forcats::fct_relabel(.x, stringr::str_to_title)) %>% 
+  dplyr::mutate_if(is.factor, 
+                   ~forcats::fct_relabel(.x, stringr::str_to_title)) %>% 
   dplyr::mutate(re01 = case_when(re == "No" ~ 0,
-                                     re == "Yes" ~ 1))
+                                 re == "Yes" ~ 1))
 ```
-
-```{r}
-names(df_long)
-```
-
-
-```{r}
-str(df_long)
-```
-
 
 ```{r}
 tibble::glimpse(df_long)
 ```
 
+
+
 ```{r}
-summary(df_long)
+df_long %>% 
+  psych::headTail(top = 10) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Thailand Education Data on Repeating a Grade, Long Format")
+```
+
+
+### Wide Format
+
+One Line Per School
+
+```{r}
+df_wide <- df_long %>% 
+  dplyr::group_by(schoolid, msesc) %>% 
+  dplyr::summarise(n_std = n(),
+                   per_girl = 100*mean(sex == "Girl"),
+                   per_pped = 100*mean(pped == "Yes"),
+                   per_re   = 100*mean(re == "Yes")) %>% 
+  dplyr::ungroup()
+```
+
+```{r}
+tibble::glimpse(df_wide)
 ```
 
 
 
-https://stats.oarc.ucla.edu/r/dae/mixed-effects-logistic-regression/
+```{r}
+df_wide %>% 
+  psych::headTail(top = 10) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Thailand Education Data on Repeating a Grade, Wide Format")
+```
+
+### Modeling Subset
+
+```{r}
+df_model <- df_long %>% 
+  dplyr::filter(complete.cases(msesc, sex, pped, re))
+```
 
 
-### ML with Laplace Approx
+
+
+## EXPLORATORY DATA ANALYSIS
+
+### Sample Size
+
+n = 7516 students
+
+```{r}
+nrow(df_model)
+```
+
+n = 411 - 55 = 356 schools
+
+```{r}
+nrow(df_wide)
+```
+
+
+```{r}
+df_wide %>% 
+  dplyr::filter(complete.cases(msesc)) %>% 
+  nrow()
+```
+
+
+### Missing Data
+
+```{r}
+df_wide %>% 
+  VIM::aggr(numbers = TRUE,   # shows the number to the far right
+            prop = FALSE)     # shows counts instead of proportions
+```
+
+
+
+
+```{r}
+df_wide %>% 
+  dplyr::mutate(miss = ifelse(!is.na(msesc), "Include", "Exclude") %>% 
+                  factor) %>% 
+  dplyr::select(miss,
+                "# Students" = n_std,
+                "% Girls" = per_girl,
+                "% Preschool" = per_pped,
+                "% Repeat Grade" = per_re) %>% 
+  apaSupp::tab1(split = "miss",
+                caption = "Compare School Excluded due to Missing SES")
+```
+
+
+### Summarize
+
+#### Demographics and Baseline
+
+```{r}
+df_wide %>% 
+  dplyr::filter(complete.cases(msesc)) %>% 
+  dplyr::select("# Students" = n_std,
+                "% Girls" = per_girl,
+                "% Preschool" = per_pped,
+                "% Repeat Grade" = per_re) %>% 
+  apaSupp::tab_desc(caption = "Description of Schools")
+```
+
+
+```{r}
+df_wide %>% 
+  dplyr::filter(complete.cases(msesc)) %>% 
+  ggplot(aes(x = per_pped,
+             y = per_re)) +
+  geom_point() +
+  theme_bw() 
+```
+
+```{r}
+df_model %>% 
+  dplyr::mutate(re = forcats::fct_recode(re,
+                                         "Never Repeated" = "No",
+                                         "Repeated a Grade" = "Yes")) %>% 
+  dplyr::select(re,
+                "Sex" = sex,
+                "Attended Preschool" = pped,
+                "SES, school mean" = msesc) %>% 
+  apaSupp::tab1(split = "re",
+                caption = "Compare Students ",
+                type = list("Attended Preschool" = "categorical"))
+```
+
+
+
+## MULILEVEL ANALYSIS
+
+
+### Fit Model
+
+> Great articles:  
+> *https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#what-methods-are-available-to-fit-estimate-glmms
+> * https://www.ellessenne.xyz/blog/2022/06/18/
+> * https://bbolker.github.io/goettingen_2019/notes/glmm_details.html 
+> slides: https://people.math.aau.dk/~rw/Undervisning/TostaII/Slides/2.pdf
+
+
+
+#### Default is the Laplace ML
+
+> `nAGQ = 1` (Laplace Approximation): This is the default method for glmer(). It approximates the integrand (the likelihood function) by a normal distribution using a second-order Taylor expansion around the mode. **It is more accurate than PQL but slower.**
+
 
 ```{r}
 fit_glmer_1 <- lme4::glmer(re01 ~ sex + pped + msesc + (1|schoolid),
-                           data = df_long,
+                           data = df_model,
                            family = binomial)
 ```
 
@@ -83,93 +260,141 @@ fit_glmer_1 <- lme4::glmer(re01 ~ sex + pped + msesc + (1|schoolid),
 summary(fit_glmer_1)
 ```
 
-### ML with Adaptive Gauss-Hermite Quadrature
+#### Penalized Iteratively Reweighted Least Squares
+
+> `nAGQ = 0` (Penalized Iteratively Reweighted Least Squares - PIRLS): This is a **faster but less exact** method that avoids explicit integration by optimizing the fixed and random effects simultaneously in a penalized fashion. It is often referred to as penalized quasi-likelihood (PQL), and provides a good starting point for more accurate methods.
 
 ```{r}
-fit_glmer_2 <- lme4::glmer(re01 ~ sex + pped + msesc + (1|schoolid),
-                           data = df_long,
+fit_glmer_0 <- lme4::glmer(re01 ~ sex + pped + msesc + (1|schoolid),
+                           data = df_model,
                            family = binomial,
-                           control = glmerControl(optimizer = "bobyqa"),
-                           nAGQ = 10)
+                           nAGQ = 0)
 ```
 
 ```{r}
-summary(fit_glmer_2)
+summary(fit_glmer_0)
 ```
 
+#### Adaptive Gauss-Hermite Quadrature
 
-
-## Data
-
-```{r}
-df_long <- haven::read_sav("data/metaresp.sav") %>% 
-  haven::as_factor() %>% 
-  haven::zap_label() %>% 
-  haven::zap_formats() %>% 
-  haven::zap_widths() %>% 
-  dplyr::rename_all(tolower) %>% 
-  dplyr::mutate_if(is.factor, ~forcats::fct_relabel(.x, stringr::str_to_title)) %>% 
-  dplyr::mutate(res  = round(response*denom, 0)) %>% 
-  dplyr::mutate(tel  = as.numeric(mode == "Tel"))%>% 
-  dplyr::mutate(mail = as.numeric(mode == "Mail"))
-```
-
+> `nAGQ = k` (Adaptive Gauss-Hermite Quadrature - AGHQ): For `k > 1`, glmer() uses adaptive Gauss-Hermite quadrature, which is the **most reliable and accurate** method among the available options. This method approximates the integral as a weighted sum over a specific number of points (nodes).Larger values of k (e.g., up to 25) increase accuracy but also significantly increase computation time. Limitation: AGHQ in glmer() is currently implemented only for models with a single scalar random effect (i.e., **a single random effects** term with a single variance component). 
 
 ```{r}
-df_long
-```
-
-
-
-
-
-### ML with Laplace Approx
-
-```{r}
-fit_glmer_1 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + (1|source),
-                           data = df_long,
-                           family = binomial)
+fit_glmer_50 <- lme4::glmer(re01 ~ sex + pped + msesc + (1|schoolid),
+                            data = df_model,
+                            family = binomial,
+                            nAGQ = 50)
 ```
 
 ```{r}
-summary(fit_glmer_1)
+summary(fit_glmer_50)
 ```
 
+
+
+
+### Parameter Estiamtes Table
+
+```{r}
+apaSupp::tab_lmers(list("PQL"     = fit_glmer_0,
+                        "Laplase" = fit_glmer_1,
+                        "Numeric" = fit_glmer_50),
+                   narrow = TRUE,
+                   var_labels = c("sex" = "Sex",
+                                  "pped" = "Attended Preschool",
+                                  "msesc" = "School SES"),
+                   general_note = "School SES is grand mean centered.")
+```
+
+
+
+
+### Predicted Probabilites
+
+
+#### Likert Scale
+
+```{r}
+fit_glmer_1 %>% 
+  emmeans::emmeans(~ pped + sex)
+```
+
+
+#### Back-Transform
+
+```{r}
+fit_glmer_1 %>% 
+  emmeans::emmeans(~ pped + sex,
+                   type = "response")
+```
 
 
 ```{r}
-fit_glmer_2 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + (1|source),
-                           data = df_long,
-                           family = binomial)
+fit_glmer_1 %>% 
+  emmeans::emmeans(~ pped + sex,
+                   type = "response") %>% 
+  data.frame() %>% 
+  dplyr::mutate(across(c(prob, asymp.LCL, asymp.UCL),
+                       ~apaSupp::p_num(.x, stars = FALSE))) %>% 
+  dplyr::mutate(cell = glue::glue("{prob} [{asymp.LCL}, {asymp.UCL}]")) %>% 
+  dplyr::select(Sex = sex,
+                "Attend Preschool" = pped, 
+                "Est [95% CI]" = cell) %>% 
+  flextable::as_grouped_data(groups = "Sex") %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Predicted Probability of Repeating a Primary Grade, by Sex and Preschool Attendance",
+                     general_note = "Predications are for grand-mean school SES.")
 ```
+
+
+### Plot
+
+#### Quick
 
 ```{r}
-summary(fit_glmer_2)
+interactions::cat_plot(model = fit_glmer_1,
+                       pred = pped,
+                       modx = sex,
+                       geom = "line")
 ```
 
 
-```{r}
-fit_glmer_2b <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + 
-                              (1|source) + (0 + tel|source) + (0+ mail|source),
-                           data = df_long,
-                           family = binomial)
-```
 
-```{r}
-summary(fit_glmer_2b)
-```
+#### Publishable (95% CI)
 
 ```{r}
-fit_glmer_3 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + 
-                             year + saliency +
-                             (1|source),
-                           data = df_long,
-                           family = binomial)
+fit_glmer_1 %>% 
+  emmeans::emmeans(~ pped + sex,
+                   type = "response") %>% 
+  data.frame() %>% 
+  dplyr::mutate(sex = forcats::fct_rev(sex)) %>% 
+  ggplot(aes(x = pped,
+             y = prob,
+             group = sex,
+             color = sex)) +
+  geom_errorbar(aes(ymin = asymp.LCL,
+                    ymax = asymp.UCL),
+                width = .25) +
+  geom_line(aes(linetype = sex),
+  ) +
+  geom_point(aes(shape = sex),
+             size = 3) +
+  theme_bw() +
+  scale_color_manual(values = c("dodgerblue", "red")) +
+  scale_linetype_manual(values = c("longdash", "solid")) +
+  labs(x = "Attended Preschool",
+       y = "Predicted Probabiliy of\nRepeated a Primary Grade",
+       color = NULL,
+       linetype = NULL,
+       shape = NULL) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(1.0, 1.0),
+        legend.justification = c(1.1, 1.1),
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(1.5, "cm"))
 ```
 
-```{r}
-summary(fit_glmer_3)
-```
+
 
 
 

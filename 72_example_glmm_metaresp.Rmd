@@ -1,0 +1,547 @@
+# GLMM, Proportion Outcome: Meta Analysis (Hox ch 6)
+
+
+See Appendix E of the Joop Hox text.
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment     = "",
+                      echo        = TRUE, 
+                      warning     = FALSE, 
+                      message     = FALSE,
+                      fig.align   = "center", 
+                      fig.width   = 6,        
+                      fig.height  = 4)        
+```
+
+
+
+
+https://uoepsy.github.io/msmr/2122/lectures/msmr_lec02_LogisticMLM.html#1
+
+https://commresearch.arizona.edu/classes/comm640/640_Book/docs/multilevel-logistic-regression.html
+
+https://stats.stackexchange.com/questions/544937/when-is-it-appropriate-to-set-nagq-0-in-glmer
+
+https://bookdown.org/animestina/phd_july_19/now-for-advanced-logistic-mixed-effects.html
+
+
+## PREPARATION 
+
+### Load Packages
+
+
+```{r, message=FALSE, error=FALSE}
+library(tidyverse)  
+library(haven)
+library(psych)        
+
+library(lme4) 
+library(optimx)
+
+library(emmeans)     
+library(performance)
+library(interactions) 
+```
+
+
+
+
+
+### Background
+
+NESTING
+* `source` study id on which multiple conditions were reported (most studies reported on 2 of the 3 modes)
+
+
+
+Study Characteristics:  
+
+* `respisrr` type of study reported proportions
++ `Cr` completion rate, # respondents / total sample size
++ `Rr` response rate,  sample size was corrected for sampling frame errors  
+
+* `year` 0 = 1947, the oldest year
+* `saliency` saliency of the questionnaire, 0 = not at all, 1 = somewhat, 2 = highly
+
+Condition Characteristics:
+
+* `mode` dta collection method, 3-levels: Face-to-face, Telephone, or Mail
+* `tel` dummy code for mode = Telephone
+* `mail` dummy code for mode = Mail
+
+* `response` either the completion rate or response rate
+* `denom` number of respondents approached
+
+
+
+### Read in the data
+
+
+```{r}
+df_raw <- haven::read_sav("data/metaresp.sav") %>% 
+  haven::as_factor() %>% 
+  haven::zap_label() %>% 
+  haven::zap_formats() %>% 
+  haven::zap_widths() 
+```
+
+
+```{r}
+tibble::glimpse(df_raw)
+```
+
+
+
+### Long Format
+
+One line per mode per source
+
+```{r}
+df_long <- df_raw %>% 
+  dplyr::rename_all(tolower) %>% 
+  dplyr::mutate_if(is.factor, ~forcats::fct_relabel(.x, stringr::str_to_title)) %>% 
+  dplyr::mutate(res  = round(response*denom, 0)) %>% 
+  dplyr::mutate(tel  = as.numeric(mode == "Tel"))%>% 
+  dplyr::mutate(mail = as.numeric(mode == "Mail")) %>% 
+  dplyr::mutate(yr = year + 1947) %>% 
+  dplyr::mutate(yr47 = year) %>% 
+  dplyr::mutate(yr77 = year - 30) %>% 
+  dplyr::select(source, 
+                yr, yr47, yr77,
+                saliency,
+                mode, tel, mail,
+                respisrr,
+                response, res, denom)
+```
+
+```{r}
+tibble::glimpse(df_long)
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+df_long %>% 
+  dplyr::select(source, respisrr, mode, tel, mail, yr, saliency, response, denom, res) %>% 
+  psych::headTail(top = 10) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Meta Data for Response Rate, Long Format")
+```
+
+### Wide Format
+
+One line per source
+
+```{r}
+df_wide <- df_long %>% 
+  dplyr::group_by(source) %>% 
+  dplyr::mutate(n_modes = n()) %>% 
+  dplyr::mutate(respisrr = dplyr::first(respisrr)) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::select(source, n_modes, yr, yr47, yr77, respisrr, saliency, mode, response) %>% 
+  tidyr::pivot_wider(names_from = mode,
+                     names_prefix = "resp_",
+                     values_from = response)
+```
+
+
+```{r}
+tibble::glimpse(df_wide)
+```
+
+
+
+```{r}
+df_wide %>%  
+  dplyr::select(-yr47, -yr77) %>% 
+  psych::headTail(top = 10) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Meta Data for Response Rate, Wide Format")
+```
+
+
+
+
+
+## EXPLORATORY DATA ANLAYSIS
+
+### Sample Size
+
+
+n = 105 modes/sources
+
+```{r}
+nrow(df_long)
+```
+
+
+n = 48 sources
+
+```{r}
+nrow(df_wide)
+```
+
+### Missing Data - None!
+
+```{r}
+df_long %>% 
+  VIM::aggr(numbers = TRUE,   # shows the number to the far right
+            prop = FALSE)     # shows counts instead of proportions
+```
+
+
+### Descriptive Summary
+
+```{r}
+df_wide %>% 
+  dplyr::select(n_modes,
+                yr,
+                resp_Ftf,
+                resp_Tel,
+                resp_Mail) %>% 
+  apaSupp::tab_desc(caption="Descriptive Summary of Sources")
+```
+
+
+```{r}
+df_long %>% 
+  dplyr::select(mode,
+                yr, saliency,
+                respisrr,
+                response, res, denom) %>% 
+  apaSupp::tab1(split = "mode")
+```
+
+
+
+
+
+
+
+```{r, fig.cap ="Distribution of Source Year (0 for 1947)"}
+df_wide %>% 
+  apaSupp::spicy_histos(yr)
+```
+
+
+
+## MULTILEVEL MODELING
+
+
+### Base Model
+
+#### PQL
+
+```{r}
+fit_glmer_0 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + (1|source),
+                              data = df_long,
+                              family = binomial,
+                              nAGQ = 0)
+```
+
+
+```{r}
+summary(fit_glmer_0)
+```
+
+#### Laplace
+
+```{r}
+fit_glmer_1 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + (1|source),
+                              data = df_long,
+                              family = binomial)
+```
+
+
+```{r}
+summary(fit_glmer_1)
+```
+
+#### Compare
+
+
+```{r}
+apaSupp::tab_lmers(list("PQL" = fit_glmer_0,
+                        "Laplace" = fit_glmer_1))
+```
+
+
+
+
+
+### Main Effect of Model
+
+#### Random Intercepts
+
+```{r}
+fit_glmer_2 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + (1|source),
+                              data = df_long,
+                              family = binomial)
+```
+
+```{r}
+summary(fit_glmer_2)
+```
+
+#### Add Random Slopes
+
+```{r}
+fit_glmer_3 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + 
+                                (1|source) + (0 + tel|source) + (0+ mail|source),
+                              data = df_long,
+                              family = binomial)
+```
+
+
+```{r}
+summary(fit_glmer_3)
+```
+
+#### Compare
+
+```{r}
+apaSupp::tab_lmers(list("RI" = fit_glmer_2,
+                        "RIAS" = fit_glmer_3))
+```
+
+```{r}
+apaSupp::tab_lmer_fits(list("RI" = fit_glmer_2,
+                            "RIAS" = fit_glmer_3))
+```
+
+```{r}
+anova(fit_glmer_2, fit_glmer_3)
+```
+
+
+
+
+
+### Cross-Level Interaction
+
+Helps for "failed to converge": https://cran.r-project.org/web/packages/lme4/vignettes/lmerperf.html 
+
+```{r}
+fit_glmer_4 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + 
+                                saliency + yr77 +
+                                (1|source) + (0 + tel|source) + (0+ mail|source),
+                              data = df_long,
+                              family = binomial,
+                              control=glmerControl(optimizer="bobyqa",
+                                                   optCtrl=list(maxfun=100000)))
+```
+
+```{r}
+summary(fit_glmer_4)
+```
+
+
+```{r}
+fit_glmer_5 <- lme4::glmer(cbind(res, denom - res) ~ respisrr + mode + 
+                                saliency + mode*yr77 +
+                                (1|source) + (0 + tel|source) + (0+ mail|source),
+                              data = df_long,
+                              family = binomial,
+                              control=glmerControl(optimizer="bobyqa",
+                                                   optCtrl=list(maxfun=100000)))
+```
+
+
+```{r}
+summary(fit_glmer_5)
+```
+
+#### Compare
+
+```{r}
+apaSupp::tab_lmers(list("Main Effect" = fit_glmer_4,
+                        "Intraction" = fit_glmer_5))
+```
+
+
+```{r}
+apaSupp::tab_lmer_fits(list("Main Effect" = fit_glmer_4,
+                            "Intraction" = fit_glmer_5))
+```
+
+
+
+
+```{r}
+anova(fit_glmer_4, fit_glmer_5)
+```
+
+
+
+
+
+### Predicted Probabilities
+
+#### At the Mean Year (1977)
+
+```{r}
+fit_glmer_5 %>% 
+  emmeans::emmeans(~ mode*saliency,
+                   at = list(yr77 = 0,
+                             saliency = c("Not", "High")),
+                   type = "response")
+```
+
+
+#### Each Mode Across Years
+
+```{r}
+fit_glmer_5 %>% 
+  emmeans::emmeans(~ mode*yr77,
+                   at = list(yr77 = c(1950-1977, 
+                                      1977-1977, 
+                                      1990-1977)),
+                   type = "response")
+```
+
+
+
+```{r}
+fit_glmer_5 %>% 
+  emmeans::emmeans(~ mode*yr77,
+                   at = list(yr77 = c(1950-1977, 
+                                      1977-1977, 
+                                      1990-1977)),
+                   type = "response") %>% 
+  data.frame() %>% 
+  dplyr::mutate(year = as.character(1977 + yr77)) %>% 
+  dplyr::mutate(mode = mode %>% 
+                  forcats::fct_recode("Face-to-Face" = "Ftf",
+                                      "Telephone" = "Tel",
+                                      "Mail" = "Mail")) %>% 
+  dplyr::mutate(across(c(prob, asymp.LCL, asymp.UCL),
+                       ~apaSupp::p_num(.x, stars = FALSE))) %>% 
+  dplyr::mutate(cell = glue::glue("{prob} [{asymp.LCL}, {asymp.UCL}]")) %>% 
+  dplyr::select(mode, year, cell) %>% 
+  tidyr::pivot_wider(names_from = year,
+                     values_from = cell) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Predicted Response Rates for Each Mode at Key Years, [95% CI]",
+                     general_note = "Predications are for 'some' saliency.")
+```
+
+
+
+#### Pairwise Comparisons
+
+```{r}
+fit_glmer_5 %>% 
+  emmeans::emmeans(~ mode*saliency|yr77,
+                   at = list(saliency = "Some",
+                             yr77 = c(1950-1977, 
+                                      1977-1977, 
+                                      1990-1977)),
+                   type = "response") %>% 
+  pairs(adjust = "none")
+```
+
+
+```{r}
+fit_glmer_5 %>% 
+  emmeans::emmeans(~ mode*saliency|yr77,
+                   at = list(saliency = "Some",
+                             yr77 = c(1950-1977, 
+                                      1977-1977, 
+                                      1990-1977)),
+                   type = "response") %>% 
+  pairs(adjust = "none") %>% 
+  data.frame() %>% 
+  dplyr::mutate(yr77 = as.numeric(as.character(yr77))) %>% 
+  dplyr::mutate(year = as.character(1977 + yr77)) %>% 
+  dplyr::mutate(contrast = contrast %>% 
+                  forcats::fct_recode("Face-to-Face vs. Telephone" = "Ftf Some / Tel Some",
+                                      "Face-to-Face vs. Mail" = "Ftf Some / Mail Some",
+                                      "Telephone vs. Mail" = "Tel Some / Mail Some")) %>% 
+  dplyr::mutate(p.adj = p.adjust(p.value, method = "fdr")) %>% 
+  dplyr::mutate(across(c(p.value, p.adj), apaSupp::p_num)) %>% 
+  dplyr::select(Year = year, 
+                "Comparing Modes" = contrast, 
+                OR = odds.ratio,
+                p_Unadj = p.value,
+                p_Adj = p.adj) %>% 
+  flextable::as_grouped_data(groups = "Year") %>% 
+  flextable::flextable() %>% 
+  flextable::separate_header() %>% 
+  apaSupp::theme_apa(caption = "Pairwise Comparisons Between Survey Mode at Key Years",
+                     general_note = "Significance is given both unadjusted (Unadj) and adjusted (Adj) via the method of Benjamini, Hochberg, and Yekutieli to control the false discovery rate (FDR).")
+```
+
+
+
+### Plot
+
+#### Simple
+
+```{r}
+interactions::interact_plot(model = fit_glmer_5,
+                            pred = yr77,
+                            modx = mode,
+                            interval = TRUE,
+                            int.width = .685)
+```
+
+#### Publishable
+
+```{r, fig.cap="Predicted Response Rates Over the Years (Hox figure 6.2 on page 122)"}
+fit_glmer_5 %>% 
+  emmeans::emmeans(~ yr77*mode,
+                   at = list(yr77 = seq(from = 1947 - 1977, 
+                                        to = 1992 - 1977, 
+                                        by = 1)),
+                   type = "response",
+                   level = .685) %>% 
+  data.frame() %>% 
+  dplyr::mutate(year = 1977 + yr77) %>% 
+  dplyr::mutate(mode = mode %>% 
+                  forcats::fct_recode("Face-to-Face" = "Ftf",
+                                      "Telephone" = "Tel",
+                                      "Mail" = "Mail")) %>% 
+  ggplot(aes(x = year,
+             y = prob,
+             linetype = mode)) +
+  # geom_ribbon(aes(ymin = asymp.LCL,
+  #                 ymax = asymp.UCL),
+  #             alpha= .15) +
+  geom_line(linewidth = 1) +
+  labs(x = NULL,
+       y = "Predicted Response Rate",
+       linetype = "Collection Mode") +
+  theme_bw() +
+  geom_vline(xintercept = c(1950, 1977, 1990),
+             linewidth = 3,
+             alpha = .2) +
+  scale_linetype_manual(values = c("solid", "longdash", "dotted")) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(.92, 1.0),
+        legend.justification = c(1.1, 1.1),
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(1.5, "cm"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+https://glennwilliams.me/r4psych/mixed-effects-models.html#a-note-on-power-effect-sizes-and-pairwise-comparisons
+
+
+
