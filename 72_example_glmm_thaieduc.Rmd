@@ -32,11 +32,9 @@ knitr::opts_chunk$set(comment     = "",
 ```{r, message=FALSE, error=FALSE}
 library(tidyverse)  
 library(haven)
-library(psych)        
-
+library(psych) 
 library(lme4) 
 library(optimx)
-
 library(emmeans)     
 library(performance)
 library(interactions) 
@@ -296,16 +294,25 @@ summary(fit_glmer_50)
 ### Parameter Estiamtes Table
 
 ```{r}
-apaSupp::tab_lmers(list("PQL"     = fit_glmer_0,
-                        "Laplase" = fit_glmer_1,
-                        "Numeric" = fit_glmer_50),
-                   narrow = TRUE,
-                   var_labels = c("sex" = "Sex",
-                                  "pped" = "Attended Preschool",
-                                  "msesc" = "School SES"),
-                   general_note = "School SES is grand mean centered.")
+apaSupp::tab_glmers(list("PQL"     = fit_glmer_0,
+                         "Laplase" = fit_glmer_1,
+                         "Numeric" = fit_glmer_50),
+                    narrow = TRUE,
+                    var_labels = c("sex" = "Sex",
+                                   "pped" = "Attended Preschool",
+                                   "msesc" = "School SES"),
+                    general_note = "School SES is grand mean centered.")
 ```
 
+
+```{r}
+apaSupp::tab_glmer(fit_glmer_50,
+                   var_labels = c("sex" = "Sex",
+                                   "pped" = "Attended Preschool",
+                                   "msesc" = "School SES",
+                                  "schoolid.var__(Intercept)" = "Random Intercept Variance"),
+                    general_note = "School SES is grand mean centered.")
+```
 
 
 

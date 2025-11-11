@@ -38,7 +38,10 @@ library(effects)      # Plotting estimated marginal means
 library(interactions)
 library(performance)
 
-library(patchwork)    # combining graphics
+library(patchwork)    # combining graphics\
+
+
+library(cold)   # this package holds the dataset we need
 ```
 
 
@@ -78,69 +81,75 @@ A ‘lock-out’ period followed each dose, where subject may not administer mor
 
 * Indicators   
 
-    + `id` unique subject indicator
-    + `time` 11 consecutive 4-hour periods: 0, 1, 2, ..., 10
++ `id` unique subject indicator
++ `time` 11 consecutive 4-hour periods: 0, 1, 2, ..., 10
 
 
 * Outcome or dependent variable    
 
-    + `count` # doses recorded for in that 4-hour period
++ `count` # doses recorded for in that 4-hour period
 
 
 * Main predictor or independent variable of interest   
 
-    + `group`1mg/dose group, 2mg/dose group
++ `group`1mg/dose group, 2mg/dose group
 
 
 
 ### Import
 
 ```{r}
-data_raw <- read.table("data/bolus.txt",
-  header = TRUE)
+data("bolus", package = "cold")
+
+df_raw <- bolus
 ```
 
 
 ```{r}
-str(data_raw) # see the structure
+str(df_raw) # see the structure
 ```
 
 
 ```{r}
-psych::headTail(data_raw)
+psych::headTail(df_raw)
 ```
 
 ### Long Format
 
 ```{r}
-data_long <- data_raw %>% 
+df_long <- df_raw %>% 
+  dplyr::rename(count = y) %>% 
   dplyr::mutate(id = factor(id)) %>% 
+  dplyr::mutate(time = time - 1) %>% 
   dplyr::mutate(timeF = factor(time)) %>% 
   dplyr::mutate(group = factor(group))
 ```
 
 
 ```{r}
-str(data_long) # see the structure
+str(df_long) # see the structure
 ```
 
 
 ```{r}
-psych::headTail(data_long)
+psych::headTail(df_long)
 ```
 
 ### Wide Format
 
 ```{r}
-data_wide <- data_long %>% 
+df_wide <- df_long %>% 
   dplyr::select(-timeF) %>%
   tidyr::pivot_wider(names_from = time,
                      names_prefix = "time_",
                      values_from = count)
+```
 
-str(data_wide) # see the structure
 
-psych::headTail(data_wide)
+```{r}
+str(df_wide) # see the structure
+
+psych::headTail(df_wide)
 ```
 
 
@@ -151,14 +160,10 @@ psych::headTail(data_wide)
 #### Demographics and Baseline
 
 ```{r}
-data_wide %>% 
-  dplyr::group_by(group) %>% 
-  furniture::table1("Count at Baseline" = time_0,
-                    total   = TRUE,
-                    test    = TRUE,
-                    na.rm   = FALSE,
-                    digits  = 2,
-                    output  = "markdown")
+df_wide %>% 
+  dplyr::select(group,
+                "Count at Baseline" = time_0) %>% 
+  apaSupp::tab1(split = "group")
 ```
 
 
@@ -166,23 +171,20 @@ data_wide %>%
 
 
 ```{r}
-data_wide %>% 
-  dplyr::group_by(group) %>% 
-  furniture::table1(time_0, 
-                    time_1, time_2, time_3, time_4, time_5, 
-                    time_6, time_7, time_8, time_9, time_10,
-                    total   = TRUE,
-                    test    = TRUE,
-                    na.rm   = FALSE,
-                    digits  = 2,
-                    output  = "markdown")
+df_wide %>% 
+  dplyr::select(group,
+                time_0, 
+                time_1, time_2, time_3, time_4, time_5, 
+                time_6, time_7, time_8, time_9, time_10,
+                time_11) %>% 
+  apaSupp::tab1(split = "group")
 ```
 
 
 #### Correlation over Time
 
 ```{r}
-data_wide %>% 
+df_wide %>% 
   dplyr::select(starts_with("time_")) %>% 
   cor() %>% 
   corrplot::corrplot.mixed()
@@ -195,7 +197,7 @@ data_wide %>%
 #### Person Profile Plots, by Group
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = time, 
              y = count)) +
   geom_line(aes(group = id),
@@ -208,7 +210,7 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = time, 
              y = count)) +
   geom_smooth(aes(group = id),
@@ -222,7 +224,7 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = time, 
              y = count)) +
   geom_smooth(aes(group = id),
@@ -238,7 +240,7 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = time, 
              y = count)) +
   geom_line(aes(group = id)) +
@@ -253,7 +255,7 @@ data_long %>%
 ```
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = time, 
              y = log(count + .1))) +
   geom_line(aes(group = id)) +
@@ -269,7 +271,7 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_long %>% 
   ggplot(aes(x = time, 
              y = count)) +
   geom_smooth(aes(color = "1. Loess"),
@@ -296,7 +298,7 @@ data_long %>%
 #### Means over Time, BY Group
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::group_by(group, timeF) %>% 
   dplyr::summarise(M = mean(count)) %>% 
   ggplot(aes(x = timeF,
@@ -313,7 +315,7 @@ data_long %>%
 
 
 ```{r}
-data_long %>% 
+df_long %>% 
   dplyr::group_by(group, timeF) %>% 
   dplyr::summarise(M = mean(log(count + .1))) %>% 
   ggplot(aes(x = timeF,
@@ -333,41 +335,26 @@ data_long %>%
 
 ### Fit Various Correlation Structures
 
-#### Exchangable
+
 
 ```{r}
-mod_gee_ex <- gee::gee(count ~ group + time + I(time^2),
-                       id = id,
-                       data = data_long,
-                       family = poisson(link = "log"),
-                       corstr = 'exchangeable')
+mod_gee_ex <- geepack::geeglm(count ~ group + time + I(time^2),
+                              id = id,
+                              data = df_long,
+                              family = poisson(link = "log"),
+                              corstr = 'exchangeable')
 
-summary(mod_gee_ex)
-```
+mod_gee_ar <- geepack::geeglm(count ~ group + time + I(time^2),
+                              id = id,
+                              data = df_long,
+                              family = poisson(link = "log"),
+                              corstr = "ar1")	
 
-#### Auto-regressive (correlation decay over time)
-
-```{r}
-mod_gee_ar <- gee::gee(count ~ group + time + I(time^2),
-                       id = id,
-                       data = data_long,
-                       family = poisson(link = "log"),
-                       corstr = "AR-M",
-                       Mv = 1)	
-
-summary(mod_gee_ar)
-```
-
-#### Unstructured
-
-```{r}
-mod_gee_un <- gee::gee(count ~ group + time + I(time^2),
-                       id = id,
-                       data = data_long,
-                       family = poisson(link = "log"),
-                       corstr = "unstructured")	
-
-summary(mod_gee_un)
+mod_gee_un <- geepack::geeglm(count ~ group + time + I(time^2),
+                              id = id,
+                              data = df_long,
+                              family = poisson(link = "log"),
+                              corstr = "unstructured")	
 ```
 
 ### Compare Corelation Structures
@@ -394,79 +381,62 @@ performance::compare_performance(mod_gee_ex,
 
 
 
-```{r, results='asis'}
-texreg::knitreg(list(extract_gee_exp(mod_gee_ex),
-                     extract_gee_exp(mod_gee_ar),
-                     extract_gee_exp(mod_gee_un)),
-                custom.model.names = c("Exchangable",
-                                       "AutoRegressive",
-                                       "Unstructured"),
-                caption = "GEE: Main Effects Only, with Quadratic Time",
-                single.row = TRUE,
-                ci.test = 1)
+```{r}
+apaSupp::tab_gees(list("Exchangable"    = mod_gee_ex,
+                       "AutoRegressive" = mod_gee_ar,
+                       "Unstructured"   = mod_gee_un),
+                  narrow = TRUE,
+                  caption = "GEE: Main Effects Only, with Quadratic Time")
 ```
 
 ### Add Interaction Terms
 
 ```{r}
-mod_gee_ar2 <- gee::gee(count ~ group*time + group*I(time^2),
-                        id = id,
-                        data = data_long,
-                        family = poisson(link = "log"),
-                        corstr = "AR-M",
-                        Mv = 1)	
+mod_gee_ex2 <- geepack::geeglm(count ~ group + time,
+                               id = id,
+                               data = df_long,
+                               family = poisson(link = "log"),
+                               corstr = "exchangeable")
 
-summary(mod_gee_ar2)
+
+mod_gee_ex3 <- geepack::geeglm(count ~ group*time + group*I(time^2),
+                               id = id,
+                               data = df_long,
+                               family = poisson(link = "log"),
+                               corstr = "exchangeable")
 ```
 
 
+
+
 ```{r}
-MuMIn::QIC(mod_gee_ar, 
-           mod_gee_ar2, 
+MuMIn::QIC(mod_gee_ex, 
+           mod_gee_ex2,
+           mod_gee_ex3, 
            typeR = TRUE)    # NOT the default
 ```
 
+
+
 ```{r}
-texreg::knitreg(list(extract_gee_exp(mod_gee_ar),
-                     extract_gee_exp(mod_gee_ar2)),
-                  single.row = TRUE,
-                  ci.test = 1)
+apaSupp::tab_gees(list("Quadratic" = mod_gee_ex,
+                       "Linear" = mod_gee_ex2,
+                       "Interaction" = mod_gee_ex3),
+                  narrow = TRUE,
+                  caption = "GEE: Exchangeable")
 ```
-
-
 
 
 ### Visualize Best Model
 
 #### Model Parameter Table
 
-
-
-
-```{r, results='asis'}
-texreg::knitreg(extract_gee_exp(mod_gee_ar),
-                caption = "GEE: Final Model (auto regressive)",
-                single.row = TRUE,
-                ci.test = 1)
-```
-
-#### Refit via `geepack::geeglm()`
-
 ```{r}
-mod_geeglm_ar <- geepack::geeglm(count ~ group + time + I(time^2),
-                       id = id,
-                       data = data_long,
-                       family = poisson(link = "log"),
-                       corstr = "ar1")	
-
-summary(mod_geeglm_ar)
+apaSupp::tab_gee(mod_gee_ex2)
 ```
 
-```{r}
-interactions::interact_plot(model = mod_geeglm_ar,
-                            pred = time,
-                            modx = group)
-```
+
+
 
 
 
@@ -474,34 +444,54 @@ interactions::interact_plot(model = mod_geeglm_ar,
 
 Estimated Marginal Mean Counts
 
+
 ```{r}
-expand.grid(time = 0:10,
-            group = levels(data_long$group)) %>% 
-  dplyr::mutate(fit = predict(mod_geeglm_ar,
-                              newdata = .,
-                              type = "response")) %>% 
-  tidyr::spread(key = group,
-                value = fit)
+mod_gee_ex2 %>% 
+  emmeans::emmeans(pairwise ~group|time,
+                   at = list(time = c(0, 5, 10)),
+                   type = "response")
 ```
+       
 
 #### Plot Estimated Marginal Means
 
+
+
 ```{r}
-expand.grid(time = 0:10,
-            group = levels(data_long$group)) %>% 
-  dplyr::mutate(fit = predict(mod_geeglm_ar,
-                              newdata = .,
-                              type = "response")) %>% 
+interactions::interact_plot(model = mod_gee_ex2,
+                            pred = time,
+                            modx = group) # Can NOT do interval ribbons
+```
+
+
+```{r}
+mod_gee_ex2 %>% 
+  emmeans::emmeans(~group|time,
+                   at = list(time = seq(from = 0, to = 11, by = .1)),
+                   type = "response",
+                   level = .685) %>% 
+  data.frame() %>% 
   ggplot(aes(x = time,
-             y = fit,
-             color = fct_rev(group))) +
-  geom_point() + 
-  geom_line() + 
+             y = rate,
+             group = group)) +
+  geom_ribbon(aes(ymin = lower.CL,
+                  ymax = upper.CL,
+                  fill = group),
+              alpha = .2) +
+  geom_line(aes(color = group,
+                linetype = group)) + 
   theme_bw() + 
-  labs(x = "Four-week Intervals",
-       y = "Estimated Populaton Mean Count",
-       color = "Dose") + 
-  scale_x_continuous(breaks = 0:10)
+  labs(x = "Four-Hour Intervals",
+       y = "Estimated Rate\nof Doses per 4 Hour Window",
+       color = "Dose",
+       fill = "Dose",
+       linetype = "Dose") + 
+  scale_x_continuous(breaks = seq(from = 0, to = 12, by = 2)) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(1, 1),
+        legend.justification = c(1.1, 1.1),
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(1.5, "cm"))
 ```
 
 
@@ -513,7 +503,7 @@ expand.grid(time = 0:10,
 
 ```{r}
 mod_glmer_ri <- lme4::glmer(count ~ group + I(time/4) + I((time/4)^2) + (1|id),
-                            data = data_long,
+                            data = df_long,
                             family = poisson(link = "log"))
 
 summary(mod_glmer_ri)
@@ -523,29 +513,26 @@ summary(mod_glmer_ri)
 ### RIAS: Random Intercepts and Slopes
 
 ```{r}
-mod_glmer_rias <- lme4::glmer(count ~ group + I(time/4) + I((time/4)^2) + (I(time/4)|id),
-                              data = data_long,
+mod_glmer_rias <- lme4::glmer(count ~ group + I(time/4) + I((time/4)^2) + 
+                                (I(time/4)|id),
+                              data = df_long,
                               family = poisson(link = "log"))
 
 summary(mod_glmer_rias)
 ```
 
- 
+
 
 ```{r}
 anova(mod_glmer_ri, mod_glmer_rias)
 ```
 
-NOTE: THI IS NO LONER WROKING???
-
-```{r, results="asis"}
-# texreg::knitreg(list(extract_glmer_exp(mod_glmer_ri),
-#                      extract_glmer_exp(mod_glmer_rias)),
-#                 custom.model.names = c("Intecepts", "Intercepts and Slopes"),
-#                 caption = "GLMM: Compare Random Effects",
-#                 single.row = TRUE,
-#                 ci.test = 1)
+```{r}
+apaSupp::tab_glmers(list("RI"   = mod_glmer_ri, 
+                        "RIAS" = mod_glmer_rias),
+                    caption = "GLMM: Main Effects Models")
 ```
+
 
 
 
@@ -555,82 +542,103 @@ NOTE: THI IS NO LONER WROKING???
 See the [GLMM - Optimizers page](https://cehs-research.github.io/eBook_multilevel/glmm-binary-outcome-antibiotics-for-leprosy.html#glmm---optimizers) for more information on convergence problems.
 
 ```{r}
-mod_glmer_rias2 <- lme4::glmer(count ~ group*I(time/4) + group*I((time/4)^2) + ( I(time/4)|id ),
-                              data = data_long,
-                              control = glmerControl(optimizer ="Nelder_Mead"),  # convergence issues resolved
-                              family = poisson(link = "log"))	
+mod_glmer_rias2 <- lme4::glmer(count ~ group*I(time/4) + group*I((time/4)^2) + 
+                                 ( I(time/4)|id ),
+                               data = df_long,
+                               control = glmerControl(optimizer ="Nelder_Mead"), 
+                               family = poisson(link = "log"))	
 ```
 
 ```{r}
 anova(mod_glmer_rias, mod_glmer_rias2)
 ```
 
+```{r}
+apaSupp::tab_glmers(list("Main Effects" = mod_glmer_rias,
+                         "interactions" = mod_glmer_rias2),
+                    caption = "GLMM: Main Effects vs. Interaction")
+```
+
+### RIAS: Simplify
+
+
+```{r}
+mod_glmer_rias3 <- lme4::glmer(count ~ group + I(time/4)  + 
+                                 ( I(time/4)|id ),
+                               data = df_long,
+                               control = glmerControl(optimizer ="Nelder_Mead"), 
+                               family = poisson(link = "log"))	
+```
+
+```{r}
+anova(mod_glmer_rias, mod_glmer_rias3)
+```
+
+```{r}
+apaSupp::tab_glmers(list("Quadratic" = mod_glmer_rias,
+                         "Linear" = mod_glmer_rias3),
+                    caption = "GLMM: Nature of Time")
+```
 
 
 ### Visualize Best Model
 
 #### Model Parameter Table
 
-
-```{r, results='asis'}
-# texreg::knitreg(list(extract_glmer_exp(mod_glmer_rias)),
-#                 caption = "GLMM: Final Model",
-#                 single.row = TRUE,
-#                 ci.test = 1)
-```
-
 ```{r}
-interactions::interact_plot(model = mod_glmer_rias,
-                            pred = time,
-                            modx = group)
+apaSupp::tab_glmer(mod_glmer_rias3)
 ```
+
 
 
 #### Estimated Marginal Means
 
 ```{r}
-effects::Effect(focal.predictors = c("group", "time"),
-                xlevels = list(time = 0:10),
-                mod = mod_glmer_rias) %>% 
-  data.frame %>% 
-  dplyr::select(group, time, fit) %>% 
-  tidyr::spread(key = group,
-                value = fit,
-                sep = "_")
+mod_glmer_rias3 %>% 
+  emmeans::emmeans(pairwise ~group|time,
+                   at = list(time = c(0, 5, 10)),
+                   type = "response")
 ```
 
 #### Plot Estimated Marginal Means
 
+
 ```{r}
-effects::Effect(focal.predictors = c("group", "time"),
-                xlevels = list(time = seq(from = 0, to = 10, by = .25)),
-                mod = mod_glmer_rias) %>% 
-  data.frame %>% 
-  ggplot(aes(x = time,
-             y = fit)) +
-  geom_ribbon(aes(ymin = fit - se,
-                  ymax = fit + se,
-                  fill = group),
-              alpha = .3) +
-  geom_line(aes(color = group)) + 
-  theme_bw() + 
-  labs(x = "Four-week Intervals",
-       y = "Estimated Populaton Mean Count",
-       color = "Dose",
-       fill = "Dose") + 
-  scale_x_continuous(breaks = 0:10)
+interactions::interact_plot(model = mod_glmer_rias3,
+                            pred = time,
+                            modx = group,
+                            interval = TRUE,
+                            int.width = .685)
 ```
 
 
 ```{r}
-data_long %>% 
-  dplyr::mutate(fit = predict(mod_glmer_rias,
-                              newdata = .,
-                              type = "response")) %>% 
-  ggplot(aes(x = time, 
-             y = fit)) +
-  geom_line(aes(group = id)) +
-  facet_grid(.~ group) +
-  theme_bw()
+mod_glmer_rias3 %>% 
+  emmeans::emmeans(~group|time,
+                   at = list(time = seq(from = 0, to = 11, by = .1)),
+                   type = "response",
+                   level = .685) %>% 
+  data.frame() %>% 
+  ggplot(aes(x = time,
+             y = rate,
+             group = group)) +
+  geom_ribbon(aes(ymin = asymp.LCL,
+                  ymax = asymp.UCL,
+                  fill = group),
+              alpha = .2) +
+  geom_line(aes(color = group,
+                linetype = group)) + 
+  theme_bw() + 
+  labs(x = "Four-Hour Intervals",
+       y = "Estimated Rate\nof Doses per 4 Hour Window",
+       color = "Dose",
+       fill = "Dose",
+       linetype = "Dose") + 
+  scale_x_continuous(breaks = seq(from = 0, to = 12, by = 2)) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(1, 1),
+        legend.justification = c(1.1, 1.1),
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(1.5, "cm"))
 ```
 

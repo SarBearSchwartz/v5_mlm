@@ -83,23 +83,23 @@ In clinical trials of modern hormonal contraceptives, pregnancy is exceedingly r
 
 
 ```{r}
-data_raw <- read.table("data/RCTcontraception.txt", header=TRUE)
+df_raw <- read.table("data/RCTcontraception.txt", header=TRUE)
 ```
 
 
 ```{r}
-str(data_raw)
+str(df_raw)
 ```
 
 
 ```{r}
-psych::headTail(data_raw, top = 10)
+psych::headTail(df_raw, top = 10)
 ```
 
 ### Long Format
 
 ```{r}
-data_long <- data_raw %>% 
+df_long <- df_raw %>% 
   dplyr::mutate(id = factor(id)) %>% 
   dplyr::mutate(dose = factor(dose,
                               levels = c("0", "1"),
@@ -114,12 +114,12 @@ data_long <- data_raw %>%
 
 
 ```{r}
-str(data_long)
+str(df_long)
 ```
 
 
 ```{r}
-psych::headTail(data_long, bottom = 10)
+psych::headTail(df_long, bottom = 10)
 ```
 
 
@@ -127,7 +127,7 @@ psych::headTail(data_long, bottom = 10)
 
 
 ```{r}
-data_wide <- data_long %>% 
+df_wide <- df_long %>% 
   dplyr::select(-time) %>% 
   tidyr::pivot_wider(id_cols = c(id, dose),
                      names_from = occasion,
@@ -137,12 +137,12 @@ data_wide <- data_long %>%
 
 
 ```{r}
-str(data_wide)
+str(df_wide)
 ```
 
 
 ```{r}
-psych::headTail(data_wide, bottom = 10)
+psych::headTail(df_wide, bottom = 10)
 ```
 
 
@@ -151,20 +151,20 @@ psych::headTail(data_wide, bottom = 10)
 ### Summary Statistics
 
 ```{r}
-data_summary <- data_long %>% 
+df_sum <- df_long %>% 
   dplyr::group_by(dose, occasion) %>% 
   dplyr::summarise(N = n(),
                    M = mean(amenorrhea),
                    SD = sd(amenorrhea),
                    SE = SD/sqrt(N))
 
-data_summary
+df_sum
 ```
 
 ### Visualize
 
 ```{r}
-data_summary %>% 
+df_sum %>% 
   ggplot(aes(x = occasion,
              y = M,
              fill = dose)) +
@@ -186,7 +186,7 @@ data_summary %>%
 
 
 ```{r}
-data_summary %>% 
+df_sum %>% 
   ggplot(aes(x = occasion,
              y = M,
              color = dose %>% fct_rev())) +
@@ -218,11 +218,11 @@ data_summary %>%
 
 ```{r}
 fit_1 <- lme4::glmer(amenorrhea ~ time*dose + (1 | id),
-                     data = data_long,
+                     data = df_long,
                      family = binomial(link = "logit"))
 
 fit_2 <- lme4::glmer(amenorrhea ~ time + dose + (1 | id),
-                     data = data_long,
+                     data = df_long,
                      family = binomial(link = "logit"))
 ```
 
@@ -243,37 +243,23 @@ performance::compare_performance(fit_1, fit_2, rank = TRUE)
 
 ### Model Parameter Tables
 
-#### Logit Scale
 
-
-
-```{r, results="asis"}
-texreg::knitreg(list(fit_1, fit_2),
-                custom.model.names = c("with", "without"),
-                single.row = TRUE,
+```{r}
+apaSupp::tab_glmers(list("Intraction"   = fit_1, 
+                         "Main Effects" = fit_2),
                 caption = "MLM Parameter Estimates: Inclusion of Interaction (SE and p-values)")
 ```
 
 
-
-
-#### Odds ratio scale
-
-NOTE: THIS IS NOT WORKING ?
-
-```{r, results="asis"}
-# texreg::knitreg(list(texreghelpr::extract_glmer_exp(fit_1), 
-#                      texreghelpr::extract_glmer_exp(fit_2)),
-#                 custom.model.names = c("with", "without"),
-#                 ci.test = 1,
-#                 single.row = TRUE,
-#                 caption = "MLM Parameter Estimates: Inclusion of Interaction (95% CI's)")
+```{r}
+apaSupp::tab_glmer(fit_2,
+                caption = "MLM Parameter Estimates: Inclusion of Interaction (SE and p-values)")
 ```
 
 
 ### Visualize the Model
 
-#### Sclae = Likert
+#### Scale = Likert
 
 ```{r}
 interactions::interact_plot(model = fit_2,
@@ -328,45 +314,23 @@ interactions::interact_plot(model = fit_2,
 
 
 ```{r}
-effects::Effect(focal.predictors = c("dose", "time"),
-                xlevels = list(time = seq(from = 0, to = 3, by = .1)),
-                mod = fit_2) %>% 
-  data.frame %>% 
+fit_2 %>% 
+  emmeans::emmeans(~dose*time,
+                   at = list(time = seq(from = 0, to = 3, by = .1)),
+                   type = "response",) %>% 
+  data.frame() %>% 
   ggplot(aes(x = time,
-             y = fit)) +
+             y = prob)) +
   geom_hline(yintercept = c(0, 0.5, 1),         # reference lines
              color = "gray",
              size = 1.5) +
-  geom_ribbon(aes(ymin = fit - se,
-                  ymax = fit + se,
+  geom_ribbon(aes(ymin = asymp.LCL,
+                  ymax = asymp.UCL,
                   fill = dose),
               alpha = .2) +
   geom_line(aes(color = dose),
             size = 1.5) +
-  theme_bw() +
-  labs(y = "Predicted Probability")
-```
-
-Remove the error bands:
-
-```{r}
-effects::Effect(focal.predictors = c("dose", "time"),
-                xlevels = list(time = seq(from = 0, to = 3, by = .1)),
-                mod = fit_2) %>% 
-  data.frame %>% 
-  ggplot(aes(x = time,
-             y = fit)) +
-  geom_hline(yintercept = c(0, 0.5),       
-             color = "gray",
-             size = 1.5) +
-  geom_line(aes(linetype = dose),
-            size = 1) +
-  theme_bw() +
-  theme(legend.position = c(0, 1),
-        legend.justification = c(-0.1, 1.1),
-        legend.background = element_rect(color = "black"),
-        legend.key.width = unit(1.5, "cm")) +
-  labs(x = "90-day Window",
+  theme_bw() +  labs(x = "90-day Window",
        y = "Predicted Probability of Amenorrhea",
        linetype = "Dosage:") +
   scale_x_continuous(breaks = 0:3,
@@ -375,6 +339,7 @@ effects::Effect(focal.predictors = c("dose", "time"),
                                 "Third",
                                 "Fourth"))
 ```
+
 
 
 
@@ -397,7 +362,7 @@ Special provisions are made for **bobyqa**, **Nelder_Mead**, and optimizers wrap
 
 ```{r}
 fit_3a <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose + (1 | id),
-                     data = data_long,
+                     data = df_long,
                      nAGQ = 50,             # increase the number of points
                      family = binomial)
 ```
@@ -406,7 +371,7 @@ fit_3a <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose
 
 ```{r}
 fit_3b <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose + (1 | id),
-                     data = data_long,
+                     data = df_long,
                      control = glmerControl(optimizer ="Nelder_Mead"),
                      family = binomial)
 ```
@@ -415,8 +380,9 @@ fit_3b <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose
 
 ```{r, message = TRUE, error=TRUE}
 fit_3c <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose + (1 | id),
-                     data = data_long,
-                     control = glmerControl(optimizer ='optimx', optCtrl=list(method='L-BFGS-B')),
+                     data = df_long,
+                     control = glmerControl(optimizer ='optimx',
+                                            optCtrl=list(method='L-BFGS-B')),
                      family = binomial)
 ```
 
@@ -424,8 +390,9 @@ fit_3c <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose
 
 ```{r}
 fit_3d <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose + (1 | id),
-                     data = data_long,
-                     control = glmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')),
+                     data = df_long,
+                     control = glmerControl(optimizer ='optimx',
+                                            optCtrl=list(method='nlminb')),
                      family = binomial)
 ```
 
@@ -449,6 +416,13 @@ texreg::knitreg(list(fit_3a, fit_3b, fit_3c, fit_3d),
 
 
 ```{r}
+apaSupp::tab_glmer(fit_3d)
+```
+
+
+
+
+```{r}
 interactions::interact_plot(model = fit_3d,
                             pred = time,
                             modx = dose,
@@ -458,23 +432,23 @@ interactions::interact_plot(model = fit_3d,
 
 
 ```{r}
-effects::Effect(focal.predictors = c("dose", "time"),
-                xlevels = list(time = seq(from = 0, to = 3, by = .1)),
-                mod = fit_3d) %>% 
-  data.frame %>% 
+fit_3d %>% 
+  emmeans::emmeans(~dose*time,
+                   at = list(time = seq(from = 0, to = 3, by = .1)),
+                   type = "response",) %>% 
+  data.frame() %>% 
   ggplot(aes(x = time,
-             y = fit)) +
-  geom_hline(yintercept = c(0, 0.5),       
+             y = prob)) +
+  geom_hline(yintercept = c(0, 0.5, 1),         # reference lines
              color = "gray",
              size = 1.5) +
-  geom_line(aes(linetype = dose),
-            size = 1) +
-  theme_bw() +
-  theme(legend.position = c(0, 1),
-        legend.justification = c(-0.1, 1.1),
-        legend.background = element_rect(color = "black"),
-        legend.key.width = unit(1.5, "cm")) +
-  labs(x = "90-day Window",
+  geom_ribbon(aes(ymin = asymp.LCL,
+                  ymax = asymp.UCL,
+                  fill = dose),
+              alpha = .2) +
+  geom_line(aes(color = dose),
+            size = 1.5) +
+  theme_bw() +  labs(x = "90-day Window",
        y = "Predicted Probability of Amenorrhea",
        linetype = "Dosage:") +
   scale_x_continuous(breaks = 0:3,
@@ -494,32 +468,26 @@ fit_3d %>%
 
 ```{r}
 fit_3d %>% 
-  emmeans::emmeans(pairwise ~ dose, at = c(time = 0), type = "response")
+  emmeans::emmeans(~ dose|time, 
+                   at = list(time = 0:3), 
+                   type = "response")
 ```
 
-
-
-```{r}
-fit_3d %>% 
-  emmeans::emmeans(pairwise ~ dose, at = c(time = 1))
-```
-
-```{r}
-fit_3d %>% 
-  emmeans::emmeans(pairwise ~ dose, at = c(time = 1), type = "response")
-```
-
-```{r}
-fit_3d %>% 
-  emmeans::emmeans(pairwise ~ dose, at = c(time = 2), type = "response")
-```
 
 
 
 
 ```{r}
 fit_3d %>% 
-  emmeans::emmeans(pairwise ~ dose, at = c(time = 3), type = "response")
+  emmeans::emmeans(~ dose|time, 
+                   at = list(time = 0:3), 
+                   type = "response") %>% 
+  pairs(adjust = "none")
 ```
+
+
+
+
+
 
 
