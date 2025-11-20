@@ -45,6 +45,9 @@ This paper's focus is three level models:
 
 ## R packages
 
+Pargent, F., Koch, T. K., Kleine, A. K., Lermer, E., & Gaube, S. (2024). A Tutorial on Tailored Simulation-Based Sample-Size Planning for Experimental Designs With Generalized Linear Mixed Models. Advances in Methods and Practices in Psychological Science, 7(4), 25152459241287132.
+
+
 ### powerlmm
 
 [**`powerlmm`** package](https://github.com/rpsychologist/powerlmm) described in:
@@ -79,7 +82,7 @@ The paper below presents a tutorial using a simple example of count data with mi
 
 * Green, P., & MacLeod, C. J. (2016). [SIMR: an R package for power analysis of generalized linear mixed models by simulation.](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12504) *Methods in Ecology and Evolution,* 7(4), 493-498.
 
-
+https://www.geeksforgeeks.org/machine-learning/sample-size-calculation-for-mixed-models-in-r/
 
 
 
