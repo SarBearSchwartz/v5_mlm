@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 What are MLM and Why do I care? | Encyclopedia of Quantitative Methods in R</title>
   <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
-  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 What are MLM and Why do I care? | Encyclopedia of Quantitative Methods in R" />
   <meta property="og:type" content="book" />
@@ -53,6 +53,7 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
 <script src="libs/tabwid-1.1.3/tabwid.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
 
 
 <style type="text/css">
@@ -130,7 +131,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -264,7 +264,9 @@ div.csl-indent {
 <li class="chapter" data-level="5.4.4" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#testing-random-components"><i class="fa fa-check"></i><b>5.4.4</b> Testing Random Components</a></li>
 <li class="chapter" data-level="5.4.5" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#testing-cross-level-interactions"><i class="fa fa-check"></i><b>5.4.5</b> Testing Cross-Level Interactions</a></li>
 <li class="chapter" data-level="5.4.6" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#final-model"><i class="fa fa-check"></i><b>5.4.6</b> Final Model</a></li>
-<li class="chapter" data-level="5.4.7" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#residual-plots"><i class="fa fa-check"></i><b>5.4.7</b> Residual Plots</a></li>
+<li class="chapter" data-level="5.4.7" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#visualization"><i class="fa fa-check"></i><b>5.4.7</b> Visualization</a></li>
+<li class="chapter" data-level="5.4.8" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#interpretation-5"><i class="fa fa-check"></i><b>5.4.8</b> Interpretation</a></li>
+<li class="chapter" data-level="5.4.9" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#residual-plots"><i class="fa fa-check"></i><b>5.4.9</b> Residual Plots</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html"><i class="fa fa-check"></i><b>6</b> MLM, 3 levels: Nurse’s Stress Intervention</a>
@@ -280,7 +282,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#mlm-null-model"><i class="fa fa-check"></i><b>6.3</b> MLM: Null Model</a></li>
 <li class="chapter" data-level="6.4" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#estimate-the-icc"><i class="fa fa-check"></i><b>6.4</b> Estimate the ICC</a></li>
-<li class="chapter" data-level="6.5" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#xxx---sarah-needs-to-fix-this-table---xxx"><i class="fa fa-check"></i><b>6.5</b> xxx - Sarah needs to fix this table! - xxx</a></li>
+<li class="chapter" data-level="6.5" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#xxx-sarah-needs-to-fix-this-table-xxx"><i class="fa fa-check"></i><b>6.5</b> xxx – Sarah needs to fix this table – XXX</a></li>
 <li class="chapter" data-level="6.6" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#mlm-add-fixed-effects"><i class="fa fa-check"></i><b>6.6</b> MLM: Add Fixed Effects</a>
 <ul>
 <li class="chapter" data-level="6.6.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#fit-the-model-5"><i class="fa fa-check"></i><b>6.6.1</b> Fit the Model</a></li>
@@ -291,7 +293,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.7.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#fit-the-model-6"><i class="fa fa-check"></i><b>6.7.1</b> Fit the Model</a></li>
 </ul></li>
-<li class="chapter" data-level="6.8" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#xxx-sarah-needs-to-fix-this-table-xxx"><i class="fa fa-check"></i><b>6.8</b> xxx – Sarah needs to fix this table – XXX</a>
+<li class="chapter" data-level="6.8" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#xxx-sarah-needs-to-fix-this-table-xxx-1"><i class="fa fa-check"></i><b>6.8</b> xxx – Sarah needs to fix this table – XXX</a>
 <ul>
 <li class="chapter" data-level="6.8.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#assess-significance-1"><i class="fa fa-check"></i><b>6.8.1</b> Assess Significance</a></li>
 </ul></li>
@@ -307,13 +309,12 @@ div.csl-indent {
 <li class="chapter" data-level="6.10.3" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#visualization-estimated-marginal-means-plot"><i class="fa fa-check"></i><b>6.10.3</b> Visualization: Estimated Marginal Means Plot</a></li>
 <li class="chapter" data-level="6.10.4" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#post-hoc-pairwise-tests"><i class="fa fa-check"></i><b>6.10.4</b> Post Hoc Pairwise Tests</a></li>
 <li class="chapter" data-level="6.10.5" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#effect-sizes"><i class="fa fa-check"></i><b>6.10.5</b> Effect Sizes</a></li>
+<li class="chapter" data-level="6.10.6" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#pairwise-comparisons-condition-for-each-hospital-size"><i class="fa fa-check"></i><b>6.10.6</b> Pairwise Comparisons: Condition for each Hospital Size</a></li>
+<li class="chapter" data-level="6.10.7" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#pairwise-comparisons-hospital-size-for-each-condition"><i class="fa fa-check"></i><b>6.10.7</b> Pairwise Comparisons: Hospital Size for each Condition</a></li>
+<li class="chapter" data-level="6.10.8" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#strength"><i class="fa fa-check"></i><b>6.10.8</b> Strength</a></li>
+<li class="chapter" data-level="6.10.9" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#weakness"><i class="fa fa-check"></i><b>6.10.9</b> Weakness</a></li>
 </ul></li>
-<li class="chapter" data-level="6.11" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#interpretation-6"><i class="fa fa-check"></i><b>6.11</b> Interpretation</a>
-<ul>
-<li class="chapter" data-level="6.11.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#strength"><i class="fa fa-check"></i><b>6.11.1</b> Strength</a></li>
-<li class="chapter" data-level="6.11.2" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#weakness"><i class="fa fa-check"></i><b>6.11.2</b> Weakness</a></li>
-</ul></li>
-<li class="chapter" data-level="6.12" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#reproduction-of-table-2.5"><i class="fa fa-check"></i><b>6.12</b> Reproduction of Table 2.5</a></li>
+<li class="chapter" data-level="6.11" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#reproduction-of-table-2.5"><i class="fa fa-check"></i><b>6.11</b> Reproduction of Table 2.5</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html"><i class="fa fa-check"></i><b>7</b> MLM, Centering/Scaling: Reading Achievement (2-levels only)</a>
 <ul>
@@ -596,7 +597,7 @@ div.csl-indent {
 <li class="chapter" data-level="16.2" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#exploratory-data-anlaysis-1"><i class="fa fa-check"></i><b>16.2</b> EXPLORATORY DATA ANLAYSIS</a>
 <ul>
 <li class="chapter" data-level="16.2.1" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#summary-statistics"><i class="fa fa-check"></i><b>16.2.1</b> Summary Statistics</a></li>
-<li class="chapter" data-level="16.2.2" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#visualization-1"><i class="fa fa-check"></i><b>16.2.2</b> Visualization</a></li>
+<li class="chapter" data-level="16.2.2" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#visualization-2"><i class="fa fa-check"></i><b>16.2.2</b> Visualization</a></li>
 </ul></li>
 <li class="chapter" data-level="16.3" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#generalized-estimating-equations-gee"><i class="fa fa-check"></i><b>16.3</b> Generalized Estimating Equations (GEE)</a>
 <ul>
@@ -658,7 +659,7 @@ div.csl-indent {
 <li class="chapter" data-level="18.3" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#generalized-estimating-equations-gee-2"><i class="fa fa-check"></i><b>18.3</b> Generalized Estimating Equations (GEE)</a>
 <ul>
 <li class="chapter" data-level="18.3.1" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#explore-various-correlation-structures-1"><i class="fa fa-check"></i><b>18.3.1</b> Explore Various Correlation Structures</a></li>
-<li class="chapter" data-level="18.3.2" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#interpretation-9"><i class="fa fa-check"></i><b>18.3.2</b> Interpretation</a></li>
+<li class="chapter" data-level="18.3.2" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#interpretation-8"><i class="fa fa-check"></i><b>18.3.2</b> Interpretation</a></li>
 <li class="chapter" data-level="18.3.3" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#visualize-the-final-model"><i class="fa fa-check"></i><b>18.3.3</b> Visualize the Final Model</a></li>
 </ul></li>
 <li class="chapter" data-level="18.4" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#follow-up-analysis"><i class="fa fa-check"></i><b>18.4</b> Follow-up Analysis</a>
@@ -666,7 +667,7 @@ div.csl-indent {
 <li class="chapter" data-level="18.4.1" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#collapse-the-predictor"><i class="fa fa-check"></i><b>18.4.1</b> Collapse the Predictor</a></li>
 <li class="chapter" data-level="18.4.2" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#reduce-the-model---geegee"><i class="fa fa-check"></i><b>18.4.2</b> Reduce the Model - <code>gee::gee()</code></a></li>
 <li class="chapter" data-level="18.4.3" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#compare-parameters"><i class="fa fa-check"></i><b>18.4.3</b> Compare Parameters</a></li>
-<li class="chapter" data-level="18.4.4" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#interpretation-10"><i class="fa fa-check"></i><b>18.4.4</b> Interpretation</a></li>
+<li class="chapter" data-level="18.4.4" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#interpretation-9"><i class="fa fa-check"></i><b>18.4.4</b> Interpretation</a></li>
 <li class="chapter" data-level="18.4.5" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#visualize-3"><i class="fa fa-check"></i><b>18.4.5</b> Visualize</a></li>
 </ul></li>
 <li class="chapter" data-level="18.5" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#conclusion-2"><i class="fa fa-check"></i><b>18.5</b> Conclusion</a></li>

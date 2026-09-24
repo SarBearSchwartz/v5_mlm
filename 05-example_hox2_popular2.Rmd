@@ -19,8 +19,8 @@ knitr::opts_chunk$set(comment     = "",
 Download/install a new GitHub package
 
 ```{r, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
+install.packages("remotes")
+remotes::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
 ```
 
 Load/activate these packages
@@ -512,7 +512,13 @@ performance::compare_performance(pop_glm_0,
 
 #### Interpretation
 
-On average, girls were rated `r coef(pop_lm_1)[2] %>% round(2)` points more popular than boys with the same extroversion score, $p<.0001$. One point higher extroversion scores were associated with `r coef(pop_lm_1)[3] %>% round(2)` points higher popularity, within each gender, $p<.0001$. Together, these two factors account for `r 100 * summary(pop_lm_1)$r.squared %>% round(4)`% of the variance in populartiy.
+
+```{block type='rmdapa', echo=TRUE}
+
+On average, girls were rated 1.51 points more popular than boys with the same extroversion score, *p* < .001. One point higher extroversion scores were associated with 0.29 points higher popularity, within each gender, *p*<.001. Together, these two factors account for 39.4% of the variance in populartiy.
+
+```
+
 
 ### Compare Fixed Effects
 
@@ -700,7 +706,11 @@ This often leads to refitting identical models via BOTH estimation methods.
 
 #### Interpretation
 
-The grand average popularity of all students is `r pop_lmer_0_re %>% fixef() %>% round(4)` and the class averages tend to vary by about `r insight::get_variance(pop_lmer_0_re)$var.random %>% sqrt() %>% round(4)` points above or below that.
+```{block type='rmdapa', echo=TRUE}
+
+The grand average popularity of all students is 5.08 and the class averages tend to vary by about `r 0.84 points above or below that.
+
+```
 
 ### Intraclass Correlation (ICC)
 
@@ -772,6 +782,12 @@ performance::icc(pop_lmer_0_re)
 #### Interpretation
 
 WOW! 36.5% of the variance of the popularity scores is at the group level, which is very high for social science data.
+
+```{block type='rmdapa', echo=TRUE}
+
+Over a third of the variance in peer popularity may be attributed to class to class differences, ICC = 0.365.
+
+```
 
 ```{block type='rmdimportant', echo=TRUE}
 The ICC should be based on a Null (intercept only) model fit via REML (restricted maximum likelihood) estimation.  This is the default for the 'lme4::lmer()' function.  In chapter 2, @hox2017 presents the numbers based on fitting the model via ML (maximum likelihood) estimation and thus does not match the presentation above exactly *(not just rounding error)*.  This is because: (1) estimation methods (REML & ML) are not discussed until chapter 3 and (2) due to the Null model also being used for model fit comparisons in Table 2.1 on the top of page 14.  Here we will fit the empty model twice, above by ML and below by REML
@@ -1183,23 +1199,34 @@ pop_lmer_2_re  <- lmerTest::lmer(popular ~ sex + extrav*texp + (extrav|class),
 
 #### Parameter Summary Table
 
-
 ```{r}
-apaSupp::tab_lmer(pop_lmer_2_re,
-                  var_labels = c(sex = "Pupil Gender",
-                                 extrav = "Pupil Extraversion",
-                                 texp = "Teacher Experience",
-                                 "extrav * texp" = "Extrav X Exp",
-                                 "class.var__(Intercept)" = "Var: Class Means",
-                                 "class.cov__(Intercept).extrav" = "Covar: Class Means X Extrav",
-                                 "class.var__extrav" = "Var: Class Exrav",
-                                 "Residual.var__Observation" = "Var: Residual"),
-                  caption = "MLM for Popularity")
+apaSupp::tab_lmer(pop_lmer_2_re)
 ```
 
 
 
-#### Visualization - `interactions` package
+
+```{r}
+apaSupp::tab_lmer(pop_lmer_2_re,
+                  var_labels = c(sex = "Pupil Gender: Girl vs Boy",
+                                 extrav = "Pupil Extraversion",
+                                 texp = "Teacher Experience, yrs",
+                                 "extrav * texp" = "Interaction: Extrav X Exp",
+                                 "class.var__(Intercept)" = "Var: Random intercepts (Class Means)",
+                                 "class.cov__(Intercept).extrav" = "Covar: Class Means X Extrav",
+                                 "class.var__extrav" = "Var: Random Slopes (Class Exrav)",
+                                 "Residual.var__Observation" = "Var: Residual"),
+                  show_single_row = "sex",
+                  p_note = "apa3",
+                  caption = "Parameter Estimates for Final MLM")
+```
+
+
+
+### Visualization 
+
+
+#### `interactions` package
 
 **Predictors:** involved in the interaction ... \* `extrav` 1 value per student, continuous, score with range 1-10\
 \* `texp` 1 value per class, continuous, years with range 2-25
@@ -1212,6 +1239,10 @@ interactions::interact_plot(model = pop_lmer_2_re,    # model name
                             modx = texp,      # 'moderator' (x) independent variable name
                             mod2 = sex)       # 2nd moderator independent variable name (optional)
 ```
+
+**Simple Slopes**
+
+
 
 ```{r}
 interactions::sim_slopes(model = pop_lmer_2_re,
@@ -1259,7 +1290,7 @@ interactions::interact_plot(pop_lmer_2_re,                # model name
   scale_y_continuous(breaks = seq(from = 0, to = 10, by = 1)) 
 ```
 
-#### Visualization - `effects` & `ggplot2` packages
+#### `effects` & `ggplot2` packages
 
 Get Estimated Marginal Means - default 'nice' predictor values:
 
@@ -1343,7 +1374,7 @@ effects::Effect(focal.predictors = c("sex", "extrav", "texp"),
 
 **Publishable Plot**
 
-Since `gender` only exhibited a main effect and is not involved in any interactions, if would be a better use of space to not muddy the water with seperate panels. The `Effect()` function will estimate the marginal means using the reference category for categorical variables and the mean for continuous variables.
+Since `gender` only exhibited a main effect and is not involved in any interactions, if would be a better use of space to not muddy the water with separate panels. The `Effect()` function will estimate the marginal means using the **typical category** (most common) for categorical variables and the mean for continuous variables.
 
 ```{r}
 effects::Effect(focal.predictors = c("extrav", "texp"),  # choose not to investigate sex (the reference category will be used)
@@ -1376,18 +1407,191 @@ effects::Effect(focal.predictors = c("extrav", "texp"),  # choose not to investi
   scale_y_continuous(breaks = seq(from = 0, to = 10, by = 1))  
 ```
 
-#### Interpretation
+
+
+#### `emmeans` & `ggplot2` packages
+
+Get Estimated Marginal Means - default 'nice' predictor values:
+
+**Focal predictors:** All combinations of... \* `sex` categorical, both levels\
+\* `extrav` continuous 1-10, default: 1, 3, 6, 8, 10\
+\* `texp` continuous, default: 5, 15, 25
+
+**Always followed by:** \* `emmean` estimated marginal mean \* `SE` standard error for the marginal mean \* `lower.CL` lower end of the 95% confidence interval around the estimated marginal mean \* `upper.CL` upper end of the 95% confidence interval around the estimated marginal mean
+
+```{r}
+pop_lmer_2_re %>% 
+  emmeans::emmeans(~ sex + extrav + texp)
+```
+
+
+```{r}
+pop_lmer_2_re %>% 
+  emmeans::emmeans(~ sex + extrav + texp,
+                   at = list(extrav = c(1, 3, 6, 8, 10),
+                             texp = c(5, 15, 25))) %>% 
+  data.frame()%>% 
+  head(n = 12)
+```
+
+
+
+
+
+**Basic, default plot**
+
+Other than selecting three illustrative values for the teacher extroversion rating, most everything is left to default.
+
+```{r}
+pop_lmer_2_re %>% 
+  emmeans::emmeans(~ sex + extrav + texp,
+                   at = list(extrav = c(1, 3, 6, 8, 10),
+                             texp = c(5, 15, 25))) %>% 
+  data.frame() %>% 
+  dplyr::mutate(texp = factor(texp)) %>% 
+  ggplot(aes(x = extrav,
+             y = emmean,
+             fill = texp,
+             linetype = texp)) +
+  geom_ribbon(aes(ymin = lower.CL,
+                  ymax = upper.CL),
+              alpha = .3) +
+  geom_line(aes(color = texp)) +
+  facet_grid(.~ sex) 
+```
+
+**More Clean Plot**
+
+There are many ways to clean up a plot, including labeling the axes.
+
+```{r}
+pop_lmer_2_re %>% 
+  emmeans::emmeans(~ sex + extrav + texp,
+                   at = list(extrav = c(1, 3, 6, 8, 10),
+                             texp = c(5, 15, 25))) %>% 
+  data.frame() %>% 
+  dplyr::mutate(texp = factor(texp)) %>% 
+  dplyr::mutate(sex = sex %>% 
+                  forcats::fct_recode("Amoung Boys" = "boy",
+                                      "Among Girls" = "girl")) %>% 
+  ggplot(aes(x = extrav,
+             y = emmean,
+             fill = texp,
+             linetype = texp)) +
+  geom_ribbon(aes(ymin = lower.CL,
+                  ymax = upper.CL),
+              alpha = .3) +
+  geom_line(aes(color = texp),
+            linewidth = 1) +
+  theme_bw() +
+  facet_grid(.~ sex) +
+  labs(x = "Pupil's Extroversion, Rated by Teacher",
+       y = "Estimated Marginal Mean\nPupil Popularity, Mean Rating of Classroom Peers",
+       color    = "Teacher's Experience, Years:",
+       linetype = "Teacher's Experience, Years:",
+       fill     = "Teacher's Experience, Years:") +
+  theme(legend.position = "bottom",
+        legend.key.width = unit(2, "cm")) +
+  scale_x_continuous(breaks = seq(from = 0, to = 10, by = 2)) 
+```
+
+**Publishable Plot**
+
+Since `gender` only exhibited a main effect and is not involved in any interactions, if would be a better use of space to not muddy the water with separate panels. The `emmeans()` function will estimate the marginal means by **averaging across all levels** for categorical variables and the mean for continuous variables.
+
+```{r}
+pop_lmer_2_re %>% 
+  emmeans::emmeans(~ extrav + texp,
+                   at = list(extrav = c(1, 3, 6, 8, 10),
+                             texp = c(5, 15, 25))) %>% 
+  data.frame() %>% 
+  dplyr::mutate(texp = factor(texp) %>% 
+                  forcats::fct_rev()) %>% 
+  ggplot(aes(x = extrav,
+             y = emmean,
+             linetype = texp))  +
+  geom_abline(intercept = 5,
+              slope = 0,
+              linewidth = 1) +
+  geom_ribbon(aes(ymin = lower.CL,
+                  ymax = upper.CL),
+              fill = "black",
+              alpha = .15) +
+  geom_line(linewidth = 1) +
+  theme_bw() +
+  labs(x = "Pupil's Extroversion, Rated by Teacher",
+       y = "Estimated Marginal Mean\nPupil Popularity, Mean Rating of Classroom Peers",
+       linetype = "Teacher's\nExperience,\nYears:") +
+  theme(legend.position = "inside",
+        legend.position.inside = c(1, 0),
+        legend.justification = c(1.1, -.1),
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(2, "cm")) +
+  scale_x_continuous(breaks = seq(from = 0, to = 10, by = 2)) +
+  scale_y_continuous(breaks = seq(from = 0, to = 10, by = 1))  +
+  scale_linetype_manual(values = c("solid", "longdash", "dotted"))
+```
+
+
+
+
+**Simple Slopes**
+
+
+```{r}
+pop_lmer_2_re %>% 
+  emmeans::emtrends(var = "extrav",
+                    ~ texp | sex,
+                   at = list(texp = c(5, 15, 25))) 
+```
+
+
+
+```{r}
+pop_lmer_2_re %>% 
+  emmeans::emtrends(var = "extrav",
+                    ~ texp,
+                   at = list(texp = c(5, 15, 25))) 
+```
+
+```{r}
+pop_lmer_2_re %>% 
+  emmeans::emtrends(var = "extrav",
+                    ~ texp,
+                   at = list(texp = 14.25)) 
+```
+
+For student's who's teacher had average experience (M = 14.25 years), a 1 unit increase in extraversion is associated with a nearly half point increase in popularity, b = 0.45, 95% CI [0.42, 0.49].  When the teacher has more experience, this association is less distinct and when teachers have more experience, this relationship is more pronounced.  
+
+
+
+### Interpretation
+
+
+```{block type='rmdapa', echo=TRUE}
 
 After accounting for class-to-class variation and the effect of gender, a positive association was found between teacher rated extroversion and peer rated popularity. This relationship was more marked for less experienced teachers.
 
+```
+
+
 ### Residual Plots
+
+
+```{r}
+ggResidpanel::resid_panel(pop_lmer_2_re,
+                          alpha = .1,
+                          type = "pearson")
+```
+
+
 
 
 Form more infromation, see the [vingette page for the `redre` package](https://goodekat.github.io/redres/articles/redres-vignette.html).
 
 ```{r}
 sjPlot::plot_model(pop_lmer_2_re,
-                   type = "diag")
+                   type = "diag") 
 ```
 
 **Standardized residuals vs. fitted values**

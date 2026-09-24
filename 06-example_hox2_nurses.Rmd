@@ -19,8 +19,8 @@ knitr::opts_chunk$set(comment     = "",
 Download/install a new GitHub package
 
 ```{r, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
+install.packages("remotes")
+remotes::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
 ```
 
 Load/activate these packages
@@ -320,7 +320,7 @@ fit_lmer_0_re_2level <-
 apaSupp::tab_lmer(fit_lmer_0_re_2level)
 ```
 
-## xxx - Sarah needs to fix this table! - xxx
+## xxx -- Sarah needs to fix this table -- XXX
 
 ```{r}
 apaSupp::tab_lmers(list("2 levels" = fit_lmer_0_re_2level, 
@@ -334,17 +334,20 @@ apaSupp::tab_lmer_fits(list("2 levels" = fit_lmer_0_re_2level,
 ```
 
 
-
-The deviance test or likelihood-ratio test shows that the inclusion of the nesting of wards within hospitals better explains the variance in nurse stress levels.
-
-
-
 ```{r}
 anova(fit_lmer_0_re, fit_lmer_0_re_2level, 
       refit = FALSE)
 ```
 
-Single-term deletion is alonther way to determine significance of random effects.
+
+
+The deviance test or likelihood-ratio test shows that the inclusion of the nesting of wards within hospitals better explains the variance in nurse stress levels.
+
+
+
+
+
+Single-term deletion is another way to determine significance of random effects.
 
 ```{r}
 ranova(fit_lmer_0_re)
@@ -633,9 +636,11 @@ apaSupp::tab_lmer(fit_lmer_final,
 
 
 
+```{block type='rmdapa', echo=TRUE}
 
-> **Interpretation:**
-> After accounting for the a nurses' age, gender, and experience, as well as the ward type, the effect of the intervention is moderated by hospital size, X2(1) = 23.41, p < .001,
+After accounting for the a nurses' age, gender, and experience, as well as the ward type, the effect of the intervention is moderated by hospital size, X^2(1) = 23.41, p < .001.
+
+```
 
 
 ### Visualization: Estimated Marginal Means Plot 
@@ -677,9 +682,11 @@ fit_lmer_final %>%
   pairs() 
 ```
 
-> **Interpretation:**
-> For hospitals that are small in size, the intervention does substantially decrease stress levels by 1.55 points, SE = 0.20, p <.001. For hospitals that are medium sizes, the intervention does decrease stress, but by a modest 0.43 points, SD = 0.17, p = .020.  For large hospitals the intervention was not effective at reducing stress, p = .200.
+```{block type='rmdapa', echo=TRUE}
 
+For hospitals that are small in size, the intervention does substantially decrease stress levels by 1.55 points, *SE* = 0.20, *p* <.001. For hospitals that are medium sizes, the intervention does decrease stress, but by a modest 0.43 points, *SD* = 0.17, *p* = .020.  For large hospitals the intervention was not effective at reducing stress, *p* = .200.
+
+```
 
 
 ### Effect Sizes
@@ -743,8 +750,24 @@ fit_lmer_final %>%
 
 
 
-> **FULL INTERPRETATION:**
-> After accounting for the a nurses' age, gender, and experience, as well as the ward type, the effect of the intervention is moderated by hospital size, F(2, 22) = 17.50, p < .001. For hospitals that are small in size, the intervention does substantially decrease stress levels by 1.55 points, SE = 0.20, p <.001, Cohen's d = 1.83.  For hospitals that are medium sizes, the intervention does decrease stress, but by a modest 0.43 points, SD = 0.17, p = .020, Cohen's d =  0.51.  For large hospitals the intervention was not effective at reducing stress, p = .200.
+```{block type='rmdapa', echo=TRUE}
+
+After accounting for the a nurses' age, gender, and experience, as well as the ward type, the effect of the intervention is moderated by hospital size, *F*(2, 22) = 17.50, *p* < .001. For hospitals that are small in size, the intervention does substantially decrease stress levels by 1.55 points, *SE* = 0.20, *p* <.001, *SMD* = 1.83.  For hospitals that are medium sizes, the intervention does decrease stress, but by a modest 0.43 points, *SE* = 0.17, *p* = .020, *SMD* =  0.51.  For large hospitals the intervention was not effective at reducing stress, *p* = .200.
+
+```
+
+
+
+#### Using `interactions::cat_plot()`
+
+Least typing...
+
+```{r}
+interactions::cat_plot(fit_lmer_final,
+                       pred = "hospsize",
+                       modx = "expcon",
+                       interval = TRUE)
+```
 
 
 
@@ -777,32 +800,6 @@ interactions::cat_plot(fit_lmer_final,
 
 
 
-#### Using `sjPlot::plot_model()`
-
-All Defaults:
-
-```{r}
-sjPlot::plot_model(fit_lmer_final, 
-                   type = "pred", 
-                   terms = c("hospsize", "expcon"))
-```
-
-
-Adding more options:
-
-```{r}
-sjPlot::plot_model(fit_lmer_final, 
-                   type = "pred", 
-                   terms = c("hospsize", 
-                             "expcon")) +
-  labs(title = "Multilevel Modeling of Hospital Nurse Stress Intervention",
-       subtitle = "Error bars display 95% Confidene Intervals",
-       x = "Hospital Size",
-       y = "Estimated Marginal Mean\nNorse's Stress Score",
-       color = "Condition") +
-  theme_bw()
-```
-
 
 #### Using `effects::Effect()` and `ggplot`
 
@@ -829,11 +826,7 @@ effects::Effect(focal.predictors = c("expcon", "hospsize"),
   data.frame()  
 ```
 
-```{r}
-effects::Effect(focal.predictors = c("expcon", "hospsize"),
-                mod = fit_lmer_final) %>% 
-  data.frame()
-```
+
 
 ```{r}
 effects::Effect(focal.predictors = c("expcon", "hospsize"),
@@ -875,14 +868,181 @@ This plot illustrates the estimated marginal means among male (gender's referenc
 
 
 
-## Interpretation
+#### Using `emmeans::emmeans()` and `ggplot`
+
+
+
+Get Estimated Marginal Means - default 'nice' predictor values:
+
+**Focal predictors:** All combinations of...     
+
+* `expcon` categorical, both levels `control` and `experiment`    
+* `hospsize` categorical, all three levels`small` , `medium`, `large`  
+
+**Always followed by:**     
+
+* `emmean` estimated marginal mean
+* `SE` standard error for the marginal mean
+* `lower` lower end of the 95% confidence interval around the estimated marginal mean
+* `upper` upper end of the 95% confidence interval around the estimated marginal mean
+
+
+
+
+
+
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans(~ expcon + hospsize) %>% 
+  data.frame()  
+```
+
+
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans(~ expcon + hospsize) %>% 
+  data.frame()  %>% 
+  ggplot(aes(x = hospsize,
+             y = emmean,
+             group = expcon,
+             shape = expcon,
+             color = expcon)) +
+  geom_errorbar(aes(ymin = emmean - SE,      # mean plus/minus one Std Error
+                    ymax = emmean + SE),
+                width = .4,
+                position = position_dodge(width = .2)) + 
+  # geom_errorbar(aes(ymin = lower.CL,           # 95% CIs
+  #                   ymax = upper.CL),
+  #               width = .2,
+  #               position = position_dodge(width = .2)) + 
+  geom_line(aes(linetype = expcon),
+            position = position_dodge(width = .2)) +
+  geom_point(size = 4,
+             position = position_dodge(width = .2)) +
+  theme_bw() +
+  labs(x = "Hospital Size",
+       y = "Estimated Marginal Mean, Stress",
+       shape    = "Condition",
+       color    = "Condition",
+       linetype = "Condition") +
+  theme(legend.key.width = unit(2, "cm"),
+        legend.background = element_rect(color = "black"),
+        legend.position = c(1, 0),
+        legend.justification = c(1.1, -0.1))
+```
+
+
+### Pairwise Comparisons: Condition for each Hospital Size
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans( ~ expcon |hospsize)
+```
+
+
+
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans( ~ expcon |hospsize) %>% 
+  pairs()
+```
+
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans( ~ expcon |hospsize) %>% 
+  pairs() %>% 
+  data.frame() 
+```
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans( ~ expcon |hospsize) %>% 
+  pairs() %>% 
+  data.frame() %>% 
+  dplyr::mutate(SMD = estimate/apaSupp::lmer_sd(fit_lmer_final)) %>% 
+  dplyr::mutate(p.value = apaSupp::p_num(p.value)) %>% 
+  dplyr::select("Hospital Size" = hospsize, 
+                "d-EMM" = estimate,
+                SE,
+                "p" = p.value,
+                SMD) %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Follow-up Pairwise Compairsons Between Control and Experimental Condition by Hospital Size",
+                     general_note = "d-EMM = difference in estimated means; SMD = standardized mean difference, a Cohen's d-like effect size.",
+                     p_note = "apa13")
+```
+
+
+### Pairwise Comparisons: Hospital Size for each Condition
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans( ~ hospsize | expcon)
+```
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans( ~ hospsize | expcon) %>% 
+  pairs()
+```
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans( ~ hospsize | expcon) %>% 
+  pairs() %>% 
+  data.frame()
+```
+
+
+
+```{r}
+fit_lmer_final %>% 
+  emmeans::emmeans( ~ hospsize | expcon) %>% 
+  pairs() %>% 
+  data.frame() %>% 
+  dplyr::mutate(SMD = estimate/apaSupp::lmer_sd(fit_lmer_final)) %>% 
+  dplyr::mutate(p.value = apaSupp::p_num(p.value)) %>% 
+  dplyr::select("Condition" = expcon,
+                "Hospital Size" = contrast, 
+                "d-EMM" = estimate,
+                SE,
+                "p" = p.value,
+                SMD) %>% 
+  flextable::as_grouped_data(groups = "Condition") %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Follow-up Pairwise Compairsons Between Hospital Sizea for each Condition",
+                     general_note = "d-EMM = difference in estimated means; SMD = standardized mean difference, a Cohen's d-like effect size.",
+                     p_note = "apa13")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{block type='rmdapa', echo=TRUE}
 
 There is evidence this intervention lowered stress among nurses working in small hospitals and to a smaller degree in medium sized hospitals.  The intervention did not exhibit an effect in large hospitals.  
+
+```
 
 
 ### Strength
 
-This analysis was able to incorporated all three levels of clustering while additionally controlling for many co0-variates, both categorical (nurse gender and ward type) and continuous (nurse age and experience in years).  Also heterogeneity was accounted for in terms of the intervention's effect at various hospitals.  This would NOT be possible via any ANOVA type analysis.
+This analysis was able to incorporated all three levels of clustering while additionally controlling for many co-variates, both categorical (nurse gender and ward type) and continuous (nurse age and experience in years).  Also heterogeneity was accounted for in terms of the intervention's effect at various hospitals.  This would NOT be possible via any ANOVA type analysis.
 
 
 ### Weakness

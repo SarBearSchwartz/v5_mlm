@@ -17,8 +17,8 @@ knitr::opts_chunk$set(comment     = "",
 Download/install a new GitHub package
 
 ```{r, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
+install.packages("remotes")
+remotes::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
 ```
 
 Load/activate these packages
@@ -36,7 +36,6 @@ library(performance)
 library(interactions)
 library(emmeans)
 library(effects)
-library(sjPlot)
 ```
 
 
