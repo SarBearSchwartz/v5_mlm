@@ -61,7 +61,7 @@ FOR THIS CHAPTER WE WILL IGNORE ALL LEVELS EXCEPT FOR STUDNETS BEING NESTED WITH
 Read the SPSS data in with the `haven` package .
 
 ```{r}
-data_raw <- haven::read_sav("data/Achieve.sav")
+df_raw <- haven::read_sav("data/Achieve.sav")
 ```
 
 Declare all categorical variables to be factors and apply labels where meaningful.
@@ -80,7 +80,7 @@ Declare all categorical variables to be factors and apply labels where meaningfu
 > * `ses` = school's SES level    
 
 ```{r}
-data_achieve <- data_raw %>% 
+df_achieve <- df_raw %>% 
   dplyr::mutate_at(vars(id, region, corp, school, class), factor) %>% 
   dplyr::mutate(gender = gender %>% 
                   factor(labels = c("Female", "Male"))) %>% 
@@ -93,6 +93,9 @@ data_achieve <- data_raw %>%
                 senroll, ses)                              # School-level vars
 ```
 
+```{r}
+tibble::glimpse(df_achieve)
+```
 
 
 ### Sample Structure    
@@ -105,7 +108,7 @@ For this chapter we will only focus on TWO levels: **students** (level 1) are th
 The number of ***regions*** = 9:
 
 ```{r num_reg}
-num_regions <- data_achieve %>% 
+num_regions <- df_achieve %>% 
   dplyr::group_by(region) %>% 
   dplyr::tally() %>% 
   nrow()
@@ -116,7 +119,7 @@ num_regions
 The number of **corps** = 60:
 
 ```{r num_corp}
-num_corps <- data_achieve %>% 
+num_corps <- df_achieve %>% 
   dplyr::group_by(region, corp) %>% 
   dplyr::tally() %>% 
   nrow()
@@ -127,7 +130,7 @@ num_corps
 The number of **schools** = 160 
 
 ```{r num_school}
-num_schools <- data_achieve %>% 
+num_schools <- df_achieve %>% 
   dplyr::group_by(region, corp, school) %>% 
   dplyr::tally() %>% 
   nrow()
@@ -137,7 +140,7 @@ num_schools
 
 The number of **classes** = 568
 ```{r num_class}
-num_classes <- data_achieve %>% 
+num_classes <- df_achieve %>% 
   dplyr::group_by(region, corp, school, class) %>% 
   dplyr::tally() %>% 
   nrow()
@@ -148,7 +151,7 @@ num_classes
 The number of **students** = 10320
 
 ```{r num_kid}
-num_subjects <- data_achieve %>% nrow
+num_subjects <- df_achieve %>% nrow
 
 num_subjects
 ```
@@ -160,7 +163,7 @@ num_subjects
 ### Summarize Descriptive Statistics
 
 ```{r}
-data_achieve %>% 
+df_achieve %>% 
   dplyr::select(classize, gender, geread, gevocab, age, ses, senroll) %>% 
   apaSupp::tab_desc(caption = "Summary of the numeric variables")
 ```
@@ -168,7 +171,7 @@ data_achieve %>%
 
 
 ```{r}
-data_achieve %>% 
+df_achieve %>% 
   dplyr::select(gender,
                 "Reading Score"       = geread, 
                 "Vocabulary Score"    = gevocab, 
@@ -192,7 +195,7 @@ For a first look, its useful to plot all the data points on a single scatterplot
 *Note: I had to manually install the package `hexbin` for the `geom_hex()` to run.*
 
 ```{r densityHex, fig.cap="Raw Data: Density, Vocab vs. Reading"}
-data_achieve %>% 
+df_achieve %>% 
   ggplot() +
   aes(x = gevocab, 
       y = geread) +
@@ -209,7 +212,7 @@ data_achieve %>%
 Up to this point, all investigation of this dataset has been only at the pupil level and any nesting or clustering within schools has been ignored.  Plotting is a good was to start to get an idea of the school-to-school variability.  This figure displays four handpicked school to illustrate the degreen of school-to-school variability in the **association between vocab and reading** scores.
 
 ```{r schoolRegEx, fig.width=6, fig.height=6, fig.cap="Raw Data: Independent Single-Level Regression within each school, a few illustrative cases"}
-data_achieve %>% 
+df_achieve %>% 
   dplyr::filter(school %in% c(1321, 6181, 
                               6197, 6823)) %>%  # choose school numbers
   ggplot(aes(x = gevocab,
@@ -223,7 +226,7 @@ data_achieve %>%
 Another way to explore the **school-to-school variability** is to plot the linear model fit *independently* to each of the schools.  This next figure displays only the smooth lines without the standard error bands or the raw data in the form of points or hexagons.
 
 ```{r schoolRegAll, fig.cap="Raw Data: Independent Single-Level Regression within each school, all schools shown together"}
-data_achieve %>% 
+df_achieve %>% 
   ggplot(aes(x = gevocab,
              y = geread)) +
   geom_smooth(aes(group = school),
@@ -242,7 +245,7 @@ Due to the high number of schools, the figure with all the school's independent 
 
 
 ```{r classRegSep, fig.width=6, fig.height=8, fig.cap="Raw Data: Independent Single-Level Regression within each school, sepearated by school size and school SES"}
-data_achieve %>% 
+df_achieve %>% 
   dplyr::mutate(ses2 = ntile(ses, 2) %>%                  # median split
                   factor(labels = c("SES: Lower Half", 
                                     "SES: Upper Half"))) %>% 
@@ -274,16 +277,16 @@ Ignoring the fact that students are nested or clustered within schools, is calle
 ```{r}
 # linear model - ignores school (for reference only)
 fit_read_lm_0 <- lm(formula = geread ~ 1,               # intercept only
-                    data    = data_achieve)
+                    data    = df_achieve)
 
 fit_read_lm_1 <- lm(formula = geread ~ gevocab ,        # one predictor
-                    data    = data_achieve)
+                    data    = df_achieve)
 
 fit_read_lm_2 <- lm(formula = geread ~ gevocab + age,   # two predictors
-                    data    = data_achieve)
+                    data    = df_achieve)
 
 fit_read_lm_3 <- lm(formula = geread ~ gevocab*age,    # interation+main effects
-                    data    = data_achieve)
+                    data    = df_achieve)
 ```
 
 
@@ -319,19 +322,23 @@ anova(fit_read_lm_3)
 ### Visualize the Interaction
 
 ```{r}
-effects::Effect(focal.predictors = c("gevocab", "age"),     # chooses default values for
-                mod = fit_read_lm_3)                        # continuous vars
+fit_read_lm_3 %>% 
+  emmeans::emmeans(~ age + gevocab,
+                   at = list(age = c(82, 107, 135),  # min, max, median
+                             gevocab = c(0, 5, 10)))
 ```
 
 
 
 ```{r}
-effects::Effect(focal.predictors = c("gevocab", "age"),     # chooses default values for
-                mod = fit_read_lm_3) %>%                    # continuous vars
-  data.frame() %>%  
+fit_read_lm_3 %>% 
+  emmeans::emmeans(~ age + gevocab,
+                   at = list(age = c(82, 107, 135),
+                             gevocab = c(0, 5, 10))) %>% 
+  data.frame() %>% 
   mutate(age = factor(age)) %>%           # must make a factor to separate lines
   ggplot(aes(x = gevocab,
-             y = fit,
+             y = emmean,
              color = age)) +
   geom_point() +
   geom_line() 
@@ -343,7 +350,7 @@ Here is a better version of the plot.
 Age is in months, so we want multiples of 12 for good visualization
 
 ```{r}
-summary(data_achieve$age)/12   # divide by 12 to change months to years
+summary(df_achieve$age)/12   # divide by 12 to change months to years
 ```
 
 A good set set of illustrative ages could be: 7, 9, and 11:
@@ -354,13 +361,15 @@ c(7, 9, 11) * 12   # times by 12 to change years to months
 
 
 ```{r mlInteraction}
-effects::Effect(focal.predictors = c("gevocab", "age"),
-                mod = fit_read_lm_3,
-                xlevels = list(age = c(84, 108, 132))) %>%  # age is in months
+fit_read_lm_3 %>% 
+  emmeans::emmeans(~ age + gevocab,
+                   at = list(age = c(84, 108, 132),
+                             gevocab = c(0, 5, 10))) %>% 
+  
   data.frame() %>% 
   mutate(age_yr = factor(age/12)) %>%    # it would be nice to plot age in years
   ggplot(aes(x        = gevocab,
-             y        = fit,
+             y        = emmean,
              color    = age_yr,
              linetype = age_yr)) +
   geom_line(size = 1.25) +
@@ -391,11 +400,11 @@ A so called *Empty Model* only includes random intercepts.  No independent varia
 
 ```{r}
 fit_read_0ml <- lmerTest::lmer(geread ~ 1 + (1|school), 
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = FALSE)                  # fit via ML (not the default)
 
 fit_read_0re <- lmerTest::lmer(geread ~ 1 + (1|school) , 
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = TRUE)                   # fit = REML (the default)
 ```
 
@@ -490,11 +499,11 @@ Fixed effects selection should come **prior** to random effects.  You should use
 
 ```{r}
 fit_read_1ml <- lmerTest::lmer(geread ~ gevocab + (1|school), 
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = FALSE)            # to compare fixed var sig
 
 fit_read_1re <- lmerTest::lmer(geread ~ gevocab + (1|school), 
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = TRUE)             # for R-sq calcs
 ```
 
@@ -522,13 +531,15 @@ anova(fit_read_0ml, fit_read_1ml)
 What does the model look like?
 
 ```{r}
-effects::Effect(focal.predictors = c("gevocab"), 
-                mod = fit_read_1ml) %>% 
+fit_read_1ml %>% 
+  emmeans::emmeans(~ gevocab,
+                   at = list(gevocab = seq(from = 0, to = 10, by = 1))) %>% 
   data.frame() %>% 
   ggplot(aes(x = gevocab,
-             y = fit)) +
-  geom_ribbon(aes(ymin = lower,
-                  ymax = upper),
+             y = emmean,
+             group = 1)) +
+  geom_ribbon(aes(ymin = asymp.LCL,
+                  ymax = asymp.UCL),
               alpha = .3) +
   geom_line() +
   theme_bw()
@@ -677,7 +688,7 @@ $$
 ```
 
 
-Remeber that these 'variance accounted for' estimations are not as straight forwards as we would like.  
+Remember that these 'variance accounted for' estimations are not as straight forwards as we would like.  
 
 
 
@@ -687,11 +698,11 @@ Part of investigating lower level explanatory variables, is checking for interac
 
 ```{r}
 fit_read_2ml <- lmerTest::lmer(geread ~ gevocab + age + (1 | school), # add main effect of age
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = FALSE)
 
 fit_read_3ml <- lmerTest::lmer(geread ~ gevocab*age + (1 | school), # add interaction between vocab and age
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = FALSE)
 ```
 
@@ -725,24 +736,25 @@ Not only is student's age predictive of their reading level (I could have guesse
 Visualizations are extremely helpful to interpred interactions.
 
 ```{r}
-summary(data_achieve$age)
+summary(df_achieve$age)
 ```
 
 
 ```{r}
-effects::Effect(focal.predictors = c("gevocab", "age"),   # variables involved in the interaction
-                mod = fit_read_3ml,
-                xlevels = list(age = c(84, 108, 132))) %>%  # age is in months
+fit_read_3ml %>% 
+  emmeans::emmeans(~ gevocab + age,
+                   at = list(age = 12*c(7, 9, 11),
+                             gevocab = seq(from = 0, to = 11, by = 1))) %>% 
   data.frame() %>% 
   mutate(age_yr = factor(age/12)) %>%    # it would be nice to plot age in years 
   ggplot(aes(x = gevocab,
-             y = fit,
+             y = emmean,
              color = age_yr)) +
   geom_line() +
   theme_bw()
 ```
 
-There is a positive association between vocabulary and reading, but it is strongest for older childred.  Among younger children, reading scores are more stable across vocabulary differences. 
+There is a positive association between vocabulary and reading, but it is strongest for older children.  Among younger children, reading scores are more stable across vocabulary differences. 
 
 
 <!-- ========================================================= -->
@@ -753,7 +765,7 @@ School enrollment (`senroll`) applies to each school as a whole.  When a variabl
 
 ```{r}
 fit_read_4ml <- lmerTest::lmer(geread ~ gevocab*age + senroll + (1 | school), 
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = FALSE)
 ```
 
@@ -791,7 +803,7 @@ The fixed effect of the predictor captures the overall association it has with t
 ```{r}
 fit_read_3re <- 
   lmerTest::lmer(geread ~ gevocab*age + (1 | school), # refit the previous 'best' model via REML
-                 data = data_achieve,
+                 data = df_achieve,
                  REML = TRUE)
 
 #fit_read_5re <- lmer(geread ~ gevocab + (gevocab | school), 
@@ -800,7 +812,7 @@ fit_read_3re <-
 
 fit_read_5re <- 
   lmerTest::lmer(geread ~ gevocab*age + (gevocab | school), 
-                 data = data_achieve,
+                 data = df_achieve,
                  REML = TRUE,
                  control = lmerControl(optimizer = "optimx",    # get it to converge
                                        calc.derivs = FALSE,
@@ -826,7 +838,7 @@ apaSupp::tab_lmers(list("Rand Int"            = fit_read_3re,
 ```{block type='rmdlightbulb', echo=TRUE}
 Likelihood Ratio Test (LRT) for Random Effects
 
-You can use the Chi-squared LRT test based on deviances even though we fit our modesl with REML, since the models only differ in terms of including/exclusing of a random effects; they have same fixed effects.  Just make sure to include the `refit = FALSE` option.
+You can use the Chi-squared LRT test based on deviances even though we fit our modesl with REML, since the models only differ in terms of including/excluding of a random effects; they have same fixed effects.  Just make sure to include the `refit = FALSE` option.
 ```
 
 
@@ -842,13 +854,14 @@ There is evidence the effect child vocabulary has on reading varies across schoo
 What does the model look like?
 
 ```{r}
-effects::Effect(focal.predictors = c("gevocab", "age"), 
-                mod = fit_read_5re,                              # just different model
-                xlevels = list(age = c(84, 108, 132))) %>% 
+fit_read_5re %>% 
+  emmeans::emmeans(~ gevocab + age,
+                   at = list(age = 12*c(7, 9, 11),
+                             gevocab = seq(from = 0, to = 11, by = 1))) %>% 
   data.frame() %>% 
   dplyr::mutate(age_yr = factor(age/12)) %>% 
   ggplot(aes(x = gevocab,
-             y = fit,
+             y = emmean,
              color = age_yr)) +
   geom_line() +
   theme_bw()
@@ -866,7 +879,7 @@ Remember that an interaction beween fixed effects is also fixed.
 
 ```{r}
 fit_read_5ml <- lmerTest::lmer(geread ~ gevocab*age + (gevocab | school), 
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = FALSE,
                                control = lmerControl(optimizer = "optimx", 
                                                      calc.derivs = FALSE,
@@ -875,16 +888,16 @@ fit_read_5ml <- lmerTest::lmer(geread ~ gevocab*age + (gevocab | school),
                                                                     kkt = FALSE)))
 
 fit_read_6ml <- lmerTest::lmer(geread ~ gevocab*age + senroll + (gevocab | school), 
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = FALSE,
                                control = lmerControl(optimizer ="Nelder_Mead"))
 
 fit_read_7ml <- lmerTest::lmer(geread ~ gevocab*age + gevocab*senroll + (gevocab | school), 
-                               data = data_achieve,
+                               data = df_achieve,
                                REML = FALSE)
 
 fit_read_8ml <- lmerTest::lmer(geread ~ gevocab*age*senroll + (gevocab | school), 
-                               data = data_achieve,
+                               data = df_achieve,
                                control = lmerControl(optimizer ="Nelder_Mead"),
                                REML = FALSE)
 ```
@@ -896,7 +909,7 @@ If you get the`lmer()` message: **Some predictor variables are on very different
 We are getting this message since `gevoab` is on mostly a single digit scale,0 to 11.2, and age (in months) ranges in the low thripe-digits, 82 through 135, while school enrollment is in the mid-hundreds, 112-916.  When we compute the interactions we get much, much larger values.  Having variables on such widely different ranges of values can cause estimation problems.
 
 ```{r}
-data_achieve %>% 
+df_achieve %>% 
   dplyr::select(gevocab, age, senroll) %>% 
   summary()
 ```
@@ -948,7 +961,7 @@ Although there are functions to automatically center and standardize variables, 
 
 
 ```{r}
-data_achieve %>% 
+df_achieve %>% 
   dplyr::select(gevocab, age, senroll) %>% 
   summary()
 ```
@@ -963,7 +976,7 @@ NOTE:  The models with CENTERED variables are able to be fit with the default op
 fit_read_5ml_c <- 
   lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
                    (I(gevocab - 4.494) | school), 
-                 data = data_achieve,
+                 data = df_achieve,
                  REML = FALSE)
 ```
 
@@ -1028,7 +1041,7 @@ To retain meaningful units, you can multiply or divide all the measured values o
 #### Divide by a Meaningful Value
 
 ```{r}
-data_achieve %>% 
+df_achieve %>% 
   dplyr::select(gevocab, age, ses) %>% 
   summary()
 ```
@@ -1047,21 +1060,21 @@ Using the new versions of our variables, investigate is SES has an effect, eithe
 fit_read_5ml_s <- 
   lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
                    (I(gevocab - 4.494) | school), 
-                 data   = data_achieve,
+                 data   = df_achieve,
                  REML   = FALSE)
 
 fit_read_6ml_s <- 
   lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
                    I(gevocab - 4.494) * I(ses/10) +
                    (I(gevocab - 4.494) | school), 
-                 data   = data_achieve,
+                 data   = df_achieve,
                  REML   = FALSE,
                  control = lmerControl(optimizer ="Nelder_Mead"))
 
 fit_read_7ml_s <- 
   lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) * I(ses/10) +
                    (I(gevocab - 4.494) | school),  
-                 data   = data_achieve,
+                 data   = df_achieve,
                  REML  = FALSE,
                  control = lmerControl(optimizer ="Nelder_Mead"))
 ```
@@ -1093,7 +1106,7 @@ Always refit the final model via REML.
 fit_read_6re_s <- lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) + 
                                I(gevocab - 4.494) * I(ses/10) +
                                (I(gevocab - 4.494) | school), 
-                             data   = data_achieve,
+                             data   = df_achieve,
                              REML   = TRUE)
 ```
 
@@ -1122,7 +1135,7 @@ apaSupp::tab_lmer(fit_read_6re_s,
 Recall the scales that the revised variables are now on:
 
 ```{r}
-data_achieve %>% 
+df_achieve %>% 
   dplyr::select(gevocab, age, ses) %>% 
   summary()
 ```

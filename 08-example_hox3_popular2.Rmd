@@ -52,7 +52,7 @@ The following example is used through out @hox2017's chapater 2.
 
 
 ```{r}
-data_raw <- haven::read_sav("data/popular2.sav") %>% 
+df_raw <- haven::read_sav("data/popular2.sav") %>% 
   haven::as_factor() %>%              # retain the labels from SPSS --> factor
   haven::zap_label() %>% 
   haven::zap_widths()
@@ -60,7 +60,7 @@ data_raw <- haven::read_sav("data/popular2.sav") %>%
 
 
 ```{r}
-data_pop <- data_raw %>%   
+df_pop <- df_raw %>%   
   dplyr::mutate(id = paste(class, pupil,
                            sep = "_") %>%   # create a unique id for each student (char)
                   factor()) %>%             # declare id is a factor
@@ -69,14 +69,14 @@ data_pop <- data_raw %>%
 
 
 ```{r}
-tibble::glimpse(data_pop)
+tibble::glimpse(df_pop)
 ```
 
 
 
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   ggplot() +
   aes(x = extrav,
       y = popular,
@@ -107,8 +107,8 @@ data_pop %>%
 It is best to manually determine the variable's mean (`mean()`) and standard deviation (`sd()`).
 
 ```{r}
-mean(data_pop$extrav)
-sd(data_pop$extrav)
+mean(df_pop$extrav)
+sd(df_pop$extrav)
 ```
 
 
@@ -129,7 +129,7 @@ $$
 
 
 ```{r}
-data_pop <- data_pop %>% 
+df_pop <- df_pop %>% 
   dplyr::mutate(extravG =  extrav - 5.215) %>% 
   dplyr::mutate(extravZ = (extrav - 5.215) / 1.262368)
 ```
@@ -138,7 +138,7 @@ data_pop <- data_pop %>%
 
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::select("Original" = extrav, 
                 "Centered" = extravG, 
                 "Standardized" = extravZ) %>% 
@@ -153,15 +153,15 @@ data_pop %>%
 
 ```{r}
 pop_lmer_1_raw <- lmerTest::lmer(popular ~ extrav + (1|class),
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE)
 
 pop_lmer_1_cen <- lmerTest::lmer(popular ~ extravG + (1|class),
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE)
 
 pop_lmer_1_std <- lmerTest::lmer(popular ~ extravZ + (1|class),
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE)
 ```
 
@@ -230,7 +230,7 @@ fixef(pop_lmer_1_raw)[["extrav"]]
 
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   ggplot() +
   aes(x = extrav,
       y = popular,
@@ -297,7 +297,7 @@ predict(pop_lmer_1_raw) %>%
 
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(pred = predict(pop_lmer_1_raw)) %>% 
   ggplot(aes(x = extrav,
              y = pred,
@@ -340,7 +340,7 @@ coef(pop_lmer_1_raw)$class %>%
 
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(pred = predict(pop_lmer_1_raw)) %>% 
   ggplot() +
   aes(x = extrav,
@@ -383,7 +383,7 @@ data_pop %>%
 ### Comapre the Centered Version
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(pred = predict(pop_lmer_1_cen)) %>%
   ggplot() +
   aes(x = extravG,
@@ -431,7 +431,7 @@ data_pop %>%
 ### Comapre the Standardized Version
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(pred = predict(pop_lmer_1_std)) %>% 
   ggplot() +
   aes(x = extravZ,
@@ -478,16 +478,16 @@ data_pop %>%
 
 ```{r}
 pop_lmer_2_raw <- lmerTest::lmer(popular ~ extrav + (extrav|class),
-                                 data = data_pop,
+                                 data = df_pop,
                                  control = lmerControl(optimizer = "Nelder_Mead"),
                                  REML = FALSE)
 
 pop_lmer_2_cen <- lmerTest::lmer(popular ~ extravG + (extravG|class),
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE)
 
 pop_lmer_2_std <- lmerTest::lmer(popular ~ extravZ + (extravZ|class),
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE)
 ```
 
@@ -550,7 +550,7 @@ fixef(pop_lmer_2_raw)[["extrav"]]
 
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   ggplot() +
   aes(x = extrav,
       y = popular,
@@ -625,7 +625,7 @@ predict(pop_lmer_2_raw) %>%
 
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(pred = predict(pop_lmer_2_raw)) %>% 
   ggplot(aes(x = extrav,
              y = pred,
@@ -669,7 +669,7 @@ coef(pop_lmer_1_raw)$class %>%
 
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(pred = predict(pop_lmer_2_raw)) %>% 
   ggplot() +
   aes(x = extrav,
@@ -713,7 +713,7 @@ data_pop %>%
 ### Comapre the Centered Version
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(pred = predict(pop_lmer_2_cen)) %>%
   ggplot() +
   aes(x = extravG,
@@ -764,7 +764,7 @@ data_pop %>%
 ### Compare the Standardized Version
 
 ```{r}
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(pred = predict(pop_lmer_2_std)) %>% 
   ggplot() +
   aes(x = extravZ,

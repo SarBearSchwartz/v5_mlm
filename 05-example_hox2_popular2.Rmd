@@ -71,36 +71,46 @@ knitr::include_graphics("images/diagram_hox_popular2.png")
 *Note: We will ignore the centered and standardized variables, which start with a capital Z or C.*
 
 ```{r}
-data_raw <- haven::read_sav("data/popular2.sav") %>% 
-  haven::as_factor() %>%             # retain the labels from SPSS --> factor
-  haven::zap_label()                 # drop the varaible labels from SPSS
+df_raw <- haven::read_sav("data/popular2.sav") 
 
-tibble::glimpse(data_raw) 
+tibble::glimpse(df_raw) 
 ```
+
+```{r}
+str(df_raw)
+```
+
+
+
 
 ### Unique Identifiers
 
 We will restrict ourselves to a few of the variables and create a unique identifier variable for each student.
 
 ```{r}
-data_pop <- data_raw %>%   
+df_pop <- df_raw %>%   
+  haven::as_factor() %>%                   # retain the labels from SPSS --> factor
+  haven::zap_label() %>%                   # drop the varaible labels from SPSS
   dplyr::mutate(id = paste(class, pupil,
                            sep = "_") %>%   # create a unique id for each student (char)
                   factor()) %>%             # declare id is a factor
+  dplyr::mutate(sex = sex %>% 
+                  forcats::fct_recode("Boy" = "boy",
+                                      "Girl" = "girl")) %>% 
   dplyr::select(id, pupil:popteach)         # reduce the variables included
 
-tibble::glimpse(data_pop)
+tibble::glimpse(df_pop)
 ```
 
-### Structure and variables
+### Structure and Variables
 
 Its a good idea to visually inspect the first few lines in the datast to get a sense of how it is organized.
 
 ```{r}
-data_pop %>%  
+df_pop %>%  
   psych::headTail(top = 25, bottom = 5) %>% 
   flextable::flextable() %>% 
-  apaSupp::theme_apa(caption = "Partial Data Printout")
+  apaSupp::theme_apa(caption = "Partial Data Printout in Long Format")
 ```
 
 Visual inspection reveals that most of the variables are measurements at level 1 and apply to specific pupils (`extrav`, `sex`, `popular`, and `popteach`), while the teacher's years of experience is a level 2 variable since it applies to the entire `class`. Notice how the `texp` variable is identical for all pupils in the same class. This is call **Disaggregated** data.
@@ -111,28 +121,28 @@ Visual inspection reveals that most of the variables are measurements at level 1
 
 #### The `apaSupp` package
 
-Most posters, journal articles, and reports start with a table of descriptive statistics. Since it tends to come first, this type of table is often refered to as *Table 1*. 
+Most posters, journal articles, and reports start with a table of descriptive statistics. Since it tends to come first, this type of table is often referred to as *Table 1*. 
 
 
-```{r, echo=FALSE, results='asis'}
-data_pop %>% 
+```{r}
+df_pop %>% 
   dplyr::select(sex,
                 "Teacher's Experience"  = texp, 
                 "Pupil's Extroversion"   = extrav, 
                 "Pupil's Popularity" = popular) %>% 
-  apaSupp::tab_desc(caption = "Descriptive statistics, aggregate over entire sample")
+  apaSupp::tab_desc(caption = "Descriptive Summary of Key Continuous Variables")
 ```
 
 
-```{r, eval = FALSE}
-data_pop %>% 
+```{r}
+df_pop %>% 
   dplyr::select(sex,
                 "Teacher Experience" = texp, 
                 "Pupil Extroversion" = extrav, 
                 "Pupil Popularity"   = popular) %>% 
   apaSupp::tab1(split = "sex",
-                total_last = FALSE,
-                caption    = "Compare genders on four main variables")
+                caption = "Descriptive Summary by Sex",
+                p_note = "apa23")
 ```
 
 
@@ -143,20 +153,23 @@ data_pop %>%
 
 ##### Scatterplots
 
-For a first look, its useful to plot all the data points on a single scatterplot as displayed in Figure \@ref(fig:scatter). Due to ganularity in the rating scale, many points end up being plotted on top of each other (*overplotted*), so its a good idea to use `geom_count()` rather than `geom_point()` so the size of the dot can convey the number of points at that location [@R-ggplot2].
+For a first look, its useful to plot all the data points on a single scatterplot as displayed in Figure \@ref(fig:scatter). Due to granularity in the rating scale, many points end up being plotted on top of each other (*overplotted*), so its a good idea to use `geom_count()` rather than `geom_point()` so the size of the dot can convey the number of points at that location [@R-ggplot2].
 
-```{r scatter, fig.cap="Disaggregate: pupil level only with extroversion treated as an continuous measure."}
+
+> Disaggregate: pupil level only with extroversion treated as an continuous measure.
+
+```{r scatter, fig.cap="Global Association between Pupil Extroversion and Popularity for the Full Sample"}
 # Disaggregate: pupil (level 1) only, ignore level 2's existance
 # extroversion treated: continuous measure
-data_pop %>% 
+df_pop %>% 
   ggplot() +
   aes(x = extrav,                                # x-axis variable
       y = popular) +                             # y-axis variable
   geom_count() +                                 # POINTS w/ SIZE = COUNT
   geom_smooth(method = "lm") +                   # linear regression line
   theme_bw() +                                   # white background  
-  labs(x    = "extroversion (10 pt scale)",      # x-axis label
-       y    = "Popularity, Sociometric Score",   # y-axis label
+  labs(x    = "Pupil Extroversion (10 pt scale)",      # x-axis label
+       y    = "Peer Rated Popularity Score",   # y-axis label
        size = "Count") +                         # legend key's title  
   theme(legend.position = c(0.9, 0.2),                          # key at
         legend.background = element_rect(color = "black")) +    # key box 
@@ -168,8 +181,10 @@ data_pop %>%
 
 When the degree of overplotting as high as it is in Figure \@ref(fig:scatter), it can be useful to represent the data with density contours as seen in Figure \@ref(fig:scatter2d). I've chosen to leave the points displayed in this redition, but color them much lighter so that they are present, but do not detract from the pattern of association.
 
-```{r scatter2d, fig.cap="Disaggregate: pupil level only with extroversion treated as an continuous measure."}
-data_pop %>% 
+> Disaggregate: pupil level only with extroversion treated as an continuous measure.
+
+```{r, fig.cap="Global Association between Pupil Extroversion and Popularity for the Full Sample"}
+df_pop %>% 
   ggplot() +
   aes(x = extrav,                                # x-axis variable
       y = popular) +                             # y-axis variable
@@ -177,32 +192,53 @@ data_pop %>%
   geom_density2d() +                             # DENSITY CURVES 
   geom_smooth(method = "lm", color = "red") +    # linear regression line
   theme_bw() +                                   # white background  
-  labs(x    = "Extroversion (10 pt scale)",      # x-axis label
-       y    = "Popularity, Sociometric Score") + # y-axis label 
+  labs(x    = "Pupil Extroversion (10 pt scale)",      # x-axis label
+       y    = "Peer Rated Popularity Score") +    # y-axis label
   guides(size = FALSE)  +                        # don't include a legend
   scale_x_continuous(breaks = seq(from = 0, to = 10, by = 1)) + # x-ticks
   scale_y_continuous(breaks = seq(from = 0, to = 10, by = 2))   # y-ticks
 ```
 
+
+##### Hexagonal Heat Map
+
+
+```{r}
+df_pop %>% 
+  ggplot(aes(x = extrav,                              # x-axis variable
+             y = popular)) +                          # y-axis variable
+  stat_binhex(colour = "grey85", na.rm  = TRUE) +     # outlines
+  scale_fill_gradientn(colors   = c("grey80","navyblue"), # fill color extremes
+                       name     = "Frequency",        # legend title
+                       na.value = NA) +               # color for count = 0
+  labs(x    = "Pupil Extroversion (10 pt scale)",     # x-axis label
+       y    = "Peer Rated Popularity Score") +        # y-axis label
+  theme_bw()
+```
+
+
+
+
+
+
+
+
 ##### Histograms, stacked
 
-The argument could be made that the extroversion score should be treated as an ordinal factor instead of as a truly continuous scale since the only valid values are the whole number 1 through 10 and there is no assurance that these category assignments represent a true ratio measurement scale. However, we must keep in mind that this was an observational study, ans as such, the number of pupils assignment each level of extroversion is not equal.
+The argument could be made that the extroversion score should be treated as an ordinal factor instead of as a truly continuous scale since the only valid values are the whole number 1 through 10 and there is no assurance that these category assignments represent a true ratio measurement scale. However, we must keep in mind that this was an observational study, and as such, the number of pupils assignment each level of extroversion is not equal.
 
 
 
 
 ```{r flextab2}
 # count the number of pupils in assigned each extroversion value, 1:10
-data_pop %>%
+df_pop %>%
   dplyr::group_by(extrav) %>%
   dplyr::summarise(Count = n_distinct(id),
                    Percent  = 100 * Count / 2000) %>%
   flextable::flextable() %>%
-  apaSupp::theme_apa(caption = "Distribution of extroversion in pupils")
+  apaSupp::theme_apa(caption = "Distribution of Peer-Rated Pupil Extroversion")
 ```
-
-
-
 
 
 
@@ -211,10 +247,13 @@ data_pop %>%
 
 Figure \@ref(fig:boxes) displays the same data as Figure \@ref(fig:scatter), but uses boxplots for the distribution of scores at each level of extroversion. 
 
-```{r boxes, fig.cap="Disaggregate: pupil level only with extroversion treated as an ordinal factor.  The width of the boxes are proportional to the square-roots of the number of observations each box represents."}
+
+> Disaggregate: pupil level only with extroversion treated as an ordinal factor.  The width of the boxes are proportional to the square-roots of the number of observations each box represents.
+
+```{r boxes, fig.cap="Global Association between Pupil Extroversion and Popularity"}
 # Disaggregate: pupil (level 1) only, ignore level 2's existance
 # extroversion treated: ordinal factor
-ggplot(data_pop,                        # dataset's name
+ggplot(df_pop,                        # dataset's name
        aes(x    = factor(extrav),       # x-axis values - make factor!
            y    = popular,              # y-axis values
            fill = factor(extrav))) +    # makes seperate boxes
@@ -233,10 +272,11 @@ ggplot(data_pop,                        # dataset's name
 
 Up to this point, all investigation of this dataset has been only at the pupil level and any nesting or clustering within classes has been ignored. Plotting is a good was to start to get an idea of the class-to-class variability.
 
+> Illustration of the degree of class level variability in the association between extroversion and popularity. Each panel represents a class and each point a pupil in that class.  First nice classes shown.
 
-```{r scatter3x3, fig.cap="Illustration of the degree of class level variability in the association between extroversion and popularity. Each panel represents a class and each point a pupil in that class.  First nice classes shown."}
+```{r, fig.cap="Global Association between Pupil Extroversion and Popularity for the First Nine Classes"}
 # compare the first 9 classrooms becuase all of there are too many at once
-data_pop %>% 
+df_pop %>% 
   dplyr::filter(class <= 9) %>%                  # select ONLY NINE classes
   ggplot(aes(x = extrav,                         # x-axis values
              y = popular)) +                     # y-axis values
@@ -255,9 +295,11 @@ data_pop %>%
                                         fill   = NA))
 ```
 
-```{r scatter3x3b, fig.cap="Illustration of the degree of class level variability in the association between extroversion and popularity. Each panel represents a class and each point a pupil in that class.  A set of nine classes was chosen to show a sampling of variability.  The facet labels are not shown as the identification number probably would not be advisable for a general publication."}
+> Illustration of the degree of class level variability in the association between extroversion and popularity. Each panel represents a class and each point a pupil in that class.  A set of nine classes was chosen to show a sampling of variability.  The facet labels are not shown as the identification number probably would not be advisable for a general publication.
+
+```{r, fig.cap="Global Association between Pupil Extroversion and Popularity for Nine Extreme Classes"}
 # select specific classes by number for illustration purposes
-data_pop %>% 
+df_pop %>% 
   dplyr::filter(class %in% c(15, 25, 33, 
                              35, 51, 64, 
                              76, 94, 100)) %>% 
@@ -279,9 +321,9 @@ data_pop %>%
 
 #### Cluster-wise Regression
 
-```{r classLMs, fig.cap="Spaghetti plot of seperate, independent linear models for each of the 100 classes."}
+```{r, fig.cap="Peer-Rated Popularity Regressed on Extroversion Independently for each of the 100 Classes"}
 # compare all 100 classrooms via linear model for each
-data_pop %>% 
+df_pop %>% 
   ggplot(aes(x     = extrav,                      # x-axis values
              y     = popular,                     # y-axis values
              group = class)) +                    # GROUPs for LINES
@@ -301,9 +343,12 @@ data_pop %>%
 A helpful resource for choosing colors to use in plots: [R color cheatsheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf)
 ```
 
-```{r classLMs3x2, fig.cap="Spaghetti plot of seperate, independent linear models for each of the 100 classes.  Seperate panels are used to untangle the 'hairball' in the previous figure.  The columns are seperated by the pupils' gender and the rows by the teacher's experince in years."}
+Spaghetti plot of seperate, independent linear models for each of the 100 classes.  Seperate panels are used to untangle the 'hairball' in the previous figure.  The columns are seperated by the pupils' gender and the rows by the teacher's experince in years.
+
+
+```{r classLMs3x2, fig.cap="Peer-Rated Popularity Regressed on Extroversion Independently for each of the 100 Classes, Subset by Pupil Sex and Teacher's Experience"}
 # compare all 100 classrooms via independent linear models
-data_pop %>% 
+df_pop %>% 
   dplyr::mutate(texp3 = cut(texp, 
                             breaks = c(0, 10, 18, 30)) %>% 
                   factor(labels = c("< 10 yrs", 
@@ -354,7 +399,7 @@ $$
 
 ```{r}
 pop_lm_0 <- lm(popular ~ 1,        #  The 1 represents the intercept
-               data = data_pop) 
+               data = df_pop) 
 
 summary(pop_lm_0)
 ```
@@ -363,7 +408,7 @@ $\hat{\beta_0}$ = `r coef(pop_lm_0) %>% round(2)` is the grand mean
 
 ```{r}
 pop_glm_0 <- glm(popular ~ 1,        #  The 1 represents the intercept
-                 data = data_pop) 
+                 data = df_pop) 
 
 summary(pop_glm_0)
 ```
@@ -407,13 +452,17 @@ Deviance:
 
 #### Interpretation
 
-The grand average popularity of all pupils in all the classes is `r coef(pop_lm_0) %>% round(2)`, and there is strong evidence that it is statistically significantly different than zero, $p<.0001$. The mean alone accounts for none of the variance in popularity. The residual variance is the same as the total variance in popularity, `r sigma(pop_lm_0)^2 %>% round(4)`.
+```{block type='rmdapa', echo=TRUE}
+
+The grand average popularity of all pupils in all the classes is 5.08, and there is strong evidence that it is statistically significantly different than zero, *p* < .001. The mean alone accounts for none of the variance in popularity. The residual variance is the same as the total variance in popularity, *var* = 1.91.
+
+```
 
 Just to make sure...
 
 ```{r}
-mean(data_pop$popular)
-var(data_pop$popular)
+mean(df_pop$popular)
+var(df_pop$popular)
 ```
 
 ### Add Predictors to the Model
@@ -450,14 +499,14 @@ $$
 
 ```{r}
 pop_lm_1 <- lm(popular ~ sex + extrav,    # implies: 1 + sex + extrav
-               data = data_pop) 
+               data = df_pop) 
 
 summary(pop_lm_1)
 ```
 
 ```{r}
 pop_glm_1 <- glm(popular ~ sex + extrav,    # implies: 1 + sex + extrav
-                 data = data_pop) 
+                 data = df_pop) 
 
 summary(pop_glm_1)
 ```
@@ -674,7 +723,7 @@ Fit the model to the data.
 
 ```{r}
 pop_lmer_0_re <- lmerTest::lmer(popular ~ 1 + (1|class),  # include a fixed and random intercept
-                                data = data_pop,
+                                data = df_pop,
                                 REML = TRUE)             # fit via REML (the default) for ICC calculations
 
 summary(pop_lmer_0_re)
@@ -684,6 +733,16 @@ summary(pop_lmer_0_re)
 apaSupp::tab_lmer(pop_lmer_0_re,
                   caption = "Null Model: No predictors")
 ```
+
+
+#### Interpretation
+
+```{block type='rmdapa', echo=TRUE}
+
+The grand average popularity of all students is 5.08 and the class averages tend to vary by 0.84 points above or below that.
+
+```
+
 
 
 
@@ -704,13 +763,9 @@ Multilevel models may be fit by various methods.  The most commonly used (and av
 This often leads to refitting identical models via BOTH estimation methods.    
 ```
 
-#### Interpretation
 
-```{block type='rmdapa', echo=TRUE}
 
-The grand average popularity of all students is 5.08 and the class averages tend to vary by about `r 0.84 points above or below that.
 
-```
 
 ### Intraclass Correlation (ICC)
 
@@ -927,12 +982,12 @@ Note: Convergence issues MAY signify problems in the model specification.
 
 ```{r, echo=TRUE}
 pop_lmer_0_ml <- lmerTest::lmer(popular ~ 1 + (1|class), 
-                                data   = data_pop,
+                                data   = df_pop,
                                 REML   = FALSE)        # refit via ML to compare the model below to 
 
 
 pop_lmer_1_ml <- lmerTest::lmer(popular ~ sex + extrav + texp + (sex + extrav|class), 
-                                data   = data_pop,
+                                data   = df_pop,
                                 REML   = FALSE,
                                 control = lmerControl(optimizer = "Nelder_Mead")) #helps converge
 
@@ -941,7 +996,12 @@ summary(pop_lmer_1_ml)
 
 #### Interpretation
 
-After accounting for the heiarchical nesting of students in classes, girls were rated `r fixef(pop_lmer_1_ml)[2] %>% round(2)` points more popular on average, than boys with the same extroversion score. One point higher extroversion scores were associated with `r fixef(pop_lmer_1_ml)[3] %>% round(2)` points higher popularity, within each gender.
+```{block type='rmdapa', echo=TRUE}
+
+After accounting for the hierarchical nesting of students in classes, girls were rated 1.25 points more popular on average, than boys with the same extroversion score. One point higher extroversion scores were associated with 0.45 points higher popularity, within each gender.
+
+
+```
 
 Reproduce Table 2.1 on the top of page 14 [@hox2017]
 
@@ -993,16 +1053,16 @@ Since we are going to compare models that are nested on random effects *(identic
 
 ```{r}
 pop_lmer_1_re <- lmerTest::lmer(popular ~ sex + extrav + texp + (sex + extrav|class), 
-                                data  = data_pop,
+                                data  = df_pop,
                                 REML  = TRUE,
                                 control = lmerControl(optimizer ="Nelder_Mead")) #helps converge
 
 pop_lmer_1a_re <- lmerTest::lmer(popular ~ sex + extrav + texp + (extrav|class), 
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = TRUE)
 
 pop_lmer_1b_re <- lmerTest::lmer(popular ~ sex + extrav + texp + (1 |class), 
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = TRUE) 
 ```
 
@@ -1117,19 +1177,19 @@ Now that we wish to compare nested that will differ only in terms of the inclusi
 
 ```{r}
 pop_lmer_1a_ml <- lmerTest::lmer(popular ~ sex + extrav + texp + (extrav|class), # main effects only
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE)
 
 pop_lmer_2_ml  <- lmerTest::lmer(popular ~ sex + extrav*texp + (extrav|class), # include cross-level interaction
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE)
 
 pop_lmer_3_ml  <- lmerTest::lmer(popular ~ extrav*texp + sex*texp + sex*extrav +  (extrav|class),  
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE)
 
 pop_lmer_4_ml  <- lmerTest::lmer(popular ~ extrav*texp*sex + (extrav|class),  
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = FALSE,
                                  control = lmerControl(optimizer ="Nelder_Mead"))
 ```
@@ -1193,7 +1253,7 @@ apaSupp::tab_lmer_fits(list(pop_lmer_1a_ml,
 
 ```{r}
 pop_lmer_2_re  <- lmerTest::lmer(popular ~ sex + extrav*texp + (extrav|class), 
-                                 data = data_pop,
+                                 data = df_pop,
                                  REML = TRUE)       # re-fit the final model via REML
 ```
 
