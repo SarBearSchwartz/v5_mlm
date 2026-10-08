@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Citations and Resources | Encyclopedia of Quantitative Methods in R</title>
+  <meta name="description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Citations and Resources | Encyclopedia of Quantitative Methods in R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/hexwall_books.png" />
+  <meta property="og:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
+  <meta name="github-repo" content="sarbearschwartz/v5_mlm" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Citations and Resources | Encyclopedia of Quantitative Methods in R" />
+  
+  <meta name="twitter:description" content="Mulilevel &amp; Marginal Modeling: ICCs, MLM/HLM, and GEEs." />
+  <meta name="twitter:image" content="/hexwall_books.png" />
+
+<meta name="author" content="Author: Sarah Schwartz, PhD" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="what-are-mlm-and-why-do-i-care.html"/>
+<link rel="next" href="formula-warehouse.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="heading.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Vol. 5: Multilevel Models</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vol. 5: Multilevel &amp; Marginal Models</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-author"><i class="fa fa-check"></i>The Author</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html"><i class="fa fa-check"></i><b>1</b> What are MLM and Why do I care?</a>
+<ul>
+<li class="chapter" data-level="1.0.1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html#john-nezlek"><i class="fa fa-check"></i><b>1.0.1</b> John Nezlek</a></li>
+<li class="chapter" data-level="1.1" data-path="what-are-mlm-and-why-do-i-care.html"><a href="what-are-mlm-and-why-do-i-care.html#gee"><i class="fa fa-check"></i><b>1.1</b> GEE</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="citations-and-resources.html"><a href="citations-and-resources.html"><i class="fa fa-check"></i><b>2</b> Citations and Resources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="citations-and-resources.html"><a href="citations-and-resources.html#r-code-online-examples"><i class="fa fa-check"></i><b>2.1</b> R Code Online Examples</a></li>
+<li class="chapter" data-level="2.2" data-path="citations-and-resources.html"><a href="citations-and-resources.html#mlm-multilevel-modeling-aka-mixed-effects-regression"><i class="fa fa-check"></i><b>2.2</b> MLM: Multilevel Modeling, <em>aka</em> Mixed Effects Regression</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="citations-and-resources.html"><a href="citations-and-resources.html#major-textbooks"><i class="fa fa-check"></i><b>2.2.1</b> Major Textbooks</a></li>
+<li class="chapter" data-level="2.2.2" data-path="citations-and-resources.html"><a href="citations-and-resources.html#articles"><i class="fa fa-check"></i><b>2.2.2</b> Articles</a></li>
+<li class="chapter" data-level="2.2.3" data-path="citations-and-resources.html"><a href="citations-and-resources.html#websites"><i class="fa fa-check"></i><b>2.2.3</b> Websites</a></li>
+<li class="chapter" data-level="2.2.4" data-path="citations-and-resources.html"><a href="citations-and-resources.html#youtube"><i class="fa fa-check"></i><b>2.2.4</b> YouTube</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="citations-and-resources.html"><a href="citations-and-resources.html#fixed-vs-random-effects"><i class="fa fa-check"></i><b>2.3</b> Fixed vs Random Effects</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="citations-and-resources.html"><a href="citations-and-resources.html#articles-1"><i class="fa fa-check"></i><b>2.3.1</b> Articles</a></li>
+<li class="chapter" data-level="2.3.2" data-path="citations-and-resources.html"><a href="citations-and-resources.html#websites-1"><i class="fa fa-check"></i><b>2.3.2</b> Websites</a></li>
+<li class="chapter" data-level="2.3.3" data-path="citations-and-resources.html"><a href="citations-and-resources.html#youtube-1"><i class="fa fa-check"></i><b>2.3.3</b> YouTube</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="citations-and-resources.html"><a href="citations-and-resources.html#centering-predictor-variables-grand-mean-vs-group-means"><i class="fa fa-check"></i><b>2.4</b> Centering Predictor Variables: Grand Mean vs Group Means</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="citations-and-resources.html"><a href="citations-and-resources.html#articles-2"><i class="fa fa-check"></i><b>2.4.1</b> Articles</a></li>
+<li class="chapter" data-level="2.4.2" data-path="citations-and-resources.html"><a href="citations-and-resources.html#websites-2"><i class="fa fa-check"></i><b>2.4.2</b> Websites</a></li>
+<li class="chapter" data-level="2.4.3" data-path="citations-and-resources.html"><a href="citations-and-resources.html#youtube-2"><i class="fa fa-check"></i><b>2.4.3</b> YouTube</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="citations-and-resources.html"><a href="citations-and-resources.html#effect-size-variance-explained-r-squared-like-measures"><i class="fa fa-check"></i><b>2.5</b> Effect Size: Variance Explained (R-squared like measures)</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="citations-and-resources.html"><a href="citations-and-resources.html#articles-3"><i class="fa fa-check"></i><b>2.5.1</b> Articles</a></li>
+<li class="chapter" data-level="2.5.2" data-path="citations-and-resources.html"><a href="citations-and-resources.html#youtube-3"><i class="fa fa-check"></i><b>2.5.2</b> YouTube</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="citations-and-resources.html"><a href="citations-and-resources.html#effect-size-pairwise-differences-standardized-mean-difference-smd"><i class="fa fa-check"></i><b>2.6</b> Effect Size: Pairwise Differences (Standardized Mean Difference, SMD)</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="citations-and-resources.html"><a href="citations-and-resources.html#example-write-up-for-methods-analysis-section"><i class="fa fa-check"></i><b>2.6.1</b> Example: Write-up for Methods-Analysis section</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="citations-and-resources.html"><a href="citations-and-resources.html#glmm-generalized-linear-multilevel-models-or-generalized-mixed-effects-regression"><i class="fa fa-check"></i><b>2.7</b> GLMM: Generalized Linear Multilevel Models <em>or</em> Generalized Mixed Effects Regression</a></li>
+<li class="chapter" data-level="2.8" data-path="citations-and-resources.html"><a href="citations-and-resources.html#gee-generalized-estimating-equations"><i class="fa fa-check"></i><b>2.8</b> GEE: Generalized Estimating Equations</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="citations-and-resources.html"><a href="citations-and-resources.html#qic-comparing-gee-models"><i class="fa fa-check"></i><b>2.8.1</b> QIC: Comparing GEE Models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="formula-warehouse.html"><a href="formula-warehouse.html"><i class="fa fa-check"></i><b>3</b> Formula Warehouse</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="formula-warehouse.html"><a href="formula-warehouse.html#data-notation"><i class="fa fa-check"></i><b>3.1</b> Data Notation</a></li>
+<li class="chapter" data-level="3.2" data-path="formula-warehouse.html"><a href="formula-warehouse.html#single-level-regression-analysis"><i class="fa fa-check"></i><b>3.2</b> Single-level Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="formula-warehouse.html"><a href="formula-warehouse.html#the-only-equation"><i class="fa fa-check"></i><b>3.2.1</b> The Only Equation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="formula-warehouse.html"><a href="formula-warehouse.html#parameters"><i class="fa fa-check"></i><b>3.2.2</b> Parameters</a></li>
+<li class="chapter" data-level="3.2.3" data-path="formula-warehouse.html"><a href="formula-warehouse.html#assumptions-to-check"><i class="fa fa-check"></i><b>3.2.3</b> Assumptions to Check</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="formula-warehouse.html"><a href="formula-warehouse.html#multi-level-regression-analysis"><i class="fa fa-check"></i><b>3.3</b> Multi-level Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="formula-warehouse.html"><a href="formula-warehouse.html#level-1-regression-equation"><i class="fa fa-check"></i><b>3.3.1</b> Level 1 Regression Equation*</a></li>
+<li class="chapter" data-level="3.3.2" data-path="formula-warehouse.html"><a href="formula-warehouse.html#level-2-regression-equations"><i class="fa fa-check"></i><b>3.3.2</b> Level 2 Regression Equations</a></li>
+<li class="chapter" data-level="3.3.3" data-path="formula-warehouse.html"><a href="formula-warehouse.html#combinded-multilevel-regression-equation"><i class="fa fa-check"></i><b>3.3.3</b> Combinded, Multilevel Regression Equation</a></li>
+<li class="chapter" data-level="3.3.4" data-path="formula-warehouse.html"><a href="formula-warehouse.html#parameters-1"><i class="fa fa-check"></i><b>3.3.4</b> Parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="formula-warehouse.html"><a href="formula-warehouse.html#intraclass-correlation-icc"><i class="fa fa-check"></i><b>3.4</b> Intraclass Correlation (ICC)</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="formula-warehouse.html"><a href="formula-warehouse.html#two-level-models"><i class="fa fa-check"></i><b>3.4.1</b> Two Level Models</a></li>
+<li class="chapter" data-level="3.4.2" data-path="formula-warehouse.html"><a href="formula-warehouse.html#three-level-models"><i class="fa fa-check"></i><b>3.4.2</b> Three Level Models</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="formula-warehouse.html"><a href="formula-warehouse.html#proporion-of-variance-explianed"><i class="fa fa-check"></i><b>3.5</b> Proporion of Variance Explianed</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="formula-warehouse.html"><a href="formula-warehouse.html#level-1-variance-explained"><i class="fa fa-check"></i><b>3.5.1</b> Level 1 Variance Explained</a></li>
+<li class="chapter" data-level="3.5.2" data-path="formula-warehouse.html"><a href="formula-warehouse.html#level-2-variance-explined"><i class="fa fa-check"></i><b>3.5.2</b> Level 2 Variance Explined</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="formula-warehouse.html"><a href="formula-warehouse.html#using-latex-for-equation-typesetting"><i class="fa fa-check"></i><b>3.6</b> Using <span class="math inline">\(\LaTeX\)</span> for Equation Typesetting</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="example-articles.html"><a href="example-articles.html"><i class="fa fa-check"></i><b>4</b> Example Articles</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="example-articles.html"><a href="example-articles.html#cross-sectional-clustered-or-hierarchical"><i class="fa fa-check"></i><b>4.1</b> Cross-sectional: clustered or hierarchical</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="example-articles.html"><a href="example-articles.html#observed-cross-classified-clusters"><i class="fa fa-check"></i><b>4.1.1</b> Observed, cross-classified Clusters</a></li>
+<li class="chapter" data-level="4.1.2" data-path="example-articles.html"><a href="example-articles.html#non-randomized-intervention"><i class="fa fa-check"></i><b>4.1.2</b> Non-randomized Intervention</a></li>
+<li class="chapter" data-level="4.1.3" data-path="example-articles.html"><a href="example-articles.html#dyadic-design"><i class="fa fa-check"></i><b>4.1.3</b> Dyadic Design</a></li>
+<li class="chapter" data-level="4.1.4" data-path="example-articles.html"><a href="example-articles.html#binary-outcome"><i class="fa fa-check"></i><b>4.1.4</b> Binary Outcome</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="example-articles.html"><a href="example-articles.html#repeated-measures-longitudinal-change-over-time-or-conditional-no-time-component"><i class="fa fa-check"></i><b>4.2</b> Repeated Measures: longitudinal (change over time) or conditional (no time component)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="example-articles.html"><a href="example-articles.html#repeated-measures---linear-growth"><i class="fa fa-check"></i><b>4.2.1</b> Repeated Measures - linear growth</a></li>
+<li class="chapter" data-level="4.2.2" data-path="example-articles.html"><a href="example-articles.html#cohort-sequential-or-accelerated-longitudinal-design"><i class="fa fa-check"></i><b>4.2.2</b> Cohort sequential or accelerated longitudinal design</a></li>
+<li class="chapter" data-level="4.2.3" data-path="example-articles.html"><a href="example-articles.html#sem-framework"><i class="fa fa-check"></i><b>4.2.3</b> SEM Framework</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="example-articles.html"><a href="example-articles.html#both-hierarchical-longitudinal"><i class="fa fa-check"></i><b>4.3</b> Both: Hierarchical longitudinal</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html"><i class="fa fa-check"></i><b>5</b> MLM, 2-levels: Pupil Popularity</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#background"><i class="fa fa-check"></i><b>5.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#unique-identifiers"><i class="fa fa-check"></i><b>5.1.1</b> Unique Identifiers</a></li>
+<li class="chapter" data-level="5.1.2" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#structure-and-variables"><i class="fa fa-check"></i><b>5.1.2</b> Structure and Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#summarize-descriptive-statistics"><i class="fa fa-check"></i><b>5.2.1</b> Summarize Descriptive Statistics</a></li>
+<li class="chapter" data-level="5.2.2" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#visualizations-of-raw-data"><i class="fa fa-check"></i><b>5.2.2</b> Visualizations of Raw Data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#consider-clustering"><i class="fa fa-check"></i><b>5.2.3</b> Consider Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#single-level-regression-analysis-1"><i class="fa fa-check"></i><b>5.3</b> Single-level Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#null-model"><i class="fa fa-check"></i><b>5.3.1</b> Null Model</a></li>
+<li class="chapter" data-level="5.3.2" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#add-predictors-to-the-model"><i class="fa fa-check"></i><b>5.3.2</b> Add Predictors to the Model</a></li>
+<li class="chapter" data-level="5.3.3" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#compare-fixed-effects"><i class="fa fa-check"></i><b>5.3.3</b> Compare Fixed Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#multi-level-regression-analysis-1"><i class="fa fa-check"></i><b>5.4</b> Multi-level Regression Analysis</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#intercept-only-or-null-model"><i class="fa fa-check"></i><b>5.4.1</b> Intercept-only or Null Model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#intraclass-correlation-icc-1"><i class="fa fa-check"></i><b>5.4.2</b> Intraclass Correlation (ICC)</a></li>
+<li class="chapter" data-level="5.4.3" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#add-predictors-to-the-model-1"><i class="fa fa-check"></i><b>5.4.3</b> Add Predictors to the Model</a></li>
+<li class="chapter" data-level="5.4.4" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#testing-random-components"><i class="fa fa-check"></i><b>5.4.4</b> Testing Random Components</a></li>
+<li class="chapter" data-level="5.4.5" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#testing-cross-level-interactions"><i class="fa fa-check"></i><b>5.4.5</b> Testing Cross-Level Interactions</a></li>
+<li class="chapter" data-level="5.4.6" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#final-model"><i class="fa fa-check"></i><b>5.4.6</b> Final Model</a></li>
+<li class="chapter" data-level="5.4.7" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#visualization"><i class="fa fa-check"></i><b>5.4.7</b> Visualization</a></li>
+<li class="chapter" data-level="5.4.8" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#interpretation-5"><i class="fa fa-check"></i><b>5.4.8</b> Interpretation</a></li>
+<li class="chapter" data-level="5.4.9" data-path="mlm-2-levels-pupil-popularity.html"><a href="mlm-2-levels-pupil-popularity.html#residual-plots"><i class="fa fa-check"></i><b>5.4.9</b> Residual Plots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html"><i class="fa fa-check"></i><b>6</b> MLM, 3 levels: Nurse’s Stress Intervention</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#background-1"><i class="fa fa-check"></i><b>6.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#unique-identifiers-1"><i class="fa fa-check"></i><b>6.1.1</b> Unique Identifiers</a></li>
+<li class="chapter" data-level="6.1.2" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#centering-variables"><i class="fa fa-check"></i><b>6.1.2</b> Centering Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>6.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#summarize-descriptive-statistics-1"><i class="fa fa-check"></i><b>6.2.1</b> Summarize Descriptive Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#mlm-null-model"><i class="fa fa-check"></i><b>6.3</b> MLM: Null Model</a></li>
+<li class="chapter" data-level="6.4" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#estimate-the-icc"><i class="fa fa-check"></i><b>6.4</b> Estimate the ICC</a></li>
+<li class="chapter" data-level="6.5" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#xxx-sarah-needs-to-fix-this-table-xxx"><i class="fa fa-check"></i><b>6.5</b> xxx – Sarah needs to fix this table – XXX</a></li>
+<li class="chapter" data-level="6.6" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#mlm-add-fixed-effects"><i class="fa fa-check"></i><b>6.6</b> MLM: Add Fixed Effects</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#fit-the-model-5"><i class="fa fa-check"></i><b>6.6.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="6.6.2" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#assess-significance"><i class="fa fa-check"></i><b>6.6.2</b> Assess Significance</a></li>
+<li class="chapter" data-level="6.6.3" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#centering-variables-1"><i class="fa fa-check"></i><b>6.6.3</b> Centering Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#mlm-add-random-slope"><i class="fa fa-check"></i><b>6.7</b> MLM: Add Random Slope</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#fit-the-model-6"><i class="fa fa-check"></i><b>6.7.1</b> Fit the Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#xxx-sarah-needs-to-fix-this-table-xxx-1"><i class="fa fa-check"></i><b>6.8</b> xxx – Sarah needs to fix this table – XXX</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#assess-significance-1"><i class="fa fa-check"></i><b>6.8.1</b> Assess Significance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#mlm-add-cross-level-interaction"><i class="fa fa-check"></i><b>6.9</b> MLM: Add Cross-Level Interaction</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#fit-the-model-7"><i class="fa fa-check"></i><b>6.9.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="6.9.2" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#assess-significance-2"><i class="fa fa-check"></i><b>6.9.2</b> Assess Significance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#final-model-1"><i class="fa fa-check"></i><b>6.10</b> Final Model</a>
+<ul>
+<li class="chapter" data-level="6.10.1" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#fit-the-model-8"><i class="fa fa-check"></i><b>6.10.1</b> Fit the model</a></li>
+<li class="chapter" data-level="6.10.2" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#table-of-estimated-parameters"><i class="fa fa-check"></i><b>6.10.2</b> Table of Estimated Parameters</a></li>
+<li class="chapter" data-level="6.10.3" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#visualization-estimated-marginal-means-plot"><i class="fa fa-check"></i><b>6.10.3</b> Visualization: Estimated Marginal Means Plot</a></li>
+<li class="chapter" data-level="6.10.4" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#post-hoc-pairwise-tests"><i class="fa fa-check"></i><b>6.10.4</b> Post Hoc Pairwise Tests</a></li>
+<li class="chapter" data-level="6.10.5" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#effect-sizes"><i class="fa fa-check"></i><b>6.10.5</b> Effect Sizes</a></li>
+<li class="chapter" data-level="6.10.6" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#pairwise-comparisons-condition-for-each-hospital-size"><i class="fa fa-check"></i><b>6.10.6</b> Pairwise Comparisons: Condition for each Hospital Size</a></li>
+<li class="chapter" data-level="6.10.7" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#pairwise-comparisons-hospital-size-for-each-condition"><i class="fa fa-check"></i><b>6.10.7</b> Pairwise Comparisons: Hospital Size for each Condition</a></li>
+<li class="chapter" data-level="6.10.8" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#strength"><i class="fa fa-check"></i><b>6.10.8</b> Strength</a></li>
+<li class="chapter" data-level="6.10.9" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#weakness"><i class="fa fa-check"></i><b>6.10.9</b> Weakness</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="mlm-3-levels-nurses-stress-intervention.html"><a href="mlm-3-levels-nurses-stress-intervention.html#reproduction-of-table-2.5"><i class="fa fa-check"></i><b>6.11</b> Reproduction of Table 2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html"><i class="fa fa-check"></i><b>7</b> MLM, Centering/Scaling: Reading Achievement (2-levels only)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#background-2"><i class="fa fa-check"></i><b>7.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#sample-structure"><i class="fa fa-check"></i><b>7.1.1</b> Sample Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>7.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#summarize-descriptive-statistics-2"><i class="fa fa-check"></i><b>7.2.1</b> Summarize Descriptive Statistics</a></li>
+<li class="chapter" data-level="7.2.2" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#visualization-of-raw-data"><i class="fa fa-check"></i><b>7.2.2</b> Visualization of Raw Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#mlm---step-1-null-model-only-fixed-and-random-intercepts"><i class="fa fa-check"></i><b>7.3</b> MLM - Step 1: Null Model, only fixed and random intercepts</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#fit-the-model-9"><i class="fa fa-check"></i><b>7.3.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="7.3.2" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#estimate-the-icc-1"><i class="fa fa-check"></i><b>7.3.2</b> Estimate the ICC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#mlm---step-2-add-lower-level-explanatory-variables-fixed-ml"><i class="fa fa-check"></i><b>7.4</b> MLM - Step 2: Add Lower-level explanatory variables, fixed, ML</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#add-pupils-vocab-score-as-a-fixed-effects-predictor"><i class="fa fa-check"></i><b>7.4.1</b> Add pupil’s vocab score as a fixed effects predictor</a></li>
+<li class="chapter" data-level="7.4.2" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#investigate-more-level-1-predictors"><i class="fa fa-check"></i><b>7.4.2</b> Investigate More Level 1 Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#mlm---step-3-higher-level-explanatory-variables-fixed-ml"><i class="fa fa-check"></i><b>7.5</b> MLM - Step 3: Higher-level explanatory variables, fixed, ML</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#assess-significance-of-effects-2"><i class="fa fa-check"></i><b>7.5.1</b> Assess Significance of Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#mlm---step-4-explanatory-variables-predict-slopes-random-reml"><i class="fa fa-check"></i><b>7.6</b> MLM - Step 4: Explanatory variables predict Slopes, random, REML</a></li>
+<li class="chapter" data-level="7.7" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#mlm---step-5-cross-level-interactions-between-explanatory-variables---fixed-ml"><i class="fa fa-check"></i><b>7.7</b> MLM - Step 5: Cross-Level interactions between explanatory variables - fixed, ML</a></li>
+<li class="chapter" data-level="7.8" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#grand-mean-centering-predictors-change-center"><i class="fa fa-check"></i><b>7.8</b> Grand-Mean Centering Predictors: Change Center</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#use-grand-mean-centered-variables"><i class="fa fa-check"></i><b>7.8.1</b> Use Grand-Mean Centered Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#re-scaling-predictors-change-units-or-standardize"><i class="fa fa-check"></i><b>7.9</b> Re-scaling Predictors: Change Units or Standardize</a>
+<ul>
+<li class="chapter" data-level="7.9.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#scale-varaibles"><i class="fa fa-check"></i><b>7.9.1</b> Scale Varaibles</a></li>
+<li class="chapter" data-level="7.9.2" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#use-scaled-variables"><i class="fa fa-check"></i><b>7.9.2</b> Use Scaled Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.10" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#final-model-2"><i class="fa fa-check"></i><b>7.10</b> Final Model</a>
+<ul>
+<li class="chapter" data-level="7.10.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#table"><i class="fa fa-check"></i><b>7.10.1</b> Table</a></li>
+<li class="chapter" data-level="7.10.2" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#interpretation-of-model"><i class="fa fa-check"></i><b>7.10.2</b> Interpretation of model</a></li>
+</ul></li>
+<li class="chapter" data-level="7.11" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#group-mean-centering-predictors-changes-meaning"><i class="fa fa-check"></i><b>7.11</b> Group-Mean Centering Predictors: changes meaning</a>
+<ul>
+<li class="chapter" data-level="7.11.1" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#creating-centered-and-altered-variables"><i class="fa fa-check"></i><b>7.11.1</b> Creating Centered and Altered Variables</a></li>
+<li class="chapter" data-level="7.11.2" data-path="mlm-centeringscaling-reading-achievement-2-levels-only.html"><a href="mlm-centeringscaling-reading-achievement-2-levels-only.html#use-group-mean-centered-in-model"><i class="fa fa-check"></i><b>7.11.2</b> Use Group-Mean Centered in Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html"><i class="fa fa-check"></i><b>8</b> MLM, Centering/Scaling: Student Popularity</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#background-3"><i class="fa fa-check"></i><b>8.1</b> Background</a></li>
+<li class="chapter" data-level="8.2" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#grand-mean-centering-and-standardizing-variables"><i class="fa fa-check"></i><b>8.2</b> Grand-Mean-Centering and Standardizing Variables</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#grand-mean-centering"><i class="fa fa-check"></i><b>8.2.1</b> Grand-Mean-Centering</a></li>
+<li class="chapter" data-level="8.2.2" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#standardizing"><i class="fa fa-check"></i><b>8.2.2</b> Standardizing</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#ri-only-random-intercepts"><i class="fa fa-check"></i><b>8.3</b> RI = ONLY Random Intercepts</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#fit-mlm-with-all-3-versions-of-the-predictor"><i class="fa fa-check"></i><b>8.3.1</b> Fit MLM with all 3 versions of the predictor</a></li>
+<li class="chapter" data-level="8.3.2" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#comapre-the-centered-version"><i class="fa fa-check"></i><b>8.3.2</b> Comapre the Centered Version</a></li>
+<li class="chapter" data-level="8.3.3" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#comapre-the-standardized-version"><i class="fa fa-check"></i><b>8.3.3</b> Comapre the Standardized Version</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#rias-random-intercepts-and-slopes"><i class="fa fa-check"></i><b>8.4</b> RIAS = Random Intercepts AND Slopes</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#fit-mlm-with-all-3-versions-of-the-predictor-1"><i class="fa fa-check"></i><b>8.4.1</b> Fit MLM with all 3 versions of the predictor</a></li>
+<li class="chapter" data-level="8.4.2" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#comapre-the-centered-version-1"><i class="fa fa-check"></i><b>8.4.2</b> Comapre the Centered Version</a></li>
+<li class="chapter" data-level="8.4.3" data-path="mlm-centeringscaling-student-popularity.html"><a href="mlm-centeringscaling-student-popularity.html#compare-the-standardized-version"><i class="fa fa-check"></i><b>8.4.3</b> Compare the Standardized Version</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="effect-size-variance-explained.html"><a href="effect-size-variance-explained.html"><i class="fa fa-check"></i><b>9</b> Effect Size: Variance Explained</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="effect-size-variance-explained.html"><a href="effect-size-variance-explained.html#mlm-or-lmm"><i class="fa fa-check"></i><b>9.1</b> MLM or LMM</a></li>
+<li class="chapter" data-level="9.2" data-path="effect-size-variance-explained.html"><a href="effect-size-variance-explained.html#glmm"><i class="fa fa-check"></i><b>9.2</b> GLMM</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html"><i class="fa fa-check"></i><b>10</b> MLM, Longitudinal: Autism</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#background-4"><i class="fa fa-check"></i><b>10.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#long-format"><i class="fa fa-check"></i><b>10.1.1</b> Long Format</a></li>
+<li class="chapter" data-level="10.1.2" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#wide-format"><i class="fa fa-check"></i><b>10.1.2</b> Wide Format</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#exploratory-data-analysis-3"><i class="fa fa-check"></i><b>10.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#demographic-summary"><i class="fa fa-check"></i><b>10.2.1</b> Demographic Summary</a></li>
+<li class="chapter" data-level="10.2.2" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#baseline-summary"><i class="fa fa-check"></i><b>10.2.2</b> Baseline Summary</a></li>
+<li class="chapter" data-level="10.2.3" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#missing-data-attrition"><i class="fa fa-check"></i><b>10.2.3</b> Missing Data &amp; Attrition</a></li>
+<li class="chapter" data-level="10.2.4" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#means-across-time"><i class="fa fa-check"></i><b>10.2.4</b> Means Across Time</a></li>
+<li class="chapter" data-level="10.2.5" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#person-profile-plots"><i class="fa fa-check"></i><b>10.2.5</b> Person Profile Plots</a></li>
+<li class="chapter" data-level="10.2.6" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#side-by-side-boxplots"><i class="fa fa-check"></i><b>10.2.6</b> Side-by-side Boxplots</a></li>
+<li class="chapter" data-level="10.2.7" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#means-plots"><i class="fa fa-check"></i><b>10.2.7</b> Means Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#model-1-full-model-with-loaded-mean-structure"><i class="fa fa-check"></i><b>10.3</b> Model 1: Full model with ‘loaded’ mean structure</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#fit-the-model-10"><i class="fa fa-check"></i><b>10.3.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="10.3.2" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#table-of-prameter-estimates"><i class="fa fa-check"></i><b>10.3.2</b> Table of Prameter Estimates</a></li>
+<li class="chapter" data-level="10.3.3" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#plot-of-the-estimated-marginal-means"><i class="fa fa-check"></i><b>10.3.3</b> Plot of the Estimated Marginal Means</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#model-2a-drop-random-intercepts"><i class="fa fa-check"></i><b>10.4</b> Model 2A: Drop Random Intercepts</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#fit-the-model-11"><i class="fa fa-check"></i><b>10.4.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="10.4.2" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#assess-the-signifcance"><i class="fa fa-check"></i><b>10.4.2</b> Assess the Signifcance</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#model-2b-drop-random-quadratic-slope"><i class="fa fa-check"></i><b>10.5</b> Model 2B: Drop Random Quadratic Slope</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#fit-the-model-12"><i class="fa fa-check"></i><b>10.5.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="10.5.2" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#assess-the-signifcance-1"><i class="fa fa-check"></i><b>10.5.2</b> Assess the Signifcance</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#model-3-drop-quadratic-time-fixed-effect"><i class="fa fa-check"></i><b>10.6</b> Model 3: Drop Quadratic Time Fixed Effect</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#fit-the-models"><i class="fa fa-check"></i><b>10.6.1</b> Fit the Models</a></li>
+<li class="chapter" data-level="10.6.2" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#assess-the-signifcance-2"><i class="fa fa-check"></i><b>10.6.2</b> Assess the Signifcance</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#final-model-3"><i class="fa fa-check"></i><b>10.7</b> Final Model</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#table-of-parameter-esitmates"><i class="fa fa-check"></i><b>10.7.1</b> Table of Parameter Esitmates</a></li>
+<li class="chapter" data-level="10.7.2" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#interpretation-of-fixed-effects"><i class="fa fa-check"></i><b>10.7.2</b> Interpretation of Fixed Effects</a></li>
+<li class="chapter" data-level="10.7.3" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#interpretation-of-random-effects"><i class="fa fa-check"></i><b>10.7.3</b> Interpretation of Random Effects</a></li>
+<li class="chapter" data-level="10.7.4" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#assumption-checking"><i class="fa fa-check"></i><b>10.7.4</b> Assumption Checking</a></li>
+<li class="chapter" data-level="10.7.5" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#plot-of-the-estimated-marginal-means-1"><i class="fa fa-check"></i><b>10.7.5</b> Plot of the Estimated Marginal Means</a></li>
+<li class="chapter" data-level="10.7.6" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#post-hoc-compairisons"><i class="fa fa-check"></i><b>10.7.6</b> Post Hoc Compairisons</a></li>
+<li class="chapter" data-level="10.7.7" data-path="mlm-longitudinal-autism.html"><a href="mlm-longitudinal-autism.html#blups-vs.-fixed-effects"><i class="fa fa-check"></i><b>10.7.7</b> Blups vs. Fixed Effects</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html"><i class="fa fa-check"></i><b>11</b> MLM, Longitudinal: Hedeker &amp; Gibbons - Depression</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#background-5"><i class="fa fa-check"></i><b>11.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#long-format-1"><i class="fa fa-check"></i><b>11.1.1</b> Long Format</a></li>
+<li class="chapter" data-level="11.1.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#wide-format-1"><i class="fa fa-check"></i><b>11.1.2</b> Wide Format</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#exploratory-data-analysis-4"><i class="fa fa-check"></i><b>11.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#diagnosis-group"><i class="fa fa-check"></i><b>11.2.1</b> Diagnosis Group</a></li>
+<li class="chapter" data-level="11.2.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#missing-data-attrition-1"><i class="fa fa-check"></i><b>11.2.2</b> Missing Data &amp; Attrition</a></li>
+<li class="chapter" data-level="11.2.3" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#depression-over-time-by-group"><i class="fa fa-check"></i><b>11.2.3</b> Depression Over Time, by Group</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#patterns-in-the-outcome-over-time"><i class="fa fa-check"></i><b>11.3</b> Patterns in the Outcome Over Time</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#variance-covariance"><i class="fa fa-check"></i><b>11.3.1</b> Variance-Covariance</a></li>
+<li class="chapter" data-level="11.3.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#correlation"><i class="fa fa-check"></i><b>11.3.2</b> Correlation</a></li>
+<li class="chapter" data-level="11.3.3" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#for-each-group"><i class="fa fa-check"></i><b>11.3.3</b> For Each Group</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#mlm---null-or-emptly-models"><i class="fa fa-check"></i><b>11.4</b> MLM - Null or Emptly Models</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#fit-the-model-13"><i class="fa fa-check"></i><b>11.4.1</b> Fit the model</a></li>
+<li class="chapter" data-level="11.4.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#table-of-parameter-estimates"><i class="fa fa-check"></i><b>11.4.2</b> Table of Parameter Estimates</a></li>
+<li class="chapter" data-level="11.4.3" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-means-plot"><i class="fa fa-check"></i><b>11.4.3</b> Estimated Marginal Means Plot</a></li>
+<li class="chapter" data-level="11.4.4" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-means-and-emperical-bayes-plots"><i class="fa fa-check"></i><b>11.4.4</b> Estimated Marginal Means and Emperical Bayes Plots</a></li>
+<li class="chapter" data-level="11.4.5" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#intra-individual-correlation-icc"><i class="fa fa-check"></i><b>11.4.5</b> Intra-individual Correlation (ICC)</a></li>
+<li class="chapter" data-level="11.4.6" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#compare-to-the-single-level-null-no-random-effects"><i class="fa fa-check"></i><b>11.4.6</b> Compare to the Single-Level Null: No Random Effects</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#mlm-add-random-slope-for-time-i.e.-trend"><i class="fa fa-check"></i><b>11.5</b> MLM: Add Random Slope for Time (i.e. Trend)</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#fit-the-model-14"><i class="fa fa-check"></i><b>11.5.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="11.5.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.2</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="11.5.3" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-means-plot-1"><i class="fa fa-check"></i><b>11.5.3</b> Estimated Marginal Means Plot</a></li>
+<li class="chapter" data-level="11.5.4" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-means-and-emperical-bayes-plots-1"><i class="fa fa-check"></i><b>11.5.4</b> Estimated Marginal Means and Emperical Bayes Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#mlm-coding-of-time"><i class="fa fa-check"></i><b>11.6</b> MLM: Coding of Time</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#fit-the-model-15"><i class="fa fa-check"></i><b>11.6.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="11.6.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#table-of-parameter-estimates-2"><i class="fa fa-check"></i><b>11.6.2</b> Table of Parameter Estimates</a></li>
+<li class="chapter" data-level="11.6.3" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-means-and-emperical-bayes-plots-2"><i class="fa fa-check"></i><b>11.6.3</b> Estimated Marginal Means and Emperical Bayes Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#mlm-effect-of-diagnosis-on-time-trends-fixed-interaction"><i class="fa fa-check"></i><b>11.7</b> MLM: Effect of DIagnosis on Time Trends (Fixed Interaction)</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#fit-the-models-1"><i class="fa fa-check"></i><b>11.7.1</b> Fit the Models</a></li>
+<li class="chapter" data-level="11.7.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-meanse-plot"><i class="fa fa-check"></i><b>11.7.2</b> Estimated Marginal Meanse Plot</a></li>
+<li class="chapter" data-level="11.7.3" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#likelihood-ratio-test-1"><i class="fa fa-check"></i><b>11.7.3</b> Likelihood Ratio Test</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#mlm-quadratic-trend"><i class="fa fa-check"></i><b>11.8</b> MLM: Quadratic Trend</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#fit-the-model-16"><i class="fa fa-check"></i><b>11.8.1</b> Fit the Model</a></li>
+<li class="chapter" data-level="11.8.2" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#table-of-parameter-estimates-3"><i class="fa fa-check"></i><b>11.8.2</b> Table of Parameter Estimates</a></li>
+<li class="chapter" data-level="11.8.3" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#likelihood-ratio-test-2"><i class="fa fa-check"></i><b>11.8.3</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="11.8.4" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-means-plot-2"><i class="fa fa-check"></i><b>11.8.4</b> Estimated Marginal Means Plot</a></li>
+<li class="chapter" data-level="11.8.5" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#blups-or-emperical-bayes-estimates"><i class="fa fa-check"></i><b>11.8.5</b> BLUPs or Emperical Bayes Estimates</a></li>
+<li class="chapter" data-level="11.8.6" data-path="mlm-longitudinal-hedeker-gibbons---depression.html"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#estimated-marginal-means-and-emperical-bayes-plots-3"><i class="fa fa-check"></i><b>11.8.6</b> Estimated Marginal Means and Emperical Bayes Plots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html"><i class="fa fa-check"></i><b>12</b> MLM, Longitudinal: Hox ch 5 - student GPA</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#background-6"><i class="fa fa-check"></i><b>12.1</b> Background</a></li>
+<li class="chapter" data-level="12.2" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#mlm"><i class="fa fa-check"></i><b>12.2</b> MLM</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#null-models-and-icc"><i class="fa fa-check"></i><b>12.2.1</b> Null Models and ICC</a></li>
+<li class="chapter" data-level="12.2.2" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#fixed-effects-1"><i class="fa fa-check"></i><b>12.2.2</b> Fixed Effects</a></li>
+<li class="chapter" data-level="12.2.3" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#variance-explained-by-linear-time-at-level-one"><i class="fa fa-check"></i><b>12.2.3</b> Variance Explained by linear TIME at Level ONE</a></li>
+<li class="chapter" data-level="12.2.4" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#variance-explained-by-linear-time-at-level-two"><i class="fa fa-check"></i><b>12.2.4</b> Variance Explained by linear TIME at Level TWO</a></li>
+<li class="chapter" data-level="12.2.5" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#random-effects-1"><i class="fa fa-check"></i><b>12.2.5</b> Random Effects</a></li>
+<li class="chapter" data-level="12.2.6" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#cross-level-interaction"><i class="fa fa-check"></i><b>12.2.6</b> Cross-Level Interaction</a></li>
+<li class="chapter" data-level="12.2.7" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#visualize-the-model-3"><i class="fa fa-check"></i><b>12.2.7</b> Visualize the Model</a></li>
+<li class="chapter" data-level="12.2.8" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#effect-sizes-1"><i class="fa fa-check"></i><b>12.2.8</b> Effect Sizes</a></li>
+<li class="chapter" data-level="12.2.9" data-path="mlm-longitudinal-hox-ch-5---student-gpa.html"><a href="mlm-longitudinal-hox-ch-5---student-gpa.html#significance"><i class="fa fa-check"></i><b>12.2.9</b> Significance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html"><i class="fa fa-check"></i><b>13</b> MLM, Longitudinal: RCT - Exercise and Diet</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#the-dataset"><i class="fa fa-check"></i><b>13.1</b> The dataset</a></li>
+<li class="chapter" data-level="13.2" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#exploratory-data-analysis-5"><i class="fa fa-check"></i><b>13.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#participant-summary"><i class="fa fa-check"></i><b>13.2.1</b> Participant Summary</a></li>
+<li class="chapter" data-level="13.2.2" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#baseline-summary-1"><i class="fa fa-check"></i><b>13.2.2</b> Baseline Summary</a></li>
+<li class="chapter" data-level="13.2.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#raw-trajectories---person-profile-plot"><i class="fa fa-check"></i><b>13.2.3</b> Raw Trajectories - Person Profile Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#multilevel-modeling"><i class="fa fa-check"></i><b>13.3</b> Multilevel Modeling</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#null-model-1"><i class="fa fa-check"></i><b>13.3.1</b> Null Model</a></li>
+<li class="chapter" data-level="13.3.2" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#icc-r-squared"><i class="fa fa-check"></i><b>13.3.2</b> ICC &amp; R-squared</a></li>
+<li class="chapter" data-level="13.3.3" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#add-fixed-effects-level-specific"><i class="fa fa-check"></i><b>13.3.3</b> Add fixed effects: level specific</a></li>
+<li class="chapter" data-level="13.3.4" data-path="mlm-longitudinal-rct---exercise-and-diet.html"><a href="mlm-longitudinal-rct---exercise-and-diet.html#final-model-4"><i class="fa fa-check"></i><b>13.3.4</b> Final Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html"><i class="fa fa-check"></i><b>14</b> GEE, Continuous Outcome: Beat the Blues</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#preparation"><i class="fa fa-check"></i><b>14.1</b> PREPARATION</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#load-packages"><i class="fa fa-check"></i><b>14.1.1</b> Load Packages</a></li>
+<li class="chapter" data-level="14.1.2" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#background-7"><i class="fa fa-check"></i><b>14.1.2</b> Background</a></li>
+<li class="chapter" data-level="14.1.3" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#read-in-the-data"><i class="fa fa-check"></i><b>14.1.3</b> Read in the data</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#exploratory-data-anlaysis"><i class="fa fa-check"></i><b>14.2</b> EXPLORATORY DATA ANLAYSIS</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#visualize-person-profile-plots"><i class="fa fa-check"></i><b>14.2.1</b> Visualize: Person-profile Plots</a></li>
+<li class="chapter" data-level="14.2.2" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#calculate-the-observed-correlation-structure"><i class="fa fa-check"></i><b>14.2.2</b> Calculate the Observed Correlation Structure</a></li>
+<li class="chapter" data-level="14.2.3" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#plot-the-correlation-matrix-to-get-a-better-feel-for-the-pattern"><i class="fa fa-check"></i><b>14.2.3</b> Plot the correlation matrix to get a better feel for the pattern</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#linear-regression-lm"><i class="fa fa-check"></i><b>14.3</b> LINEAR REGRESSION, LM</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#fit-the-models-2"><i class="fa fa-check"></i><b>14.3.1</b> Fit the models</a></li>
+<li class="chapter" data-level="14.3.2" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#parameter-estimates-table"><i class="fa fa-check"></i><b>14.3.2</b> Parameter Estimates Table</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#multilevel-modeling-mlm"><i class="fa fa-check"></i><b>14.4</b> MULTILEVEL MODELING, MLM</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#fit-the-models-3"><i class="fa fa-check"></i><b>14.4.1</b> Fit the models</a></li>
+<li class="chapter" data-level="14.4.2" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#parameter-estimates-table-1"><i class="fa fa-check"></i><b>14.4.2</b> Parameter Estimates Table</a></li>
+<li class="chapter" data-level="14.4.3" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#likelihood-ratio-test-3"><i class="fa fa-check"></i><b>14.4.3</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="14.4.4" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#plot-the-model-predictions"><i class="fa fa-check"></i><b>14.4.4</b> Plot the model predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#general-estimating-equations-gee"><i class="fa fa-check"></i><b>14.5</b> GENERAL ESTIMATING EQUATIONS, GEE</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#explore-various-correlation-structures"><i class="fa fa-check"></i><b>14.5.1</b> Explore Various Correlation Structures</a></li>
+<li class="chapter" data-level="14.5.2" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#final-best-model"><i class="fa fa-check"></i><b>14.5.2</b> Final “Best” Model</a></li>
+<li class="chapter" data-level="14.5.3" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#investigate-interactions-not-with-time-month"><i class="fa fa-check"></i><b>14.5.3</b> Investigate interactions NOT with time (<code>month</code>)</a></li>
+<li class="chapter" data-level="14.5.4" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#investigate-interactions-with-time-month"><i class="fa fa-check"></i><b>14.5.4</b> Investigate interactions with time (<code>month</code>)</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#plot-best-model"><i class="fa fa-check"></i><b>14.6</b> Plot Best Model</a></li>
+<li class="chapter" data-level="14.7" data-path="gee-continuous-outcome-beat-the-blues.html"><a href="gee-continuous-outcome-beat-the-blues.html#conclusion"><i class="fa fa-check"></i><b>14.7</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html"><i class="fa fa-check"></i><b>15</b> GEE, Binary Outcome: Respiratory Illness</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#preparation-1"><i class="fa fa-check"></i><b>15.1</b> PREPARATION</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#load-packages-1"><i class="fa fa-check"></i><b>15.1.1</b> Load Packages</a></li>
+<li class="chapter" data-level="15.1.2" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#background-8"><i class="fa fa-check"></i><b>15.1.2</b> Background</a></li>
+<li class="chapter" data-level="15.1.3" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#read-in-the-data-1"><i class="fa fa-check"></i><b>15.1.3</b> Read in the data</a></li>
+<li class="chapter" data-level="15.1.4" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#wide-format-3"><i class="fa fa-check"></i><b>15.1.4</b> Wide Format</a></li>
+<li class="chapter" data-level="15.1.5" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#long-format-3"><i class="fa fa-check"></i><b>15.1.5</b> Long Format</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#exploratory-data-anlaysis-1"><i class="fa fa-check"></i><b>15.2</b> EXPLORATORY DATA ANLAYSIS</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#summary-statistics"><i class="fa fa-check"></i><b>15.2.1</b> Summary Statistics</a></li>
+<li class="chapter" data-level="15.2.2" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#visualization-2"><i class="fa fa-check"></i><b>15.2.2</b> Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#generalized-estimating-equations-gee"><i class="fa fa-check"></i><b>15.3</b> Generalized Estimating Equations (GEE)</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#indepdendence"><i class="fa fa-check"></i><b>15.3.1</b> Indepdendence</a></li>
+<li class="chapter" data-level="15.3.2" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#exchangeable"><i class="fa fa-check"></i><b>15.3.2</b> Exchangeable</a></li>
+<li class="chapter" data-level="15.3.3" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#auto-regressive"><i class="fa fa-check"></i><b>15.3.3</b> Auto-Regressive</a></li>
+<li class="chapter" data-level="15.3.4" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#paramgeter-estimates-table"><i class="fa fa-check"></i><b>15.3.4</b> Paramgeter Estimates Table</a></li>
+<li class="chapter" data-level="15.3.5" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#compare-models"><i class="fa fa-check"></i><b>15.3.5</b> Compare Models</a></li>
+<li class="chapter" data-level="15.3.6" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#final-model-5"><i class="fa fa-check"></i><b>15.3.6</b> Final Model</a></li>
+<li class="chapter" data-level="15.3.7" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#predicted-probabilities"><i class="fa fa-check"></i><b>15.3.7</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="15.3.8" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#marginal-plot-to-visualize-the-model"><i class="fa fa-check"></i><b>15.3.8</b> Marginal Plot to Visualize the Model</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="gee-binary-outcome-respiratory-illness.html"><a href="gee-binary-outcome-respiratory-illness.html#conclusion-1"><i class="fa fa-check"></i><b>15.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html"><i class="fa fa-check"></i><b>16</b> GEE, Count Outcome: Epilepsy</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#preparation-2"><i class="fa fa-check"></i><b>16.1</b> PREPARATION</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#load-packages-2"><i class="fa fa-check"></i><b>16.1.1</b> Load Packages</a></li>
+<li class="chapter" data-level="16.1.2" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#background-9"><i class="fa fa-check"></i><b>16.1.2</b> Background</a></li>
+<li class="chapter" data-level="16.1.3" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#read-in-the-data-2"><i class="fa fa-check"></i><b>16.1.3</b> Read in the data</a></li>
+<li class="chapter" data-level="16.1.4" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#long-format-4"><i class="fa fa-check"></i><b>16.1.4</b> Long Format</a></li>
+<li class="chapter" data-level="16.1.5" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#wide-format-4"><i class="fa fa-check"></i><b>16.1.5</b> Wide Format</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#exploratory-data-analysis-6"><i class="fa fa-check"></i><b>16.2</b> EXPLORATORY DATA ANALYSIS</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#summarize"><i class="fa fa-check"></i><b>16.2.1</b> Summarize</a></li>
+<li class="chapter" data-level="16.2.2" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#visualize-1"><i class="fa fa-check"></i><b>16.2.2</b> Visualize</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#poisson-regression-glm"><i class="fa fa-check"></i><b>16.3</b> Poisson Regression (GLM)</a>
+<ul>
+<li class="chapter" data-level="16.3.1" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#fit-the-model-17"><i class="fa fa-check"></i><b>16.3.1</b> Fit the model</a></li>
+<li class="chapter" data-level="16.3.2" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#tabulate-the-model-parameters"><i class="fa fa-check"></i><b>16.3.2</b> Tabulate the Model Parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#generalized-estimating-equations-gee-1"><i class="fa fa-check"></i><b>16.4</b> Generalized Estimating Equations (GEE)</a>
+<ul>
+<li class="chapter" data-level="16.4.1" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#match-poisson-regresssion-glm"><i class="fa fa-check"></i><b>16.4.1</b> Match Poisson Regresssion (GLM)</a></li>
+<li class="chapter" data-level="16.4.2" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#change-correlation-sturucture"><i class="fa fa-check"></i><b>16.4.2</b> Change Correlation Sturucture</a></li>
+<li class="chapter" data-level="16.4.3" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#estimate-the-additional-scale-parameter"><i class="fa fa-check"></i><b>16.4.3</b> Estimate the Additional Scale Parameter</a></li>
+<li class="chapter" data-level="16.4.4" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#compare-models-1"><i class="fa fa-check"></i><b>16.4.4</b> Compare Models</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="gee-count-outcome-epilepsy.html"><a href="gee-count-outcome-epilepsy.html#conculsion"><i class="fa fa-check"></i><b>16.5</b> Conculsion</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html"><i class="fa fa-check"></i><b>17</b> GEE, Count Outcome: Antibiotics for Leprosy</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#preparation-3"><i class="fa fa-check"></i><b>17.1</b> PREPARATION</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#load-packages-3"><i class="fa fa-check"></i><b>17.1.1</b> Load Packages</a></li>
+<li class="chapter" data-level="17.1.2" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#background-10"><i class="fa fa-check"></i><b>17.1.2</b> Background</a></li>
+<li class="chapter" data-level="17.1.3" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#enter-the-data-by-hand"><i class="fa fa-check"></i><b>17.1.3</b> Enter the data by hand!</a></li>
+<li class="chapter" data-level="17.1.4" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#wide-format-5"><i class="fa fa-check"></i><b>17.1.4</b> Wide Format</a></li>
+<li class="chapter" data-level="17.1.5" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#long-format-5"><i class="fa fa-check"></i><b>17.1.5</b> Long Format</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#exploratory-data-analysis-7"><i class="fa fa-check"></i><b>17.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#summary-statistics-1"><i class="fa fa-check"></i><b>17.2.1</b> Summary Statistics</a></li>
+<li class="chapter" data-level="17.2.2" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#visualize-2"><i class="fa fa-check"></i><b>17.2.2</b> Visualize</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#generalized-estimating-equations-gee-2"><i class="fa fa-check"></i><b>17.3</b> Generalized Estimating Equations (GEE)</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#explore-various-correlation-structures-1"><i class="fa fa-check"></i><b>17.3.1</b> Explore Various Correlation Structures</a></li>
+<li class="chapter" data-level="17.3.2" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#interpretation-8"><i class="fa fa-check"></i><b>17.3.2</b> Interpretation</a></li>
+<li class="chapter" data-level="17.3.3" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#visualize-the-final-model"><i class="fa fa-check"></i><b>17.3.3</b> Visualize the Final Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#follow-up-analysis"><i class="fa fa-check"></i><b>17.4</b> Follow-up Analysis</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#collapse-the-predictor"><i class="fa fa-check"></i><b>17.4.1</b> Collapse the Predictor</a></li>
+<li class="chapter" data-level="17.4.2" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#reduce-the-model---geegee"><i class="fa fa-check"></i><b>17.4.2</b> Reduce the Model - <code>gee::gee()</code></a></li>
+<li class="chapter" data-level="17.4.3" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#compare-parameters"><i class="fa fa-check"></i><b>17.4.3</b> Compare Parameters</a></li>
+<li class="chapter" data-level="17.4.4" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#interpretation-9"><i class="fa fa-check"></i><b>17.4.4</b> Interpretation</a></li>
+<li class="chapter" data-level="17.4.5" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#visualize-3"><i class="fa fa-check"></i><b>17.4.5</b> Visualize</a></li>
+</ul></li>
+<li class="chapter" data-level="17.5" data-path="gee-count-outcome-antibiotics-for-leprosy.html"><a href="gee-count-outcome-antibiotics-for-leprosy.html#conclusion-2"><i class="fa fa-check"></i><b>17.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html"><i class="fa fa-check"></i><b>18</b> GLMM, Binary Outcome: Contraception &amp; Amenorrhea</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#packages"><i class="fa fa-check"></i><b>18.1</b> Packages</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#cran"><i class="fa fa-check"></i><b>18.1.1</b> CRAN</a></li>
+<li class="chapter" data-level="18.1.2" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#github"><i class="fa fa-check"></i><b>18.1.2</b> GitHub</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#data-prep"><i class="fa fa-check"></i><b>18.2</b> Data Prep</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#import"><i class="fa fa-check"></i><b>18.2.1</b> Import</a></li>
+<li class="chapter" data-level="18.2.2" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#long-format-6"><i class="fa fa-check"></i><b>18.2.2</b> Long Format</a></li>
+<li class="chapter" data-level="18.2.3" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#wide-format-6"><i class="fa fa-check"></i><b>18.2.3</b> Wide Format</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#exploratory-data-analysis-8"><i class="fa fa-check"></i><b>18.3</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="18.3.1" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#summary-statistics-2"><i class="fa fa-check"></i><b>18.3.1</b> Summary Statistics</a></li>
+<li class="chapter" data-level="18.3.2" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#visualize-4"><i class="fa fa-check"></i><b>18.3.2</b> Visualize</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#glmm---basic"><i class="fa fa-check"></i><b>18.4</b> GLMM - Basic</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#fit-models"><i class="fa fa-check"></i><b>18.4.1</b> Fit Models</a></li>
+<li class="chapter" data-level="18.4.2" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#model-parameter-tables"><i class="fa fa-check"></i><b>18.4.2</b> Model Parameter Tables</a></li>
+<li class="chapter" data-level="18.4.3" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#visualize-the-model-4"><i class="fa fa-check"></i><b>18.4.3</b> Visualize the Model</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#glmm---optimizers"><i class="fa fa-check"></i><b>18.5</b> GLMM - Optimizers</a>
+<ul>
+<li class="chapter" data-level="18.5.1" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#adaptive-gauss-hermite-quadrature-increase-the-number-of-quadrature-points"><i class="fa fa-check"></i><b>18.5.1</b> Adaptive Gauss-Hermite Quadrature: Increase the number of quadrature points</a></li>
+<li class="chapter" data-level="18.5.2" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#laplace-approximation-switch-to-the-nelder_mead-optimizer"><i class="fa fa-check"></i><b>18.5.2</b> Laplace Approximation: switch to the Nelder_Mead optimizer</a></li>
+<li class="chapter" data-level="18.5.3" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#laplace-approximation-switch-to-the-l-bfgs-b-method"><i class="fa fa-check"></i><b>18.5.3</b> Laplace Approximation: Switch to the <code>L-BFGS-B</code> method</a></li>
+<li class="chapter" data-level="18.5.4" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#laplace-approximation-switch-to-the-nlminb-method"><i class="fa fa-check"></i><b>18.5.4</b> Laplace Approximation: Switch to the <code>nlminb</code> method</a></li>
+</ul></li>
+<li class="chapter" data-level="18.6" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#quadratic-time"><i class="fa fa-check"></i><b>18.6</b> Quadratic Time?</a>
+<ul>
+<li class="chapter" data-level="18.6.1" data-path="glmm-binary-outcome-contraception-amenorrhea.html"><a href="glmm-binary-outcome-contraception-amenorrhea.html#post-hoc-compairsons"><i class="fa fa-check"></i><b>18.6.1</b> Post hoc compairsons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html"><i class="fa fa-check"></i><b>19</b> GLMM, Binary Outcome: Muscatine Obesity</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#preparation-4"><i class="fa fa-check"></i><b>19.1</b> PREPARATION</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#load-packages-4"><i class="fa fa-check"></i><b>19.1.1</b> Load Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#data-prep-1"><i class="fa fa-check"></i><b>19.2</b> Data Prep</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#import-1"><i class="fa fa-check"></i><b>19.2.1</b> Import</a></li>
+<li class="chapter" data-level="19.2.2" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#restrict-to-350ids-of-children-with-complete-data-for-class-demonstration"><i class="fa fa-check"></i><b>19.2.2</b> Restrict to 350ID’s of children with complete data for Class Demonstration</a></li>
+<li class="chapter" data-level="19.2.3" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#long-format-7"><i class="fa fa-check"></i><b>19.2.3</b> Long Format</a></li>
+<li class="chapter" data-level="19.2.4" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#wide-format-7"><i class="fa fa-check"></i><b>19.2.4</b> Wide Format</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#exploratory-data-analysis-9"><i class="fa fa-check"></i><b>19.3</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#summary-statistics-3"><i class="fa fa-check"></i><b>19.3.1</b> Summary Statistics</a></li>
+<li class="chapter" data-level="19.3.2" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#visualize-5"><i class="fa fa-check"></i><b>19.3.2</b> Visualize</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#analysis-goal"><i class="fa fa-check"></i><b>19.4</b> Analysis Goal</a></li>
+<li class="chapter" data-level="19.5" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#glm-analysis"><i class="fa fa-check"></i><b>19.5</b> GLM Analysis</a>
+<ul>
+<li class="chapter" data-level="19.5.1" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#standard-logistic-regression"><i class="fa fa-check"></i><b>19.5.1</b> Standard logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="19.6" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#gee-analysis"><i class="fa fa-check"></i><b>19.6</b> GEE Analysis</a>
+<ul>
+<li class="chapter" data-level="19.6.1" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#inculde-interactions"><i class="fa fa-check"></i><b>19.6.1</b> Inculde Interactions</a></li>
+<li class="chapter" data-level="19.6.2" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#drop-the-interactions"><i class="fa fa-check"></i><b>19.6.2</b> Drop the interactions</a></li>
+<li class="chapter" data-level="19.6.3" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#select-the-final-model."><i class="fa fa-check"></i><b>19.6.3</b> Select the <strong>“final”</strong> model.</a></li>
+</ul></li>
+<li class="chapter" data-level="19.7" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#glmm-analysis"><i class="fa fa-check"></i><b>19.7</b> GLMM Analysis</a></li>
+<li class="chapter" data-level="19.8" data-path="glmm-binary-outcome-muscatine-obesity.html"><a href="glmm-binary-outcome-muscatine-obesity.html#compare-methods"><i class="fa fa-check"></i><b>19.8</b> Compare Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html"><i class="fa fa-check"></i><b>20</b> GLMM, Binary Outcome: Thailand Education (Hox ch 6)</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#preparation-5"><i class="fa fa-check"></i><b>20.1</b> PREPARATION</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#load-packages-5"><i class="fa fa-check"></i><b>20.1.1</b> Load Packages</a></li>
+<li class="chapter" data-level="20.1.2" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#background-11"><i class="fa fa-check"></i><b>20.1.2</b> Background</a></li>
+<li class="chapter" data-level="20.1.3" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#read-in-the-data-3"><i class="fa fa-check"></i><b>20.1.3</b> Read in the data</a></li>
+<li class="chapter" data-level="20.1.4" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#long-format-8"><i class="fa fa-check"></i><b>20.1.4</b> Long Format</a></li>
+<li class="chapter" data-level="20.1.5" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#wide-format-8"><i class="fa fa-check"></i><b>20.1.5</b> Wide Format</a></li>
+<li class="chapter" data-level="20.1.6" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#modeling-subset"><i class="fa fa-check"></i><b>20.1.6</b> Modeling Subset</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#exploratory-data-analysis-10"><i class="fa fa-check"></i><b>20.2</b> EXPLORATORY DATA ANALYSIS</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#sample-size"><i class="fa fa-check"></i><b>20.2.1</b> Sample Size</a></li>
+<li class="chapter" data-level="20.2.2" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#missing-data"><i class="fa fa-check"></i><b>20.2.2</b> Missing Data</a></li>
+<li class="chapter" data-level="20.2.3" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#summarize-1"><i class="fa fa-check"></i><b>20.2.3</b> Summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#mulilevel-analysis"><i class="fa fa-check"></i><b>20.3</b> MULILEVEL ANALYSIS</a>
+<ul>
+<li class="chapter" data-level="20.3.1" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#fit-model"><i class="fa fa-check"></i><b>20.3.1</b> Fit Model</a></li>
+<li class="chapter" data-level="20.3.2" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#parameter-estiamtes-table"><i class="fa fa-check"></i><b>20.3.2</b> Parameter Estiamtes Table</a></li>
+<li class="chapter" data-level="20.3.3" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#predicted-probabilites"><i class="fa fa-check"></i><b>20.3.3</b> Predicted Probabilites</a></li>
+<li class="chapter" data-level="20.3.4" data-path="glmm-binary-outcome-thailand-education-hox-ch-6.html"><a href="glmm-binary-outcome-thailand-education-hox-ch-6.html#plot"><i class="fa fa-check"></i><b>20.3.4</b> Plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><i class="fa fa-check"></i><b>21</b> GLMM, Proportion Outcome: Meta Analysis (Hox ch 6)</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#preparation-6"><i class="fa fa-check"></i><b>21.1</b> PREPARATION</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#load-packages-6"><i class="fa fa-check"></i><b>21.1.1</b> Load Packages</a></li>
+<li class="chapter" data-level="21.1.2" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#background-12"><i class="fa fa-check"></i><b>21.1.2</b> Background</a></li>
+<li class="chapter" data-level="21.1.3" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#read-in-the-data-4"><i class="fa fa-check"></i><b>21.1.3</b> Read in the data</a></li>
+<li class="chapter" data-level="21.1.4" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#long-format-9"><i class="fa fa-check"></i><b>21.1.4</b> Long Format</a></li>
+<li class="chapter" data-level="21.1.5" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#wide-format-9"><i class="fa fa-check"></i><b>21.1.5</b> Wide Format</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#exploratory-data-anlaysis-2"><i class="fa fa-check"></i><b>21.2</b> EXPLORATORY DATA ANLAYSIS</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#sample-size-1"><i class="fa fa-check"></i><b>21.2.1</b> Sample Size</a></li>
+<li class="chapter" data-level="21.2.2" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#missing-data---none"><i class="fa fa-check"></i><b>21.2.2</b> Missing Data - None!</a></li>
+<li class="chapter" data-level="21.2.3" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#descriptive-summary"><i class="fa fa-check"></i><b>21.2.3</b> Descriptive Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#multilevel-modeling-1"><i class="fa fa-check"></i><b>21.3</b> MULTILEVEL MODELING</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#base-model"><i class="fa fa-check"></i><b>21.3.1</b> Base Model</a></li>
+<li class="chapter" data-level="21.3.2" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#main-effect-of-model"><i class="fa fa-check"></i><b>21.3.2</b> Main Effect of Model</a></li>
+<li class="chapter" data-level="21.3.3" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#cross-level-interaction-1"><i class="fa fa-check"></i><b>21.3.3</b> Cross-Level Interaction</a></li>
+<li class="chapter" data-level="21.3.4" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#predicted-probabilities-1"><i class="fa fa-check"></i><b>21.3.4</b> Predicted Probabilities</a></li>
+<li class="chapter" data-level="21.3.5" data-path="glmm-proportion-outcome-meta-analysis-hox-ch-6.html"><a href="glmm-proportion-outcome-meta-analysis-hox-ch-6.html#plot-1"><i class="fa fa-check"></i><b>21.3.5</b> Plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html"><i class="fa fa-check"></i><b>22</b> GLMM, Count Outcome: Bolous</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#packages-1"><i class="fa fa-check"></i><b>22.1</b> Packages</a>
+<ul>
+<li class="chapter" data-level="22.1.1" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#cran-1"><i class="fa fa-check"></i><b>22.1.1</b> CRAN</a></li>
+<li class="chapter" data-level="22.1.2" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#github-1"><i class="fa fa-check"></i><b>22.1.2</b> GitHub</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#data-prep-2"><i class="fa fa-check"></i><b>22.2</b> Data Prep</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#import-2"><i class="fa fa-check"></i><b>22.2.1</b> Import</a></li>
+<li class="chapter" data-level="22.2.2" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#long-format-10"><i class="fa fa-check"></i><b>22.2.2</b> Long Format</a></li>
+<li class="chapter" data-level="22.2.3" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#wide-format-10"><i class="fa fa-check"></i><b>22.2.3</b> Wide Format</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#exploratory-data-analysis-11"><i class="fa fa-check"></i><b>22.3</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#summary-statistics-4"><i class="fa fa-check"></i><b>22.3.1</b> Summary Statistics</a></li>
+<li class="chapter" data-level="22.3.2" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#visualize-6"><i class="fa fa-check"></i><b>22.3.2</b> Visualize</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#gee-analysis-1"><i class="fa fa-check"></i><b>22.4</b> GEE Analysis</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#fit-various-correlation-structures"><i class="fa fa-check"></i><b>22.4.1</b> Fit Various Correlation Structures</a></li>
+<li class="chapter" data-level="22.4.2" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#compare-corelation-structures"><i class="fa fa-check"></i><b>22.4.2</b> Compare Corelation Structures</a></li>
+<li class="chapter" data-level="22.4.3" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#add-interaction-terms"><i class="fa fa-check"></i><b>22.4.3</b> Add Interaction Terms</a></li>
+<li class="chapter" data-level="22.4.4" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#visualize-best-model"><i class="fa fa-check"></i><b>22.4.4</b> Visualize Best Model</a></li>
+</ul></li>
+<li class="chapter" data-level="22.5" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#glmm-analysis-1"><i class="fa fa-check"></i><b>22.5</b> GLMM Analysis</a>
+<ul>
+<li class="chapter" data-level="22.5.1" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#ri-random-intercepts-only"><i class="fa fa-check"></i><b>22.5.1</b> RI: Random Intercepts Only</a></li>
+<li class="chapter" data-level="22.5.2" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#rias-random-intercepts-and-slopes-1"><i class="fa fa-check"></i><b>22.5.2</b> RIAS: Random Intercepts and Slopes</a></li>
+<li class="chapter" data-level="22.5.3" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#rais-add-interaction"><i class="fa fa-check"></i><b>22.5.3</b> RAIS: Add Interaction</a></li>
+<li class="chapter" data-level="22.5.4" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#rias-simplify"><i class="fa fa-check"></i><b>22.5.4</b> RIAS: Simplify</a></li>
+<li class="chapter" data-level="22.5.5" data-path="glmm-count-outcome-bolous.html"><a href="glmm-count-outcome-bolous.html#visualize-best-model-1"><i class="fa fa-check"></i><b>22.5.5</b> Visualize Best Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html"><i class="fa fa-check"></i><b>23</b> Sample Size and Power</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#key-publications"><i class="fa fa-check"></i><b>23.1</b> Key Publications</a></li>
+<li class="chapter" data-level="23.2" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#r-packages"><i class="fa fa-check"></i><b>23.2</b> R packages</a>
+<ul>
+<li class="chapter" data-level="23.2.1" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#powerlmm"><i class="fa fa-check"></i><b>23.2.1</b> powerlmm</a></li>
+<li class="chapter" data-level="23.2.2" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#simr"><i class="fa fa-check"></i><b>23.2.2</b> simr</a></li>
+<li class="chapter" data-level="23.2.3" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#sjstatssmpsize_lmm"><i class="fa fa-check"></i><b>23.2.3</b> sjstats::smpsize_lmm()</a></li>
+<li class="chapter" data-level="23.2.4" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#mlpowsim"><i class="fa fa-check"></i><b>23.2.4</b> MLPowSim</a></li>
+</ul></li>
+<li class="chapter" data-level="23.3" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#online-interactive-interfaces"><i class="fa fa-check"></i><b>23.3</b> Online Interactive Interfaces</a>
+<ul>
+<li class="chapter" data-level="23.3.1" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#glimmpse"><i class="fa fa-check"></i><b>23.3.1</b> GLIMMPSE</a></li>
+<li class="chapter" data-level="23.3.2" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#webpower"><i class="fa fa-check"></i><b>23.3.2</b> WebPower</a></li>
+</ul></li>
+<li class="chapter" data-level="23.4" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#stand-alone-computer-programs"><i class="fa fa-check"></i><b>23.4</b> Stand-alone Computer Programs</a>
+<ul>
+<li class="chapter" data-level="23.4.1" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#optimal-design"><i class="fa fa-check"></i><b>23.4.1</b> Optimal Design</a></li>
+<li class="chapter" data-level="23.4.2" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#pint"><i class="fa fa-check"></i><b>23.4.2</b> PinT</a></li>
+<li class="chapter" data-level="23.4.3" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#rmass2"><i class="fa fa-check"></i><b>23.4.3</b> RMASS2</a></li>
+<li class="chapter" data-level="23.4.4" data-path="sample-size-and-power.html"><a href="sample-size-and-power.html#acluster"><i class="fa fa-check"></i><b>23.4.4</b> ACluster</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="citations-and-resources" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Citations and Resources<a href="citations-and-resources.html#citations-and-resources" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="r-code-online-examples" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> R Code Online Examples<a href="citations-and-resources.html#r-code-online-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Shaw, M. and Flake J.K. (2022) <a href="https://www.learn-mlms.com/">Introduction to Multilevel Modelling</a></p>
+</div>
+<div id="mlm-multilevel-modeling-aka-mixed-effects-regression" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> MLM: Multilevel Modeling, <em>aka</em> Mixed Effects Regression<a href="citations-and-resources.html#mlm-multilevel-modeling-aka-mixed-effects-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="major-textbooks" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Major Textbooks<a href="citations-and-resources.html#major-textbooks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="rmdcitation">
+<p>
+Fitzmaurice, G. M., Laird, N. M., Ware, J. H. (2004). <strong>Applied
+Longitudinal Analysis.</strong> Hoboken, NJ: John Wiley &amp; Sons.
+</p>
+<p>
+Hox, J. J., Moerbeek, M., &amp; Van de Schoot, R. (2017).
+<strong>Multilevel analysis: Techniques and applications.</strong>
+Routledge.
+</p>
+<p>
+Gelman, A., &amp; Hill, J. (2006). <strong>Data Analysis Using
+Regression and Multilevel/Hierarchical Models.</strong> Cambridge
+University Press.
+</p>
+<p>
+Raudenbush, S. W., &amp; Bryk, A. S. (2002). <strong>Hierarchical
+Linear Models: Applications and Data Analysis Methods (Vol. 1).</strong>
+Sage.
+</p>
+<p>
+Singer, J. D., Willett, J. B., &amp; Willett, J. B. (2003).
+<strong>Applied Longitudinal Data Analysis: Modeling Change and Event
+Occurrence.</strong> Oxford University Press.
+</p>
+<p>
+Snijders, T. A. B., &amp; Bosker, R. J. (2012). <strong>Multilevel
+analysis: An introduction to basic and advanced multilevel
+modeling.</strong> Los Angeles; London, SAGE.
+</p>
+</div>
+</div>
+<div id="articles" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Articles<a href="citations-and-resources.html#articles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nezlek, J. B. (2012). <a href="https://jbnezl.people.wm.edu/Reprints/2012-APA-Handbook-MLM.pdf">Multilevel modeling for psychologists</a>.</p>
+<p>Nezlek, J. B. (2020): <a href="https://www.cairn-int.info/article-E_ANPSY1_201_0039--applications-of-multilevel-modeling.htm">Applications of multilevel modeling in psychological science: Intensive repeated measures designs</a>.</p>
+<p>Huang, F. L. (2018). <a href="https://d1wqtxts1xzle7.cloudfront.net/89304135/05_20Multilevel_20myths_complete-libre.pdf?1659734178=&amp;response-content-disposition=inline%3B+filename%3DMultilevel_modeling_myths.pdf&amp;Expires=1791478798&amp;Signature=Z3-S4y~vrC4CYJVhEUL-ieeZ-JjTFz-65uldb50YkP4L-crdYFBP5K~WWfMRa~mhSg7TUZUsxhOUw-uu6VMEU-SLfj-PA84sJb2cEkhPIH9pmBhVf9oIKiE-WhlAI7TJ8ykhHOcwW-URar75vsNQjtYEMNkda20n15J9WZP6k6JLdyRkGJaHikLcOZbCCCMnMqIXPiTDjTO7d6Mn~IRY0CL~O9wXgyg42gk6tVOpO9IE6~hNkC75XrlaAnuM4vpcttJx~2106M9kpjiPrR8jg4dEbPJfVDFWW7dgaNE2216tq5Hf~XFgJ8ewHnnYzaTFcfJbbkxuOGqP9diavcP6Rg__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA">Multilevel modeling myths</a>. School Psychology Quarterly, 33(3), 492.</p>
+<p>Boisgontier, M. P., &amp; Cheval, B. (2016). <a href="https://www.sciencedirect.com/science/article/pii/S0149763416301634">The anova to mixed model transition.</a> Neuroscience &amp; Biobehavioral Reviews, 68, 1004-1005.</p>
+<p>Quené, H., &amp; Van den Bergh, H. (2004). <a href="https://www.sciencedirect.com/science/article/pii/S0167639304000226">On multi-level modeling of data from repeated measures designs: A tutorial.</a> Speech communication, 43(1-2), 103-121.</p>
+</div>
+<div id="websites" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Websites<a href="citations-and-resources.html#websites" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Interactive web-app: [An Introduction to Hierarchical Modeling}(<a href="http://mfviz.com/hierarchical-models/" class="uri">http://mfviz.com/hierarchical-models/</a>) (Michael Freeman)</p></li>
+<li><p>Blog post: <a href="https://geekflare.com/multilevel-modeling/" class="uri">https://geekflare.com/multilevel-modeling/</a></p></li>
+<li><p>The analysis Factor: <a href="https://www.theanalysisfactor.com/advantages-of-repeated-measures-anova-as-a-mixed-model/">Five Advantages of Running Repeated Measures ANOVA as a Mixed Model</a></p></li>
+</ul>
+</div>
+<div id="youtube" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> YouTube<a href="citations-and-resources.html#youtube" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>John Nezlek talk: <a href="https://www.youtube.com/watch?v=f817HdHJneo&amp;list=PLtAksNetLqNqkk4rDa7dvyDa6sBpGzTLq&amp;index=8&amp;t=1862s">An Introduction to Multilevel Modeling - basic terms and research examples</a>
+This video was also optional in the first week. I know it is long (1 hr 45 min) but its SOOOOOOO good. If nothing more, watch the first 40 minutes. It covers the multilevel philosophy and lots of simple illustrative examples, including the paradox/confounding of not doing MLM when your data is clustered.</p>
+<ul>
+<li>at 42-48 the ICC issue</li>
+<li>at 48-52 power and sample size</li>
+<li>at 52-1:11 the logic of multilevel models (slopes as outcomes)</li>
+<li>at 1:19 he starts going into longitudinal (don’t watch yet)</li>
+<li>at 1:30-1:34 should you use MLM</li>
+<li>at 1:35-1:38 dyatic data (partners) but, warning, he does swear some</li>
+</ul></li>
+<li><p>Thomas Grund: <a href="https://www.youtube.com/watch?v=yavcwYS9qc0">What is an ecological fallacy?</a> (15 min)</p></li>
+<li><p>Dr. Trefor Bazett: <a href="https://www.youtube.com/watch?v=t-Ci3FosqZs">How SIMPSON’s PARADOX explains weird COVID 19 statistics</a> (8 min)</p></li>
+<li><p>Mikko Ronkko: <a href="https://www.youtube.com/watch?v=dx8lZnoY8hU">Introduction to Multilevel Data</a> (7 min) &lt;- ecological fallacy &amp; Simpson’s Paradox</p></li>
+<li><p>Violet Brown: <a href="https://www.youtube.com/watch?v=3OFXxh4yORU">Multi-Level Modeling, Part 1</a> (21 min)</p></li>
+<li><p>Quant Psych: <a href="https://www.youtube.com/watch?v=eVuQlGDZxHs&amp;list=PL8F480DgtpW9_IT7xN1XeRF_dglZmK0nM&amp;index=2&amp;t=709s">Mixed Model Notation - A Simple Explanation</a> (20 min) (longitudinal example)</p></li>
+<li><p>Ian Brunton-Smith: <a href="https://www.youtube.com/watch?v=KmbtZNjvsNM&amp;list=PLtAksNetLqNqkk4rDa7dvyDa6sBpGzTLq&amp;index=5">Multilevel Models: Random Intercept Models</a> (8.5 min)</p></li>
+<li><p>Ian Brunton-Smith: <a href="https://www.youtube.com/watch?v=YCcLiIKMYL8">Multilevel Models: Random Coefficients Models</a> (8.5 min)</p></li>
+<li><p>Violet Brown: <a href="https://www.youtube.com/watch?v=_UmY-3brJJ0">Multi-level Modeling, Part 2</a> (26 min)</p></li>
+</ul>
+</div>
+</div>
+<div id="fixed-vs-random-effects" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Fixed vs Random Effects<a href="citations-and-resources.html#fixed-vs-random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="articles-1" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Articles<a href="citations-and-resources.html#articles-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Hamaker, E. L., &amp; Muthén, B. (2020). <a href="https://research-portal.uu.nl/ws/files/235997520/The_Fixed_Versus_Random_Effects_Debate_and_How_It_Relates_to_Centering_in_Multilevel_Modeling_.pdf">The fixed versus random effects debate and how it relates to centering in multilevel modeling</a>. Psychological methods, 25(3), 365.</p>
+<p>Antonakis, J., Bastardoz, N., &amp; Rönkkö, M. (2021). <a href="https://journals.sagepub.com/doi/pdf/10.1177/1094428119877457">On ignoring the random effects assumption in multilevel models: Review, critique, and recommendations.</a> Organizational Research Methods, 24(2), 443-483.</p>
+</div>
+<div id="websites-1" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Websites<a href="citations-and-resources.html#websites-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>The Analysis Factor: <a href="https://www.theanalysisfactor.com/understanding-random-effects-in-mixed-models/">Understanding Random Effects in Mixed Models</a></li>
+<li>The Analysis Factor: <a href="https://www.theanalysisfactor.com/specifying-fixed-and-random-factors-in-mixed-models/">Specifying Fixed and Random Factors in Mixed Models</a></li>
+<li>The Analysis Factor: <a href="https://www.theanalysisfactor.com/mixed-models-predictor-both-fixed-random/">Can you specify a predictor as both fixed and random?</a></li>
+</ul>
+</div>
+<div id="youtube-1" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> YouTube<a href="citations-and-resources.html#youtube-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Tom Reader: <a href="https://www.youtube.com/watch?v=FCcVPsq8VcA&amp;t=65s">Fixed and random effects</a> (8 min)</li>
+</ul>
+</div>
+</div>
+<div id="centering-predictor-variables-grand-mean-vs-group-means" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Centering Predictor Variables: Grand Mean vs Group Means<a href="citations-and-resources.html#centering-predictor-variables-grand-mean-vs-group-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="rmdcitation">
+<p>
+Enders, C. K., &amp; Tofighi, D. (2007). <a
+href="https://www.researchgate.net/profile/Matthew-Kerry/post/Setting-Up-LMM-in-SPSS-Comparing-Two-Groups-12-Individuals-Each-Across-16-Time-Periods/attachment/5a4dc9b04cde266d587feae8/AS%3A578964678770688%401515047344406/download/Enders%26Tofighi+%282007%29+Centering+Predictors+in+XSect+MLMs.pdf">Centering
+predictor variables in cross-sectional multilevel models: a new look at
+an old issue.</a> Psychological methods, 12(2), 121.
+</p>
+</div>
+<div id="articles-2" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Articles<a href="citations-and-resources.html#articles-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Enders, C.K. (2013) <a href="https://methods.sagepub.com/hnbk/edvol/the-sage-handbook-of-multilevel-modeling/chpt/centering-predictors-contextual-effects">Centering Predictors and Contextual Effects.</a> The SAGE Handbook of Multilevel Modeling, 89-108. <a href="DOI:https://doi.org/10.4135/9781446247600.n6" class="uri">DOI:https://doi.org/10.4135/9781446247600.n6</a></p>
+<p>Bliese, P. D., Maltarich, M. A., &amp; Hendricks, J. L. (2018). <a href="https://link.springer.com/content/pdf/10.1007/s10869-017-9491-z.pdf">Back to basics with mixed-effects models: Nine take-away points.</a> Journal of Business and Psychology, 33(1), 1-23.</p>
+<p>Hamaker, E. L., &amp; Muthén, B. (2020). <a href="https://research-portal.uu.nl/ws/files/235997520/The_Fixed_Versus_Random_Effects_Debate_and_How_It_Relates_to_Centering_in_Multilevel_Modeling_.pdf">The fixed versus random effects debate and how it relates to centering in multilevel modeling</a>. Psychological methods, 25(3), 365.</p>
+<p>Paccagnella, O. (2006). <a href="https://journals.sagepub.com/doi/pdf/10.1177/0193841X05275649">Centering or not centering in multilevel models? The role of the group mean and the assessment of group effects.</a> Evaluation review, 30(1), 66-85.</p>
+<p>Bell, A., Jones, K., &amp; Fairbrother, M. (2018). <a href="https://link.springer.com/content/pdf/10.1007/s11135-017-0593-5.pdf">Understanding and misunderstanding group mean centering: A commentary on Kelley et al.’s dangerous practice.</a> Quality &amp; quantity, 52(5), 2031-2036.</p>
+</div>
+<div id="websites-2" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Websites<a href="citations-and-resources.html#websites-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>The Analysis Factor: <a href="https://www.theanalysisfactor.com/when-not-to-center-a-predictor-variable-in-regression/">When NOT to Center a Predictor Variable in Regression</a></p></li>
+<li><p>MetricGate (2026) <a href="https://metricgate.com/blogs/grand-mean-vs-group-mean-centering/">Group-Mean vs Grand-Mean Centering in Multilevel Models</a> &lt;– INTERACTIVE!</p></li>
+</ul>
+</div>
+<div id="youtube-2" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> YouTube<a href="citations-and-resources.html#youtube-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Mikko Ronkko: <a href="https://www.youtube.com/watch?v=b1NGpsBRokE&amp;t=475s">Grand-mean centering, cluster-mean centering, and cluster means</a> (13 min)</p></li>
+<li><p>Christian Geiser (QuantFish): <a href="https://www.youtube.com/watch?v=h2nkqtLjjZY">Why You Should Center Variables in Statistics</a> (11 min, last 2 min)</p></li>
+</ul>
+</div>
+</div>
+<div id="effect-size-variance-explained-r-squared-like-measures" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Effect Size: Variance Explained (R-squared like measures)<a href="citations-and-resources.html#effect-size-variance-explained-r-squared-like-measures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="rmdcitation">
+<p>
+Hox, J. J. (2017). Multilevel analysis: techniques and applications
+(3rd ed). New York: Routledge.
+</p>
+<p>
+Johnson, P. C. D. (2014). <a
+href="https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/2041-210X.12225">Extension
+of Nakagawa and Schielzeth’s R2 GLMM to random slopes models.</a>
+Methods in Ecology and Evolution, 5(9), 944–946.
+<a href="doi:10.1111/2041-210X.12225" class="uri">doi:10.1111/2041-210X.12225</a>
+</p>
+<p>
+Nakagawa, S., and Schielzeth, H. (2013). <a
+href="https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.2041-210x.2012.00261.x">A
+general and simple method for obtaining R2 from generalized linear
+mixed-effects models.</a> Methods in Ecology and Evolution, 4(2),
+133–142. <a href="doi:10.1111/j.2041-210x.2012.00261.x" class="uri">doi:10.1111/j.2041-210x.2012.00261.x</a>
+</p>
+<p>
+Nakagawa, S., Johnson, P. C. D., and Schielzeth, H. (2017). <a
+href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5636267/pdf/rsif20170213.pdf">The
+coefficient of determination R2 and intra-class correlation coefficient
+from generalized linear mixed-effects models revisited and expanded.</a>
+Journal of The Royal Society Interface, 14(134), 20170213.
+</p>
+</div>
+<div id="articles-3" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Articles<a href="citations-and-resources.html#articles-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lorah, J. (2018). <a href="https://link.springer.com/article/10.1186/s40536-018-0061-2?trk=public_post_comment-text">Effect size measures for multilevel models: Definition, interpretation, and TIMSS example. Large-scale assessments in education</a>, 6(1), 8.</p>
+<p>Pek, J., &amp; Flora, D. B. (2018). <a href="https://psycnet.apa.org/journals/met/23/2/208.pdf">Reporting effect sizes in original psychological research: A discussion and tutorial.</a> Psychological methods, 23(2), 208.</p>
+<p>Rights, J. D., &amp; Cole, D. A. (2018). <a href="https://www.tandfonline.com/doi/pdf/10.1080/15374416.2018.1528550">Effect size measures for multilevel models in clinical child and adolescent research: New R-squared methods and recommendations.</a> Journal of Clinical Child &amp; Adolescent Psychology, 47(6), 863-873.</p>
+<p>Lai, M. H., &amp; Kwok, O. M. (2016). <a href="https://www.tandfonline.com/doi/pdf/10.1080/00273171.2016.1231606">Estimating standardized effect sizes for two-and three-level partially nested data.</a> Multivariate Behavioral Research, 51(6), 740-756.</p>
+<p>Grob, J., &amp; Moller, A. (2025). <a href="https://link.springer.com/content/pdf/10.1007/s40300-025-00295-w.pdf">Effect Size Estimation in Linear Mixed Models</a>. Metron. 83(3), 353-363.</p>
+</div>
+<div id="youtube-3" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> YouTube<a href="citations-and-resources.html#youtube-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Quant Psych: <a href="https://www.youtube.com/watch?v=frDLoflnhyM">Explaining Variance Explained in Mixed Models</a> (10 min)</li>
+</ul>
+</div>
+</div>
+<div id="effect-size-pairwise-differences-standardized-mean-difference-smd" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Effect Size: Pairwise Differences (Standardized Mean Difference, SMD)<a href="citations-and-resources.html#effect-size-pairwise-differences-standardized-mean-difference-smd" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are a number of ways to calculate standardized mean difference (SMD) effect sizes and there really is not a universally accepted “right” way. Using <em>residual SD</em> and the <em>square root of the sum of variance components</em> from a mixed model for standardization are NOT traditional Cohen’s <em>d</em> statistics, so they should be referred to as standardized effect sizes.</p>
+<p><strong>The important thing is to detail which method you are using and make sure to label it appropriately.</strong></p>
+<p>Probably the effect size calculation with the most academic support is taking the square root of the sum of all variance components in the model. This method was first discussed by Westfall, Judd, and Kenny (2014) and later included in a statistical tutorial on <strong>Effect Sizes and Power Analysis in Mixed Effects Models</strong> by Marc Brysbaert and Michael Stevens (2018).</p>
+<div class="rmdlightbulb">
+<p>
+We can add interpretations to these SMD effects. There have been
+different propositions regarding the qualitative interpretation of
+effect sizes’. The original interpretation given by
+<strong>Cohen</strong> suggests:
+</p>
+<ul>
+<li>
+Small: &lt; 0.5
+</li>
+<li>
+Moderate: 0.5 - 0.7
+</li>
+<li>
+Large: &gt; 0.8
+</li>
+</ul>
+<p>
+More recently <a
+href="https://www.sportsci.org/resource/stats/effectmag.html"><strong>Will
+G. Hopkins</strong></a> suggested a revised scale with threshold values
+at:
+</p>
+<ul>
+<li>
+0.2 small
+</li>
+<li>
+0.6 moderate
+</li>
+<li>
+1.2 large
+</li>
+<li>
+2.0 very large
+</li>
+<li>
+4.0 nearly perfect
+</li>
+</ul>
+</div>
+<div class="rmdcitation">
+<p>
+Brysbaert, M., &amp; Stevens, M. (2018). <a
+href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6646942/"><strong>Power
+analysis and effect size in mixed effects models: A
+tutorial.</strong></a> Journal of cognition, 1(1).
+</p>
+<p>
+Luke, S. G. (2017). <a
+href="https://link.springer.com/article/10.3758/s13428-016-0809-y#Sec3"><strong>Evaluating
+significance in linear mixed-effects models in R.</strong></a> Behavior
+research methods, 49(4), 1494-1502.
+</p>
+<p>
+Westfall, J., Kenny, D. A., &amp; Judd, C. M. (2014). <a
+href="https://psycnet.apa.org/doiLanding?doi=10.1037%2Fxge0000014"><strong>Statistical
+power and optimal design in experiments in which samples of participants
+respond to samples of stimuli.</strong></a> Journal of Experimental
+Psychology: General, 143(5), 2020.
+</p>
+</div>
+<div id="example-write-up-for-methods-analysis-section" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Example: Write-up for Methods-Analysis section<a href="citations-and-resources.html#example-write-up-for-methods-analysis-section" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="rmdapa">
+<p>
+Follow-up pairwise comparisons utilizing Kenward-Rodger degrees of
+freedom (Luke, 2017) were made <strong>without/with??</strong>
+controlling for multiple comparisons. Corresponding effect sizes give
+Cohen’s d-like standardized mean differences (SMD) utilizing the
+standard deviation based on the sum of the MLM variance components
+(Brysbaert &amp; Stevens, 2018).
+</p>
+</div>
+</div>
+</div>
+<div id="glmm-generalized-linear-multilevel-models-or-generalized-mixed-effects-regression" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> GLMM: Generalized Linear Multilevel Models <em>or</em> Generalized Mixed Effects Regression<a href="citations-and-resources.html#glmm-generalized-linear-multilevel-models-or-generalized-mixed-effects-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="gee-generalized-estimating-equations" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> GEE: Generalized Estimating Equations<a href="citations-and-resources.html#gee-generalized-estimating-equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="rmdcitation">
+<p>
+Fitzmaurice, G. M., Laird, N. M., Ware, J. H. (2004). <strong>Applied
+Longitudinal Analysis.</strong> Hoboken, NJ: John Wiley &amp; Sons.
+</p>
+<p>
+Hardin, J. W., Hilbe, J. M. (2003). <strong>Generalized Estimating
+Equations.</strong> Boca Raton: Chapman &amp; Hall/CRC.
+</p>
+<p>
+Liang, K.-Y., Zeger, S. L. (1986). <strong>Longitudinal data analysis
+using generalized linear models.</strong> Biometrika 73:13–22.
+</p>
+<p>
+McCullagh, P., Nelder, J. A. (1989). <strong>Generalized Linear
+Models.</strong> 2nd ed. London: Chapman &amp; Hall.
+</p>
+<p>
+Nelder, J. A., Wedderburn, R. W. M. (1972). <strong>Generalized
+linear models.</strong> J. Roy. Statist. Soc.,Ser. A 135:370–384.
+</p>
+</div>
+<p>Burger, H. G., Dudley, E. C., Cui, J., Dennerstein, L., Hopper, J. L. (2000). <strong>A prospective longitudinal study of serum testosterone levels during and after the menopause transition.</strong> J. Clin. Endocrinol. Metabolism 85:2832–2838.</p>
+<div id="qic-comparing-gee-models" class="section level3 hasAnchor" number="2.8.1">
+<h3><span class="header-section-number">2.8.1</span> QIC: Comparing GEE Models<a href="citations-and-resources.html#qic-comparing-gee-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="rmdlightbulb">
+<p>
+The QIC involves using the quasi-likelihood constructed under the
+working independence model and the naive and robust covariance estimates
+of estimated regression coefficients.
+</p>
+<ul>
+<li>
+QIC-U is asymptotic, not appropriate for selected an optimal
+correlation structure
+</li>
+</ul>
+</div>
+<div class="rmdcitation">
+<p>
+Cui, J., &amp; Qian, G. (2007). <strong>Selection of working
+correlation structure and best model in GEE analyses of longitudinal
+data.</strong> Communications in statistics—Simulation and computation®,
+36(5), 987-996. <a
+href="https://www.tandfonline.com/doi/pdf/10.1080/03610910701539617">Download
+PDF</a>
+</p>
+</div>
+<blockquote>
+<p>We propose to choose the best correlation structure first and then choose the best subsets of covariates. The best correlation structure was selected based on the full model including all covariates. However, if we use only a subset of covariates to select the best correlation structure, we may end up with a different correlation structure. This is a dilemma as to choose the best correlation structure first or the best subset of covariates first. It seems that the full model contains most information to predict the outcome variable and is reasonable to use it to select the best correlation structure first (Hardin and Hilbe, 2003).</p>
+</blockquote>
+<div class="rmdcitation">
+<p>
+Burnham, K. P. and D. R. Anderson. 2002. <strong>Model selection and
+multimodel inference: a practical information-theoretic approach. Second
+edition.</strong> Springer Science and Business Media, Inc., New York.
+<a
+href="https://cds.cern.ch/record/1608735/files/9780387953649_TOC.pdf">Download
+PDF</a>
+</p>
+<p>
+Pan, W. 2001. <strong>Akaike’s information criterion in generalized
+estimating equations.</strong> Biometrics 57:120-125.
+<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.0006-341X.2001.00120.x" class="uri">https://onlinelibrary.wiley.com/doi/abs/10.1111/j.0006-341X.2001.00120.x</a>
+<a
+href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.0006-341X.2001.00120.x">Download
+PDF</a>
+</p>
+<p>
+Wedderburn, R. W. M. (1974). <strong>Quasi-likelihood functions,
+generalized liner models, and the Gauss-newton method.</strong>
+Biometrika 61:439–447.
+</p>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="what-are-mlm-and-why-do-i-care.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="formula-warehouse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "toc_depth": 3,
+    "scroll_highlight": true
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

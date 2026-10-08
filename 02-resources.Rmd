@@ -1,18 +1,16 @@
-# Citations for Writeup
+# Citations and Resources
+
+## R Code Online Examples
 
 
-
-```{block type='rmdconstruct', echo=TRUE}
-This chapter is **UNDER CONSTRUCTION**, so check back often.  
-```
-
+Shaw, M. and Flake J.K. (2022) [Introduction to Multilevel Modelling](https://www.learn-mlms.com/)
 
 
 
 
 ## MLM: Multilevel Modeling, *aka* Mixed Effects Regression
 
-### General MLM
+### Major Textbooks
 
 
 ```{block type='rmdcitation', echo=TRUE}
@@ -31,11 +29,66 @@ Snijders, T. A. B., & Bosker, R. J. (2012). **Multilevel analysis: An introducti
 ```
 
 
+### Articles
+
 Nezlek, J. B. (2012). [Multilevel modeling for psychologists](https://jbnezl.people.wm.edu/Reprints/2012-APA-Handbook-MLM.pdf).
 
 Nezlek, J. B. (2020): [Applications of multilevel modeling in psychological science: Intensive repeated measures designs](https://www.cairn-int.info/article-E_ANPSY1_201_0039--applications-of-multilevel-modeling.htm).
 
 Huang, F. L. (2018). [Multilevel modeling myths](https://d1wqtxts1xzle7.cloudfront.net/89304135/05_20Multilevel_20myths_complete-libre.pdf?1659734178=&response-content-disposition=inline%3B+filename%3DMultilevel_modeling_myths.pdf&Expires=1791478798&Signature=Z3-S4y~vrC4CYJVhEUL-ieeZ-JjTFz-65uldb50YkP4L-crdYFBP5K~WWfMRa~mhSg7TUZUsxhOUw-uu6VMEU-SLfj-PA84sJb2cEkhPIH9pmBhVf9oIKiE-WhlAI7TJ8ykhHOcwW-URar75vsNQjtYEMNkda20n15J9WZP6k6JLdyRkGJaHikLcOZbCCCMnMqIXPiTDjTO7d6Mn~IRY0CL~O9wXgyg42gk6tVOpO9IE6~hNkC75XrlaAnuM4vpcttJx~2106M9kpjiPrR8jg4dEbPJfVDFWW7dgaNE2216tq5Hf~XFgJ8ewHnnYzaTFcfJbbkxuOGqP9diavcP6Rg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA). School Psychology Quarterly, 33(3), 492.
+
+
+Boisgontier, M. P., & Cheval, B. (2016). [The anova to mixed model transition.](https://www.sciencedirect.com/science/article/pii/S0149763416301634) Neuroscience & Biobehavioral Reviews, 68, 1004-1005.
+
+
+Quené, H., & Van den Bergh, H. (2004). [On multi-level modeling of data from repeated measures designs: A tutorial.](https://www.sciencedirect.com/science/article/pii/S0167639304000226) Speech communication, 43(1-2), 103-121.
+
+
+
+### Websites
+
+* Interactive web-app: [An Introduction to Hierarchical Modeling}(http://mfviz.com/hierarchical-models/) (Michael Freeman)
+
+* Blog post: https://geekflare.com/multilevel-modeling/
+    
+* The analysis Factor:  [Five Advantages of Running Repeated Measures ANOVA as a Mixed Model](https://www.theanalysisfactor.com/advantages-of-repeated-measures-anova-as-a-mixed-model/)
+
+
+### YouTube
+
+* John Nezlek talk: [An Introduction to Multilevel Modeling - basic terms and research examples](https://www.youtube.com/watch?v=f817HdHJneo&list=PLtAksNetLqNqkk4rDa7dvyDa6sBpGzTLq&index=8&t=1862s) 
+This video was also optional in the first week.  I know it is long (1 hr 45 min) but its SOOOOOOO good. If nothing more, watch the first 40 minutes.  It covers the multilevel philosophy and lots of simple illustrative examples, including the paradox/confounding of not doing MLM when your data is clustered. 
+    + at 42-48 the ICC issue
+    + at 48-52 power and sample size 
+    + at 52-1:11 the logic of multilevel models (slopes as outcomes)
+    + at 1:19 he starts going into longitudinal (don't watch yet)
+    + at 1:30-1:34 should you use MLM
+    + at 1:35-1:38 dyatic data (partners) but, warning, he does swear some  
+    
+    
+    
+* Thomas Grund: [What is an ecological fallacy?](https://www.youtube.com/watch?v=yavcwYS9qc0) (15 min)
+
+* Dr. Trefor Bazett: [How SIMPSON's PARADOX explains weird COVID 19 statistics](https://www.youtube.com/watch?v=t-Ci3FosqZs) (8 min)
+
+* Mikko Ronkko: [Introduction to Multilevel Data](https://www.youtube.com/watch?v=dx8lZnoY8hU) (7 min)  <- ecological fallacy & Simpson's Paradox
+
+* Violet Brown: [Multi-Level Modeling, Part 1](https://www.youtube.com/watch?v=3OFXxh4yORU) (21 min)    
+    
+* Quant Psych: [Mixed Model Notation - A Simple Explanation](https://www.youtube.com/watch?v=eVuQlGDZxHs&list=PL8F480DgtpW9_IT7xN1XeRF_dglZmK0nM&index=2&t=709s) (20 min) (longitudinal example)
+
+* Ian Brunton-Smith: [Multilevel Models: Random Intercept Models](https://www.youtube.com/watch?v=KmbtZNjvsNM&list=PLtAksNetLqNqkk4rDa7dvyDa6sBpGzTLq&index=5) (8.5 min)
+
+* Ian Brunton-Smith: [Multilevel Models: Random Coefficients Models](https://www.youtube.com/watch?v=YCcLiIKMYL8) (8.5 min)
+
+* Violet Brown: [Multi-level Modeling, Part 2](https://www.youtube.com/watch?v=_UmY-3brJJ0) (26 min)
+
+
+
+
+## Fixed vs Random Effects
+
+### Articles
 
 Hamaker, E. L., & Muthén, B. (2020). [The fixed versus random effects debate and how it relates to centering in multilevel modeling](https://research-portal.uu.nl/ws/files/235997520/The_Fixed_Versus_Random_Effects_Debate_and_How_It_Relates_to_Centering_in_Multilevel_Modeling_.pdf). Psychological methods, 25(3), 365.
 
@@ -44,7 +97,23 @@ Antonakis, J., Bastardoz, N., & Rönkkö, M. (2021). [On ignoring the random eff
 
 
 
-### Centering Predictor Variables
+### Websites 
+
+* The Analysis Factor: [Understanding Random Effects in Mixed Models](https://www.theanalysisfactor.com/understanding-random-effects-in-mixed-models/)
+* The Analysis Factor: [Specifying Fixed and Random Factors in Mixed Models](https://www.theanalysisfactor.com/specifying-fixed-and-random-factors-in-mixed-models/)
+* The Analysis Factor: [Can you specify a predictor as both fixed and random?](https://www.theanalysisfactor.com/mixed-models-predictor-both-fixed-random/)
+
+
+### YouTube
+
+* Tom Reader: [Fixed and random effects](https://www.youtube.com/watch?v=FCcVPsq8VcA&t=65s) (8 min)
+
+
+
+
+
+
+## Centering Predictor Variables: Grand Mean vs Group Means
 
 
 ```{block type='rmdcitation', echo=TRUE}
@@ -52,22 +121,94 @@ Enders, C. K., & Tofighi, D. (2007). [Centering predictor variables in cross-sec
 ```
 
 
+### Articles
+
+Enders, C.K. (2013) [Centering Predictors and Contextual Effects.](https://methods.sagepub.com/hnbk/edvol/the-sage-handbook-of-multilevel-modeling/chpt/centering-predictors-contextual-effects) The SAGE Handbook of Multilevel Modeling, 89-108. DOI:https://doi.org/10.4135/9781446247600.n6
+
+Bliese, P. D., Maltarich, M. A., & Hendricks, J. L. (2018). [Back to basics with mixed-effects models: Nine take-away points.](https://link.springer.com/content/pdf/10.1007/s10869-017-9491-z.pdf) Journal of Business and Psychology, 33(1), 1-23.
+
 Hamaker, E. L., & Muthén, B. (2020). [The fixed versus random effects debate and how it relates to centering in multilevel modeling](https://research-portal.uu.nl/ws/files/235997520/The_Fixed_Versus_Random_Effects_Debate_and_How_It_Relates_to_Centering_in_Multilevel_Modeling_.pdf). Psychological methods, 25(3), 365.
 
+Paccagnella, O. (2006). [Centering or not centering in multilevel models? The role of the group mean and the assessment of group effects.](https://journals.sagepub.com/doi/pdf/10.1177/0193841X05275649) Evaluation review, 30(1), 66-85.
+
+Bell, A., Jones, K., & Fairbrother, M. (2018). [Understanding and misunderstanding group mean centering: A commentary on Kelley et al.’s dangerous practice.](https://link.springer.com/content/pdf/10.1007/s11135-017-0593-5.pdf) Quality & quantity, 52(5), 2031-2036.
 
 
 
-YouTube Videos
+### Websites
 
-> Mikko Ronkko: [Grand-mean centering, cluster-mean centering, and cluster means](https://www.youtube.com/watch?v=b1NGpsBRokE&t=475s) (13 min)
-
-
-> Christian Geiser (QuantFish): [Why You Should Center Variables in Statistics](https://www.youtube.com/watch?v=h2nkqtLjjZY) (11 min, last 2 min)
+* The Analysis Factor: [When NOT to Center a Predictor Variable in Regression](https://www.theanalysisfactor.com/when-not-to-center-a-predictor-variable-in-regression/)
 
 
+* MetricGate (2026) [Group-Mean vs Grand-Mean Centering in Multilevel Models](https://metricgate.com/blogs/grand-mean-vs-group-mean-centering/) <-- INTERACTIVE!
 
 
-### Pairwise Differences Effect Size (Standardized Mean Difference, SMD)
+
+
+### YouTube
+
+* Mikko Ronkko: [Grand-mean centering, cluster-mean centering, and cluster means](https://www.youtube.com/watch?v=b1NGpsBRokE&t=475s) (13 min)
+
+* Christian Geiser (QuantFish): [Why You Should Center Variables in Statistics](https://www.youtube.com/watch?v=h2nkqtLjjZY) (11 min, last 2 min)
+
+
+
+
+
+
+## Effect Size: Variance Explained (R-squared like measures)
+
+
+
+```{block type='rmdcitation', echo=TRUE}
+Hox, J. J. (2017). Multilevel analysis: techniques and applications (3rd ed). New York: Routledge.
+
+Johnson, P. C. D. (2014). [Extension of Nakagawa and Schielzeth’s R2 GLMM to random slopes models.](https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/2041-210X.12225) Methods in Ecology and Evolution, 5(9), 944–946. doi:10.1111/2041-210X.12225
+
+Nakagawa, S., and Schielzeth, H. (2013). [A general and simple method for obtaining R2 from generalized linear mixed-effects models.](https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.2041-210x.2012.00261.x) Methods in Ecology and Evolution, 4(2), 133–142. doi:10.1111/j.2041-210x.2012.00261.x
+
+Nakagawa, S., Johnson, P. C. D., and Schielzeth, H. (2017). [The coefficient of determination R2 and intra-class correlation coefficient from generalized linear mixed-effects models revisited and expanded.](https://pmc.ncbi.nlm.nih.gov/articles/PMC5636267/pdf/rsif20170213.pdf) Journal of The Royal Society Interface, 14(134), 20170213.
+```
+
+
+### Articles
+
+Lorah, J. (2018). [Effect size measures for multilevel models: Definition, interpretation, and TIMSS example. Large-scale assessments in education](https://link.springer.com/article/10.1186/s40536-018-0061-2?trk=public_post_comment-text), 6(1), 8.
+
+
+Pek, J., & Flora, D. B. (2018). [Reporting effect sizes in original psychological research: A discussion and tutorial.](https://psycnet.apa.org/journals/met/23/2/208.pdf) Psychological methods, 23(2), 208.
+
+
+Rights, J. D., & Cole, D. A. (2018). [Effect size measures for multilevel models in clinical child and adolescent research: New R-squared methods and recommendations.](https://www.tandfonline.com/doi/pdf/10.1080/15374416.2018.1528550) Journal of Clinical Child & Adolescent Psychology, 47(6), 863-873.
+
+Lai, M. H., & Kwok, O. M. (2016). [Estimating standardized effect sizes for two-and three-level partially nested data.](https://www.tandfonline.com/doi/pdf/10.1080/00273171.2016.1231606) Multivariate Behavioral Research, 51(6), 740-756.
+
+
+Grob, J., & Moller, A. (2025). [Effect Size Estimation in Linear Mixed Models](https://link.springer.com/content/pdf/10.1007/s40300-025-00295-w.pdf). Metron. 83(3), 353-363.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### YouTube
+
+* Quant Psych: [Explaining Variance Explained in Mixed Models](https://www.youtube.com/watch?v=frDLoflnhyM) (10 min)
+
+
+
+
+
+## Effect Size: Pairwise Differences  (Standardized Mean Difference, SMD)
 
 
 
@@ -84,7 +225,7 @@ We can add interpretations to these SMD effects. There have been different propo
  * Moderate: 0.5 - 0.7
  * Large: > 0.8
 
- More recently **Hopkins** suggested a revised scale with threshold values at:  
+ More recently [**Will G. Hopkins**](https://www.sportsci.org/resource/stats/effectmag.html) suggested a revised scale with threshold values at:  
  
  * 0.2 small
  * 0.6 moderate
@@ -104,10 +245,11 @@ Westfall, J., Kenny, D. A., & Judd, C. M. (2014). [**Statistical power and optim
 ```
 
 
-#### Example Write-up for Methods-Analysis section:
+### Example: Write-up for Methods-Analysis section
 
+```{block type='rmdapa', echo=TRUE}
 Follow-up pairwise comparisons utilizing Kenward-Rodger degrees of freedom (Luke, 2017) were made **without/with??** controlling for multiple comparisons. Corresponding effect sizes give Cohen’s d-like standardized mean differences (SMD) utilizing the standard deviation based on the sum of the MLM variance components (Brysbaert & Stevens, 2018).
-
+```
 
 
 
