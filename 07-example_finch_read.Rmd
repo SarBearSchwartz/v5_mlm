@@ -179,6 +179,7 @@ df_achieve %>%
                 "School SES"          = ses, 
                 "School's Enrollment" = senroll) %>% 
   apaSupp::tab1(split = "gender",
+                missing = "ifany",
                 caption = "Summary by Gender")
 ```
 
@@ -264,129 +265,6 @@ df_achieve %>%
   theme_bw() +
   facet_grid(senroll ~ ses2)     # makes separate panels (rows ~ columns)
 ```
-
-
-<!-- ========================================================= -->
-## Single-Level Regression
-<!-- ========================================================= -->
-
-### Fit Nested Models
-
-Ignoring the fact that students are nested or clustered within schools, is called dissagregating.  This treats all students as independent units.
-
-```{r}
-# linear model - ignores school (for reference only)
-fit_read_lm_0 <- lm(formula = geread ~ 1,               # intercept only
-                    data    = df_achieve)
-
-fit_read_lm_1 <- lm(formula = geread ~ gevocab ,        # one predictor
-                    data    = df_achieve)
-
-fit_read_lm_2 <- lm(formula = geread ~ gevocab + age,   # two predictors
-                    data    = df_achieve)
-
-fit_read_lm_3 <- lm(formula = geread ~ gevocab*age,    # interation+main effects
-                    data    = df_achieve)
-```
-
-
-Now compare the models:
-
-```{r}
-apaSupp::tab_lms(list("Null" = fit_read_lm_0,
-                      "1 IV" = fit_read_lm_1,
-                      "2 IV" = fit_read_lm_2,
-                      "Interaction" = fit_read_lm_3),
-                 narrow = TRUE,
-                 caption = "OLS: Investigate Fixed, Pupil-level Predictors")
-```
-
-
-
-Assess the significance of terms in the last 'best' model
-
-```{r}
-summary(fit_read_lm_3) 
-```
-
-
-```{r}
-performance::r2(fit_read_lm_3)
-```
-
-
-```{r}
-anova(fit_read_lm_3)
-```
-
-### Visualize the Interaction
-
-```{r}
-fit_read_lm_3 %>% 
-  emmeans::emmeans(~ age + gevocab,
-                   at = list(age = c(82, 107, 135),  # min, max, median
-                             gevocab = c(0, 5, 10)))
-```
-
-
-
-```{r}
-fit_read_lm_3 %>% 
-  emmeans::emmeans(~ age + gevocab,
-                   at = list(age = c(82, 107, 135),
-                             gevocab = c(0, 5, 10))) %>% 
-  data.frame() %>% 
-  mutate(age = factor(age)) %>%           # must make a factor to separate lines
-  ggplot(aes(x = gevocab,
-             y = emmean,
-             color = age)) +
-  geom_point() +
-  geom_line() 
-```
-
-
-Here is a better version of the plot.
-
-Age is in months, so we want multiples of 12 for good visualization
-
-```{r}
-summary(df_achieve$age)/12   # divide by 12 to change months to years
-```
-
-A good set set of illustrative ages could be: 7, 9, and 11:
-
-```{r}
-c(7, 9, 11) * 12   # times by 12 to change years to months
-```
-
-
-```{r mlInteraction}
-fit_read_lm_3 %>% 
-  emmeans::emmeans(~ age + gevocab,
-                   at = list(age = c(84, 108, 132),
-                             gevocab = c(0, 5, 10))) %>% 
-  
-  data.frame() %>% 
-  mutate(age_yr = factor(age/12)) %>%    # it would be nice to plot age in years
-  ggplot(aes(x        = gevocab,
-             y        = emmean,
-             color    = age_yr,
-             linetype = age_yr)) +
-  geom_line(size = 1.25) +
-  theme_bw() +
-  labs(title = "Best Linear Model - Disaggregated Data (OLS)",
-       x = "Vocabulary Score",
-       y = "Reading Score",
-       linetype = "Age (yrs)",
-       color    = "Age (yrs)") +
-  theme(legend.position = c(0.85, 0.2),
-        legend.key.width = unit(2, "cm"),
-        legend.background = element_rect(color = "black")) +
-  scale_linetype_manual(values = c("solid", "longdash", "dotted")) +
-  scale_x_continuous(breaks = seq(from = 0, to = 11, by = 2)) +
-  scale_y_continuous(breaks = seq(from = 0, to = 11, by = 1))
-```
-
 
 
 <!-- ========================================================= -->
@@ -950,7 +828,7 @@ anova(fit_read_5ml, fit_read_8ml)
 ```
 
 <!-- ========================================================= -->
-## Centering Predictors: Change Center
+## Grand-Mean Centering Predictors: Change Center
 <!-- ========================================================= -->
 
 Centering variables measured on the lowest level only involves subtacting the mean from every value.  The spread or standard deviation is not changed.
@@ -967,7 +845,7 @@ df_achieve %>%
 ```
 
 
-### Use Centered Variables
+### Use Grand-Mean Centered Variables
 
 
 NOTE:  The models with CENTERED variables are able to be fit with the default optimizer settings and do not return the error: `"unable to evaluate scaled gradientModel failed to converge: degenerate  Hessian with 1 negative eigenvalues"`
@@ -1028,7 +906,7 @@ interactions::interact_plot(model = fit_read_5ml_c,
 
 
 <!-- ========================================================= -->
-## Rescaling Predictors: Change Units or Standardize
+## Re-scaling Predictors: Change Units or Standardize
 <!-- ========================================================= -->
 
 
@@ -1095,7 +973,7 @@ apaSupp::tab_lmers(list("no SES" = fit_read_5ml_s,
 anova(fit_read_5ml_s, fit_read_6ml_s, fit_read_7ml_s)
 ```
 
-There is evidence that SES moderates the main effect of vocabulary, after accounting for the interaction between age and vocabulary.  But there is NOT evidence of a three-way interaction between vobaculary, age, and SES.
+There is evidence that SES moderates the main effect of vocabulary, after accounting for the interaction between age and vocabulary, $\chi^2$(2) = 54.90, *p* < .001, but there is NOT evidence of a three-way interaction between vobaculary, age, and SES, $\chi^2$(2) = 0.77, *p* = .681.
 
 
 ## Final Model
@@ -1110,11 +988,25 @@ fit_read_6re_s <- lmerTest::lmer(geread ~ I(gevocab - 4.494) * I(age - 107.5) +
                              REML   = TRUE)
 ```
 
+```{r}
+summary(fit_read_6re_s)
+```
+
+
 ### Table
+
+Simple Version:
+
+```{r}
+apaSupp::tab_lmer(fit_read_6re_s)
+```
+
+
+Fancy Version:
 
 ```{r}
 apaSupp::tab_lmer(fit_read_6re_s,
-                  var_labels = c("(Intercept)" = "Mean Vocab, Age, SES",
+                  var_labels = c("(Intercept)" = "Intercept (Mean Vocab, Age, SES)",
                                  "I(gevocab - 4.494)" = "Vocab, points",
                                  "I(age - 107.5)" = "Age, months",
                                  "I(ses/10)" = "SES, 10 points",
@@ -1124,7 +1016,8 @@ apaSupp::tab_lmer(fit_read_6re_s,
                                  "school.cov__(Intercept).I(gevocab - 4.494)" = "Covariance: Intercepts & Slope",
                                  "school.var__I(gevocab - 4.494)" = "Variance: Slope of Vocab",
                                  "Residual.var__Observation" = "Variance: Residual"),
-                  caption = "MLM: Final Model")
+                  d = 3,
+                  caption = "Parameter Estimates for Final Model with Grand-Mean Centering")
 ```
 
 
@@ -1141,16 +1034,16 @@ df_achieve %>%
 ```
 
 ```{r}
-interactions::interact_plot(model = fit_read_6ml_s,  # model name
-                            pred  = gevocab,         # x-axis, main independent variable (continuous, ordinal)
-                            modx  = age,             # lines by moderator, another independent variable
-                            mod2 = ses)              # panel by 2nd moderator, another indep var
+interactions::interact_plot(model = fit_read_6re_s,  # model name
+                            pred  = gevocab,         # x-axis
+                            modx  = age,             # lines 
+                            mod2 = ses)              # panels
 ```
 
 Define values for the moderator(s):
 
 ```{r}
-interactions::interact_plot(model = fit_read_6ml_s,
+interactions::interact_plot(model = fit_read_6re_s,
                             pred  = gevocab,
                             modx  = age,
                             mod2 = ses,
@@ -1163,7 +1056,7 @@ interactions::interact_plot(model = fit_read_6ml_s,
 Swap the moderators:
 
 ```{r}
-interactions::interact_plot(model = fit_read_6ml_s,
+interactions::interact_plot(model = fit_read_6re_s,
                             pred  = gevocab,
                             mod2  = age,
                             modx = ses,
@@ -1174,17 +1067,14 @@ interactions::interact_plot(model = fit_read_6ml_s,
 ```
 
 ```{r}
-fit_read_6ml_s %>% 
+fit_read_6re_s %>% 
   emmeans::emmeans(~ gevocab*age*ses,
                    at = list(gevocab = seq(from = 0, to = 10, by = .1),
                              age = c(7*12, 9*12, 11*12),
                              ses = c(20, 55, 90))) %>% 
   data.frame() %>% 
   dplyr::mutate(ses = factor(ses)) %>% 
-  dplyr::mutate(age = factor(age/12) %>% 
-                  forcats::fct_recode("Age = 7" = "7",
-                                      "Age = 9" = "9",
-                                      "Age = 11" = "11")) %>% 
+  dplyr::mutate(age = factor(paste("Age = ", age/12))) %>% 
   ggplot(aes(x = gevocab,
              y = emmean,
              group = ses)) +
@@ -1229,7 +1119,154 @@ From the `performance::r2()` documentation, for mixed models:
 performance::r2(fit_read_6re_s)
 ```
 
-Over 32% of the variance in student reading is attributable vocab, ses, age, and school-to-school differences, R^2 = .322.
+Nearly a third of the variance in student reading is attributable vocab, ses, age, and school-to-school differences, $R^2_{c}$ = .322.
+
+After accounting for school-to-school differences, roughly  30% of the remaining variance in student reading is attributable vocab, ses, age, $R^2_{m}$ = .289.
+
+
+
+## Group-Mean Centering Predictors: changes meaning
+
+### Creating Centered and Altered Variables
+
+#### Changing units: Age & SES
+
+```{r}
+df_achieve %>% 
+  dplyr::mutate(ageyr = age/12) %>% 
+  dplyr::mutate(ses10 = ses/10) %>% 
+  dplyr::select(id, age, ageyr, ses, ses10)
+```
+
+
+
+
+
+#### Grand-Mean & Grand-Mean Centering: Age
+
+```{r}
+df_achieve %>% 
+  dplyr::mutate(ageyr = age/12) %>% 
+  dplyr::mutate(ageyr_GM = mean(ageyr)) %>% 
+  dplyr::mutate(ageyr_GMc = ageyr - ageyr_GM) %>% 
+  dplyr::select(id, age, ageyr, ageyr_GM, ageyr_GMc) 
+```
+
+#### Grand-Mean & Grand-Mean Centering: Vocab
+
+```{r}
+df_achieve %>% 
+  dplyr::mutate(gevocab_GM = mean(gevocab)) %>% 
+  dplyr::mutate(gevocab_GMc = gevocab - gevocab_GM) %>% 
+  dplyr::select(id, gevocab, gevocab_GM, gevocab_GMc) 
+```
+
+
+#### Group-Means & Group-Mean Centered: Vocab
+
+
+```{r}
+df_achieve %>% 
+  dplyr::group_by(school) %>% 
+  dplyr::mutate(gevocab_gM = mean(gevocab)) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::mutate(gevocab_gMc = gevocab - gevocab_gM) %>% 
+  dplyr::select(id, gevocab, gevocab_gM, gevocab_gMc)
+```
+
+
+#### All Together
+
+```{r}
+df_achieve_new <- df_achieve %>% 
+  dplyr::mutate(ses10 = ses/10) %>%                     # change units from 1 to 10
+  dplyr::mutate(ageyr = age/12) %>%                     # change units from months to years
+  dplyr::mutate(ageyr_GM   = mean(ageyr)) %>%           # Grand mean of age (in years)
+  dplyr::mutate(gevocab_GM = mean(gevocab)) %>%         # Grand mean of vocab
+  dplyr::mutate(ageyr_GMc   = ageyr   - ageyr_GM) %>%   # Grand-mean centered age (in years)
+  dplyr::mutate(gevocab_GMc = gevocab - gevocab_GM) %>% # Grand-mean centered vocab
+  dplyr::group_by(school) %>% 
+  dplyr::mutate(gevocab_gM = mean(gevocab)) %>%         # group means of vocab
+  dplyr::ungroup() %>% 
+  dplyr::mutate(gevocab_gMc = gevocab - gevocab_gM)     # group-mean centered vocab
+```
+
+
+
+### Use Group-Mean Centered in Model
+
+
+```{r}
+fit_read_c0_ml <- 
+  lmerTest::lmer(geread ~ gevocab + 
+                   (1 | school), 
+                 data = df_achieve_new,
+                 REML = FALSE)
+
+fit_read_c1_ml <- 
+  lmerTest::lmer(geread ~ gevocab_gM + 
+                   (1 | school), 
+                 data = df_achieve_new,
+                 REML = FALSE)
+
+fit_read_c2_ml <- 
+  lmerTest::lmer(geread ~ gevocab_gM + gevocab_gMc + 
+                   (1 | school), 
+                 data = df_achieve_new,
+                 REML = FALSE)
+```
+
+```{r}
+apaSupp::tab_lmers(list("Raw" = fit_read_c0_ml,
+                        "group Means" = fit_read_c1_ml,
+                        "group-Mean Centered" = fit_read_c2_ml))
+```
+
+
+
+
+```{r}
+fit_read_c3_ml <- 
+  lmerTest::lmer(geread ~ gevocab_gM + gevocab_gMc + ageyr_GMc +
+                   (1 | school), 
+                 data = df_achieve_new,
+                 REML = FALSE)
+
+fit_read_c4_ml <- 
+  lmerTest::lmer(geread ~ gevocab_gM*ageyr_GMc + gevocab_gMc + 
+                   (1 | school), 
+                 data = df_achieve_new,
+                 REML = FALSE)
+
+fit_read_c5_ml <- 
+  lmerTest::lmer(geread ~ gevocab_gM + gevocab_gMc*ageyr_GMc +
+                   (1 | school), 
+                 data = df_achieve_new,
+                 REML = FALSE)
+```
+
+
+
+```{r}
+apaSupp::tab_lmers(list("Main Effect" = fit_read_c3_ml,
+                        "Moderate\ngroup mean" = fit_read_c4_ml,
+                        "Moderate\ngroup-mean centered" = fit_read_c5_ml))
+```
+
+```{r}
+anova(fit_read_c2_ml, fit_read_c3_ml, fit_read_c4_ml)
+```
+
+
+
+```{r}
+anova(fit_read_c3_ml, fit_read_c5_ml)
+```
+
+
+
+
+
 
 ---- 
 

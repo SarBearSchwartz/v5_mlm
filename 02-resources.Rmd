@@ -31,9 +31,43 @@ Snijders, T. A. B., & Bosker, R. J. (2012). **Multilevel analysis: An introducti
 ```
 
 
+Nezlek, J. B. (2012). [Multilevel modeling for psychologists](https://jbnezl.people.wm.edu/Reprints/2012-APA-Handbook-MLM.pdf).
+
+Nezlek, J. B. (2020): [Applications of multilevel modeling in psychological science: Intensive repeated measures designs](https://www.cairn-int.info/article-E_ANPSY1_201_0039--applications-of-multilevel-modeling.htm).
+
+Huang, F. L. (2018). [Multilevel modeling myths](https://d1wqtxts1xzle7.cloudfront.net/89304135/05_20Multilevel_20myths_complete-libre.pdf?1659734178=&response-content-disposition=inline%3B+filename%3DMultilevel_modeling_myths.pdf&Expires=1791478798&Signature=Z3-S4y~vrC4CYJVhEUL-ieeZ-JjTFz-65uldb50YkP4L-crdYFBP5K~WWfMRa~mhSg7TUZUsxhOUw-uu6VMEU-SLfj-PA84sJb2cEkhPIH9pmBhVf9oIKiE-WhlAI7TJ8ykhHOcwW-URar75vsNQjtYEMNkda20n15J9WZP6k6JLdyRkGJaHikLcOZbCCCMnMqIXPiTDjTO7d6Mn~IRY0CL~O9wXgyg42gk6tVOpO9IE6~hNkC75XrlaAnuM4vpcttJx~2106M9kpjiPrR8jg4dEbPJfVDFWW7dgaNE2216tq5Hf~XFgJ8ewHnnYzaTFcfJbbkxuOGqP9diavcP6Rg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA). School Psychology Quarterly, 33(3), 492.
+
+Hamaker, E. L., & Muthén, B. (2020). [The fixed versus random effects debate and how it relates to centering in multilevel modeling](https://research-portal.uu.nl/ws/files/235997520/The_Fixed_Versus_Random_Effects_Debate_and_How_It_Relates_to_Centering_in_Multilevel_Modeling_.pdf). Psychological methods, 25(3), 365.
+
+Antonakis, J., Bastardoz, N., & Rönkkö, M. (2021). [On ignoring the random effects assumption in multilevel models: Review, critique, and recommendations.](https://journals.sagepub.com/doi/pdf/10.1177/1094428119877457) Organizational Research Methods, 24(2), 443-483.
 
 
-### Pairwise Differenes Effect Size (Standardized Mean Difference, SMD)
+
+
+### Centering Predictor Variables
+
+
+```{block type='rmdcitation', echo=TRUE}
+Enders, C. K., & Tofighi, D. (2007). [Centering predictor variables in cross-sectional multilevel models: a new look at an old issue.](https://www.researchgate.net/profile/Matthew-Kerry/post/Setting-Up-LMM-in-SPSS-Comparing-Two-Groups-12-Individuals-Each-Across-16-Time-Periods/attachment/5a4dc9b04cde266d587feae8/AS%3A578964678770688%401515047344406/download/Enders%26Tofighi+%282007%29+Centering+Predictors+in+XSect+MLMs.pdf) Psychological methods, 12(2), 121.
+```
+
+
+Hamaker, E. L., & Muthén, B. (2020). [The fixed versus random effects debate and how it relates to centering in multilevel modeling](https://research-portal.uu.nl/ws/files/235997520/The_Fixed_Versus_Random_Effects_Debate_and_How_It_Relates_to_Centering_in_Multilevel_Modeling_.pdf). Psychological methods, 25(3), 365.
+
+
+
+
+YouTube Videos
+
+> Mikko Ronkko: [Grand-mean centering, cluster-mean centering, and cluster means](https://www.youtube.com/watch?v=b1NGpsBRokE&t=475s) (13 min)
+
+
+> Christian Geiser (QuantFish): [Why You Should Center Variables in Statistics](https://www.youtube.com/watch?v=h2nkqtLjjZY) (11 min, last 2 min)
+
+
+
+
+### Pairwise Differences Effect Size (Standardized Mean Difference, SMD)
 
 
 
@@ -62,11 +96,11 @@ We can add interpretations to these SMD effects. There have been different propo
 
 
 ```{block type='rmdcitation', echo=TRUE}
-Brysbaert, M., & Stevens, M. (2018). **Power analysis and effect size in mixed effects models: A tutorial.** Journal of cognition, 1(1).  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6646942/ Links to an external site. 
+Brysbaert, M., & Stevens, M. (2018). [**Power analysis and effect size in mixed effects models: A tutorial.**](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6646942/  ) Journal of cognition, 1(1).  
 
-Luke, S. G. (2017). **Evaluating significance in linear mixed-effects models in R.** Behavior research methods, 49(4), 1494-1502.  https://link.springer.com/article/10.3758/s13428-016-0809-y#Sec3 Links to an external site. 
+Luke, S. G. (2017). [**Evaluating significance in linear mixed-effects models in R.**](https://link.springer.com/article/10.3758/s13428-016-0809-y#Sec3 ) Behavior research methods, 49(4), 1494-1502.   
 
-Westfall, J., Kenny, D. A., & Judd, C. M. (2014). **Statistical power and optimal design in experiments in which samples of participants respond to samples of stimuli.** Journal of Experimental Psychology: General, 143(5), 2020. https://psycnet.apa.org/doiLanding?doi=10.1037%2Fxge0000014
+Westfall, J., Kenny, D. A., & Judd, C. M. (2014). [**Statistical power and optimal design in experiments in which samples of participants respond to samples of stimuli.**](https://psycnet.apa.org/doiLanding?doi=10.1037%2Fxge0000014) Journal of Experimental Psychology: General, 143(5), 2020. 
 ```
 
 
