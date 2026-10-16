@@ -903,21 +903,15 @@ div.csl-indent {
 <p>Note: The IMI and DMI measures were only taken in the later weeks, but are not used here.</p>
 </blockquote>
 <p>DEPENDENT VARIABLE</p>
-<ul>
-<li><code>hamd</code> Hamilton Depression Scores (HD)</li>
-</ul>
+<p><code>hamd</code> Hamilton Depression Scores (HD)</p>
 <p>INDEPENDENT VARIABLES</p>
-<ul>
-<li><p><code>endog</code> Depression Diagnosis,</p></li>
-<li><p>endogenous<br />
-</p></li>
-<li><p>non-endogenous/reactive</p></li>
-<li><p>IMI (imipramine) drug-plasma levels (µg/l)<br />
-</p></li>
-<li><p>antidepressant given 225 mg/day, weeks 3-6</p></li>
-<li><p>DMI (desipramine) drug-plasma levels (µg/l)</p></li>
-<li><p>metabolite of imipramine</p></li>
-</ul>
+<p><code>endog</code> Depression Diagnosis,
+* endogenous<br />
+* non-endogenous/reactive</p>
+<p>IMI (imipramine) drug-plasma levels (µg/l)<br />
+* antidepressant given 225 mg/day, weeks 3-6</p>
+<p>DMI (desipramine) drug-plasma levels (µg/l)
+* metabolite of imipramine</p>
 <div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb512-1" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/riesby.dat.txt&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb512-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb512-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">id    =</span> <span class="st">&quot;V1&quot;</span>,</span>
 <span id="cb512-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb512-3" tabindex="-1"></a>                <span class="at">hamd  =</span> <span class="st">&quot;V2&quot;</span>,</span>
@@ -1422,12 +1416,9 @@ as a fixed effect only.
 <thead><tr style="overflow-wrap:break-word;"><th class="cl-ec514d73"><p class="cl-e9d81dfc"><span class="cl-14f50f7a"></span></p></th><th class="cl-bbecd21e"><p class="cl-772e05b4"><span class="cl-14f50f7a">Est</span></p></th><th class="cl-62373174"><p class="cl-e9d81dfc"><span class="cl-14f50f7a">(SE)</span></p></th><th class="cl-c0dcfe52"><p class="cl-c54950b5"><span class="cl-14f50f7a">p</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-24a0f8e3"><p class="cl-f47a1def"><span class="cl-9f1c1ce9">(Intercept)</span></p></td><td class="cl-5a5ea80d"><p class="cl-a7a7481b"><span class="cl-9f1c1ce9">23.55</span></p></td><td class="cl-28719a77"><p class="cl-f47a1def"><span class="cl-9f1c1ce9">(0.64)</span></p></td><td class="cl-3cf66812"><p class="cl-ef4a7702"><span class="cl-9f1c1ce9">&lt; .001***</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b8bf9855"><p class="cl-f47a1def"><span class="cl-9f1c1ce9">week</span></p></td><td class="cl-7a3c4756"><p class="cl-a7a7481b"><span class="cl-9f1c1ce9">-2.38</span></p></td><td class="cl-290eb109"><p class="cl-f47a1def"><span class="cl-9f1c1ce9">(0.14)</span></p></td><td class="cl-20e9f306"><p class="cl-ef4a7702"><span class="cl-9f1c1ce9">&lt; .001***</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-520939ce"><p class="cl-f47a1def"><span class="cl-14f50f7a">id.var__(Intercept)</span></p></td><td class="cl-0930243b"><p class="cl-a7a7481b"><span class="cl-14f50f7a">16.45</span></p></td><td class="cl-b131400e"><p class="cl-f47a1def"><span class="cl-14f50f7a"></span></p></td><td class="cl-964c6d6f"><p class="cl-ef4a7702"><span class="cl-14f50f7a"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-418a9d25"><p class="cl-f47a1def"><span class="cl-14f50f7a">Residual.var__Observation</span></p></td><td class="cl-7e106d32"><p class="cl-a7a7481b"><span class="cl-14f50f7a">19.10</span></p></td><td class="cl-368bde5f"><p class="cl-f47a1def"><span class="cl-14f50f7a"></span></p></td><td class="cl-d1fb52bc"><p class="cl-ef4a7702"><span class="cl-14f50f7a"></span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td  colspan="4"class="cl-9858da2d"><p class="cl-1f78fad1"><span class="cl-14f50f7a">Note. Est</span><span class="cl-9f1c1ce9"> = estimated regresssion coefficient for fixed effects and varaince/covariance estimates for random effects. </span><span class="cl-14f50f7a">p</span><span class="cl-9f1c1ce9"> = significance from Wald t-test for parameter estimate using Satterthwaite's method for degrees of freedom. </span><span class="cl-9f1c1ce9">Reproduction of Hedeker's table 4.3 on page 55, except using REML here instead of ML</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  colspan="4"class="cl-9858da2d"><p class="cl-1f78fad1"><span class="cl-9f1c1ce9">*</span><span class="cl-14f50f7a"> p &lt; </span><span class="cl-9f1c1ce9">.05</span><span class="cl-9f1c1ce9">. </span><span class="cl-9f1c1ce9">**</span><span class="cl-14f50f7a"> p &lt; </span><span class="cl-9f1c1ce9">.01</span><span class="cl-9f1c1ce9">. </span><span class="cl-9f1c1ce9">***</span><span class="cl-14f50f7a"> p &lt; </span><span class="cl-9f1c1ce9">.001</span><span class="cl-9f1c1ce9">. </span></p></td></tr></tfoot></table></div>
 <div class="rmdapa">
 <p>
-On average, patients start off with HDRS scores of
-<code>r fixef(fit_lmer_wks_RI_reml)[“(Intercept)”] %&gt;% round(2)</code>
-and then change by
-<code>r fixef(fit_lmer_wks_RI_reml)[“week”] %&gt;% round(2)</code>
-points each week. This weekly improvement of about 2 points a week is
-statistically significant via the Wald test.
+On average, patients start off with HDRS scores of 23.55 and then
+change by -2.38 points each week. This weekly improvement of about 2
+points a week is statistically significant via the Wald test.
 </p>
 </div>
 </div>
@@ -1555,17 +1546,17 @@ clusters, and setting it as a random factor might not be necessary.
 </div>
 <div class="rmdlightbulb">
 <p>
-<code>performane::icc()</code> calculates an adjusted and an
-unadjusted ICC, which both take all sources of uncertainty (i.e. of all
-random effects) into account.
+<code>performane::icc()</code> calculates an <strong>adjusted and an
+unadjusted ICC</strong>, which both take all sources of uncertainty
+(i.e. of all random effects) into account.
 </p>
 <p>
-While the adjusted ICC only relates to the random effects, the
-unadjusted ICC also takes the fixed effects variances into account, more
-precisely, the fixed effects variance is added to the denominator of the
-formula to calculate the ICC (see Nakagawa et al. 2017). Typically, the
-**adjusted ICC is of interest when the analysis of random effects is of
-interest.
+While the <strong>adjusted ICC</strong> only relates to the random
+effects, the <strong>unadjusted ICC</strong> also takes the fixed
+effects variances into account, more precisely, the fixed effects
+variance is added to the denominator of the formula to calculate the ICC
+(see Nakagawa et al. 2017). Typically, the <strong>adjusted ICC</strong>
+is of interest when the analysis of random effects is of interest.
 </p>
 <p>
 <code>performane::icc()</code> returns a meaningful ICC also for more
@@ -1590,7 +1581,7 @@ differences. Thus, subjects display considerable heterogeneity in
 depression levels.
 </p>
 <p>
-This value of .46is an oversimplification of the correlation matrix
+This value of .46 is an oversimplification of the correlation matrix
 above and may be thought of as the expected correlation between two
 randomly drawn weeks for any given person.
 </p>
@@ -1619,10 +1610,10 @@ marginal R2
 <p>
 Marginal and conditional r-squared values for mixed models are
 calculated based on Nakagawa et al. (2017). For more details on the
-computation of the variances, see insight::get_variance(). The random
-effect variances are actually the mean random effect variances, thus the
-r-squared value is also appropriate for mixed models with random slopes
-or nested random effects (see Johnson, 2014).
+computation of the variances, see <code>insight::get_variance()</code>.
+The random effect variances are actually the mean random effect
+variances, thus the r-squared value is also appropriate for mixed models
+with random slopes or nested random effects (see Johnson, 2014).
 </p>
 <p>
 <strong>Conditional R2</strong>: takes both the <strong>fixed and
@@ -1634,7 +1625,8 @@ variance of the <strong>fixed effects</strong>.
 </p>
 <p>
 The contribution of random effects can be deduced by subtracting the
-marginal R2 from the conditional R2 or by computing the icc().
+marginal R2 from the conditional R2 or by computing the
+<code>performance::icc()</code>.
 </p>
 </div>
 <div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb552-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">r2</span>(fit_lmer_wks_RI_reml)</span></code></pre></div>
@@ -1670,29 +1662,160 @@ randomly drawn weeks for any given person.
 <div id="table-of-parameter-estimates-1" class="section level4 hasAnchor" number="11.4.6.1">
 <h4><span class="header-section-number">11.4.6.1</span> Table of Parameter Estimates<a href="mlm-longitudinal-hedeker-gibbons---depression.html#table-of-parameter-estimates-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Note: the <code>apaSupp</code> tables can not combine models of different types.</p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb555-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(fit_lm_wks_ml, fit_lmer_wks_RI_reml),</span>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb555-1" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">knitreg</span>(<span class="fu">list</span>(fit_lm_wks_ml, fit_lmer_wks_RI_reml),</span>
 <span id="cb555-2"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb555-2" tabindex="-1"></a>                  <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">&quot;Single-Level&quot;</span>, <span class="st">&quot;Multilevel&quot;</span>),</span>
 <span id="cb555-3"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb555-3" tabindex="-1"></a>                  <span class="at">single.row =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb555-4"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb555-4" tabindex="-1"></a>                  <span class="at">caption =</span> <span class="st">&quot;MLM: Longitudinal Null Models&quot;</span>,</span>
 <span id="cb555-5"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb555-5" tabindex="-1"></a>                  <span class="at">caption.above =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb555-6"><a href="mlm-longitudinal-hedeker-gibbons---depression.html#cb555-6" tabindex="-1"></a>                  <span class="at">custom.note =</span> <span class="st">&quot;The singel-level model treats are observations as being independent and unrelated to each other, even if they were made on the same person.&quot;</span>)</span></code></pre></div>
-<p>===========================================================
-Single-Level Multilevel<br />
-———————————————————–
-(Intercept) 23.60 (0.55) *** 23.55 (0.64) <strong><em>
-week -2.41 (0.18) </em></strong> -2.38 (0.14) ***
-———————————————————–
-R^2 0.32<br />
-Adj. R^2 0.32<br />
-Num. obs. 375 375<br />
-AIC 2294.73<br />
-BIC 2310.43<br />
-Log Likelihood -1143.36<br />
-Num. groups: id 66<br />
-Var: id (Intercept) 16.45<br />
-Var: Residual 19.10<br />
-===========================================================
-The singel-level model treats are observations as being independent and unrelated to each other, even if they were made on the same person.</p>
+<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;color: #000000;border-top: 2px solid #000000;">
+<caption>
+MLM: Longitudinal Null Models
+</caption>
+<thead>
+<tr>
+<th style="padding-left: 5px;padding-right: 5px;">
+ 
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Single-Level
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Multilevel
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+(Intercept)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+23.60 (0.55)<sup class="texreg-stars">***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+23.55 (0.64)<sup class="texreg-stars">***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+week
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-2.41 (0.18)<sup class="texreg-stars">***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-2.38 (0.14)<sup class="texreg-stars">***</sup>
+</td>
+</tr>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+R<sup>2</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.32
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+ 
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Adj. R<sup>2</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.32
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+ 
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Num. obs.
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+375
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+375
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+AIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+ 
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2294.73
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+BIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+ 
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2310.43
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Log Likelihood
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+ 
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-1143.36
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Num. groups: id
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+ 
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+66
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Var: id (Intercept)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+ 
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+16.45
+</td>
+</tr>
+<tr style="border-bottom: 2px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+Var: Residual
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+ 
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+19.10
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="font-size: 0.8em;" colspan="3">
+The singel-level model treats are observations as being independent and unrelated to each other, even if they were made on the same person.
+</td>
+</tr>
+</tfoot>
+</table>
 <p>For the multilevel model, the Wald tests indicated the fixed intercept is significant <em>(no surprised that the depressions scores are not zero at baseline)</em>. More of note is the significance of the fixed effect of time. This signifies that depression scores are declining over time. On average, patients are improving (Hamilton Depression Scores get smaller) across time, by an average of 2.4’ish points a week.</p>
 <p>For the multilevel model, the Wald tests indicated the fixed intercept is significant (no surprised that the depressions scores are not zero at baseline). More of note is the significance of the fixed effect of time. This signifies that depression scores are declining over time. On average, patients are improving (Hamilton Depression Scores get smaller) across time, by an average of 2.4’ish points a week.</p>
 </div>
