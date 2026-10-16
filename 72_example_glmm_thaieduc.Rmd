@@ -29,8 +29,16 @@ knitr::opts_chunk$set(comment     = "",
 ### Load Packages
 
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)  
+```{r, eval=FALSE}
+remotes::install_github("sarbearschwartz/apaSupp") 
+```
+
+Load/activate these packages
+
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above) 
 library(haven)
 library(psych) 
 library(lme4) 
@@ -50,7 +58,7 @@ NESTING
 * `schoolid` identify school each student attends
 
 
-OUCOME
+OUTCOME
 * `re` student repeated a grade during primary school: Yes or No
 
 

@@ -17,8 +17,7 @@ knitr::opts_chunk$set(comment     = "",
 
 
 ```{r, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("sarbearschwartz/apaSupp") # updated 10/14/2025
+remotes::install_github("sarbearschwartz/apaSupp") 
 ```
 
 Load/activate these packages

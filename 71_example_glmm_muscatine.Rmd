@@ -18,8 +18,7 @@ knitr::opts_chunk$set(comment     = "",
 
 
 ```{r, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("sarbearschwartz/apaSupp") # updated 11/11/2025
+remotes::install_github("sarbearschwartz/apaSupp") 
 ```
 
 Load/activate these packages
@@ -30,8 +29,7 @@ library(flextable)
 library(apaSupp)      # Not on CRAN, on GitHub (see above)
 library(psych)      
 library(geepack)  
-library(lme4)         
-library(lmerTest)
+library(lme4)      
 library(corrplot) 
 library(emmeans)
 library(interactions)
@@ -438,7 +436,8 @@ plot_pred_glm <- fit_glm_2 %>%
          legend.justification = c(-0.05, 1.05),
          legend.background = element_rect(color = "black"),
          legend.key.width = unit(2, "cm")) +
-  scale_x_continuous(breaks = seq(from = 6, to = 18, by = 3)) 
+  scale_x_continuous(breaks = seq(from = 6, to = 18, by = 3))  +
+  scale_y_continuous(labels = scales::percent_format())
 
 plot_pred_glm 
 ```
@@ -541,7 +540,8 @@ plot_pred_gee <- fit_gee_2un %>%
         legend.justification = c(-0.05, 1.05),
         legend.background = element_rect(color = "black"),
         legend.key.width = unit(2, "cm")) +
-  scale_x_continuous(breaks = seq(from = 6, to = 18, by = 3)) 
+  scale_x_continuous(breaks = seq(from = 6, to = 18, by = 3))  +
+  scale_y_continuous(labels = scales::percent_format())
 
   
 plot_pred_gee
@@ -591,9 +591,11 @@ interactions::interact_plot(model = fit_glmm_2,
 
 
 ```{r}
-Effect(c("gender", "ageGc"),fit_glmm_2) %>% 
-  data.frame %>% 
-  mutate(fit_exp = exp(fit))
+fit_glmm_2 %>% 
+  emmeans::emmeans(~ gender*ageGc,
+                   at = list(ageGc = c(-3, 0, 3)),
+                   type = "response",
+                   level = .685)
 ```
 
 
@@ -629,9 +631,10 @@ plot_pred_glmm <- fit_glmm_2 %>%
         legend.justification = c(-0.05, 1.05),
         legend.background = element_rect(color = "black"),
         legend.key.width = unit(2, "cm")) +
-  scale_x_continuous(breaks = seq(from = 6, to = 18, by = 3)) 
+  scale_x_continuous(breaks = seq(from = 6, to = 18, by = 3)) +
+  scale_y_continuous(labels = scales::percent_format())
 
-plot_pred_glmm 
+plot_pred_glmm
 ```
 
 ## Compare Methods

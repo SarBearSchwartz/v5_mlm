@@ -19,8 +19,7 @@ knitr::opts_chunk$set(comment     = "",
 Download/install a new GitHub package
 
 ```{r, eval=FALSE}
-install.packages("remotes")
-remotes::install_github("sarbearschwartz/apaSupp") # updated 9/17/2025
+remotes::install_github("sarbearschwartz/apaSupp")
 ```
 
 Load/activate these packages

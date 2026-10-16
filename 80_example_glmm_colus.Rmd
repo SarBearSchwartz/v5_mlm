@@ -19,43 +19,34 @@ knitr::opts_chunk$set(comment     = "",
                       fig.height  = 4)        # set default figure height to 3 inches
 ```
 
-## Packages
+## PREPARATION 
 
-### CRAN
+### Load Packages
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(pander)       # nice looking genderal tabulations
-library(furniture)    # nice table1() descriptives
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-library(psych)        # contains some useful functions, like headTail
 
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
-library(gee)          # Generalized Estimating Equations
-library(optimx)       # Optimizers for use in lme4::glmer
-library(MuMIn)        # Multi-Model Inference (caluclate QIC)
-library(effects)      # Plotting estimated marginal means
+```{r, eval=FALSE}
+remotes::install_github("sarbearschwartz/apaSupp") 
+```
+
+Load/activate these packages
+
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(psych)        
+library(lme4)         
+library(gee)          
+library(optimx)       
+library(MuMIn)        
+library(effects)      
 library(interactions)
 library(performance)
-
-library(patchwork)    # combining graphics\
-
+library(patchwork)   
 
 library(cold)   # this package holds the dataset we need
 ```
 
-
-### GitHub
-
-Helper `extract` functions for exponentiating parameters form generalized regression models within a `texreg` table of model parameters.
-
-```{r, message=FALSE, error=FALSE}
-# install.packages("devtools")
-# library(devtools)
-# install_github("SarBearSchwartz/texreghelpr")
-
-library(texreghelpr)
-```
 
 
 ## Data Prep

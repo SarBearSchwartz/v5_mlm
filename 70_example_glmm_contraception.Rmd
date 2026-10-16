@@ -10,38 +10,31 @@ knitr::opts_chunk$set(comment     = "",
                       fig.height  = 4)        # set default figure height to 3 inches
 ```
 
-## Packages
+## PREPARATION
 
-### CRAN
+### Load Packages
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)    # all things tidy
-library(pander)       # nice looking genderal tabulations
-library(furniture)    # nice table1() descriptives
-library(texreg)       # Convert Regression Output to LaTeX or HTML Tables
-library(psych)        # contains some useful functions, like headTail
 
-library(lme4)         # Linear, generalized linear, & nonlinear mixed models
-library(effects)      # Plotting estimated marginal means
+```{r, eval=FALSE}
+remotes::install_github("sarbearschwartz/apaSupp") 
+```
+
+Load/activate these packages
+
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(psych)       
+library(lme4)    
+library(optimx)     
+library(effects)      
 library(emmeans)
 library(interactions)
 library(performance)
-
-library(optimx)       # Unify and streamline optimization capabilities in R
 ```
 
 
-### GitHub
-
-Helper `extract` functions for exponentiating parameters form generalized regression models within a `texreg` table of model parameters.
-
-```{r, message=FALSE, error=FALSE}
-# install.packages("devtools")
-# library(devtools)
-# install_github("SarBearSchwartz/texreghelpr")
-
-library(texreghelpr)
-```
 
 
 ## Data Prep
@@ -67,16 +60,16 @@ In clinical trials of modern hormonal contraceptives, pregnancy is exceedingly r
 
 * Indicators   
 
-    + `id` participant identification
-    + `occasion` denotes the four 90-day periods
-    
++ `id` participant identification
++ `occasion` denotes the four 90-day periods
+
 * Outcome or dependent variable    
 
-    + `amenorrhea` Amenorrhea Status: 1=Amenorrhea, 0=No Amenorrhea
-    
++ `amenorrhea` Amenorrhea Status: 1=Amenorrhea, 0=No Amenorrhea
+
 * Main predictor or independent variable of interest   
 
-    + `dose` 0 = Low (100 mg), 1 = High (150 mg)
++ `dose` 0 = Low (100 mg), 1 = High (150 mg)
 
 
 ### Import
@@ -88,7 +81,7 @@ df_raw <- read.table("data/RCTcontraception.txt", header=TRUE)
 
 
 ```{r}
-str(df_raw)
+tibble::glimpse(df_raw)
 ```
 
 
@@ -114,7 +107,7 @@ df_long <- df_raw %>%
 
 
 ```{r}
-str(df_long)
+tibble::glimpse(df_long)
 ```
 
 
@@ -137,7 +130,7 @@ df_wide <- df_long %>%
 
 
 ```{r}
-str(df_wide)
+tibble::glimpse(df_wide)
 ```
 
 
@@ -227,6 +220,8 @@ fit_2 <- lme4::glmer(amenorrhea ~ time + dose + (1 | id),
 ```
 
 
+
+
 #### Compare via LRT
 
 Should the interaction be included?  No.
@@ -237,8 +232,11 @@ anova(fit_1, fit_2)
 
 
 ```{r}
-performance::compare_performance(fit_1, fit_2, rank = TRUE)
+apaSupp::tab_lmer_fits(list("Intraction"   = fit_1, 
+                            "Main Effects" = fit_2))
 ```
+
+
 
 
 ### Model Parameter Tables
@@ -247,13 +245,13 @@ performance::compare_performance(fit_1, fit_2, rank = TRUE)
 ```{r}
 apaSupp::tab_glmers(list("Intraction"   = fit_1, 
                          "Main Effects" = fit_2),
-                caption = "MLM Parameter Estimates: Inclusion of Interaction (SE and p-values)")
+                    caption = "MLM Parameter Estimates: Inclusion of Interaction (SE and p-values)")
 ```
 
 
 ```{r}
 apaSupp::tab_glmer(fit_2,
-                caption = "MLM Parameter Estimates: Inclusion of Interaction (SE and p-values)")
+                   caption = "MLM Parameter Estimates: Inclusion of Interaction (SE and p-values)")
 ```
 
 
@@ -282,7 +280,7 @@ interactions::interact_plot(model = fit_2,
                             modx = dose,
                             interval = TRUE,
                             outcome.scale = "response",
-                            y.label = "Estimated Marginal Probability of Ammenorea") 
+                            y.label = "Estimated Predicted Probability of Ammenorea") 
 ```
 
 
@@ -305,11 +303,8 @@ interactions::interact_plot(model = fit_2,
         legend.justification = c(-0.1, 1.1),
         legend.background = element_rect(color = "black"),
         legend.key.width = unit(1.5, "cm")) +
-  scale_x_continuous(breaks = 0:3,
-                     labels = c("0",
-                                "3",
-                                "6",
-                                "9"))
+  scale_x_continuous(breaks = 0:3) +
+  scale_y_continuous(labels = scales::percent_format())
 ```
 
 
@@ -328,16 +323,26 @@ fit_2 %>%
                   ymax = asymp.UCL,
                   fill = dose),
               alpha = .2) +
-  geom_line(aes(color = dose),
+  geom_line(aes(color = dose,
+                linetype = dose),
             size = 1.5) +
-  theme_bw() +  labs(x = "90-day Window",
+  theme_bw() +  
+  theme(legend.position = c(0, 1),
+        legend.justification = c(-0.1, 1.1),
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(2.5, "cm")) +
+  labs(x = "90-day Window",
        y = "Predicted Probability of Amenorrhea",
-       linetype = "Dosage:") +
+       linetype = "Dosage:",
+       color = "Dosage:",
+       fill = "Dosage:") +
   scale_x_continuous(breaks = 0:3,
                      labels = c("First",
                                 "Second",
                                 "Third",
-                                "Fourth"))
+                                "Fourth"))+
+  scale_y_continuous(labels = scales::percent_format()) +
+  scale_linetype_manual(values = c("solid", "longdash"))
 ```
 
 
@@ -362,38 +367,38 @@ Special provisions are made for **bobyqa**, **Nelder_Mead**, and optimizers wrap
 
 ```{r}
 fit_3a <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose + (1 | id),
-                     data = df_long,
-                     nAGQ = 50,             # increase the number of points
-                     family = binomial)
+                      data = df_long,
+                      nAGQ = 50,             # increase the number of points
+                      family = binomial)
 ```
 
 ### Laplace Approximation: switch to the Nelder_Mead optimizer
 
 ```{r}
 fit_3b <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose + (1 | id),
-                     data = df_long,
-                     control = glmerControl(optimizer ="Nelder_Mead"),
-                     family = binomial)
+                      data = df_long,
+                      control = glmerControl(optimizer ="Nelder_Mead"),
+                      family = binomial)
 ```
 
 ### Laplace Approximation: Switch to the `L-BFGS-B` method
 
 ```{r, message = TRUE, error=TRUE}
 fit_3c <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose + (1 | id),
-                     data = df_long,
-                     control = glmerControl(optimizer ='optimx',
-                                            optCtrl=list(method='L-BFGS-B')),
-                     family = binomial)
+                      data = df_long,
+                      control = glmerControl(optimizer ='optimx',
+                                             optCtrl=list(method='L-BFGS-B')),
+                      family = binomial)
 ```
 
 ### Laplace Approximation: Switch to the `nlminb` method
 
 ```{r}
 fit_3d <- lme4::glmer(amenorrhea ~ time + I(time^2) + time:dose + I(time^2):dose + (1 | id),
-                     data = df_long,
-                     control = glmerControl(optimizer ='optimx',
-                                            optCtrl=list(method='nlminb')),
-                     family = binomial)
+                      data = df_long,
+                      control = glmerControl(optimizer ='optimx',
+                                             optCtrl=list(method='nlminb')),
+                      family = binomial)
 ```
 
 ## Quadratic Time?
@@ -406,12 +411,14 @@ anova(fit_2, fit_3d)
 
 
 
-```{r, results="asis"}
-texreg::knitreg(list(fit_3a, fit_3b, fit_3c, fit_3d),
-                custom.model.names = c("nAGQ", "Nelder_Mead",
-                                       "L BFGS B", "nlminb"),
-                caption = "GLMM: Various methods of ML approximation",
-                digits = 4)
+```{r,}
+apaSupp::tab_glmers(list("nAGQ" = fit_3a, 
+                         "Nelder Mead" = fit_3b, 
+                         # "L BFGS B" = fit_3c, 
+                         "nlminb" = fit_3d),
+                    narrow = TRUE,
+                    caption = "GLMM: Various methods of ML approximation",
+                    d = 3)
 ```
 
 
@@ -446,16 +453,26 @@ fit_3d %>%
                   ymax = asymp.UCL,
                   fill = dose),
               alpha = .2) +
-  geom_line(aes(color = dose),
+  geom_line(aes(color = dose,
+                linetype = dose),
             size = 1.5) +
-  theme_bw() +  labs(x = "90-day Window",
+  theme_bw() +
+  theme(legend.position = c(0, 1),
+        legend.justification = c(-0.1, 1.1),
+        legend.background = element_rect(color = "black"),
+        legend.key.width = unit(2.5, "cm")) +
+  labs(x = "90-day Window",
        y = "Predicted Probability of Amenorrhea",
-       linetype = "Dosage:") +
+       linetype = "Dosage:",
+       color = "Dosage:",
+       fill = "Dosage:") +
   scale_x_continuous(breaks = 0:3,
                      labels = c("First",
                                 "Second",
                                 "Third",
-                                "Fourth"))
+                                "Fourth"))+
+  scale_y_continuous(labels = scales::percent_format()) +
+  scale_linetype_manual(values = c("solid", "longdash"))
 ```
 
 

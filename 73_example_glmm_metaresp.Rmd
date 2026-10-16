@@ -30,14 +30,20 @@ https://bookdown.org/animestina/phd_july_19/now-for-advanced-logistic-mixed-effe
 ### Load Packages
 
 
-```{r, message=FALSE, error=FALSE}
-library(tidyverse)  
-library(haven)
-library(psych)        
+```{r, eval=FALSE}
+remotes::install_github("sarbearschwartz/apaSupp") 
+```
 
+Load/activate these packages
+
+```{r, message=FALSE, error=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)    
+library(flextable)
+library(apaSupp)      # Not on CRAN, on GitHub (see above)
+library(haven)
+library(psych)     
 library(lme4) 
 library(optimx)
-
 library(emmeans)     
 library(performance)
 library(interactions) 
@@ -49,7 +55,8 @@ library(interactions)
 
 ### Background
 
-NESTING
+NESTING  
+
 * `source` study id on which multiple conditions were reported (most studies reported on 2 of the 3 modes)
 
 
