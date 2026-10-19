@@ -32,7 +32,7 @@ library(sjstats)
 
 
 
-## Background
+## BACKGROUND
 
 
 ```{block type='rmdlink', echo=TRUE}
@@ -45,10 +45,12 @@ The following example is used through out @hox2017's chapater 5.
 The GPA for 200 college students were followed for 6 consecutive semesters (simulated).  Job status was also measured as number of hours worked for the same size occations.  Time-invariant covariates are the student's gender and high school GPA.  The variable `admitted` will not be used.  
 
 
+### Long Format
+
 ```{r}
 df_raw <- haven::read_sav("data/gpa2long.sav") %>% 
   haven::as_factor() %>%             # retain the labels from SPSS --> factor
-  haven::zap_label()
+  haven::zap_label() 
 ```
 
 
@@ -56,29 +58,31 @@ df_raw <- haven::read_sav("data/gpa2long.sav") %>%
 tibble::glimpse(df_raw) 
 ```
 
-```{r}
-df_raw %>% 
-  dplyr::select(occas, job) %>% 
-  table(useNA = "always")
-```
+
+
+
+
+
 
 
 
 ```{r}
 df_gpa_long <- df_raw %>% 
+  dplyr::mutate_if(is.factor, forcats::fct_drop) %>% 
   dplyr::mutate(student = factor(student)) %>% 
+  dplyr::mutate(sex = forcats::fct_recode(sex,
+                                          "Female" = "female",
+                                          "Male" = "male")) %>% 
   dplyr::mutate(sem = case_when(occas == "year 1 semester 1" ~ 1,
                                 occas == "year 1 semester 2" ~ 2,
                                 occas == "year 2 semester 1" ~ 3,
                                 occas == "year 2 semester 2" ~ 4,
                                 occas == "year 3 semester 1" ~ 5,
-                                occas == "year 3 semester 2" ~ 6)) %>% 
+                                occas == "year 3 semester 2" ~ 6) - 1) %>% 
   dplyr::mutate(job = fct_drop(job)) %>% 
-  dplyr::mutate(hrs = case_when(job == "no job" ~ 0,
-                                job == "1 hour" ~ 1,
+  dplyr::mutate(hrs = case_when(job == "1 hour"  ~ 1,
                                 job == "2 hours" ~ 2,
-                                job == "3 hours" ~ 3,
-                                job == "4 or more hours" ~ 4)) %>%  
+                                job == "3 hours" ~ 3)) %>%  
   dplyr::select(student, sex, highgpa, sem, job, hrs, gpa) %>% 
   dplyr::arrange(student, sem)
 ```
@@ -88,18 +92,40 @@ tibble::glimpse(df_gpa_long)
 ```
 
 
+
 ```{r}
 df_gpa_long %>% 
-  psych::headTail(top = 10) %>% 
+  psych::headTail(top = 14,
+                  bottom = 8) %>% 
   flextable::flextable() %>% 
-  apaSupp::theme_apa(caption = "Data in Long Format")
+  apaSupp::theme_apa(caption = "Sample of LONG format of the dataset") %>%
+  flextable::hline(i = c(6, 12, 17))
 ```
 
 
+
+
+
+
+
+```{r}
+df_raw %>% 
+  dplyr::select(job,
+                "Occation" = occas) %>% 
+  apaSupp::tab1(split = "job",
+                missing = "ifany",
+                percent = "row",
+                caption = "Distribution of Hours Worked at a Job at each Occation")
+```
+
+
+### Wide Format
+
 ```{r}
 df_gpa_wide <- df_gpa_long %>% 
+  dplyr::select(-job) %>% 
   tidyr::pivot_wider(names_from = sem,
-                     values_from = c(job, hrs, gpa),
+                     values_from = c(hrs, gpa),
                      names_sep = "_")
 ```
 
@@ -109,14 +135,31 @@ tibble::glimpse(df_gpa_wide)
 ```
 
 
+
+
+```{r}
+df_gpa_wide %>% 
+  psych::headTail() %>% 
+  flextable::flextable() %>% 
+  apaSupp::theme_apa(caption = "Sample of WIDE format of the dataset")
+  
+```
+
+
+## EXPLORTATORY DATA ANLAYSIS
+
+
+### Sample Summary
+
+
 ```{r}
 df_gpa_wide %>% 
   dplyr::select(sex,
                 "High School GPA" = highgpa, 
-                "Initial College GPA" = gpa_1, 
-                "Initial Job" = job_1, 
-                "Initial Hrs" = hrs_1) %>% 
+                "Initial College GPA" = gpa_0, 
+                "Initial Hrs Working" = hrs_0) %>% 
   apaSupp::tab1(split = "sex",
+                missing = "ifany",
                 caption = "Demographic Summary by Sex")
 ```
 
@@ -124,12 +167,19 @@ df_gpa_wide %>%
 
 ```{r}
 df_gpa_wide %>% 
-  dplyr::select(sex, gpa_1, gpa_2, gpa_3, gpa_4, gpa_5, gpa_6) %>% 
+  dplyr::select(sex, 
+                "Year 1, Semester 1" = gpa_0, 
+                "Year 1, Semester 2" = gpa_1, 
+                "Year 2, Semester 1" = gpa_2, 
+                "Year 2, Semester 2" = gpa_3, 
+                "Year 3, Semester 1" = gpa_4, 
+                "Year 3, Semester 2" = gpa_5) %>% 
   apaSupp::tab1(split = "sex",
+                missing = "ifany",
                 caption = "Hox Table 5.2 (page 77) GPA means at six occations, for male and female students")
 ```
 
-## MLM
+## MULTILEVEL MODELING
 
 ### Null Models and ICC
 
@@ -145,12 +195,12 @@ fit_lmer_0_re <- lmerTest::lmer(gpa ~ 1 + (1|student),
 performance::icc(fit_lmer_0_re)
 ```
 
-
-Over a third of the variance in the 6 GPA measures is variance between individuals, and about two-thirds is variance within individuals across time, $\rho = .369$.
-
+```{block type='rmdapa', echo=TRUE}
+Over a third of the variance in the 6 GPA measures is variance between individuals, and about two-thirds is variance within individuals across time, *ICC* = .369.
+```
 
 ```{r}
-fit_lmer_1_re <- lmerTest::lmer(gpa ~ I(sem - 1) + (1|student),
+fit_lmer_1_re <- lmerTest::lmer(gpa ~ sem + (1|student),
                                 data = df_gpa_long,
                                 REML = TRUE)
 ```
@@ -159,14 +209,18 @@ fit_lmer_1_re <- lmerTest::lmer(gpa ~ I(sem - 1) + (1|student),
 performance::icc(fit_lmer_1_re)
 ```
 
-After accounting for the linear change in GPA over semesters, about half of the remaining variance in GPA scores is attributable to person-to-person difference.  
+```{block type='rmdapa', echo=TRUE}
+After accounting for the linear change in GPA over semesters, about half of the remaining variance in GPA scores is attributable to person-to-person difference, *adj-ICC* = .523.  
 
-> Another way to say it, is about half of the variance in initial GPAs is due to student-to-student differences.
+Another way to say it, is about half of the variance in **initial GPAs** is due to student-to-student differences.
+```
+
+
 
 ```{r}
 apaSupp::tab_lmers(list("M0: Null w/o Time" = fit_lmer_0_re,
                         "M1: Null w/Time"   = fit_lmer_1_re),
-                   caption = "Null Models")
+                   caption = "Parameter Estimates for the Null Models")
 ```
 
 
@@ -179,17 +233,17 @@ fit_lmer_0_ml <- lmerTest::lmer(gpa ~ 1 + (1|student),
                                 data = df_gpa_long,
                                 REML = FALSE)
 
-fit_lmer_1_ml <- lmerTest::lmer(gpa ~ I(sem - 1) + (1|student),
+fit_lmer_1_ml <- lmerTest::lmer(gpa ~ sem + (1|student),
                                 data = df_gpa_long,
                                 REML = FALSE)
 
 
-fit_lmer_2_ml <- lmerTest::lmer(gpa ~ I(sem - 1) + hrs + (1|student),
+fit_lmer_2_ml <- lmerTest::lmer(gpa ~ sem + hrs + (1|student),
                                 data = df_gpa_long,
                                 REML = FALSE)
 
 
-fit_lmer_3_ml <- lmerTest::lmer(gpa ~ I(sem - 1) + hrs + highgpa + sex + (1|student),
+fit_lmer_3_ml <- lmerTest::lmer(gpa ~ sem + hrs + highgpa + sex + (1|student),
                                 data = df_gpa_long,
                                 REML = FALSE)
 ```
@@ -198,9 +252,9 @@ fit_lmer_3_ml <- lmerTest::lmer(gpa ~ I(sem - 1) + hrs + highgpa + sex + (1|stud
 ```{r}
 apaSupp::tab_lmers(list("M2: Occ" = fit_lmer_1_ml, 
                         "M3: Job" = fit_lmer_2_ml, 
-                        "M4: GPA, Sex" = fit_lmer_3_ml),
+                        "M4: hsGPA, Sex" = fit_lmer_3_ml),
                    var_labels = c("(Intercept)" = "(Intercept)",
-                                  "I(sem - 1)" = "Semester",
+                                  "sem" = "Semester",
                                   "hrs" = "Hours Working",
                                   "highgpa" = "High School GPA",
                                   "sex" = "Sex",
@@ -208,7 +262,7 @@ apaSupp::tab_lmers(list("M2: Occ" = fit_lmer_1_ml,
                                   "female" = "Female"),
                    narrow = TRUE,
                    caption = "Hox Table 5.3 (page 78) Results of Multilevel Anlaysis of GPA, Fixed Effects",
-                   general_note = "Intercept refers to population mean for a Male who is not working during their first semester")
+                   general_note = "Intercept refers to population mean for a Male who is working a single hours during their first semester")
 ```
 
 
@@ -217,7 +271,7 @@ tab_lmer_fits(list("M0: Null w/o Time" = fit_lmer_0_re,
                    "M1: Null w/Time"   = fit_lmer_1_re, 
                    "M2: Occ"           = fit_lmer_1_ml, 
                    "M3: Job"           = fit_lmer_2_ml, 
-                   "M4: GPA, Sex"      = fit_lmer_3_ml))
+                   "M4: hsGPA, Sex"      = fit_lmer_3_ml))
 ```
 
 
@@ -231,26 +285,32 @@ anova(fit_lmer_0_ml, fit_lmer_1_ml, fit_lmer_2_ml, fit_lmer_3_ml)
 
 ### Variance Explained by linear TIME at Level ONE
 
-```{r}
-lme4::VarCorr(fit_lmer_0_ml)  # baseline
-```
-
-```{r}
-lme4::VarCorr(fit_lmer_1_ml)  # model to compare
-```
+#### Nakagawa
 
 
-```{r}
-lme4::VarCorr(fit_lmer_0_ml) %>%  # baseline
-  print(comp = c("Variance", "Std.Dev"),
-        digits = 3)
-```
 
-```{r}
-lme4::VarCorr(fit_lmer_1_ml) %>%  # model to compare
-  print(comp = c("Variance", "Std.Dev"),
-        digits = 3)
+
+```{block type='rmdimportant', echo=TRUE}
+
+Marginal and conditional r-squared values for mixed models are calculated based on Nakagawa et al. (2017).
+
+The random effect variances are actually the mean random effect variances, thus the r-squared value is also appropriate for mixed models with random slopes or nested random effects (see Johnson, 2014).
+
+* **Conditional R2**: takes both the fixed and random effects into account.
+
+* **Marginal R2**: considers only the variance of the fixed effects.
+
+The contribution of random effects can be deduced by subtracting the marginal R2 from the conditional R2 or by computing the `performance::icc()`.
+
+* Hox, J. J. (2010). Multilevel analysis: techniques and applications (2nd ed). New York: Routledge.
+
+* Johnson, P. C. D. (2014). Extension of Nakagawa and Schielzeth’s R2 GLMM to random slopes models. Methods in Ecology and Evolution, 5(9), 944–946. doi:10.1111/2041-210X.12225
+
+* Nakagawa, S., and Schielzeth, H. (2013). A general and simple method for obtaining R2 from generalized linear mixed-effects models. Methods in Ecology and Evolution, 4(2), 133–142. doi:10.1111/j.2041-210x.2012.00261.x
+
+* Nakagawa, S., Johnson, P. C. D., and Schielzeth, H. (2017). The coefficient of determination R2 and intra-class correlation coefficient from generalized linear mixed-effects models revisited and expanded. Journal of The Royal Society Interface, 14(134), 20170213.
 ```
+    
 
 
 ```{r}
@@ -259,15 +319,46 @@ performance::r2(fit_lmer_1_ml)
 
 
 ```{r}
-performance::r2(fit_lmer_1_ml, by_group = TRUE)
+performance::r2(fit_lmer_1_ml, by_group = TRUE)  # 
 ```
 
 
 
 #### Raudenbush and Bryk
 
+
+BL = Baseline Model (simpler)
+
+```{r}
+lme4::VarCorr(fit_lmer_0_ml) %>%  # baseline
+  print(comp = c("Variance", "Std.Dev"),
+        digits = 3)
+```
+
+
+MC = Main Comparison Model (more complex)
+
+```{r}
+lme4::VarCorr(fit_lmer_1_ml) %>%  # model to compare
+  print(comp = c("Variance", "Std.Dev"),
+        digits = 3)
+```
+
+
+
+
+
 * Explained variance is a proportion of first-level variance only
 * A good option when the multilevel sampling process is is close to two-stage simple random sampling
+
+
+
+
+
+
+
+
+
 
 ```{block type='genericEq', echo=TRUE}
 **Raudenbush and Bryk Approximate Formula - Level 1 ** *approximate*
@@ -364,14 +455,14 @@ Reason: The intercept only model overestimates the variance at the occasion leve
 
 
 ```{r}
-fit_lmer_3_re <- lmerTest::lmer(gpa ~ I(sem-1) + hrs + highgpa + sex + 
+fit_lmer_3_re <- lmerTest::lmer(gpa ~ sem + hrs + highgpa + sex + 
                                   (1|student),
                                 data = df_gpa_long,
                                 REML = TRUE)
 
 
-fit_lmer_4_re <- lmerTest::lmer(gpa ~ I(sem-1) + hrs + highgpa + sex +
-                                  (I(sem-1)|student),
+fit_lmer_4_re <- lmerTest::lmer(gpa ~ sem + hrs + highgpa + sex +
+                                  (sem|student),
                                 data = df_gpa_long,
                                 REML = TRUE,
                                 control = lmerControl(optimizer ="Nelder_Mead"))
@@ -385,26 +476,18 @@ anova(fit_lmer_3_re, fit_lmer_4_re, refit = FALSE)
 ### Cross-Level Interaction
 
 ```{r}
-fit_lmer_4_ml <- lmerTest::lmer(gpa ~ I(sem-1) + 
-                                  hrs + highgpa + sex + 
-                                  (I(sem-1)|student),
-                                data = df_gpa_long,
-                                REML = FALSE)
-```
-
-
-```{r}
-fit_lmer_5_ml <- lmerTest::lmer(gpa ~ I(sem-1) + 
-                                  hrs + highgpa + sex + 
-                                  I(sem-1):sex + 
-                                  (I(sem-1)|student),
+fit_lmer_4_ml <- lmerTest::lmer(gpa ~ sem + hrs + highgpa + sex + 
+                                  (sem|student),
                                 data = df_gpa_long,
                                 REML = FALSE)
 
-fit_lmer_5_re <- lmerTest::lmer(gpa ~ I(sem-1) + 
-                                  hrs + highgpa + sex + 
-                                  I(sem-1):sex + 
-                                  (I(sem-1)|student),
+fit_lmer_5_ml <- lmerTest::lmer(gpa ~ sem + hrs + highgpa + sex + sem:sex + 
+                                  (sem|student),
+                                data = df_gpa_long,
+                                REML = FALSE)
+
+fit_lmer_5_re <- lmerTest::lmer(gpa ~ sem + hrs + highgpa + sex + sem:sex + 
+                                  (sem|student),
                                 data = df_gpa_long,
                                 REML = TRUE)
 ```
@@ -414,11 +497,11 @@ fit_lmer_5_re <- lmerTest::lmer(gpa ~ I(sem-1) +
 apaSupp::tab_lmers(list("M5: Occ Rand"   = fit_lmer_4_ml,
                         "M6: Xlevel Int" = fit_lmer_5_ml),
                    var_labels = c("(Intercept)" = "(Intercept)",
-                                  "I(sem - 1)" = "Semester",
+                                  "sem" = "Semester",
                                   "hrs" = "Hours Working",
                                   "sexfemale" = "Sex: Female vs. Male",
                                   "highgpa" = "High School GPA",
-                                  "I(sem - 1):sexfemale" = "Semester X Sex"),
+                                  "sem:sexfemale" = "Semester X Sex"),
                    caption = "Hox Table 5.4 (page 80) Results of Multilevel Anlaysis of GPA, Varying Effects for Occation",
                    general_note = "Intercept refers to population mean for a Male who is not working during their first semester and had a high school GPA = 0.",
                    d = 3)
@@ -434,7 +517,8 @@ anova(fit_lmer_4_ml, fit_lmer_5_ml)
 
 ```{r}
 apaSupp::tab_lmer(fit_lmer_5_re,
-                  d = 3)
+                  d = 3,
+                  caption = "Parameter Estimates of Final Model")
 ```
 
 
@@ -474,14 +558,14 @@ interactions::interact_plot(model = fit_lmer_5_re,
 ```{r}
 fit_lmer_5_re %>% 
   emmeans::emmeans(~sem*sex,
-                   at = list(sem = 1:6))
+                   at = list(sem = 0:5))
 ```
 
 
 ```{r}
 fit_lmer_5_re %>% 
   emmeans::emmeans(~sem*sex,
-                   at = list(sem = 1:6)) %>% 
+                   at = list(sem = 0:5)) %>% 
   data.frame() %>% 
   dplyr::mutate(sex = sex %>% 
                   forcats::fct_recode("Male" = "male",
@@ -500,13 +584,19 @@ fit_lmer_5_re %>%
   geom_line(aes(linetype = sex,
                 color = sex)) +
   theme_bw() +
-  labs(x = "Semester",
+  labs(x = NULL,
        y = "Estimated Marginal Mean\nCollege GPA",
        fill = NULL,
        color = NULL,
        shape = NULL,
        linetype = NULL) +
-  scale_x_continuous(breaks = 1:6) +
+  scale_x_continuous(breaks = 0:5,
+                     labels = c("Year 1\nSem 1",
+                                "Year 1\nSem 2",
+                                "Year 2\nSem 1",
+                                "Year 2\nSem 2",
+                                "Year 3\nSem 1",
+                                "Year 3\nSem 2")) +
   scale_y_continuous(breaks = seq(from = 0, to = 4, by = .2)) +
   scale_linetype_manual(values = c("solid", "longdash")) +
   theme(legend.position = "inside",
@@ -548,13 +638,13 @@ performance::r2(fit_lmer_5_re, by_group = TRUE)
 ```{r}
 fit_lmer_5_re %>% 
   emmeans::emmeans(~sex | sem,
-                   at = list(sem = 1:6))
+                   at = list(sem = 0:5))
 ```
 
 ```{r}
 fit_lmer_5_re %>% 
   emmeans::emmeans(~sex | sem,
-                   at = list(sem = 1:6)) %>% 
+                   at = list(sem = 0:5)) %>% 
   pairs()
 ```
 
@@ -563,7 +653,7 @@ fit_lmer_5_re %>%
 ```{r}
 fit_lmer_5_re %>% 
   emmeans::emmeans(~sex | sem,
-                   at = list(sem = 1:6)) %>% 
+                   at = list(sem = 0:5)) %>% 
   pairs(adjust = "none") %>% 
   data.frame() %>% 
   dplyr::mutate(p_Unadj = apaSupp::p_num(p.value)) %>% 

@@ -29,33 +29,31 @@ library(HLMdiag)
 library(sjPlot)
 library(sjstats)      
 library(effects)     
-
-library(HLMdiag)      # package with the dataset
 ```
 
 ## BACKGROUND
 
+```{block type='rmdlink', echo=TRUE}
 Starting in chapter 4, [@hedeker2006] details analysis of a psychiatric study described by [@reisby1977]. This study focuses on the relationship between Imipramine (IMI) and Desipramine (DMI) plasma levels and clinical response in 66 depressed inpatients (37 endogenous and 29 non-endogenous).
+
+Hedeker, D., & Gibbons, R. D. (2006). [Longitudinal data analysis](https://www.google.com/books/edition/Longitudinal_Data_Analysis/f9p9iIgzQSQC?hl=en&gbpv=1&dq=hedeker+gibbons+longitudinal+data+analysis+reisby+1977&pg=PA52&printsec=frontcover). John Wiley & Sons.
+```
+
 
 > Note: The IMI and DMI measures were only taken in the later weeks, but are not used here.
 
 
 DEPENDENT VARIABLE
 
-`hamd` Hamilton Depression Scores (HD)
+* `hamd` Hamilton Depression Scores (HD), measured weekly for 6 weeks
 
 
 INDEPENDENT VARIABLES 
 
-`endog` Depression Diagnosis, 
-* endogenous  
-* non-endogenous/reactive 
+* `endog` Depression Diagnosis: endogenous vs. non-endogenous/reactive 
 
-IMI (imipramine) drug-plasma levels (µg/l)     
-* antidepressant given 225 mg/day, weeks 3-6   
 
-DMI (desipramine) drug-plasma levels (µg/l)
-* metabolite of imipramine
+
 
 ```{r}
 df_raw <- read.table("data/riesby.dat.txt") %>% 
@@ -332,7 +330,7 @@ df_long %>%
 ```
 
 
-```{r, fig.cap="Observed Mean Depression Trajectories by Diagnosis"}
+```{r, fig.cap="Observed Mean Weekly Depression by Diagnosis Group"}
 df_long %>% 
   dplyr::filter(!is.na(hamd)) %>% 
   ggplot(aes(x = week,
@@ -633,7 +631,11 @@ fit_lmer_wks_RI_reml %>%
 ### Intra-individual Correlation (ICC)
 
 ```{block type='rmdimportant', echo=TRUE}
-The ICC can be interpreted as "the proportion of the variance explained by the grouping structure in the population". The grouping structure entails that measurements are organized into groups (e.g., test scores in a school can be grouped by classroom if there are multiple classrooms and each classroom was administered the same test) and ICC indexes how strongly measurements in the same group resemble each other. This index goes from 0, if the grouping conveys no information, to 1, if all observations in a group are identical (Gelman and Hill, 2007, p. 258). In other word, the ICC - sometimes conceptualized as the measurement repeatability - "can also be interpreted as the expected correlation between two randomly drawn units that are in the same group" (Hox 2010: 15), although this definition might not apply to mixed models with more complex random effects structures. The ICC can help determine whether a mixed model is even necessary: an ICC of zero (or very close to zero) means the observations within clusters are no more similar than observations from different clusters, and setting it as a random factor might not be necessary.
+The **ICC** can be interpreted as **"the proportion of the variance explained by the grouping structure in the population"**. 
+
+The grouping structure entails that measurements are organized into groups (e.g., test scores in a school can be grouped by classroom if there are multiple classrooms and each classroom was administered the same test) and ICC indexes how strongly measurements in the same group resemble each other. 
+
+This index goes from 0, if the grouping conveys no information, to 1, if all observations in a group are identical (Gelman and Hill, 2007, p. 258). In other word, the ICC - sometimes conceptualized as the measurement repeatability - "can also be interpreted as the expected correlation between two randomly drawn units that are in the same group" (Hox 2010: 15), although this definition might not apply to mixed models with more complex random effects structures. 
 ```
 
 ```{block type='rmdlightbulb', echo=TRUE}
@@ -936,17 +938,17 @@ apaSupp::tab_lmers(list("0 = Baseline" = fit_lmer_wks_RIAS_reml,
 
 
 ```{block type='rmdlightbulb', echo=TRUE}
-When Grand-Mean Centering with RAIS (random intercepts and slopes)
+When Grand-Mean Centering with RAIS (random intercepts and slopes)...
 
-* Unchanged    
-+ model fit: AIC, BIC, -2LL, residual variance    
-+ fixed effect of week    
-+ variance for random intercepts     
+**UN-CHANGED**    
+* model fit: AIC, BIC, -2LL, residual variance    
+* fixed effect of week    
+* variance for random intercepts     
 
-* Changed    
-+ fixed intercept    
-+ variance for random slopes   
-+ covariance between random intercepts and random slopes
+**CHANGED**    
+* fixed intercept    
+* variance for random slopes   
+* covariance between random intercepts and random slopes
 ```
 
 
